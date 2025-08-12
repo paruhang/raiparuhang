@@ -1,0 +1,36 @@
+// Smooth scrolling for internal anchors
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector(anchor.getAttribute('href'))
+                .scrollIntoView({ behavior: 'smooth' });
+    });
+});
+
+// Scroll Reveal
+const revealElements = document.querySelectorAll('section');
+function revealOnScroll() {
+    const windowHeight = window.innerHeight;
+    revealElements.forEach(el => {
+        const position = el.getBoundingClientRect().top;
+        if (position < windowHeight - 100) {
+            el.classList.add('visible');
+        }
+    });
+}
+window.addEventListener('scroll', revealOnScroll);
+revealOnScroll();
+
+// Mobile Menu Toggle
+const menuToggle = document.getElementById('menu-toggle');
+const navLinks = document.getElementById('nav-links');
+menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+});
+
+// Close mobile menu on link click
+navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('show');
+    });
+});
