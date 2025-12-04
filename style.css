@@ -32,6 +32,9 @@ nav a:hover { color: #00c2ff; }
 .hero-content {
     width: 100%;
 }
+.profile{
+    border-radius: 50%;
+}    
 .avatar {
     width: 140px;
     height: 140px;
@@ -139,5 +142,6 @@ footer {
     .hero-content h1 { font-size: 34px; }
     header { padding: 15px 20px; }
 }
+
 
 
