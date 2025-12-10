@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to PDF Converter - Raiparuhang</title>
+    
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="imagetopdf.css"> 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">
+            <a href="index.html">raiparuhang<span class="dot">.com.np</span></a>
+        </div>
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html#tools">Back to Tools</a></li>
+            </ul>
+        </nav>
+        <button class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+    </header>
+
+    <main>
+        <section class="converter-section">
+            <h2>🖼️ Image to PDF Converter</h2>
+            <p>Upload your images (JPG, PNG, GIF) to convert and merge them into a single PDF.</p>
+
+            <div id="upload-stage" class="tool-box-container">
+                <div class="tool-upload-box">
+                    <input type="file" id="imageInput" accept="image/jpeg,image/png,image/gif" multiple style="display: none;">
+                    
+                    <label for="imageInput" class="cta-button upload-btn">
+                        <span id="upload-text">UPLOAD</span>
+                    </label>
+                    <p class="drag-drop-text">Drag and drop here</p>
+                </div>
+                
+                <div class="preview-area-upload" id="upload-preview-area">
+                    <p id="upload-preview-placeholder">No images selected yet. Drag and drop or click UPLOAD.</p>
+                </div>
+                <div class="page-count-display">
+                    Number of pages: <span id="page-count-value">0</span> 
+                    <span class="info-icon" title="This is the number of selected images, which will be the number of pages in the PDF.">ℹ️</span>
+                </div>
+                
+                <button id="processBtn" class="cta-button process-btn" disabled>
+                    PROCESS <span id="process-loader" class="loader"></span>
+                </button>
+            </div>
+
+            <div id="result-stage" class="tool-box-container" style="display:none;">
+                
+                <h3 class="stage-heading">Preview</h3>
+                
+                <div class="carousel-wrapper" id="preview-carousel-wrapper">
+                    <button class="carousel-nav" id="prev-preview" disabled>&lt;</button>
+                    <div class="preview-carousel" id="preview-container">
+                        </div>
+                    <button class="carousel-nav" id="next-preview" disabled>&gt;</button>
+                </div>
+                <button id="convertBtn" class="cta-button convert-btn">CONVERT TO PDF</button>
+                
+                <h3 class="stage-heading">Results</h3>
+                <div class="pdf-output" id="pdf-output">
+                    <p id="pdf-ready-message" style="display:none;">✅ PDF Conversion Complete!</p>
+                </div>
+                
+                <a id="downloadPdfBtn" href="#" class="cta-button download-btn" download="converted_images.pdf" style="display:none; margin-top: 20px;">Download PDF</a>
+                <button id="downloadZipBtn" class="cta-button download-zip-btn" style="display:none; margin-top: 10px;">Download Original Images as ZIP</button>
+                
+            </div>
+            </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Raiparuhang. All rights reserved.</p>
+    </footer>
+
+    <script src="imagetopdf.js"></script>
+    <script src="script.js"></script> 
+</body>
+</html>
