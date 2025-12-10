@@ -1,0 +1,113 @@
+/* ---------------------------------- */
+/* IMAGE TO PDF TOOL STYLES           */
+/* ---------------------------------- */
+
+/* Container for the main tool area */
+.converter-section {
+    padding: 80px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* ... (Existing styles for h2, stage-heading, tool-upload-box, etc. remain the same) ... */
+
+/* ------------------ */
+/* Preview Area (Simple scrolling for upload stage) */
+/* ------------------ */
+.preview-area-upload {
+    display: flex;
+    overflow-x: auto; /* Allows horizontal scrolling */
+    white-space: nowrap;
+    padding: 15px 10px;
+    margin-bottom: 20px;
+    gap: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f7f7f7;
+    min-height: 120px;
+    align-items: center; 
+    justify-content: flex-start;
+
+    /* Hide scrollbar for a cleaner look */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.preview-area-upload::-webkit-scrollbar {
+    display: none;
+}
+
+#upload-preview-placeholder {
+    color: #999;
+    font-style: italic;
+    width: 100%;
+    text-align: center;
+}
+
+.preview-thumbnail {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border: 1px solid var(--primary-color);
+    border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 0; 
+    margin: 0 5px; 
+}
+
+.preview-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: #fff;
+}
+
+
+/* ------------------ */
+/* Stage 2: Carousel & Results */
+/* ------------------ */
+
+.carousel-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.carousel-nav {
+    /* ... (Button styles remain the same) ... */
+    background: var(--background-color);
+    border: 1px solid #ddd;
+    color: var(--text-color);
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    line-height: 1;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+    flex-shrink: 0; /* Important: Prevents button from shrinking */
+}
+
+.carousel-nav:hover:not(:disabled) {
+    background-color: #eee;
+}
+
+.carousel-nav:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.preview-carousel {
+    flex-grow: 1;
+    display: flex;
+    overflow-x: hidden; /* HIDDEN: We control scrolling via buttons now */
+    scroll-behavior: smooth; /* For smooth transitions */
+    padding: 10px;
+    gap: 10px;
+    margin: 0 10px;
+}
+/* IMPORTANT: The thumbnail style remains the same, but its behavior changes 
+   due to the parent container's overflow-x: hidden. The JS will now manually 
+   adjust the scroll position to show one image at a time. */
+
+/* ... (Remaining styles for pdf-output, convert-btn, loader, download-btn are the same) ... */
