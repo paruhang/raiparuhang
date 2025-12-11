@@ -44,16 +44,47 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 4. Contact Form Submission (Prevent default behavior for demonstration)
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Form submitted successfully! (This is a placeholder action.)');
-            // In a real application, you would add AJAX/Fetch API code here 
-            // to send the form data to a server (e.g., using a service like Formspree, Netlify Forms, or your own backend).
-            contactForm.reset();
-        });
-    }
+const contactForm = document.getElementById('contact-form');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        // 1. Stop the browser from navigating away
+        e.preventDefault();
+        
+        // 2. Collect all the form fields and values
+        const formData = new FormData(contactForm);
+        
+        // 3. Optional: Add a visual loading state here (e.g., disable the button)
+        // contactForm.querySelector('button[type="submit"]').disabled = true;
+
+        // 4. Send the data to Getform
+        try {
+            const response = await fetch(contactForm.action, {
+                method: 'POST', 
+                body: formData, 
+                // Setting 'Accept' header for JSON response from Getform
+                headers: { 'Accept': 'application/json' } 
+            });
+
+            // 5. Handle the response and provide feedback
+            if (response.ok) {
+                alert('Thank you! Your message has been sent successfully.');
+                contactForm.reset(); // Clear form fields
+            } else {
+                // If Getform rejected the submission (e.g., due to configuration)
+                alert('Submission failed. Please check the form data and your Getform settings.');
+            }
+        } catch (error) {
+            // Handle network errors (user offline, server unreachable)
+            console.error('Network Error:', error);
+            alert('A connection error occurred. Please try again.');
+        } 
+        // 6. Optional: Re-enable the button if you added a loading state
+        // finally {
+        //     contactForm.querySelector('button[type="submit"]').disabled = false;
+        // }
+    });
+}
 
 
 
