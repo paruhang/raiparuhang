@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Converter - Raiparuhang</title>
+    
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="imageconverter.css"> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">
+            <a href="index.html">raiparuhang<span class="dot">.com.np</span></a>
+        </div>
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html#tools">Back to Tools</a></li>
+            </ul>
+        </nav>
+        <button class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+    </header>
+
+    <main>
+        <section class="converter-section">
+            <h2>🔄 Image Converter</h2>
+            <p>Convert your image files between common formats like JPG, PNG, and WebP instantly in your browser.</p>
+
+            <div id="converter-tool" class="tool-box-container">
+                <div class="tool-upload-box">
+                    <input type="file" id="imageInput" accept="image/jpeg,image/png,image/webp" style="display: none;">
+                    
+                    <label for="imageInput" class="cta-button upload-btn">
+                        <span id="upload-text">UPLOAD IMAGE</span>
+                    </label>
+                    <p class="drag-drop-text">Drag and drop here</p>
+                </div>
+
+                <div class="preview-area" id="previewArea" style="margin-bottom: 20px;">
+                    <img id="inputImagePreview" src="" alt="Image Preview" style="display:none; max-width: 100%; max-height: 250px;">
+                    <p id="previewPlaceholder">Select an image to begin.</p>
+                    <canvas id="conversionCanvas" style="display: none;"></canvas>
+                </div>
+                
+                <div class="settings-panel">
+                    <h3>Output Format</h3>
+                    <select id="outputFormat" class="format-select">
+                        <option value="image/jpeg">JPEG (.jpg)</option>
+                        <option value="image/png">PNG (.png)</option>
+                        <option value="image/webp">WebP (.webp)</option>
+                    </select>
+                    
+                    <div id="jpegQualityControl" style="display: none; margin-top: 15px;">
+                        <label for="jpegQuality">JPEG Quality (1-100):</label>
+                        <input type="range" id="jpegQuality" min="10" max="100" value="90">
+                        <span id="qualityValue">90</span>
+                    </div>
+                </div>
+                
+                <button id="convertBtn" class="cta-button process-btn" disabled style="margin-top: 20px;">
+                    CONVERT <span id="process-loader" class="loader"></span>
+                </button>
+                
+                <div class="download-area" style="margin-top: 20px;">
+                    <a id="downloadLink" href="#" class="cta-button download-btn" style="display:none;" download>Download Converted Image</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Raiparuhang. All rights reserved.</p>
+    </footer>
+
+    <script src="imageconverter.js"></script>
+    <script src="script.js"></script> 
+</body>
+</html>
