@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to Image Converter - Raiparuhang</title>
+    
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="pdftoimage.css"> 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">
+            <a href="index.html">raiparuhang<span class="dot">.com.np</span></a>
+        </div>
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html#tools">Back to Tools</a></li>
+            </ul>
+        </nav>
+        <button class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+    </header>
+
+    <main>
+        <section class="converter-section">
+            <h2>📄 PDF to Image Converter</h2>
+            <p>Upload PDF documents to extract every page as a high-quality image (JPG or PNG).</p>
+
+            <div id="upload-stage" class="tool-box-container">
+                <div class="tool-upload-box">
+                    <input type="file" id="pdfInput" accept="application/pdf" style="display: none;" multiple> 
+                    
+                    <label for="pdfInput" class="cta-button upload-btn">
+                        <span id="upload-text">UPLOAD PDFs</span>
+                    </label>
+                    <p class="drag-drop-text">Drag and drop here</p>
+                </div>
+                
+                <div class="preview-area-upload" id="upload-preview-area">
+                    <p id="upload-preview-placeholder">No PDF selected yet. Drag and drop or click UPLOAD.</p>
+                </div>
+                
+                <div class="page-count-display">
+                    Selected Files: <span id="file-count-value">0 PDF(s) Selected</span>
+                </div>
+                
+                <div class="option-group">
+                    <label for="imageFormat">Select Output Format:</label>
+                    <select id="imageFormat" class="format-select">
+                        <option value="jpg">JPG (Best for photos)</option>
+                        <option value="png">PNG (Best for graphics/transparency)</option>
+                    </select>
+                </div>
+
+                <button id="processBtn" class="cta-button process-btn" disabled>
+                    CONVERT TO IMAGES <span id="process-loader" class="loader"></span>
+                </button>
+            </div>
+
+            <div id="result-stage" class="tool-box-container" style="display:none;">
+                
+                <h3 class="stage-heading">Extracted Images Preview</h3>
+                
+                <div class="carousel-wrapper" id="preview-carousel-wrapper">
+                    <button class="carousel-nav" id="prev-preview" disabled>&lt;</button>
+                    <div class="preview-carousel" id="preview-container">
+                        </div>
+                    <button class="carousel-nav" id="next-preview" disabled>&gt;</button>
+                </div>
+
+                <h3 class="stage-heading">Download</h3>
+                <div class="pdf-output" id="pdf-output">
+                    <p id="success-message" style="display:none;">✅ Extraction Complete! Total Images: <span id="total-images-count"></span></p>
+                </div>
+                
+                <p style="margin-top:10px; font-size: 0.9rem; color: #666;">
+                    Use the buttons below to download the current image or all images as a ZIP.
+                </p>
+
+                <button id="downloadSingleImageBtn" class="cta-button download-single-btn" style="display:block; margin-top: 20px;">
+                    Download Current Image
+                </button>
+                
+                <button id="downloadZipBtn" class="cta-button download-zip-btn" style="display:block; margin-top: 10px;">
+                    Download All Images (ZIP)
+                </button>
+                
+                <button id="resetBtn" class="cta-button" style="background-color: #666; margin-top: 10px;">Convert Another File</button>
+                
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Raiparuhang. All rights reserved.</p>
+    </footer>
+
+    <script src="pdftoimage.js"></script>
+    <script src="script.js"></script> 
+</body>
+</html>
