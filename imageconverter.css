@@ -1,0 +1,56 @@
+/* ---------------------------------- */
+/* IMAGE CONVERTER SPECIFIC STYLES    */
+/* ---------------------------------- */
+
+/* REMOVED .settings-and-preview display: flex; */
+
+.settings-panel {
+    /* Set to full width for stacking */
+    width: 100%;
+    flex: unset; 
+    min-width: unset; 
+    
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.format-select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.preview-area {
+    /* Set to full width and centered */
+    width: 100%;
+    flex: none; 
+    
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f7f7f7;
+    min-height: 250px;
+    
+    /* Centering the content */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;    /* Center vertically */
+    
+    overflow: hidden; /* Contains the image */
+}
+
+/* Style for the quality slider */
+#jpegQualityControl label, #jpegQualityControl span {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+#jpegQuality {
+    width: 100%;
+}
