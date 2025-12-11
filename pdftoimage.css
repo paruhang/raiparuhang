@@ -1,0 +1,179 @@
+/* ---------------------------------- */
+/* PDF TO IMAGE TOOL STYLES           */
+/* ---------------------------------- */
+
+/* ---------------------------------- */
+/* PDF TO IMAGE TOOL STYLES           */
+/* ---------------------------------- */
+
+.converter-section {
+    padding: 80px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* ------------------ */
+/* Preview Area (Upload Stage) - FIX FOR EXPANSION */
+/* ------------------ */
+.preview-area-upload {
+    display: flex;
+    /* FIX: Allow content to scroll horizontally if it overflows */
+    overflow-x: auto; 
+    white-space: nowrap; /* Prevent items from wrapping vertically */
+    justify-content: flex-start; /* Align items to the left */
+    align-items: center;
+    padding: 15px 10px;
+    margin-bottom: 20px;
+    gap: 10px; /* Space between file preview items */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f7f7f7;
+    min-height: 80px;
+    max-width: 100%; /* Ensure it respects parent container limits */
+
+    /* Hide scrollbar for a cleaner look */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.preview-area-upload::-webkit-scrollbar {
+    display: none;
+}
+
+/* Ensure individual file items don't expand too much */
+.file-preview-item {
+    display: inline-flex; /* Use inline-flex for horizontal flow */
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: #333;
+    background: #fff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    flex-shrink: 0; /* Prevents item from shrinking */
+    max-width: 200px; /* Limit the width of a single file item */
+    text-overflow: ellipsis; /* For overflowed text */
+    overflow: hidden;
+}
+
+
+#upload-preview-placeholder {
+    color: #999;
+    font-style: italic;
+    width: 100%;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* New Option Group Styles */
+.option-group {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.format-select {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+/* ------------------ */
+/* Stage 2: Carousel (Reuse) */
+/* ------------------ */
+
+.carousel-wrapper {
+    /* ... (rest of the carousel styles remain the same) ... */
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* ... (rest of the CSS) ... */
+.carousel-nav {
+    background: var(--background-color, #fff);
+    border: 1px solid #ddd;
+    color: var(--text-color, #333);
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    line-height: 1;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+    flex-shrink: 0;
+}
+
+.carousel-nav:hover:not(:disabled) {
+    background-color: #eee;
+}
+
+.carousel-nav:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.preview-carousel {
+    flex-grow: 1;
+    display: flex;
+    overflow-x: hidden; 
+    scroll-behavior: smooth;
+    padding: 10px;
+    gap: 10px;
+    margin: 0 10px;
+    /* Center the images if there are only a few */
+    align-items: center; 
+}
+
+/* Reusing your thumbnail class */
+.preview-thumbnail {
+    display: inline-block;
+    width: 150px; /* Slightly wider for PDF pages */
+    height: 200px;
+    border: 1px solid var(--primary-color, #333);
+    border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 0; 
+    margin: 0 5px; 
+    background: #fff;
+    position: relative;
+}
+
+.preview-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: #fff;
+}
+
+/* Page number label inside thumbnail */
+.page-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    font-size: 12px;
+    padding: 2px 0;
+}
+
+.loader {
+    display: none;
+    border: 3px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 3px solid #3498db;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
