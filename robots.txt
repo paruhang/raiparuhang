@@ -1,0 +1,22 @@
+# Standard robots.txt file for raiparuhang.com.np
+# Applies to all web crawlers (Google, Bing, etc.)
+User-agent: *
+
+# Disallow common directories that are sensitive or low-value for search results
+Disallow: /admin/
+Disallow: /cgi-bin/
+Disallow: /temp/
+Disallow: /cache/
+
+# If your site has an internal search function, it's best to block it to prevent 
+# search engines from indexing duplicate or low-value search results pages.
+Disallow: /search/
+
+# Use the 'Allow' directive if any specific file or directory is needed within a 
+# broader 'Disallow' rule (e.g., a necessary script inside a 'temp' folder)
+# Allow: /some/needed/file.js
+
+# --- SITEMAP DIRECTIVE ---
+# It is highly recommended to generate an XML sitemap and place its full URL here.
+# Replace the example below with the actual location of your sitemap file.
+Sitemap: https://raiparuhang.com.np/sitemap.xml
