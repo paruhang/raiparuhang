@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Image to PDF Converter Online: Secure, Private, & Fast</title>
+    <meta name="description" content="Our Image to PDF tool converts your files instantly in your browser. Your images are never uploaded to a server, guaranteeing 100% security and privacy.">
+	<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "[Full Name of Your Tool, e.g., Free Online Image to PDF Converter]",
+  "description": "[A unique, concise description of your tool's function and key benefits, e.g., Convert JPG, PNG, and other image files into a single high-quality PDF document instantly. This tool processes all files securely on your device.]",
+  "applicationCategory": "http://schema.org/MultimediaApplication",
+  "operatingSystem": "All (Web Browser)",
+  "url": "[Canonical URL of this tool page, e.g., https://raiparuhang.com.np/image-to-pdf-converter]",
+  "isAccessibleForFree": "true",
+  "inLanguage": "en-US",
+  "provider": {
+    "@type": "Organization",
+    "name": "Rai Paruhang",
+    "url": "https://raiparuhang.com.np/"
+  },
+  "screenshot": "https://supertool.org/convert-png-jpeg-and-other-images-to-pdf/"
+}
+</script>
+	<link rel="icon" type="image/ico" href="raiparuhang.ico">
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="imagetopdf.css"> 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">
+            <a href="https://raiparuhang.com.np">raiparuhang<span class="dot">.com.np</span></a>
+        </div>
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html#tools">Back to Tools</a></li>
+            </ul>
+        </nav>
+        <button class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+    </header>
+
+    <main>
+        <section class="converter-section">
+            <h1>Convert JPG, PNG, GIF to PDF: Private, Client-Side Conversion</h1>
+            <h2>🖼️ Image to PDF Converter</h2>
+            <p>Upload your images (JPG, PNG, GIF) to convert and merge them into a single PDF.</p>
+
+            <div id="upload-stage" class="tool-box-container">
+                <div class="tool-upload-box">
+                    <input type="file" id="imageInput" accept="image/jpeg,image/png,image/gif" multiple style="display: none;">
+                    
+                    <label for="imageInput" class="cta-button upload-btn">
+                        <span id="upload-text">UPLOAD</span>
+                    </label>
+                    <p class="drag-drop-text">Drag and drop here</p>
+                </div>
+                
+                <div class="preview-area-upload" id="upload-preview-area">
+                    <p id="upload-preview-placeholder">No images selected yet. Drag and drop or click UPLOAD.</p>
+                </div>
+                <div class="page-count-display">
+                    Number of pages: <span id="page-count-value">0</span> 
+                    <span class="info-icon" title="This is the number of selected images, which will be the number of pages in the PDF.">ℹ️</span>
+                </div>
+                
+                <button id="processBtn" class="cta-button process-btn" disabled>
+                    PROCESS <span id="process-loader" class="loader"></span>
+                </button>
+            </div>
+
+            <div id="result-stage" class="tool-box-container" style="display:none;">
+                
+                <h3 class="stage-heading">Preview</h3>
+                
+                <div class="carousel-wrapper" id="preview-carousel-wrapper">
+                    <button class="carousel-nav" id="prev-preview" disabled>&lt;</button>
+                    <div class="preview-carousel" id="preview-container">
+                        </div>
+                    <button class="carousel-nav" id="next-preview" disabled>&gt;</button>
+                </div>
+                <button id="convertBtn" class="cta-button convert-btn">CONVERT TO PDF</button>
+                
+                <h3 class="stage-heading">Results</h3>
+                <div class="pdf-output" id="pdf-output">
+                    <p id="pdf-ready-message" style="display:none;">✅ PDF Conversion Complete!</p>
+                </div>
+                
+                <a id="downloadPdfBtn" href="#" class="cta-button download-btn" download="converted_images.pdf" style="display:none; margin-top: 20px;">Download PDF</a>
+                <button id="downloadZipBtn" class="cta-button download-zip-btn" style="display:none; margin-top: 10px;">Download Original Images as ZIP</button>
+                
+            </div>
+            </section>
+    </main>
+
+    <div class="tool-seo-section">
+    <h2 class="section-title">🖼️ Convert Images to PDF Online Instantly (Free & Secure)</h2>
+    
+    <p>Welcome to the <strong>Free Online Image to PDF Converter</strong> by Rai Paruhang. Easily combine multiple images (such as <strong>JPG, PNG, and WebP</strong> files) into a single, high-quality PDF document instantly. Whether you need to compile screenshots, convert photos to a professional portfolio, or consolidate scanned documents, our client-side tool provides the fastest and most secure solution.</p>
+
+    <h3 class="subsection-title">Security First: Why Choose a Client-Side Converter?</h3>
+    
+    <p class="security-note">Unlike most online conversion services, our tool performs the entire conversion process <strong>right here in your web browser.</strong> Your image files are never uploaded to a server, guaranteeing complete privacy and security. This method makes the process lightning-fast and ensures that your sensitive documents remain entirely under your control.</p>
+    
+    <h3 class="subsection-title">Key Features of Our Free Image to PDF Tool</h3>
+    
+    <ul class="feature-list">
+        <li><strong>Multiple Format Support:</strong> Seamlessly convert widely used formats, including <strong>JPG to PDF</strong>, <strong>PNG to PDF</strong>, and the modern WebP format.</li>
+        <li><strong>Combine Multiple Images:</strong> Drag and drop or select as many photos as you need; the tool will arrange them into one clean PDF file.</li>
+        <li><strong>Instant Conversion:</strong> Since no server upload is required, the final PDF is generated immediately.</li>
+        <li><strong>Zero Cost:</strong> Use our reliable <strong>photo to PDF converter</strong> completely free of charge, with no limits or required sign-ups.</li>
+    </ul>
+    
+    <p>Stop searching for complex software. Start using the simplest and most secure way to transform your pictures into a single, easy-to-share PDF document today.</p>
+
+    </div>
+
+    <footer>
+        <a href="terms.html"><h3>PRIVACY AND POLICY</h3></a>
+        <p>&copy; 2025 Raiparuhang. All rights reserved.</p>
+	<div style="display: flex; justify-content: center; gap: 20px; padding: 20px 0;">
+		<a href="[YOUR FACEBOOK URL HERE]" target="_blank" style="color: white; border: 1px solid white; border-radius: 50%; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">
+        <i class="fab fa-facebook-f" style="color: white; font-size: 18px;"></i>
+		</a>
+		<a href="https://x.com/Paruhang005" target="_blank" style="color: white; border: 1px solid white; border-radius: 50%; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">
+        <i class="fab fa-x-twitter" style="color: white; font-size: 18px;"></i>
+		</a>
+	</div>
+    </footer>
+
+    <script src="imagetopdf.js"></script>
+    <script src="script.js"></script> 
+</body>
+
+</html>
+

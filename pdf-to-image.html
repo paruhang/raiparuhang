@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Easily convert your PDF documents to high-quality JPG or PNG images instantly and for free. Secure, fast, and no registration needed.">
+	<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "PDF to Image Converter Tool",
+  "description": "Convert PDF files into high-quality JPEG, PNG, or GIF images directly in your browser. This tool is client-side, ensuring your files are never uploaded.",
+  "applicationCategory": "Multimedia",
+  "operatingSystem": "All (Web Browser)",
+  "url": "https://raiparuhang.com.np/pdf-to-image-converter", 
+  "inLanguage": "en-US",
+  "isAccessibleForFree": "true",
+  "provider": {
+    "@type": "Organization",
+    "name": "Rai Paruhang",
+    "url": "https://raiparuhang.com.np/"
+  }
+}
+</script>
+    <title>Convert PDF to JPG & PNG Online Free - PDF to Image Converter Tool</title>
+    	<link rel="icon" type="image/ico" href="raiparuhang.ico">
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="pdftoimage.css"> 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">
+            <a href="https://raiparuhang.com.np">raiparuhang<span class="dot">.com.np</span></a>
+        </div>
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html#tools">Back to Tools</a></li>
+            </ul>
+        </nav>
+        <button class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+    </header>
+
+    <main>
+        <section class="converter-section">
+            <h1>📄 PDF to Image Converter Online (JPG/PNG)</h1>
+            <p>Upload PDF documents to extract every page as a high-quality image (JPG or PNG).</p>
+
+            <div id="upload-stage" class="tool-box-container">
+                <div class="tool-upload-box">
+                    <input type="file" id="pdfInput" accept="application/pdf" style="display: none;" multiple> 
+                    
+                    <label for="pdfInput" class="cta-button upload-btn">
+                        <span id="upload-text">UPLOAD PDFs</span>
+                    </label>
+                    <p class="drag-drop-text">Drag and drop here</p>
+                </div>
+                
+                <div class="preview-area-upload" id="upload-preview-area">
+                    <p id="upload-preview-placeholder">No PDF selected yet. Drag and drop or click UPLOAD.</p>
+                </div>
+                
+                <div class="page-count-display">
+                    Selected Files: <span id="file-count-value">0 PDF(s) Selected</span>
+                </div>
+                
+                <div class="option-group">
+                    <label for="imageFormat">Select Output Format:</label>
+                    <select id="imageFormat" class="format-select">
+                        <option value="jpg">JPG (Best for photos)</option>
+                        <option value="png">PNG (Best for graphics/transparency)</option>
+                    </select>
+                </div>
+
+                <button id="processBtn" class="cta-button process-btn" disabled>
+                    CONVERT TO IMAGES <span id="process-loader" class="loader"></span>
+                </button>
+            </div>
+
+            <div id="result-stage" class="tool-box-container" style="display:none;">
+                
+                <h3 class="stage-heading">Extracted Images Preview</h3>
+                
+                <div class="carousel-wrapper" id="preview-carousel-wrapper">
+                    <button class="carousel-nav" id="prev-preview" disabled>&lt;</button>
+                    <div class="preview-carousel" id="preview-container">
+                        </div>
+                    <button class="carousel-nav" id="next-preview" disabled>&gt;</button>
+                </div>
+
+                <h3 class="stage-heading">Download</h3>
+                <div class="pdf-output" id="pdf-output">
+                    <p id="success-message" style="display:none;">✅ Extraction Complete! Total Images: <span id="total-images-count"></span></p>
+                </div>
+                
+                <p style="margin-top:10px; font-size: 0.9rem; color: #666;">
+                    Use the buttons below to download the current image or all images as a ZIP.
+                </p>
+
+                <button id="downloadSingleImageBtn" class="cta-button download-single-btn" style="display:block; margin-top: 20px;">
+                    Download Current Image
+                </button>
+                
+                <button id="downloadZipBtn" class="cta-button download-zip-btn" style="display:block; margin-top: 10px;">
+                    Download All Images (ZIP)
+                </button>
+                
+                <button id="resetBtn" class="cta-button" style="background-color: #666; margin-top: 10px;">Convert Another File</button>
+                
+            </div>
+        </section>
+    </main>
+
+
+    <div class="tool-seo-section">
+    <h2 class="section-title">📄 Free PDF to Image Converter: Extract Pages as JPG & PNG</h2>
+    
+    <p>Use our **Free Online PDF to Image Converter** to instantly and securely extract every page of your PDF document into a high-quality image file. Whether you need to convert a report, a document scan, or a presentation, our tool provides a fast way to get lossless **PNG** or compressed **JPG** files from your PDFs.</p>
+
+    <h3 class="subsection-title">Secure & Instant Client-Side Conversion</h3>
+    
+    <p class="security-note">Your privacy is our priority. Unlike server-based tools, this converter processes your files entirely **in your web browser**. Your PDF is never uploaded, stored, or viewed by anyone, guaranteeing maximum security and the fastest possible conversion speed.</p>
+    
+    <h3 class="subsection-title">Key Features of Our PDF Extraction Tool</h3>
+    
+    <ul class="feature-list">
+        <li><strong>High-Quality Output:</strong> Convert PDF pages into crisp, clear images, perfect for sharing or editing.</li>
+        <li><strong>Format Flexibility:</strong> Easily choose between **PDF to JPG** (best for photos and sharing) or **PDF to PNG** (best for graphics and transparency).</li>
+        <li><strong>Batch Processing:</strong> Upload multi-page PDFs; every page is extracted into a separate, numbered image file.</li>
+        <li><strong>Free to Use:</strong> Access this reliable **document to image converter** anytime without limits or registration.</li>
+    </ul>
+    
+    <p>Stop relying on complicated software. Start converting your PDFs into versatile image files quickly and securely today.</p>
+
+    </div>
+
+
+    <footer>
+        <a href="terms.html"><h3>PRIVACY AND POLICY</h3></a>
+        <p>&copy; 2025 Raiparuhang. All rights reserved.</p>
+	<div style="display: flex; justify-content: center; gap: 20px; padding: 20px 0;">
+		<a href="[YOUR FACEBOOK URL HERE]" target="_blank" style="color: white; border: 1px solid white; border-radius: 50%; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">
+        <i class="fab fa-facebook-f" style="color: white; font-size: 18px;"></i>
+		</a>
+		<a href="https://x.com/Paruhang005" target="_blank" style="color: white; border: 1px solid white; border-radius: 50%; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">
+        <i class="fab fa-x-twitter" style="color: white; font-size: 18px;"></i>
+		</a>
+	</div>
+    </footer>
+
+    <script src="pdftoimage.js"></script>
+    <script src="script.js"></script> 
+</body>
+
+</html>
+
