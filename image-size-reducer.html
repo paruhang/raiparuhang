@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free Online Image Size Reducer. Compress JPG and PNG files to reduce KB/MB size quickly and securely in your browser.">
+    
+    <title>Free Online Image Size Reducer - Compress Images to KB</title>
+    <link rel="canonical" href="https://raiparuhang.com.np/image-size-reducer/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+	<link rel="icon" type="image/ico" href="raiparuhang.ico">
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="imagesizereducer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">
+            <a href="https://raiparuhang.com.np">raiparuhang<span class="dot">.com.np</span></a>
+        </div>
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html#tools">Back to Tools</a></li>
+            </ul>
+        </nav>
+        <button class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+    </header>
+
+    <main>
+        <section class="reducer-section">
+            <h1>Online Image Size Reducer</h1>
+            <h2>📉 Reduce Image File Size (KB/MB)</h2>
+            <p>Compress your images securely in your browser to reduce file size without losing too much quality.</p>
+
+            <div id="reducer-tool" class="tool-box-container">
+                
+                <div id="stage1" class="stage-container">
+                    
+                    <div class="tool-upload-box">
+                        <input type="file" id="imageInput" accept="image/jpeg,image/png" style="display: none;">
+                        
+                        <label for="imageInput" class="cta-button upload-btn">
+                            <span id="upload-text">UPLOAD IMAGE</span>
+                        </label>
+                        <p class="drag-drop-text">Drag and drop here</p>
+                    </div>
+
+                    <div class="format-options">
+                        <h3>1. Select Output Format</h3>
+                        <div class="format-buttons-group">
+                            <button class="format-button active" data-format="jpeg" id="formatJpeg">JPEG (.jpg)</button>
+                            <button class="format-button" data-format="png" id="formatPng">PNG (.png)</button>
+                        </div>
+                    </div>
+
+                    <button id="nextBtn" class="cta-button process-btn" disabled style="margin-top: 30px;">
+                        NEXT <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div id="stage2" class="stage-container" style="display: none;">
+                    
+                    <div class="preview-area" id="previewArea">
+                        <img id="inputImagePreview" src="" alt="Image Preview" style="max-width: 100%; max-height: 300px;">
+                    </div>
+
+                    <div class="settings-panel">
+                        
+                        <h3>Image Details</h3>
+                        <p>Original Dimensions: <strong id="originalDimensions">-- x --</strong></p>
+                        <p>Original File Size: <strong id="originalFileSize">-- KB</strong></p>
+                        
+                        <hr>
+                        
+                        <div id="qualityControlContainer">
+                            <h3>2. Compression Quality</h3>
+                            <label for="qualityInput">Image Quality (10 - 100):</label>
+                            <input type="range" id="qualityInput" min="10" max="100" value="70">
+                            <span id="qualityValue">70</span>
+                            <p class="quality-tip">Lower quality means smaller file size, but higher compression artifacts.</p>
+                            
+                            <p class="estimated-size-display">
+                                Estimated Size: <strong id="estimatedFileSize">-- KB</strong>
+                            </p>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <button id="downloadBtn" class="cta-button process-btn" style="margin-top: 20px;">
+                        DOWNLOAD REDUCED <i class="fas fa-download"></i>
+                    </button>
+                    
+                    <button id="backBtn" class="back-button" style="margin-top: 10px;">
+                        <i class="fas fa-arrow-left"></i> Back to Upload
+                    </button>
+                    
+                </div>
+                
+                <canvas id="reducerCanvas" style="display: none;"></canvas>
+            </div>
+        </section>
+    </main>
+
+
+<div class="tool-seo-section">
+
+    <h2 class="section-title">📉 Free Online Image Size Reducer: Compress JPG & PNG Files</h2>
+
+    <p>Welcome to the ultimate solution for optimizing your digital images. Our **Online Image Size Reducer** is a powerful, client-side tool designed to dramatically **reduce the file size (KB/MB)** of your photos and graphics without compromising crucial visual quality.</p>
+
+    <h3 class="subsection-title">Why Use Our Image Compression Tool?</h3>
+    
+    <p>Large image files slow down websites, drain bandwidth, and frustrate users. Whether you're a web developer, a blogger, or just need to compress a batch of photos for email, our tool provides an instant, secure solution.</p>
+
+    <ul class="feature-list">
+        <li><strong>Maximum Security (Client-Side):</strong> Unlike server-based tools, all **image compression** and processing occur directly in your web browser. Your images are never uploaded or stored, ensuring 100% privacy.</li>
+        <li><strong>Precise JPEG Quality Control:</strong> Use the dedicated compression slider to set the exact **JPEG quality** from 10% to 100%. Watch the estimated file size update in real-time, allowing you to hit specific KB targets effortlessly.</li>
+        <li><strong>Effective File Size Reduction:</strong> Easily transform multi-megabyte images into highly optimized files often **under 100 KB** for improved web performance.</li>
+        <li><strong>Simple Two-Stage Workflow:</strong> Upload your image, instantly view its original dimensions and file size, adjust the quality, and download the compressed result—all in two easy steps.</li>
+        <li><strong>Support for Key Formats:</strong> Seamlessly handle and output popular formats like **JPG (.jpg)** and **PNG (.png)** for universal compatibility.</li>
+    </ul>
+
+    <h3 class="subsection-title">Understanding Image Compression and Quality</h3>
+
+    <p>Image compression, especially for **JPEG file size reduction**, involves removing redundant visual data. While lower quality settings yield the smallest files, they introduce compression artifacts. We recommend aiming for a quality setting between 60% and 75% to achieve a balance between a low **MB to KB file size reduction** and high visual fidelity.</p>
+
+    <p>Start optimizing your image files today. Achieve lightning-fast load times and save storage space with our free **Image Size Reducer**.</p>
+    
+</div>
+
+    
+    <footer>
+    <a href="terms.html"><h3>PRIVACY AND POLICY</h3></a>
+        <p>&copy; 2025 Raiparuhang. All rights reserved.</p>
+	<div style="display: flex; justify-content: center; gap: 20px; padding: 20px 0;">
+		<a href="[YOUR FACEBOOK URL HERE]" target="_blank" style="color: white; border: 1px solid white; border-radius: 50%; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">
+        <i class="fab fa-facebook-f" style="color: white; font-size: 18px;"></i>
+		</a>
+		<a href="https://x.com/Paruhang005" target="_blank" style="color: white; border: 1px solid white; border-radius: 50%; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">
+        <i class="fab fa-x-twitter" style="color: white; font-size: 18px;"></i>
+		</a>
+	</div>
+    </footer>
+
+    <script src="imagesizereducer.js"></script>
+    <script src="script.js"></script> 
+</body>
+</html>

@@ -1,0 +1,193 @@
+/* ---------------------------------- */
+/* IMAGE SIZE REDUCER SPECIFIC STYLES */
+/* ---------------------------------- */
+
+.tool-box-container {
+    /* Apply the requested width reduction */
+    max-width: 760px;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.settings-panel {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.preview-area {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f7f7f7;
+    min-height: 300px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+    overflow: hidden; 
+}
+
+/* ------------------ STAGE 1: FORMAT BUTTONS ------------------ */
+
+.format-options h3 {
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.format-buttons-group {
+    display: flex;
+    gap: 10px;
+}
+
+.format-button {
+    flex: 1;
+    padding: 12px 10px;
+    background-color: #f0f0f0;
+    color: #333;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.format-button:hover {
+    background-color: #e0e0e0;
+}
+
+.format-button.active {
+    background-color: #007bff; /* Primary color active state */
+    color: white;
+    border-color: #007bff;
+}
+
+/* ------------------ STAGE 2: QUALITY CONTROL ------------------ */
+
+#qualityControlContainer {
+    padding: 10px 0;
+}
+
+#qualityControlContainer h3 {
+    margin-bottom: 15px;
+}
+
+#qualityInput {
+    width: calc(100% - 40px); /* Leave space for the value span */
+    vertical-align: middle;
+}
+
+#qualityValue {
+    display: inline-block;
+    width: 30px;
+    text-align: right;
+    font-weight: 700;
+    color: #007bff;
+}
+
+.quality-tip {
+    font-size: 0.9rem;
+    color: #777;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+/* Back Button Style */
+.back-button {
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 5px 10px;
+    transition: color 0.2s;
+}
+.back-button:hover {
+    color: #007bff;
+}
+
+.settings-panel hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 20px 0;
+}
+h1, h2, p {
+    text-align: center;
+}
+
+
+/* ---------------------------------- */
+/* SEO DESCRIPTION STYLING            */
+/* ---------------------------------- */
+
+.tool-seo-section {
+    /* Set max width and center it for readability on large screens */
+    max-width: 900px; 
+    margin: 40px auto 60px auto; 
+    padding: 20px;
+    border-top: 2px solid #007bff; /* Use your main brand color for a separator */
+    line-height: 1.7; /* Improves readability of body text */
+    font-family: 'Inter', sans-serif; /* Use your site's primary font */
+    color: #333; /* Darker text for contrast */
+    text-align: left; /* Ensure text is left-aligned within the section */
+}
+
+/* Styling for the main section title (H2) */
+.tool-seo-section .section-title {
+    font-size: 1.8rem; /* Large and impactful */
+    color: #007bff; /* Main brand color */
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    font-weight: 700;
+}
+
+/* Styling for the subsections titles (H3) */
+.tool-seo-section .subsection-title {
+    font-size: 1.4rem;
+    color: #555;
+    margin-top: 35px; /* More space above H3s to separate sections */
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+/* Styling for regular paragraphs */
+.tool-seo-section p {
+    margin-bottom: 15px;
+}
+
+/* Styling for the feature list (UL) */
+.tool-seo-section .feature-list {
+    list-style-type: none; /* Remove default bullets */
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.tool-seo-section .feature-list li {
+    padding-left: 1.5em; /* Space for custom bullet */
+    margin-bottom: 10px;
+    position: relative;
+}
+
+/* Custom bullet point using Font Awesome (assuming you have it linked) */
+.tool-seo-section .feature-list li::before {
+    content: "\f00c"; /* Checkmark icon: F00C is the Unicode for the fa-check icon */
+    font-family: 'Font Awesome 6 Free'; 
+    font-weight: 900; 
+    color: #28a745; /* Green checkmark */
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 0.9rem;
+}
+
+/* Special styling for nested lists (e.g., options within a feature) */
+.tool-seo-section .feature-list li ul {
+    list-style: circle;
+    padding-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

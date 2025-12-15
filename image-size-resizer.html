@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free Online Image Resizer. Quickly change the size of JPG and PNG files by manually setting width and height. Client-side, secure, and fast.">
+    
+    <title>Online Image Size Resizer - Two Stage Workflow</title>
+    <link rel="canonical" href="https://raiparuhang.com.np/image-size-resizer/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+	<link rel="icon" type="image/ico" href="raiparuhang.ico">
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="imagesizeresizer.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">
+            <a href="https://raiparuhang.com.np">raiparuhang<span class="dot">.com.np</span></a>
+        </div>
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html#tools">Back to Tools</a></li>
+            </ul>
+        </nav>
+        <button class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+    </header>
+
+    <main>
+        <section class="resizer-section">
+            <h1>Online Image Size Resizer</h1>
+            <h2>📏 Two-Stage Resizing Tool</h2>
+            <p>Upload your image, set dimensions, and download instantly.</p>
+
+            <div id="resizer-tool" class="tool-box-container">
+                
+                <div id="stage1" class="stage-container">
+                    
+                    <div class="tool-upload-box">
+                        <input type="file" id="imageInput" accept="image/jpeg,image/png" style="display: none;">
+                        
+                        <label for="imageInput" class="cta-button upload-btn">
+                            <span id="upload-text">UPLOAD IMAGE</span>
+                        </label>
+                        <p class="drag-drop-text">Drag and drop here</p>
+                    </div>
+
+                    <div class="format-options">
+                        <h3>1. Select Output Format</h3>
+                        <div class="format-buttons-group">
+                            <button class="format-button active" data-format="jpeg" id="formatJpeg">JPEG (.jpg)</button>
+                            <button class="format-button" data-format="png" id="formatPng">PNG (.png)</button>
+                        </div>
+                        
+                        <div id="jpegQualityControl" style="margin-top: 15px;">
+                            <label for="jpegQuality">JPEG Quality (10-100):</label>
+                            <input type="range" id="jpegQuality" min="10" max="100" value="90">
+                            <span id="qualityValue">90</span>
+                        </div>
+                    </div>
+
+                    <button id="nextBtn" class="cta-button process-btn" disabled style="margin-top: 30px;">
+                        NEXT <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div id="stage2" class="stage-container" style="display: none;">
+                    
+                    <div class="preview-area" id="previewArea">
+                        <img id="inputImagePreview" src="" alt="Image Preview" style="max-width: 100%; max-height: 300px;">
+                    </div>
+
+                    <div class="settings-panel">
+                        
+                        <h3>Image Details</h3>
+                        <p>Original Dimensions: <strong id="originalDimensions">-- x --</strong></p>
+                        <p>Approx. File Size: <strong id="originalFileSize">-- KB</strong></p>
+                        
+                        <hr>
+                        
+                        <h3>2. Set New Dimensions</h3>
+                        <div class="resizer-inputs-group">
+                            <div class="resizer-input-column">
+                                <label for="widthInput">Width (px):</label>
+                                <input type="number" id="widthInput" min="1" value="0">
+                            </div>
+                            <span class="dimension-separator">x</span>
+                            <div class="resizer-input-column">
+                                <label for="heightInput">Height (px):</label>
+                                <input type="number" id="heightInput" min="1" value="0">
+                            </div>
+                        </div>
+                        
+                        <label style="display: block; margin-bottom: 20px; font-weight: 500;">
+                            <input type="checkbox" id="aspectRatioCheck" checked> 
+                            Lock Aspect Ratio (Maintain Proportions)
+                        </label>
+                        
+                    </div>
+                    
+                    <button id="downloadBtn" class="cta-button process-btn" style="margin-top: 20px;">
+                        DOWNLOAD RESIZED <i class="fas fa-download"></i>
+                    </button>
+                    
+                    <button id="backBtn" class="back-button" style="margin-top: 10px;">
+                        <i class="fas fa-arrow-left"></i> Back to Upload
+                    </button>
+                    
+                </div>
+                
+                <canvas id="resizerCanvas" style="display: none;"></canvas>
+            </div>
+        </section>
+    </main>
+
+<div class="tool-seo-section">
+
+    <h2 class="section-title">📐 Free Online Image Size Resizer (JPG & PNG)</h2>
+
+    <p>Welcome to the Rai Paruhang <strong>Online Image Size Resizer</strong>, the easiest and fastest way to adjust the dimensions and file size of your JPEG (.jpg) and PNG images. Our tool is designed for speed, security, and simplicity, processing all resizing and compression directly in your browser without ever uploading your private files to a server.</p>
+
+    <h3 class="subsection-title">Why Use Our Image Resizing Tool?</h3>
+    
+    <p>Whether you're preparing images for a website, email, or social media, optimizing image size is crucial for performance and quality. Our tool gives you precise control over the output, ensuring your image looks great while keeping the file size minimal.</p>
+
+    <ul class="feature-list">
+        <li><strong>Client-Side Security:</strong> Your files are processed entirely in your web browser. No uploads, no servers, zero data storage.</li>
+        <li><strong>Two-Stage Control:</strong> Upload your file, view the original size, set the new dimensions, and select your format and quality, all in a simple, step-by-step process.</li>
+        <li><strong>Aspect Ratio Lock:</strong> Easily maintain image proportions to prevent stretching or distortion while setting your custom pixel width and height.</li>
+        <li><strong>Lossy & Lossless Output:</strong> Choose the format that suits your needs: 
+            <ul>
+                <li><strong>JPEG (JPG):</strong> Perfect for photographs. Adjust the quality slider to dramatically **reduce the file size (MB to KB)** for faster web loading.</li>
+                <li><strong>PNG:</strong> Ideal for graphics and images with transparent backgrounds.</li>
+            </ul>
+        </li>
+        <li><strong>Manual Dimension Input:</strong> Set the **exact width and height in pixels** required for your specific platform (e.g., banner ads, social media cover photos, or website thumbnails).</li>
+    </ul>
+
+    <h3 class="subsection-title">How to Reduce Image File Size (KB/MB)</h3>
+
+    <p>The key to file size reduction is often **compression**, not just resizing. When you resize a large image to a smaller dimension (e.g., 4000px to 800px) and select the **JPEG format**, our tool automatically applies high-quality compression algorithms. Use the <strong>Quality Slider</strong> to find the perfect balance between image fidelity and file size, helping you hit those essential **sub-100KB** targets for web optimization.</p>
+
+    <p>Start resizing and optimizing your **photos and graphics** today for free!</p>
+    
+</div>
+    
+    <footer>
+    <a href="terms.html"><h3>PRIVACY AND POLICY</h3></a>
+        <p>&copy; 2025 Raiparuhang. All rights reserved.</p>
+	<div style="display: flex; justify-content: center; gap: 20px; padding: 20px 0;">
+		<a href="[YOUR FACEBOOK URL HERE]" target="_blank" style="color: white; border: 1px solid white; border-radius: 50%; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">
+        <i class="fab fa-facebook-f" style="color: white; font-size: 18px;"></i>
+		</a>
+		<a href="https://x.com/Paruhang005" target="_blank" style="color: white; border: 1px solid white; border-radius: 50%; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">
+        <i class="fab fa-x-twitter" style="color: white; font-size: 18px;"></i>
+		</a>
+	</div>
+    </footer>
+
+    <script src="imagesizeresizer.js"></script>
+    <script src="script.js"></script> 
+</body>
+</html>
