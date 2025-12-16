@@ -1,0 +1,499 @@
+/* ---------------------------------- */
+/* 1. RESET & BASE STYLES             */
+/* ---------------------------------- */
+:root {
+    --primary-color: #007bff; /* A nice blue for accents */
+    --text-color: #333;
+    --background-color: #f4f7f6; /* Adjusted for better content contrast */
+    --white-color: #ffffff;
+    --dark-color: #1a1a1a;
+    --font-family: 'Inter', sans-serif;
+    --max-width: 1200px;
+    --light-border: #ddd;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3; /* A darker blue on hover */
+}
+
+ul {
+    list-style: none;
+}
+
+/* ---------------------------------- */
+/* 2. HEADER & NAVIGATION LAYOUT      */
+/* ---------------------------------- */
+.main-header {
+    background-color: var(--white-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+}
+
+.logo a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    text-transform: lowercase;
+}
+
+.logo .dot {
+    color: var(--primary-color);
+}
+
+.main-nav {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-list {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-list a {
+    color: var(--text-color);
+    font-weight: 400;
+    padding: 5px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-list a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-list a:hover::after,
+.nav-list a.active::after {
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--dark-color);
+}
+
+/* ---------------------------------- */
+/* 3. MAIN CONTENT STYLES             */
+/* ---------------------------------- */
+main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.content-section {
+    padding: 80px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.content-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--dark-color);
+    color: #bbb;
+    font-size: 0.9rem;
+}
+
+
+/* -------------------------------------- */
+/* 4. PDF MERGER TOOL STYLES (ADAPTED)    */
+/* -------------------------------------- */
+
+.pdf-merger-section {
+    background-color: var(--background-color);
+    border-radius: 12px;
+    padding: 60px 40px;
+    border-bottom: none;
+    display: flex;
+    justify-content: center;
+}
+
+.container-wrapper {
+    max-width: 700px; /* Constrain the merger tool width for better readability */
+    width: 100%;
+}
+
+.control-panel {
+    background-color: var(--white-color);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.control-panel h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.control-panel p {
+    text-align: left;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+/* Input Group for File Input */
+.input-group {
+    margin-bottom: 30px;
+}
+
+.input-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+#pdf-files {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--light-border);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+#pdf-files:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+
+/* File List and Display */
+.file-list {
+    min-height: 50px;
+    padding: 15px;
+    border: 1px solid var(--light-border);
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    margin-bottom: 30px;
+    color: #666;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.file-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-style: normal;
+}
+
+.file-list li {
+    padding: 8px 0;
+    border-bottom: 1px dashed #eee;
+    color: var(--text-color);
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.file-list li:last-child {
+    border-bottom: none;
+}
+
+
+/* Action Buttons (Merge Button) */
+.action-buttons-group {
+    margin-bottom: 20px;
+}
+
+.primary-button {
+    width: 100%;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, opacity 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    font-size: 1.1rem;
+}
+
+.primary-button:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.primary-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Status and Download Area */
+.status-message {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.status-message.success {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+
+.status-message.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+.download-area {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.download-area a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 25px;
+    background-color: #28a745;
+    color: var(--white-color);
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+.download-area a:hover {
+    background-color: #1e7e34;
+    color: var(--white-color);
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* ---------------------------------- */
+/* 5. MEDIA QUERIES (Responsiveness)  */
+/* ---------------------------------- */
+@media (max-width: 850px) {
+    /* Breakpoint for tablets/smaller devices */
+    
+    .main-header {
+        padding: 10px 20px;
+    }
+    
+    .logo a {
+        font-size: 1.3rem;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Mobile Navigation Logic */
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: var(--white-color);
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+        z-index: 99;
+    }
+
+    .main-nav.open {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        padding: 10px 0;
+    }
+
+    .nav-list li {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+    }
+
+    .nav-list a {
+        display: block;
+        padding: 15px 0;
+    }
+    
+    .nav-list a::after {
+        display: none;
+    }
+
+    /* Content adjustments */
+    .content-section {
+        padding: 40px 0;
+    }
+    
+    .content-section h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+
+    .pdf-merger-section {
+        padding: 30px 20px;
+    }
+}
+
+
+/* ... (Existing base styles remain the same) ... */
+
+/* -------------------------------------- */
+/* 4. PDF MERGER TOOL STYLES (ADAPTED)    */
+/* -------------------------------------- */
+
+/* ... (Existing control-panel, h2, h3, p styles remain the same) ... */
+
+/* --- NEW DROP ZONE STYLES --- */
+
+.drop-zone {
+    border: 3px dashed var(--light-border);
+    border-radius: 10px;
+    background-color: #fcfcfc;
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.3s, background-color 0.3s;
+    margin-bottom: 30px;
+}
+
+.drop-zone:hover {
+    border-color: var(--primary-color);
+    background-color: #f0f8ff; /* Light blue tint on hover */
+}
+
+.drop-zone.dragover {
+    border-color: #28a745; /* Green border when files are dragged over */
+    background-color: #e6ffe6;
+}
+
+.drop-zone i {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.drop-zone p {
+    color: #666;
+    margin: 5px 0;
+    text-align: center; /* Override control-panel p alignment */
+}
+
+.or-separator {
+    font-size: 0.8rem;
+    color: #aaa !important;
+    margin: 10px 0 !important;
+    font-weight: 500;
+}
+
+.secondary-button {
+    /* Style for the "Select Files" button */
+    padding: 8px 15px;
+    border: 2px solid var(--primary-color);
+    background-color: var(--white-color);
+    color: var(--primary-color);
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 10px;
+}
+
+.secondary-button:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+
+/* File List and Display (Ensure this part is still responsive) */
+.file-list {
+    min-height: 50px;
+    padding: 15px;
+    border: 1px solid var(--light-border);
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    margin-bottom: 30px;
+    color: #666;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.file-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-style: normal;
+}
+
+.file-list li {
+    padding: 8px 0;
+    border-bottom: 1px dashed #eee;
+    color: var(--text-color);
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ... (Remaining styles for buttons, status, and media queries remain the same) ... */

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Merger Tool | RaiParuhang</title>
+    <link rel="icon" type="image/ico" href="raiparuhang.ico">
+    <link rel="canonical" href="https://raiparuhang.com.np/pdf-merger">
+    <meta name="description" content="Merge multiple PDF files into a single document easily and securely with RaiParuhang's free online PDF Merger Tool.">
+    <link rel="stylesheet" href="pdfmerger.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+</head>
+<body>
+ 
+    <header class="main-header">
+        <div class="logo">
+            <a href="https://raiparuhang.com.np">raiparuhang<span class="dot">.com.np</span></a>
+        </div>
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html#tools">Back to Tools</a></li>
+            </ul>
+        </nav>
+        <button class="menu-toggle" aria-label="Toggle navigation">
+            &#9776;
+        </button>            
+    </header>
+
+    <main>
+        <section class="content-section pdf-merger-section">
+            <div class="container-wrapper">
+                <h2>PDF Merger Tool</h2>
+                
+                <div class="control-panel">
+                    <h3>1. Upload & Order PDFs</h3>
+                    <p>Drag and drop your PDF files into the box below, or click to select them. Files are merged in the order they appear.</p>
+                    
+                    <div class="input-group">
+                        <input type="file" id="pdf-files" accept=".pdf" multiple style="display: none;">
+                        
+                        <div id="drop-zone" class="drop-zone">
+                            <i class="fas fa-file-upload fa-3x"></i>
+                            <p>Drag and drop PDF files here</p>
+                            <p class="or-separator">OR</p>
+                            <button id="select-files-btn" class="secondary-button">Select Files</button>
+                        </div>
+                    </div>
+
+                    <div id="file-list" class="file-list">No files selected.</div>
+                    
+                    <div class="action-buttons-group">
+                        <button id="merge-btn" class="primary-button" disabled>
+                            <i class="fas fa-file-merge"></i> Merge PDFs
+                        </button>
+                    </div>
+
+                    <div id="status-message" class="status-message"></div>
+                    <div id="download-area" class="download-area hidden">
+                        </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+       
+    <footer>
+        <a href="terms.html"><h3>PRIVACY AND POLICY</h3></a>
+        <p>&copy; 2025 Raiparuhang. All rights reserved.</p>
+        <div style="display: flex; justify-content: center; gap: 20px; padding: 20px 0;">
+            <a href="#" target="_blank" aria-label="Facebook" style="color: white; border: 1px solid white; border-radius: 50%; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">
+            <i class="fab fa-facebook-f" style="color: white; font-size: 18px;"></i>
+            </a>
+            <a href="https://x.com/Paruhang005" target="_blank" aria-label="Twitter" style="color: white; border: 1px solid white; border-radius: 50%; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">
+            <i class="fab fa-x-twitter" style="color: white; font-size: 18px;"></i>
+            </a>
+        </div>
+    </footer>
+
+    <script src="pdfmerger.js" defer></script>
+</body>
+</html>
