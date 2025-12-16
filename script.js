@@ -18,16 +18,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3. Simple Active Link Indicator (Optional: Adds 'active' class to current section link)
+    // 3. Simple Active Link Indicator (Adds 'active' class to current section link)
     const sections = document.querySelectorAll('section[id]');
 
     window.addEventListener('scroll', () => {
         let current = '';
+        // Adjusted the buffer value (70) to be a constant
+        const HEADER_HEIGHT_BUFFER = 70; 
         const scrollPosition = window.scrollY;
 
         sections.forEach(section => {
-            // Get the top offset of the section, minus a fixed header height for accuracy
-            const sectionTop = section.offsetTop - 70;
+            const sectionTop = section.offsetTop - HEADER_HEIGHT_BUFFER;
             const sectionHeight = section.clientHeight;
 
             if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
@@ -37,57 +38,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
         navLinks.forEach(link => {
             link.classList.remove('active');
+            // Check if the href (e.g., '#contact') contains the current section ID ('contact')
             if (link.getAttribute('href').includes(current)) {
                 link.classList.add('active');
             }
         });
     });
 
-    // 4. Contact Form Submission (Prevent default behavior for demonstration)
-const contactForm = document.getElementById('contact-form');
+    // 4. Contact Form Submission (Simplified using promise-based fetch)
+    const contactForm = document.getElementById('contact-form');
 
-if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-        // 1. Stop the browser from navigating away
-        e.preventDefault();
-        
-        // 2. Collect all the form fields and values
-        const formData = new FormData(contactForm);
-        
-        // 3. Optional: Add a visual loading state here (e.g., disable the button)
-        // contactForm.querySelector('button[type="submit"]').disabled = true;
-
-        // 4. Send the data to Getform
-        try {
-            const response = await fetch(contactForm.action, {
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            // Stop the browser from navigating away
+            e.preventDefault();
+            
+            const formData = new FormData(contactForm);
+            
+            // Send the data using fetch
+            fetch(contactForm.action, {
                 method: 'POST', 
                 body: formData, 
-                // Setting 'Accept' header for JSON response from Getform
                 headers: { 'Accept': 'application/json' } 
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Thank you! Your message has been sent successfully.');
+                    contactForm.reset(); // Clear form fields
+                } else {
+                    alert('Submission failed. Please check the form data.');
+                }
+            })
+            .catch(error => {
+                // Handle network errors
+                console.error('Network Error:', error);
+                alert('A connection error occurred. Please try again.');
             });
-
-            // 5. Handle the response and provide feedback
-            if (response.ok) {
-                alert('Thank you! Your message has been sent successfully.');
-                contactForm.reset(); // Clear form fields
-            } else {
-                // If Getform rejected the submission (e.g., due to configuration)
-                alert('Submission failed. Please check the form data and your Getform settings.');
-            }
-        } catch (error) {
-            // Handle network errors (user offline, server unreachable)
-            console.error('Network Error:', error);
-            alert('A connection error occurred. Please try again.');
-        } 
-        // 6. Optional: Re-enable the button if you added a loading state
-        // finally {
-        //     contactForm.querySelector('button[type="submit"]').disabled = false;
-        // }
-    });
-}
-
-
-
-
-
+        });
+    }
 });

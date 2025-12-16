@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO: Updated Title for the QR Tool page -->
+    <title>Free Dynamic QR Code Generator | raiparuhang</title>
+    <link rel="icon" type="image/ico" href="raiparuhang.ico">
+    <link rel="canonical" href="https://raiparuhang.com.np/qr-generator">
+    <!-- SEO: Updated Meta Description for the QR Tool page -->
+    <meta name="description" content="Instantly generate custom, dynamic QR codes for URLs, text, and more using RaiParuhang's free online tool. Customize colors and download high-quality PNGs.">
+    <!-- Linking local style and script files -->
+    <link rel="stylesheet" href="qrcodegenerator.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Dependency for generating QR Codes -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8424476643034432"
+      crossorigin="anonymous"></script>
+    <script src="qrcodegenerator.js" defer></script>
+</head>
+<body>
+ 
+    <header class="main-header">
+        <div class="logo">
+            <a href="https://raiparuhang.com.np">raiparuhang<span class="dot">.com.np</span></a>
+        </div>
+        <nav class="main-nav">
+            <ul class="nav-list">
+            <ul class="nav-list">
+                <li><a href="index.html#tools">Back to Tools</a></li>
+            </ul>
+        </nav>
+        <button class="menu-toggle" aria-label="Toggle navigation">
+            &#9776;
+        </button>            
+    </header>
+       
+    <main>
+        <section class="content-section qr-generator-section">
+            <!-- SEO: H2 for the tool name -->
+            <h2>Free Dynamic QR Code Generator</h2>
+
+            <div class="qr-container-wrapper">
+                
+                <!-- QR Code Input and Customization Panel -->
+                <div class="qr-control-panel">
+                    <h3>1. Enter Content</h3>
+                    <div class="input-group">
+                        <label for="qr-text" class="input-label">Text or URL to Encode:</label>
+                        <textarea id="qr-text" rows="4" placeholder="Type your text or URL here..."></textarea>
+                        <span class="char-count-display">Characters: <span id="char-count">0</span></span>
+                    </div>
+
+                    <h3>2. Customize Colors</h3>
+                    <div class="color-options-group">
+                        <div class="color-picker-item">
+                            <label for="dark-color">Foreground (Dots):</label>
+                            <input type="color" id="dark-color" value="#000000" aria-label="Foreground Color Selector">
+                            <span id="dark-color-label" class="color-hex-label">#000000</span>
+                        </div>
+                        <div class="color-picker-item">
+                            <label for="light-color">Background (Empty):</label>
+                            <input type="color" id="light-color" value="#ffffff" aria-label="Background Color Selector">
+                            <span id="light-color-label" class="color-hex-label">#ffffff</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QR Code Preview and Download Panel -->
+                <div class="qr-preview-panel">
+                    <h3>3. Preview & Download</h3>
+                    <div id="qr-display-box" class="qr-display-box">
+                        <div id="qr-box" class="qr-box-inner">
+                            <!-- QR code will be rendered here -->
+                        </div>
+                        <p id="empty-message" class="empty-message">Start typing to generate your QR Code.</p>
+                        <p id="error-message" class="error-message hidden"></p>
+                    </div>
+
+                    <div class="action-buttons-group">
+                        <button id="download-btn" class="primary-button" disabled aria-label="Download QR Code">
+                            <i class="fa-solid fa-download"></i> Download PNG
+                        </button>
+                        <button id="copy-btn" class="secondary-button" disabled aria-label="Copy QR Code Image">
+                            <i class="fa-solid fa-copy copy-icon"></i>
+                            <i class="fa-solid fa-check check-icon hidden"></i>
+                            <span class="btn-text">Copy Image</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <a href="terms.html"><h3>PRIVACY AND POLICY</h3></a>
+        <p>&copy; 2025 Raiparuhang. All rights reserved.</p>
+	<div style="display: flex; justify-content: center; gap: 20px; padding: 20px 0;">
+		<a href="#" target="_blank" style="color: white; border: 1px solid white; border-radius: 50%; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">
+        <i class="fab fa-facebook-f" style="color: white; font-size: 18px;"></i>
+		</a>
+		<a href="https://x.com/Paruhang005" target="_blank" style="color: white; border: 1px solid white; border-radius: 50%; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">
+        <i class="fab fa-x-twitter" style="color: white; font-size: 18px;"></i>
+		</a>
+	</div>
+    </footer>
+</body>
+</html>

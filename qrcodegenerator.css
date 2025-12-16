@@ -1,0 +1,458 @@
+/* ---------------------------------- */
+/* 1. RESET & BASE STYLES             */
+/* ---------------------------------- */
+:root {
+    --primary-color: #007bff; /* A nice blue for accents */
+    --text-color: #333;
+    --background-color: #f9f9f9;
+    --white-color: #ffffff;
+    --dark-color: #1a1a1a;
+    --font-family: 'Inter', sans-serif;
+    --max-width: 1200px;
+    --light-border: #ddd;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--white-color);
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3; /* A darker blue on hover */
+}
+
+ul {
+    list-style: none;
+}
+
+/* ---------------------------------- */
+/* 2. HEADER & NAVIGATION LAYOUT      */
+/* ---------------------------------- */
+.main-header {
+    background-color: var(--white-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    
+    /* Flex container for the whole header */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+}
+
+.logo a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    text-transform: lowercase;
+}
+
+.logo .dot {
+    color: var(--primary-color);
+}
+
+/* Navigation Menu Positioning (Center on Desktop) */
+.main-nav {
+    flex-grow: 1; /* Allows it to take up space */
+    display: flex;
+    justify-content: center; /* Pushes the menu items to the center */
+}
+
+.nav-list {
+    display: flex;
+    gap: 30px; /* Space between menu items */
+}
+
+.nav-list a {
+    color: var(--text-color);
+    font-weight: 400;
+    padding: 5px 0;
+    position: relative;
+    /* Underline animation effect */
+    transition: color 0.3s ease;
+}
+
+.nav-list a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-list a:hover::after,
+.nav-list a.active::after {
+    width: 100%;
+}
+
+/* Hide the toggle button by default (Desktop) */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--dark-color);
+}
+
+/* ---------------------------------- */
+/* 3. MAIN CONTENT STYLES             */
+/* ---------------------------------- */
+main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.content-section {
+    padding: 80px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.content-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--dark-color);
+    color: #bbb;
+    font-size: 0.9rem;
+}
+
+
+/* Make sure the hero section is positioned relatively to contain absolute children */
+.hero-section {
+    position: relative; /* CRITICAL: Ensures elements stay within the hero section */
+}
+
+/* -------------------------------------- */
+/* 4. QR CODE GENERATOR TOOL STYLES (NEW) */
+/* -------------------------------------- */
+
+.qr-generator-section {
+    background-color: var(--background-color);
+    border-radius: 12px;
+    padding: 60px 40px;
+    border-bottom: none; /* Override default border */
+}
+
+.qr-container-wrapper {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.qr-control-panel,
+.qr-preview-panel {
+    flex: 1;
+    background-color: var(--white-color);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.qr-control-panel h3,
+.qr-preview-panel h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* Input Group */
+.input-group {
+    margin-bottom: 30px;
+}
+
+.input-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+#qr-text {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--light-border);
+    border-radius: 6px;
+    font-size: 1rem;
+    resize: vertical;
+    transition: border-color 0.3s;
+}
+
+#qr-text:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.char-count-display {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.85rem;
+    color: #666;
+    text-align: right;
+}
+
+/* Color Options */
+.color-options-group {
+    display: flex;
+    gap: 20px;
+}
+
+.color-picker-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.color-picker-item label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+/* Color input styling */
+.color-picker-item input[type="color"] {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 0 3px var(--light-border);
+    margin-bottom: 10px;
+    transition: box-shadow 0.3s;
+}
+
+.color-picker-item input[type="color"]:hover {
+    box-shadow: 0 0 0 3px var(--primary-color);
+}
+
+.color-hex-label {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* QR Preview */
+.qr-display-box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Forces a square aspect ratio */
+    border: 3px solid var(--light-border);
+    border-radius: 8px;
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.qr-box-inner {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.qr-box-inner img {
+    /* Ensure the generated image scales within the container */
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.empty-message, .error-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-style: italic;
+    color: #888;
+    text-align: center;
+    padding: 20px;
+}
+
+.error-message {
+    color: #ff4d4d;
+    font-weight: 600;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Action Buttons */
+.action-buttons-group {
+    display: flex;
+    gap: 15px;
+}
+
+.primary-button, .secondary-button {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, opacity 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.primary-button {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.primary-button:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.secondary-button {
+    background-color: var(--white-color);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.secondary-button:hover:not(:disabled) {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.primary-button:disabled,
+.secondary-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.secondary-button .check-icon {
+    color: #28a745; /* Green color for success checkmark */
+}
+
+
+/* ---------------------------------- */
+/* 5. MEDIA QUERIES (Responsiveness)  */
+/* ---------------------------------- */
+@media (max-width: 1024px) {
+    .qr-container-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+@media (max-width: 850px) {
+    /* Breakpoint for tablets/smaller devices */
+    
+    .main-header {
+        padding: 10px 20px;
+    }
+    
+    /* Make the logo slightly smaller */
+    .logo a {
+        font-size: 1.3rem;
+    }
+
+    /* Show the hamburger menu */
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Hide desktop nav and turn it into a column layout */
+    .main-nav {
+        /* Initially hidden and positioned for mobile */
+        display: none;
+        position: absolute;
+        top: 60px; /* Below the header */
+        left: 0;
+        width: 100%;
+        background-color: var(--white-color);
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+        z-index: 99;
+    }
+
+    /* Class added by JavaScript to show the menu */
+    .main-nav.open {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        padding: 10px 0;
+    }
+
+    .nav-list li {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+    }
+
+    .nav-list a {
+        display: block;
+        padding: 15px 0;
+    }
+    
+    .nav-list a::after {
+        display: none; /* Remove desktop underline effect on mobile */
+    }
+
+    /* Content adjustments */
+    .content-section {
+        padding: 40px 0;
+    }
+    
+    .content-section h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+
+    .qr-generator-section {
+        padding: 30px 20px;
+    }
+
+    .color-options-group {
+        flex-direction: column;
+    }
+
+    .action-buttons-group {
+        flex-direction: column;
+    }
+}
