@@ -358,5 +358,62 @@
     animation: shield-pulse 3s infinite ease-in-out;
 }
 
+/*about developer styling*/
+.about-developer {
+    background: #f8fafc;
+    border-radius: 20px;
+    padding: 40px;
+    margin: 60px auto;
+    max-width: 850px;
+    border: 1px solid #e2e8f0;
+}
+
+.developer-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.developer-image img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.developer-info h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
+
+.developer-info p {
+    color: #475569;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.developer-links a {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.developer-links a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile Layout */
+@media (max-width: 600px) {
+    .developer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
 
 
