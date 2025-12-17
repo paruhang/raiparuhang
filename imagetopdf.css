@@ -307,3 +307,56 @@
         padding: 20px;
     }
 }
+
+.privacy-badge {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f0fdf4; /* Soft green background */
+    border: 1px solid #bbf7d0; /* Light green border */
+    padding: 12px 20px;
+    border-radius: 50px; /* Pill shape */
+    margin: 20px 0;
+    text-align: left;
+}
+
+.badge-icon {
+    background-color: #22c55e; /* Vibrant green */
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    font-size: 1.1rem;
+    flex-shrink: 0; /* Prevents icon from squishing */
+}
+
+.badge-content strong {
+    display: block;
+    font-size: 0.95rem;
+    color: #166534; /* Dark green text */
+    line-height: 1.2;
+}
+
+.badge-content p {
+    font-size: 0.85rem;
+    color: #15803d;
+    margin: 0;
+    font-weight: 400;
+}
+
+/* Pulse animation to draw the eye (Optional) */
+@keyframes shield-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.badge-icon i {
+    animation: shield-pulse 3s infinite ease-in-out;
+}
+
+
+
