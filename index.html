@@ -3,21 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RaiParuhang</title>
+    <title>Rai Paruhang | Free Client-Side Web Tools</title>
     <link rel="icon" type="image/ico" href="raiparuhang.ico">
     <link rel="canonical" href="https://raiparuhang.com.np">
-    <meta name="description" content="Use free online file conversion tools at RaiParuhang. Convert Image to PDF, PDF to Image, Image formats, DOCX to PDF and PDF to DOCX quickly and securely.">
+    <meta name="description" content="Free online file conversion tools at RaiParuhang. Convert Image to PDF, PDF to Image, and resize images quickly and securely. 100% client-side.">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8424476643034432"
-      crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8424476643034432" crossorigin="anonymous"></script>
     <script src="script.js" defer></script>
 </head>
-<body>
-
- 
+<body> bn 
 
     <header class="main-header">
         <div class="logo">
@@ -25,117 +21,137 @@
         </div>
         <nav class="main-nav">
             <ul class="nav-list">
+                <li><a href="#home">Home</a></li>
                 <li><a href="#tools">Tools</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
-        <button class="menu-toggle" aria-label="Toggle navigation">
-            &#9776;
-        </button>
+        <button class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
     </header>
 
     <main>
         <section id="home" class="hero-section">
             <div class="hero-content">
-                <h1>Hello, I'm Rai Paruhang. I build fast, free, client-side tools to solve your everyday problems.</h1>
-                <p>A Developer focused on creating intuitive and efficient web experiences.</p>
-                <a href="#tools" class="cta-button">Explore Free Tools</a>
+                <h1>Fast, Free, Client-Side Tools.</h1>
+                <p>I build intuitive web experiences where your data never leaves your browser.</p>
+                <div class="hero-btns">
+                    <a href="#tools" class="cta-button">Explore Tools</a>
+                    <a href="#projects" class="cta-button secondary">View Projects</a>
+                </div>
             </div>
         </section>
 
-        <section id="tools" class="content-section">
-            <h2>🛠️ Tools</h2>
-			<h4>100% Client-Side. Your data never leaves your browser.</h4>
-            <div class="tools-grid">
-                <div class="tool-item"><a href="https://raiparuhang.com.np/imagetopdf">IMAGE TO PDF</a></div>
-                <div class="tool-item"><a href="https://raiparuhang.com.np/pdftoimage">PDF TO IMAGE</a></div>
-                <div class="tool-item"><a href="https://raiparuhang.com.np/imageconverter">IMAGE CONVERTER</a></div>
-                <div class="tool-item"><a href="https://raiparuhang.com.np/image-size-resizer">IMAGE SIZE RESIZER</a></div>
-                <div class="tool-item"><a href="https://raiparuhang.com.np/image-size-reducer">IMAGE SIZE REDUCE</a></div>
-                <div class="tool-item"><a href="https://raiparuhang.com.np/pdf-merger">PDF MERGER</a></div>
-                <div class="tool-item"><a href="https://raiparuhang.com.np/qr-code-generator">QR CODE GENERATOR</a></div>
-
-            </div>
-        </section>
+<section id="tools" class="tools-gallery">
+    <h2 class="section-title">🛠️ Web Tools</h2>
+    <p class="section-subtitle">100% Client-Side. Your data never leaves your browser.</p>
+    
+    <div class="tools-grid">
+        <a href="https://raiparuhang.com.np/image-to-pdf" class="tool-card">
+            <div class="tool-icon"><i class="fas fa-file-pdf"></i></div>
+            <h3>Image to PDF</h3>
+            <p>Convert JPG, PNG, and WebP into high-quality PDFs.</p>
+        </a>
+        <a href="https://raiparuhang.com.np/pdf-to-image" class="tool-card">
+            <div class="tool-icon"><i class="fas fa-file-image"></i></div>
+            <h3>PDF to Image</h3>
+            <p>Extract images from your PDF documents instantly.</p>
+        </a>
+        <a href="https://raiparuhang.com.np/image-converter" class="tool-card">
+            <div class="tool-icon"><i class="fas fa-sync-alt"></i></div>
+            <h3>Image Converter</h3>
+            <p>Convert between JPG, PNG, and WebP formats.</p>
+        </a>
+        <a href="https://raiparuhang.com.np/image-size-resizer" class="tool-card">
+            <div class="tool-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+            <h3>Size Resizer</h3>
+            <p>Adjust dimensions for social media or web use.</p>
+        </a>
+        <a href="https://raiparuhang.com.np/image-size-reducer" class="tool-card">
+            <div class="tool-icon"><i class="fas fa-compress-arrows-alt"></i></div>
+            <h3>Size Reducer</h3>
+            <p>Compress file size without losing visual quality.</p>
+        </a>
+        <a href="https://raiparuhang.com.np/pdf-merger" class="tool-card">
+            <div class="tool-icon"><i class="fas fa-object-group"></i></div>
+            <h3>PDF Merger</h3>
+            <p>Combine multiple PDF files into a single document.</p>
+        </a>
+        <a href="https://raiparuhang.com.np/qr-code-generator" class="tool-card">
+            <div class="tool-icon"><i class="fas fa-qrcode"></i></div>
+            <h3>Generate QR Code</h3>
+            <p>Generate QR for your business instantly with live preview</p>
+        </a>
+    </div>
+</section>
 
         <section id="projects" class="content-section">
-            <h2>📂 Projects</h2>
-            <div class="project-card">
-                <h3>Optional Math Solution- Grade: 10:</h3>
-                <p>This is a solution of Dr.Simkhada Opt.Math grade 10 to help teachers as well as students.</p>
-                | <a href="math-solution/math-solution.html">View</a> | 
-            </div>
-            <div class="project-card">
-                <h3>Project Title Two</h3>
-                <p>description</p>
-                <a href="#">View Live Demo</a> | GitHub Repo
+            <h2 class="section-title">📂 Projects</h2>
+            <div class="projects-container">
+                <div class="project-card">
+                    <h3>Optional Math Solution (Grade 10)</h3>
+                    <p>Complete solution of Dr. Simkhada Optional Math to assist students and teachers.</p>
+                    <a href="math-solution/math-solution.html" class="project-link">View Solution <i class="fas fa-external-link-alt"></i></a>
+                </div>
             </div>
         </section>
 
-        <section id="about" class="content-section">
-            <h2>👤 About Me</h2>
-            <p>I enjoy solving complex problems and constantly learning new technologies. My goal is to build digital solutions that make a real impact.</p>
+
+        <section id="about" class="content-section about-section">
+            <h2>👤</h2>
+            <h2 class="section-title"> About Me</h2>
+        <div class="developer-image">
+            <img src="profile.jpg" alt="Rai Paruhang - Full Stack Developer">
+        </div>
+            <p>Hi, I'm Paruhang Rai, a developer based in Nepal dedicated to building fast, privacy-focused web utilities.<br> I creat free online tools because I believe users shouldn't have to sacrifice their data privacy<br> just to perform simple document tasks.
+
+All tools on this site are designed to be client-side,<br> meaning your files never touch a server. My goal is to provide the community with free,<br> secure, and high-performance tools that just work.</p>
         </section>
 
         <section id="contact" class="content-section">
-            <h2>✉️ Get In Touch</h2>
-            <form id="contact-form" action="https://getform.io/f/bdrkrdmb" method="POST">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
+            <h2 class="section-title">✉️ Get In Touch</h2>
+            <form id="contact-form" action="https://getform.io/f/ayvqkvkb" method="POST">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                </div>
                 <textarea name="Message" placeholder="Your Message" rows="5" required></textarea>
                 <button type="submit" class="cta-button">Send Message</button>
             </form>
-        </section>
+        </section>    
     </main>
 
-    <footer>
-        <a href="terms.html"><h3>PRIVACY AND POLICY</h3></a>
-        <p>&copy; 2025 Raiparuhang. All rights reserved.</p>
-	<div style="display: flex; justify-content: center; gap: 20px; padding: 20px 0;">
-		<a href="#" target="_blank" style="color: white; border: 1px solid white; border-radius: 50%; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">
-        <i class="fab fa-facebook-f" style="color: white; font-size: 18px;"></i>
-		</a>
-		<a href="https://x.com/Paruhang005" target="_blank" style="color: white; border: 1px solid white; border-radius: 50%; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">
-        <i class="fab fa-x-twitter" style="color: white; font-size: 18px;"></i>
-		</a>
-	</div>
+    <footer class="main-footer">
+        <div class="footer-content">
+            <a href="terms.html" class="footer-link">Privacy & Terms</a>
+            <p>&copy; 2025 Rai Paruhang. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/Paruhang005" target="_blank"><i class="fab fa-x-twitter"></i></a>
+            </div>
+        </div>
     </footer>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
+    <script type="application/ld+json">
     {
-      "@type": "CollectionPage",
-      "@id": "https://raiparuhang.com.np/#collectionpage",
-      "name": "Rai Paruhang: Free Online Tools Hub",
-      "description": "A collection of free, high-speed, client-side online tools for PDF, image, and document conversion and resizing.",
-      "url": "https://raiparuhang.com.np/",
-      "about": {
-        "@type": "Organization",
-        "name": "Rai Paruhang",
-        "url": "https://raiparuhang.com.np/",
-        "logo": "https://raiparuhang.com.np/raiparuhang.ico",
-        "sameAs": [
-          "https://x.com/Paruhang005",
-        ]
-      }
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://raiparuhang.com.np/#website",
-      "url": "https://raiparuhang.com.np/",
-      "name": "Rai Paruhang"
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "CollectionPage",
+          "@id": "https://raiparuhang.com.np/#collectionpage",
+          "name": "Rai Paruhang Tools",
+          "description": "Privacy-first online tools for PDF and Image processing.",
+          "url": "https://raiparuhang.com.np/"
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://raiparuhang.com.np/#website",
+          "url": "https://raiparuhang.com.np/",
+          "name": "Rai Paruhang"
+        }
+      ]
     }
-  ]
-}
-</script>
+    </script>
 </body>
 </html>
-
-
-
-
-
