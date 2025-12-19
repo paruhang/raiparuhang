@@ -10,6 +10,15 @@
     --font-family: 'Inter', sans-serif;
     --max-width: 1200px;
     --light-border: #ddd;
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --bg: #f8fafc;
+    --white: #ffffff;
+    --dark: #0f172a;
+    --border: #e2e8f0;
+    --font: 'Inter', sans-serif;
 }
 
 * {
@@ -496,4 +505,180 @@ footer {
     justify-content: space-between;
 }
 
+
+/*how to section */
+
+.how-to-section {
+    padding: 60px 20px;
+    background-color: #121212; /* Matches your dark theme */
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.how-to-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #00d4ff; /* Accent color */
+}
+
+.subtitle {
+    text-align: center;
+    color: #b0b0b0;
+    margin-bottom: 40px;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.step-card {
+    background: #1e1e1e;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #333;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-5px);
+    border-color: #00d4ff;
+}
+
+.step-number {
+    background: #00d4ff;
+    color: #000;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.step-card h3 {
+    margin-bottom: 12px;
+    font-size: 1.25rem;
+}
+
+.step-card p {
+    color: #cccccc;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.pro-tip {
+    max-width: 800px;
+    margin: 40px auto 0;
+    padding: 15px 20px;
+    background: rgba(0, 212, 255, 0.1);
+    border-left: 4px solid #00d4ff;
+    border-radius: 4px;
+    color: #e0e0e0;
+}
+
+@media (max-width: 768px) {
+    .how-to-section { padding: 40px 15px; }
+    .steps-grid { gap: 15px; }
+}
+
+/*faq section*/
+.faq-section {
+    padding: 80px 20px;
+    background-color: #0f0f0f;
+    color: #ffffff;
+}
+
+.faq-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: #00d4ff;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: #1a1a1a;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-item[open] {
+    border-color: #00d4ff;
+    background: #222;
+}
+
+summary {
+    padding: 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    outline: none;
+}
+
+/* Custom arrow for the accordion */
+summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: #00d4ff;
+    transition: transform 0.3s ease;
+}
+
+.faq-item[open] summary::after {
+    content: '−';
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    padding: 0 20px 20px;
+    color: #b0b0b0;
+    line-height: 1.6;
+    border-top: 1px solid #333;
+    padding-top: 15px;
+}
+
+.faq-answer strong {
+    color: #00d4ff;
+}
+
+/* Hover effects */
+summary:hover {
+    background-color: #252525;
+}
+
+
 /* ... (Remaining styles for buttons, status, and media queries remain the same) ... */
+
+/* Footer */
+.main-footer { background: var(--dark); color: var(--white); padding: 40px 5%; text-align: center; }
+.footer-link { color: var(--primary); text-decoration: none; font-weight: 600; display: block; margin-bottom: 10px; }
+.social-links { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
+.social-links a { color: white; border: 1px solid rgba(255,255,255,0.2); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+.social-links a:hover { background: var(--primary); border-color: var(--primary); }
+
+/* Mobile */
+@media (max-width: 850px) {
+    .menu-toggle { display: block; }
+    .main-nav { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: white; border-bottom: 1px solid var(--border); }
+    .main-nav.open { display: block; }
+    .nav-list { flex-direction: column; padding: 20px; gap: 10px; }
+    .form-group { flex-direction: column; }
+}
