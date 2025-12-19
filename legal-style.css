@@ -44,6 +44,10 @@ body {
 
 .menu-toggle { display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* Main Container */
 .policy-container {
     max-width: 850px;
