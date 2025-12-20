@@ -139,14 +139,7 @@ main {
     font-weight: 600;
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: var(--dark-color);
-    color: #bbb;
-    font-size: 0.9rem;
-}
+
 
 
 /* -------------------------------------- */
@@ -195,13 +188,7 @@ footer {
     margin-bottom: 30px;
 }
 
-.input-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: var(--text-color);
-    font-size: 0.95rem;
-}
+
 
 #pdf-files {
     width: 100%;
@@ -408,14 +395,6 @@ footer {
 }
 
 
-/* ... (Existing base styles remain the same) ... */
-
-/* -------------------------------------- */
-/* 4. PDF MERGER TOOL STYLES (ADAPTED)    */
-/* -------------------------------------- */
-
-/* ... (Existing control-panel, h2, h3, p styles remain the same) ... */
-
 /* --- NEW DROP ZONE STYLES --- */
 
 .drop-zone {
@@ -473,36 +452,6 @@ footer {
 .secondary-button:hover {
     background-color: var(--primary-color);
     color: var(--white-color);
-}
-
-
-/* File List and Display (Ensure this part is still responsive) */
-.file-list {
-    min-height: 50px;
-    padding: 15px;
-    border: 1px solid var(--light-border);
-    border-radius: 6px;
-    background-color: #f9f9f9;
-    margin-bottom: 30px;
-    color: #666;
-    font-style: italic;
-    font-size: 0.9rem;
-}
-
-.file-list ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    font-style: normal;
-}
-
-.file-list li {
-    padding: 8px 0;
-    border-bottom: 1px dashed #eee;
-    color: var(--text-color);
-    font-size: 0.95rem;
-    display: flex;
-    justify-content: space-between;
 }
 
 
@@ -631,10 +580,3 @@ footer {
 .social-links a:hover { background: var(--primary); border-color: var(--primary); }
 
 /* Mobile */
-@media (max-width: 850px) {
-    .menu-toggle { display: block; }
-    .main-nav { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: white; border-bottom: 1px solid var(--border); }
-    .main-nav.open { display: block; }
-    .nav-list { flex-direction: column; padding: 20px; gap: 10px; }
-    .form-group { flex-direction: column; }
-}
