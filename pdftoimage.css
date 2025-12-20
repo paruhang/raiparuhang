@@ -1,7 +1,17 @@
 /* ---------------------------------- */
 /* PDF TO IMAGE TOOL STYLES           */
 /* ---------------------------------- */
-
+:root {
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --bg: #f8fafc;
+    --white: #ffffff;
+    --dark: #0f172a;
+    --border: #e2e8f0;
+    --font: 'Inter', sans-serif;
+}
 /* ---------------------------------- */
 /* PDF TO IMAGE TOOL STYLES           */
 /* ---------------------------------- */
@@ -239,4 +249,20 @@
 /* Ensure strong tags stand out */
 .tool-seo-section strong {
     color: #1a1a1a;
+}
+
+/* Footer */
+.main-footer { background: var(--dark); color: var(--white); padding: 40px 5%; text-align: center; }
+.footer-link { color: var(--primary); text-decoration: none; font-weight: 600; display: block; margin-bottom: 10px; }
+.social-links { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
+.social-links a { color: white; border: 1px solid rgba(255,255,255,0.2); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+.social-links a:hover { background: var(--primary); border-color: var(--primary); }
+
+/* Mobile */
+@media (max-width: 850px) {
+    .menu-toggle { display: block; }
+    .main-nav { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: white; border-bottom: 1px solid var(--border); }
+    .main-nav.open { display: block; }
+    .nav-list { flex-direction: column; padding: 20px; gap: 10px; }
+    .form-group { flex-direction: column; }
 }
