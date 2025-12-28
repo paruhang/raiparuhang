@@ -1,179 +1,171 @@
-// Global variable to store files (allows for drag-and-drop file collection)
+// Global variable to store files
 let uploadedFiles = [];
 
-// Function to update the file list display
+// --- UPDATED: Function to update the file list with Preview button ---
 function updateFileList() {
     const fileListElement = document.getElementById('file-list');
     const mergeBtn = document.getElementById('merge-btn');
     
     if (uploadedFiles.length === 0) {
-        fileListElement.innerHTML = 'No files selected.';
+        fileListElement.innerHTML = '<p style="color: #64748b; text-align: center;">No files selected.</p>';
         mergeBtn.disabled = true;
         return;
     }
 
-    // Enable the button if 2 or more files are selected
     mergeBtn.disabled = uploadedFiles.length < 2;
 
-    let html = '<ul>';
+    let html = `
+        <div style="text-align: right; margin-bottom: 10px;">
+            <button onclick="clearAllFiles()" style="background: #64748b; color: white; border: none; padding: 5px 12px; border-radius: 4px; cursor: pointer; font-size: 13px;">
+                <i class="fas fa-eraser"></i> Clear All
+            </button>
+        </div>
+        <ul style="list-style: none; padding: 0;">`;
+
     uploadedFiles.forEach((file, index) => {
-        // Display files with a sequential number and size
         const fileSizeMB = (file.size / 1024 / 1024).toFixed(2);
-        html += `<li><span>${index + 1}. ${file.name}</span><span>(${fileSizeMB} MB)</span></li>`;
+        const isFirst = index === 0;
+        const isLast = index === uploadedFiles.length - 1;
+
+        html += `
+            <li style="display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 12px; margin-bottom: 8px; border-radius: 6px; border: 1px solid #e2e8f0; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                <div style="display: flex; flex-direction: column; overflow: hidden; margin-right: 10px;">
+                    <span style="font-weight: 600; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; cursor: pointer; color: #2563eb;" onclick="previewFile(${index})">
+                        ${index + 1}. ${file.name}
+                    </span>
+                    <small style="color: #94a3b8;">${fileSizeMB} MB</small>
+                </div>
+                <div style="display: flex; gap: 5px; flex-shrink: 0;">
+                    <button onclick="previewFile(${index})" title="Preview" style="background: #f1f5f9; border: 1px solid #cbd5e1; padding: 5px 8px; border-radius: 4px; cursor: pointer;">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    <button onclick="moveFile(${index}, -1)" ${isFirst ? 'disabled' : ''} style="background: #f1f5f9; border: 1px solid #cbd5e1; padding: 5px 8px; border-radius: 4px; cursor: pointer; opacity: ${isFirst ? '0.3' : '1'};">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                    <button onclick="moveFile(${index}, 1)" ${isLast ? 'disabled' : ''} style="background: #f1f5f9; border: 1px solid #cbd5e1; padding: 5px 8px; border-radius: 4px; cursor: pointer; opacity: ${isLast ? '0.3' : '1'};">
+                        <i class="fas fa-arrow-down"></i>
+                    </button>
+                    <button onclick="removeFile(${index})" style="background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; padding: 5px 8px; border-radius: 4px; cursor: pointer;">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </li>`;
     });
     html += '</ul>';
     fileListElement.innerHTML = html;
 }
 
-// Function to handle the merging process (Uses the global uploadedFiles array)
+// --- NEW: Preview functionality ---
+function previewFile(index) {
+    const file = uploadedFiles[index];
+    const fileURL = URL.createObjectURL(file);
+    
+    // Create a simple modal overlay if it doesn't exist
+    let modal = document.getElementById('preview-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'preview-modal';
+        modal.style = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1000;";
+        modal.innerHTML = `
+            <div style="width: 90%; height: 80%; background: white; border-radius: 8px; position: relative;">
+                <button onclick="closePreview()" style="position: absolute; top: -40px; right: 0; background: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold;">CLOSE ✕</button>
+                <iframe id="preview-iframe" style="width: 100%; height: 100%; border: none; border-radius: 8px;"></iframe>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+    
+    document.getElementById('preview-iframe').src = fileURL;
+    modal.style.display = 'flex';
+}
+
+function closePreview() {
+    const modal = document.getElementById('preview-modal');
+    if (modal) modal.style.display = 'none';
+    document.getElementById('preview-iframe').src = '';
+}
+
+// --- Support Functions (Move, Remove, Clear) ---
+function moveFile(index, direction) {
+    const newIndex = index + direction;
+    if (newIndex < 0 || newIndex >= uploadedFiles.length) return;
+    [uploadedFiles[index], uploadedFiles[newIndex]] = [uploadedFiles[newIndex], uploadedFiles[index]];
+    updateFileList();
+    resetStatus();
+}
+
+function removeFile(index) {
+    uploadedFiles.splice(index, 1);
+    updateFileList();
+    resetStatus();
+}
+
+function clearAllFiles() {
+    if (confirm("Clear all selected files?")) {
+        uploadedFiles = [];
+        document.getElementById('pdf-files').value = "";
+        updateFileList();
+        resetStatus();
+    }
+}
+
+function resetStatus() {
+    document.getElementById('status-message').textContent = '';
+    document.getElementById('download-area').classList.add('hidden');
+}
+
+// --- Merge Logic ---
 async function mergePdfs() {
     const statusMessage = document.getElementById('status-message');
     const downloadArea = document.getElementById('download-area');
     const mergeBtn = document.getElementById('merge-btn');
 
-    if (uploadedFiles.length < 2) {
-        statusMessage.className = 'status-message error';
-        statusMessage.textContent = 'Please select at least two PDF files to merge.';
-        downloadArea.classList.add('hidden');
-        return;
-    }
-
-    // Disable button and show loading status
     mergeBtn.disabled = true;
-    statusMessage.className = 'status-message';
-    statusMessage.textContent = 'Merging PDFs... Please wait.';
-    downloadArea.innerHTML = ''; // Clear previous download link
-    downloadArea.classList.add('hidden');
+    statusMessage.textContent = 'Merging...';
 
     try {
-        // 1. Create a new, blank PDF document
         const mergedPdf = await PDFLib.PDFDocument.create();
-
-        // 2. Iterate through uploadedFiles and merge them
         for (const file of uploadedFiles) {
             const arrayBuffer = await file.arrayBuffer();
-            // This is a memory-intensive operation for large files
             const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
-            
-            // Get all pages from the current document
-            const copiedPages = await mergedPdf.copyPages(pdfDoc, pdfDoc.getPageIndices());
-            
-            // Add all pages to the new merged document (main merging step)
-            copiedPages.forEach((page) => {
-                mergedPdf.addPage(page);
-            });
+            const pages = await mergedPdf.copyPages(pdfDoc, pdfDoc.getPageIndices());
+            pages.forEach(p => mergedPdf.addPage(p));
         }
+        const bytes = await mergedPdf.save();
+        const url = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
 
-        // 3. Serialize the merged PDF document to bytes
-        const mergedPdfBytes = await mergedPdf.save();
-
-        // 4. Create a Blob and a download link
-        const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
-        const url = URL.createObjectURL(blob);
-
-        // Update status and create the download link
         statusMessage.className = 'status-message success';
-        statusMessage.textContent = 'PDFs successfully merged! Download your file below.';
-
-        const downloadLink = document.createElement('a');
-        downloadLink.href = url;
-        downloadLink.download = 'raiparuhang_merged_document.pdf';
-        downloadLink.innerHTML = '<i class="fas fa-download"></i> Download Merged PDF';
-
-        downloadArea.appendChild(downloadLink);
+        statusMessage.textContent = 'Done!';
+        downloadArea.innerHTML = `<a href="${url}" download="merged.pdf" style="display:inline-block; background:#16a34a; color:white; padding:12px 24px; border-radius:6px; text-decoration:none;">Download PDF</a>`;
         downloadArea.classList.remove('hidden');
-
-    } catch (error) {
-        statusMessage.className = 'status-message error';
-        statusMessage.textContent = `Error during merging: ${error.message}. Check the console for details.`;
-        console.error("PDF Merging Error:", error);
+    } catch (e) {
+        statusMessage.textContent = "Error: " + e.message;
     } finally {
-        // Re-enable the button after operation is complete
         mergeBtn.disabled = false;
     }
 }
 
-
-// --- Event Handlers for File Upload ---
-
-// Central function to handle files from input or drop
+// --- Event Listeners ---
 function handleNewFiles(fileList) {
-    const newPdfs = Array.from(fileList).filter(file => file.type === 'application/pdf');
-
+    const newPdfs = Array.from(fileList).filter(f => f.type === 'application/pdf');
     if (newPdfs.length > 0) {
-        // Overwrite the global list with the new selection
-        uploadedFiles = newPdfs; 
+        newPdfs.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
+        uploadedFiles = newPdfs;
         updateFileList();
-        
-        // Clear status/download area
-        document.getElementById('status-message').textContent = '';
-        document.getElementById('download-area').innerHTML = '';
-        document.getElementById('download-area').classList.add('hidden');
+        resetStatus();
     }
 }
 
-// 1. Handle "Select Files" button click (delegates to hidden input)
-document.getElementById('select-files-btn').addEventListener('click', () => {
-    document.getElementById('pdf-files').click();
-});
-
-// 2. Handle files selected via the hidden input
-document.getElementById('pdf-files').addEventListener('change', (event) => {
-    handleNewFiles(event.target.files);
-});
-
-// 3. Handle the Merge button click
+document.getElementById('select-files-btn').addEventListener('click', () => document.getElementById('pdf-files').click());
+document.getElementById('pdf-files').addEventListener('change', e => handleNewFiles(e.target.files));
 document.getElementById('merge-btn').addEventListener('click', mergePdfs);
 
-
-// --- DRAG AND DROP LOGIC ---
 const dropZone = document.getElementById('drop-zone');
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(n => dropZone.addEventListener(n, e => { e.preventDefault(); e.stopPropagation(); }));
+dropZone.addEventListener('drop', e => handleNewFiles(e.dataTransfer.files));
 
-// Prevent default drag behaviors
-['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-    dropZone.addEventListener(eventName, preventDefaults, false);
-});
-
-function preventDefaults(e) {
-    e.preventDefault();
-    e.stopPropagation();
-}
-
-// Highlight drop zone when item is dragged over
-['dragenter', 'dragover'].forEach(eventName => {
-    dropZone.addEventListener(eventName, () => {
-        dropZone.classList.add('dragover');
-    }, false);
-});
-
-// Remove highlight when item leaves
-['dragleave', 'drop'].forEach(eventName => {
-    dropZone.addEventListener(eventName, () => {
-        dropZone.classList.remove('dragover');
-    }, false);
-});
-
-// Handle dropped files
-dropZone.addEventListener('drop', (e) => {
-    const dt = e.dataTransfer;
-    const files = dt.files;
-    
-    // Pass the dropped files to our central handler
-    handleNewFiles(files);
-}, false);
-
-
-// 4. Handle mobile navigation toggle
-document.querySelector('.menu-toggle').addEventListener('click', () => {
-    document.querySelector('.main-nav').classList.toggle('open');
-});
-
-// Initial call to set button state on page load
 document.addEventListener('DOMContentLoaded', () => {
-    // Check if files were already in the input (browser history)
     const initialFiles = document.getElementById('pdf-files').files;
-    if (initialFiles.length > 0) {
-        uploadedFiles = Array.from(initialFiles);
-    }
-    updateFileList();
+    if (initialFiles.length > 0) handleNewFiles(initialFiles);
+    else updateFileList();
 });
