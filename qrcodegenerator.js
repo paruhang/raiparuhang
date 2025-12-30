@@ -1,213 +1,123 @@
-// Use an IIFE (Immediately Activated Function Expression) for code encapsulation.
-(function() {
-    
-    // --- Configuration and State ---
-    const QR_OPTIONS = {
-        width: 400, // Generated image size for high quality
-        margin: 2,  // Margin around the QR code
-        errorCorrectionLevel: 'H' // High correction level for better reliability
-    };
+/* --- NAVIGATION LOGIC --- */
+// --- 1. MOBILE MENU TOGGLE LOGIC ---
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('menuToggle');
+    const siteSidebar = document.getElementById('siteSidebar');
 
-    let debounceTimer; // Used to prevent excessive QR generation while typing
+    if (menuToggle && siteSidebar) {
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent immediate closing
+            siteSidebar.classList.toggle('active');
+        });
 
-    // Cache DOM elements
-    const elements = {
-        qrTextarea: document.getElementById('qr-text'),
-        darkColorInput: document.getElementById('dark-color'),
-        lightColorInput: document.getElementById('light-color'),
-        darkColorLabel: document.getElementById('dark-color-label'),
-        lightColorLabel: document.getElementById('light-color-label'),
-        qrBox: document.getElementById('qr-box'),
-        emptyMessage: document.getElementById('empty-message'),
-        errorMessage: document.getElementById('error-message'),
-        charCount: document.getElementById('char-count'),
-        downloadBtn: document.getElementById('download-btn'),
-        copyBtn: document.getElementById('copy-btn'),
-        copyIcon: document.querySelector('#copy-btn .copy-icon'),
-        checkIcon: document.querySelector('#copy-btn .check-icon'),
-        btnTextSpan: document.querySelector('#copy-btn .btn-text'),
-        mainNav: document.querySelector('.main-nav'),
-        menuToggle: document.querySelector('.menu-toggle')
-    };
-    
-    // --- Utility Functions ---
-
-    /**
-     * Toggles the mobile navigation menu.
-     */
-    function toggleMobileMenu() {
-        elements.mainNav.classList.toggle('open');
+        // Close sidebar when clicking anywhere else on the screen
+        document.addEventListener('click', (e) => {
+            if (!siteSidebar.contains(e.target) && siteSidebar.classList.contains('active')) {
+                siteSidebar.classList.remove('active');
+            }
+        });
     }
+});
 
-    /**
-     * Sets the loading state on the UI elements.
-     * @param {boolean} isLoading 
-     */
-    function setLoading(isLoading) {
-        // Disable buttons if loading or if no text is entered
-        elements.downloadBtn.disabled = isLoading || elements.qrTextarea.value.trim() === '';
-        elements.copyBtn.disabled = isLoading || elements.qrTextarea.value.trim() === '';
+// 2. Global Tool Search & "/" Shortcut
+const toolSearch = document.getElementById('toolSearch');
+window.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement !== toolSearch) {
+        e.preventDefault();
+        toolSearch.focus();
     }
+});
 
-    /**
-     * Displays a specific UI state (Empty, Image, Error).
-     * @param {'empty' | 'image' | 'error'} state 
-     * @param {string} [message] - Message for the error state.
-     */
-    function setUIState(state, message = '') {
-        const isImage = state === 'image';
-        const isError = state === 'error';
-        const isEmpty = state === 'empty';
-
-        elements.emptyMessage.classList.toggle('hidden', !isEmpty);
-        elements.errorMessage.classList.toggle('hidden', !isError);
+if (toolSearch) {
+    toolSearch.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        const navLinks = document.querySelectorAll('.nav-link');
         
-        if (isError) {
-            elements.errorMessage.textContent = message;
-            elements.qrBox.innerHTML = ''; // Clear QR code on error
-        } else if (isEmpty) {
-            elements.qrBox.innerHTML = '';
-        }
+        navLinks.forEach(link => {
+            const isMatch = link.textContent.toLowerCase().includes(term);
+            link.style.display = isMatch ? 'flex' : 'none';
+        });
+    });
+}
 
-        // The download/copy buttons are enabled only if an image is visible (isImage is true)
-        setLoading(!isImage); 
-    }
+/* --- YOUR ORIGINAL QR LOGIC (UNCHANGED) --- */
+
+let activeTab = 'url';
+let logoImage = "";
+
+const qrCode = new QRCodeStyling({
+    width: 260,
+    height: 260,
+    type: "svg",
+    data: "https://raiparuhang.com.np",
+    dotsOptions: { color: "#6366f1", type: "rounded" },
+    backgroundOptions: { color: "#ffffff" },
+    imageOptions: { crossOrigin: "anonymous", margin: 10 }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("canvas-container");
+    if (container) qrCode.append(container);
+});
+
+// --- 2. UPDATED TAB SWITCHING LOGIC ---
+window.switchTab = function(event, tabId) {
+    // Prevent page jump
+    if (event) event.preventDefault();
     
-    // --- Core QR Generation Logic ---
+    activeTab = tabId;
 
-    /**
-     * Handles all input events and triggers the debounced generation.
-     */
-    function handleInput() {
-        // Update labels and counts immediately
-        const text = elements.qrTextarea.value.trim();
-        elements.charCount.textContent = text.length;
-        elements.darkColorLabel.textContent = elements.darkColorInput.value.toUpperCase();
-        elements.lightColorLabel.textContent = elements.lightColorInput.value.toUpperCase();
-
-        // Debounce: clear existing timer and set a new one
-        clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(generateQR, 300);
-    }
-
-    /**
-     * Generates the QR code based on current input and color settings.
-     */
-    async function generateQR() {
-        const text = elements.qrTextarea.value.trim();
-        const darkColor = elements.darkColorInput.value;
-        const lightColor = elements.lightColorInput.value;
-
-        if (!text) {
-            setUIState('empty');
-            return;
-        }
-
-        setLoading(true);
-
-        try {
-            // Use QRCode.toDataURL to get a Base64 image string
-            const dataUrl = await QRCode.toDataURL(text, {
-                ...QR_OPTIONS,
-                color: {
-                    dark: darkColor,
-                    light: lightColor
-                }
-            });
-
-            elements.qrBox.innerHTML = `<img src="${dataUrl}" alt="Generated QR Code for ${text.substring(0, 50)}">`;
-            setUIState('image');
-
-        } catch (err) {
-            console.error("QR Generation Error:", err);
-            setUIState('error', "Generation failed. Try shorter content or different colors.");
-        } finally {
-            setLoading(false);
-        }
-    }
-
-    // --- Action Functions ---
-
-    /**
-     * Downloads the QR code image as a PNG file.
-     */
-    function downloadQR() {
-        // The QR code is the first image element inside the qr-box
-        const qrImage = elements.qrBox.querySelector('img');
-        if (!qrImage) return;
-
-        const link = document.createElement('a');
-        link.href = qrImage.src;
-        link.download = `qr-code-${Date.now()}.png`; 
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-
-    /**
-     * Copies the QR code image to the clipboard.
-     */
-    async function copyQR() {
-        const qrImage = elements.qrBox.querySelector('img');
-        if (!qrImage) return;
-        
-        const dataUrl = qrImage.src;
-        setLoading(true);
-
-        try {
-            // Fetch the image as a Blob
-            const res = await fetch(dataUrl);
-            const blob = await res.blob();
-            
-            // Use Clipboard API
-            await navigator.clipboard.write([
-                new ClipboardItem({ [blob.type]: blob }),
-            ]);
-
-            // Success UI Feedback
-            elements.copyIcon.classList.add('hidden');
-            elements.checkIcon.classList.remove('hidden');
-            elements.btnTextSpan.textContent = 'Copied!';
-            elements.copyBtn.classList.add('success-feedback'); // Using a temporary class for visual feedback
-
-            setTimeout(() => {
-                // Reset UI
-                elements.copyIcon.classList.remove('hidden');
-                elements.checkIcon.classList.add('hidden');
-                elements.btnTextSpan.textContent = 'Copy Image';
-                elements.copyBtn.classList.remove('success-feedback');
-                setLoading(false);
-            }, 2000);
-
-        } catch (err) {
-            console.error('Copy Image Failed:', err);
-            
-            // Show custom error message on the UI
-            elements.errorMessage.textContent = 'Copy failed. Browser security restrictions sometimes prevent direct image copying. Please use the Download button instead.';
-            elements.errorMessage.classList.remove('hidden');
-            
-            setTimeout(() => elements.errorMessage.classList.add('hidden'), 5000);
-            setLoading(false);
-        }
-    }
-
-    // --- Initialization ---
-
-    document.addEventListener('DOMContentLoaded', () => {
-        // Attach all event listeners
-        elements.qrTextarea.addEventListener('input', handleInput);
-        elements.darkColorInput.addEventListener('input', handleInput);
-        elements.lightColorInput.addEventListener('input', handleInput);
-        elements.downloadBtn.addEventListener('click', downloadQR);
-        elements.copyBtn.addEventListener('click', copyQR);
-
-        // Mobile menu toggle
-        elements.menuToggle.addEventListener('click', toggleMobileMenu);
-
-        // Initial generation of the default content (or empty state)
-        // Set default text to generate an initial QR code on load
-        elements.qrTextarea.value = "https://raiparuhang.com.np";
-        handleInput();
+    // Update Button UI
+    document.querySelectorAll('.tab-link').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    // Support both mobile and desktop buttons if they share the class
+    document.querySelectorAll(`.tab-link[data-tab="${tabId}"]`).forEach(btn => {
+        btn.classList.add('active');
     });
 
-})();
+    // Update Panel Visibility
+    document.querySelectorAll('.tab-panel').forEach(panel => {
+        panel.classList.remove('active');
+        panel.style.display = 'none'; // Ensure it's hidden
+    });
+    
+    const activePanel = document.getElementById(tabId);
+    if (activePanel) {
+        activePanel.classList.add('active');
+        activePanel.style.display = 'block';
+    }
+
+    // Refresh QR Code
+    updateQR();
+};
+
+window.updateQR = function() {
+    let qrData = "";
+    if (activeTab === 'url') qrData = document.getElementById('qr-url').value || "https://raiparuhang.com.np";
+    else if (activeTab === 'wifi') {
+        const ssid = document.getElementById('wifi-ssid').value || "WiFi";
+        const pass = document.getElementById('wifi-pass').value || "";
+        const enc = document.getElementById('wifi-type').value;
+        qrData = `WIFI:S:${ssid};T:${enc};P:${pass};;`;
+    } 
+    else if (activeTab === 'text') qrData = document.getElementById('qr-text').value || "Hello!";
+
+    qrCode.update({
+        data: qrData,
+        dotsOptions: { color: document.getElementById('qr-color').value, type: document.getElementById('dot-style').value },
+        image: logoImage
+    });
+};
+
+window.handleLogo = function(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => { logoImage = e.target.result; updateQR(); };
+    reader.readAsDataURL(file);
+};
+
+window.downloadQR = function(format) {
+    qrCode.download({ name: "qr-code-" + activeTab, extension: format });
+};

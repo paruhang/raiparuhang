@@ -3,96 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEO: Updated Title for the QR Tool page -->
     <title>Free Dynamic QR Code Generator | raiparuhang</title>
+    <meta name="description" content="Instantly generate custom, dynamic QR codes using RaiParuhang's free online tool.">
     <link rel="icon" type="image/ico" href="raiparuhang.ico">
-    <link rel="canonical" href="https://raiparuhang.com.np/qr-generator">
-    <!-- SEO: Updated Meta Description for the QR Tool page -->
-    <meta name="description" content="Instantly generate custom, dynamic QR codes for URLs, text, and more using RaiParuhang's free online tool. Customize colors and download high-quality PNGs.">
-    <!-- Linking local style and script files -->
     <link rel="stylesheet" href="qrcodegenerator.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Dependency for generating QR Codes -->
-    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8424476643034432"
-      crossorigin="anonymous"></script>
-    <script src="qrcodegenerator.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
 </head>
 <body>
- 
-    <header class="main-header">
-        <div class="logo">
-            <a href="https://raiparuhang.com.np">raiparuhang<span class="dot">.com.np</span></a>
-        </div>
-        <nav class="main-nav">
-            <ul class="nav-list">
-            <ul class="nav-list">
-                <li><a href="index.html#tools">Back to Tools</a></li>
-            </ul>
-        </nav>
-        <button class="menu-toggle" aria-label="Toggle navigation">
-            &#9776;
-        </button>            
-    </header>
-       
-    <main>
-        <section class="content-section qr-generator-section">
-            <!-- SEO: H2 for the tool name -->
-            <h2>Free Dynamic QR Code Generator</h2>
 
-            <div class="qr-container-wrapper">
+    <div class="dashboard-container">
+        <aside class="site-sidebar" id="siteSidebar">
+            <div class="sidebar-header">
+
                 
-                <!-- QR Code Input and Customization Panel -->
-                <div class="qr-control-panel">
-                    <h3>1. Enter Content</h3>
-                    <div class="input-group">
-                        <label for="qr-text" class="input-label">Text or URL to Encode:</label>
-                        <textarea id="qr-text" rows="4" placeholder="Type your text or URL here..."></textarea>
-                        <span class="char-count-display">Characters: <span id="char-count">0</span></span>
-                    </div>
-
-                    <h3>2. Customize Colors</h3>
-                    <div class="color-options-group">
-                        <div class="color-picker-item">
-                            <label for="dark-color">Foreground (Dots):</label>
-                            <input type="color" id="dark-color" value="#000000" aria-label="Foreground Color Selector">
-                            <span id="dark-color-label" class="color-hex-label">#000000</span>
-                        </div>
-                        <div class="color-picker-item">
-                            <label for="light-color">Background (Empty):</label>
-                            <input type="color" id="light-color" value="#ffffff" aria-label="Background Color Selector">
-                            <span id="light-color-label" class="color-hex-label">#ffffff</span>
-                        </div>
-                    </div>
+                <div class="logo-text"><a href="https://raiparuhang.com.np">raiparuhang<span class="dot">.com.np</span></a>
                 </div>
 
-                <!-- QR Code Preview and Download Panel -->
-                <div class="qr-preview-panel">
-                    <h3>3. Preview & Download</h3>
-                    <div id="qr-display-box" class="qr-display-box">
-                        <div id="qr-box" class="qr-box-inner">
-                            <!-- QR code will be rendered here -->
-                        </div>
-                        <p id="empty-message" class="empty-message">Start typing to generate your QR Code.</p>
-                        <p id="error-message" class="error-message hidden"></p>
-                    </div>
-
-                    <div class="action-buttons-group">
-                        <button id="download-btn" class="primary-button" disabled aria-label="Download QR Code">
-                            <i class="fa-solid fa-download"></i> Download PNG
-                        </button>
-                        <button id="copy-btn" class="secondary-button" disabled aria-label="Copy QR Code Image">
-                            <i class="fa-solid fa-copy copy-icon"></i>
-                            <i class="fa-solid fa-check check-icon hidden"></i>
-                            <span class="btn-text">Copy Image</span>
-                        </button>
-                    </div>
-                </div>
             </div>
-        </section>
-    </main>
 
+            <nav class="sidebar-nav">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="toolSearch" placeholder="Search tools... ( / )">
+                </div>
+
+                <div class="nav-group">
+                    <span class="group-label">Free Online Tools</span>
+                    <a href="https://raiparuhang.com.np/image-to-pdf" class="nav-link"><i class="fas fa-file-pdf"></i> Image to PDF</a>
+                    <a href="https://raiparuhang.com.np/pdf-to-image" class="nav-link"><i class="fas fa-file-pdf"></i>PDF to Image</a>
+                    <a href="https://raiparuhang.com.np/image-converter" class="nav-link"><i class="fas fa-cogs"></i>Image Format Change</a>
+                    <a href="https://raiparuhang.com.np/pdf-merger" class="nav-link"><i class="fas fa-align-left"></i>PDF Merger</a>
+                    <a href="https://raiparuhang.com.np/image-size-reducer" class="nav-link"><i class="fas fa-compress"></i>Image Size Reducer</a>
+                    <a href="https://raiparuhang.com.np/image-size-resizer" class="nav-link"><i class="fas fa-expand"></i>Image Size Resizer</a>
+                    <a href="qr-code-generator.html" class="nav-link active"><i class="fas fa-qrcode"></i> QR Generator</a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="privacy-badge"><i class="fas fa-shield-halved"></i> 100% Client-Side</div>
+            </div>
+        </aside>
+
+        <main class="main-body">
+            <header class="top-bar">
+                <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+                <div class="breadcrumbs">Tools / <strong>QR Studio Pro</strong></div>
+                <h1>Qr code generator free online</h1>
+            </header>
+
+            <div class="content-area">
+                <nav class="mobile-tabs">
+                    <button class="tab-link active" data-tab="url" onclick="switchTab(event, 'url')">
+                        <i class="fas fa-link"></i> URL
+                    </button>
+                    <button class="tab-link" data-tab="wifi" onclick="switchTab(event, 'wifi')">
+                        <i class="fas fa-wifi"></i> WiFi
+                    </button>
+                    <button class="tab-link" data-tab="text" onclick="switchTab(event, 'text')">
+                        <i class="fas fa-font"></i> Text
+                    </button>
+                </nav>
+
+                <div class="grid-layout">
+
+                    <div class="inputs-column">
+                        <section class="card fade-in">
+                            <div class="card-header">
+                                <span class="step-num">1</span>
+                                <h3>Enter Content</h3>
+                            </div>
+                            <div id="url" class="tab-panel active">
+                                <div class="input-group">
+                                    <label>Website URL</label>
+                                    <input type="url" id="qr-url" placeholder="https://raiparuhang.com.np" oninput="updateQR()">
+                                </div>
+                            </div>
+                            <div id="wifi" class="tab-panel">
+                                <div class="input-group">
+                                    <label>Network Name (SSID)</label>
+                                    <input type="text" id="wifi-ssid" placeholder="My Network" oninput="updateQR()">
+                                </div>
+                                <div class="input-row">
+                                    <div class="input-group">
+                                        <label>Password</label>
+                                        <input type="password" id="wifi-pass" placeholder="••••••••" oninput="updateQR()">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Security</label>
+                                        <select id="wifi-type" onchange="updateQR()">
+                                            <option value="WPA">WPA/WPA2</option>
+                                            <option value="WEP">WEP</option>
+                                            <option value="nopass">None</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="text" class="tab-panel">
+                                <div class="input-group">
+                                    <label>Your Message</label>
+                                    <textarea id="qr-text" rows="4" placeholder="Type here..." oninput="updateQR()"></textarea>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="card fade-in delay-1">
+                            <div class="card-header">
+                                <span class="step-num">2</span>
+                                <h3>Customize Design</h3>
+                            </div>
+                            <div class="input-row">
+                                <div class="input-group">
+                                    <label>Dot Pattern</label>
+                                    <select id="dot-style" onchange="updateQR()">
+                                        <option value="rounded">Smooth Rounded</option>
+                                        <option value="dots">Modern Dots</option>
+                                        <option value="square">Classic Square</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label>Brand Color</label>
+                                    <input type="color" id="qr-color" value="#6366f1" oninput="updateQR()">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label>Add Logo (Center)</label>
+                                <input type="file" id="logo-input" accept="image/*" onchange="handleLogo(event)">
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="preview-column">
+                        <div class="preview-sticky">
+                            <div class="preview-card">
+                                <div class="badge">Live Preview</div>
+                                <div id="canvas-container"></div>
+                                <div class="action-buttons">
+                                    <button class="btn-main" onclick="downloadQR('png')">
+                                        <i class="fas fa-download"></i> Download PNG
+                                    </button>
+                                    <button class="btn-sub" onclick="downloadQR('svg')">Export as SVG</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+                <div class="feat">
+                    <strong><p>What Can You Do ?</p></strong>
+                <h2>You can easily convert link to qr code for free.</h2>
+                <h3>You can create qr code with logo on the center.</h3>
+                <h4>Help your customer easily connect to your wifi with wifi code qr generator.</h4>
+                <h5>Just hide your message with text into qr code.</h5>
+                </div>
     <footer class="main-footer">
         <div class="footer-content">
             <a href="terms.html" class="footer-link">Privacy & Terms</a>
@@ -103,5 +168,9 @@
             </div>
         </div>
     </footer>
+        </main>
+    </div>
+
+    <script src="qrcodegenerator.js"></script>
 </body>
 </html>
