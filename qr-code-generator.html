@@ -6,6 +6,7 @@
     <title>Free Dynamic QR Code Generator | raiparuhang</title>
     <meta name="description" content="Instantly generate custom, dynamic QR codes using RaiParuhang's free online tool.">
     <link rel="icon" type="image/ico" href="raiparuhang.ico">
+    <link rel="stylesheet" href="styledefault.css">
     <link rel="stylesheet" href="qrcodegenerator.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -14,46 +15,26 @@
 <body>
 
     <div class="dashboard-container">
-        <aside class="site-sidebar" id="siteSidebar">
-            <div class="sidebar-header">
 
-                
-                <div class="logo-text"><a href="https://raiparuhang.com.np">raiparuhang<span class="dot">.com.np</span></a>
-                </div>
-
-            </div>
-
-            <nav class="sidebar-nav">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="toolSearch" placeholder="Search tools... ( / )">
-                </div>
-
-                <div class="nav-group">
-                    <span class="group-label">Free Online Tools</span>
-                    <a href="https://raiparuhang.com.np/image-to-pdf" class="nav-link"><i class="fas fa-file-pdf"></i> Image to PDF</a>
-                    <a href="https://raiparuhang.com.np/pdf-to-image" class="nav-link"><i class="fas fa-file-pdf"></i>PDF to Image</a>
-                    <a href="https://raiparuhang.com.np/image-converter" class="nav-link"><i class="fas fa-cogs"></i>Image Format Change</a>
-                    <a href="https://raiparuhang.com.np/pdf-merger" class="nav-link"><i class="fas fa-align-left"></i>PDF Merger</a>
-                    <a href="https://raiparuhang.com.np/image-size-reducer" class="nav-link"><i class="fas fa-compress"></i>Image Size Reducer</a>
-                    <a href="https://raiparuhang.com.np/image-size-resizer" class="nav-link"><i class="fas fa-expand"></i>Image Size Resizer</a>
-                    <a href="qr-code-generator.html" class="nav-link active"><i class="fas fa-qrcode"></i> QR Generator</a>
-                </div>
-            </nav>
-
-            <div class="sidebar-footer">
-                <div class="privacy-badge"><i class="fas fa-shield-halved"></i> 100% Client-Side</div>
-            </div>
-        </aside>
 
         <main class="main-body">
-            <header class="top-bar">
-                <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
-                <div class="breadcrumbs">Tools / <strong>QR Studio Pro</strong></div>
-                <h1>Qr code generator free online</h1>
-            </header>
+    <header class="main-header">
+        <div class="logo">
+            <a href="https://raiparuhang.com.np">raiparuhang<span class="dot">.com.np</span></a>
+        </div>
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html#tools">Back to Tools</a></li>
+            </ul>
+        </nav>
+        <button class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+    </header>
 
             <div class="content-area">
+                <div class="privacy-badge"><i class="fas fa-shield-halved"></i> 100% Client-Side</div>
+
+                <h1>Qr code generator free online</h1>
+
                 <nav class="mobile-tabs">
                     <button class="tab-link active" data-tab="url" onclick="switchTab(event, 'url')">
                         <i class="fas fa-link"></i> URL

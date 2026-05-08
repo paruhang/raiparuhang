@@ -19,7 +19,15 @@ html {
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-
+.privacy-badge {
+    font-size: 0.75rem;
+    color: #166534;
+    background: #dcfce7;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+}
 body { 
     background: var(--bg-main); 
     color: var(--text-dark); 
@@ -62,62 +70,7 @@ body {
 .logo-text { font-weight: 700; font-size: 1.1rem; color: var(--text-dark); }
 .logo-text span { color: var(--primary); }
 
-/* SIDEBAR NAV */
-.sidebar-nav { flex: 1; padding: 1rem; overflow-y: auto; }
 
-.search-box {
-    background: #f1f5f9;
-    padding: 10px 15px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 1.5rem;
-}
-
-.search-box input {
-    border: none;
-    background: transparent;
-    outline: none;
-    font-size: 0.85rem;
-    width: 100%;
-}
-
-.group-label {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    color: var(--text-light);
-    margin: 1.5rem 0 0.5rem 0.5rem;
-    display: block;
-    letter-spacing: 0.05em;
-}
-
-.nav-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    color: var(--text-light);
-    text-decoration: none;
-    border-radius: 12px;
-    transition: 0.2s;
-    font-weight: 500;
-    margin-bottom: 4px;
-}
-
-.nav-link:hover { background: #f1f5f9; color: var(--primary); }
-.nav-link.active { background: #eef2ff; color: var(--primary); }
-
-.sidebar-footer { padding: 1.5rem; border-top: 1px solid #f1f5f9; }
-.privacy-badge {
-    font-size: 0.75rem;
-    color: #166534;
-    background: #dcfce7;
-    padding: 10px;
-    border-radius: 10px;
-    text-align: center;
-    font-weight: 600;
-}
 
 /* 3. MAIN CONTENT AREA */
 .main-body {
