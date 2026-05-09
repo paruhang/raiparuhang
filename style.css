@@ -153,6 +153,110 @@ h2 {
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
+
+/* Styling for the Donation Section */
+.donation-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    background-color: #f4f7f6; /* Light gray background to make the card pop */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.donation-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    padding: 40px 30px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    border-top: 6px solid #60BB46; /* eSewa Brand Green */
+    position: relative;
+}
+
+.esewa-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #60BB46;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.donation-card h2 {
+    color: #2c3e50;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.donation-card p {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.qr-container {
+    background: #fdfdfd;
+    padding: 15px;
+    border: 2px dashed #d1d8e0;
+    border-radius: 12px;
+    display: inline-block;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.qr-container:hover {
+    transform: scale(1.02);
+    border-color: #60BB46;
+}
+
+.esewa-qr {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+.esewa-details {
+    margin-top: 10px;
+}
+
+.esewa-details p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #7f8c8d;
+}
+
+.esewa-details .scan-text {
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 16px;
+}
+
+.esewa-details .esewa-id {
+    font-size: 20px;
+    font-weight: bold;
+    color: #60BB46;
+    letter-spacing: 1px;
+    margin-top: 8px;
+    background: #f0f9f1;
+    padding: 8px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+
+
 /* Footer */
 .main-footer { background: var(--dark); color: var(--white); padding: 40px 5%; text-align: center; }
 .footer-link { color: var(--primary); text-decoration: none; font-weight: 600; display: block; margin-bottom: 10px; }
