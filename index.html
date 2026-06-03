@@ -1,165 +1,1263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rai Paruhang | Free Client-Side Web Tools</title>
-    <link rel="icon" type="image/ico" href="raiparuhang.ico">
-    <link rel="canonical" href="https://raiparuhang.com.np">
-    <meta name="description" content="Free online file conversion tools at RaiParuhang. Convert Image to PDF, PDF to Image, and resize images quickly and securely. 100% client-side.">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8424476643034432" crossorigin="anonymous"></script>
-    <script src="script.js" defer></script>
-</head>
-<body> 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rai Paruhang | Free Client-Side Web Tools</title>
+<meta name="description" content="Free online file conversion tools. Convert images, PDFs, resize, compress — 100% client-side. Your data never leaves your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <header class="main-header">
-        <div class="logo">
-            <a href="https://raiparuhang.com.np">raiparuhang<span class="dot">.com.np</span></a>
-        </div>
-        <nav class="main-nav">
-            <ul class="nav-list">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#tools">Tools</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-        <button class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
-    </header>
+  :root {
+    --bg: #06080f;
+    --bg2: #0d1120;
+    --bg3: #111827;
+    --surface: #161d2e;
+    --surface2: #1e2840;
+    --border: rgba(99,140,255,0.12);
+    --border2: rgba(99,140,255,0.22);
+    --accent: #4f8eff;
+    --accent2: #7eb3ff;
+    --accent-glow: rgba(79,142,255,0.18);
+    --green: #22d3a0;
+    --green-bg: rgba(34,211,160,0.1);
+    --text: #e8edf8;
+    --text2: #8b99bb;
+    --text3: #556080;
+    --mono: 'DM Mono', monospace;
+    --sans: 'Sora', sans-serif;
+    --radius: 14px;
+    --radius-lg: 20px;
+  }
 
-    <main>
-        <section id="home" class="hero-section">
-            <div class="hero-content">
-                <h1>Fast, Free, Client-Side Tools.</h1>
-                <p>I build intuitive web experiences where your data never leaves your browser.</p>
-                <div class="hero-btns">
-                    <a href="#tools" class="cta-button">Explore Tools</a>
-                </div>
-            </div>
-        </section>
+  html { scroll-behavior: smooth; }
 
-<section id="tools" class="tools-gallery">
-    <h2 class="section-title">🛠️ Web Tools</h2>
-    <p class="section-subtitle">100% Client-Side. Your data never leaves your browser.</p>
-    
-    <div class="tools-grid">
-        <a href="https://raiparuhang.com.np/image-to-pdf" class="tool-card">
-            <div class="tool-icon"><i class="fas fa-file-pdf"></i></div>
-            <h3>Image to PDF</h3>
-            <p>Convert JPG, PNG, and WebP into high-quality PDFs.</p>
-        </a>
-        <a href="https://raiparuhang.com.np/pdf-to-image" class="tool-card">
-            <div class="tool-icon"><i class="fas fa-file-image"></i></div>
-            <h3>PDF to Image</h3>
-            <p>Extract images from your PDF documents instantly.</p>
-        </a>
-        <a href="https://raiparuhang.com.np/image-converter" class="tool-card">
-            <div class="tool-icon"><i class="fas fa-sync-alt"></i></div>
-            <h3>Image Converter</h3>
-            <p>Convert between JPG, PNG, and WebP formats.</p>
-        </a>
-        <a href="https://raiparuhang.com.np/image-size-resizer" class="tool-card">
-            <div class="tool-icon"><i class="fas fa-expand-arrows-alt"></i></div>
-            <h3>Size Resizer</h3>
-            <p>Adjust dimensions for social media or web use.</p>
-        </a>
-        <a href="https://raiparuhang.com.np/image-size-reducer" class="tool-card">
-            <div class="tool-icon"><i class="fas fa-compress-arrows-alt"></i></div>
-            <h3>Size Reducer</h3>
-            <p>Compress file size without losing visual quality.</p>
-        </a>
-        <a href="https://raiparuhang.com.np/pdf-merger" class="tool-card">
-            <div class="tool-icon"><i class="fas fa-object-group"></i></div>
-            <h3>PDF Merger</h3>
-            <p>Combine multiple PDF files into a single document.</p>
-        </a>
-        <a href="https://raiparuhang.com.np/qr-code-generator" class="tool-card">
-            <div class="tool-icon"><i class="fas fa-qrcode"></i></div>
-            <h3>Generate QR Code</h3>
-            <p>Generate QR for your business instantly with live preview</p>
-        </a>
-    </div>
-</section>
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
 
+  /* ---- NAV ---- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(6,8,15,0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 max(24px, 5vw);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
+  .nav-logo {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 
+  .nav-logo .dot {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
 
-        <section id="about" class="content-section about-section">
-            <h2>👤</h2>
-            <h2 class="section-title"> About Me</h2>
-        <div class="developer-image">
-            <img src="profile.jpg" alt="Rai Paruhang - Full Stack Developer">
-        </div>
-            <p>Hi, I'm Paruhang Rai, a developer based in Nepal dedicated to building fast, privacy-focused web utilities.<br> I creat free online tools because I believe users shouldn't have to sacrifice their data privacy<br> just to perform simple document tasks.
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.8); }
+  }
 
-All tools on this site are designed to be client-side,<br> meaning your files never touch a server. My goal is to provide the community with free,<br> secure, and high-performance tools that just work.</p>
-        </section>
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
 
-        <!-- Donation Section Start -->
-<section class="donation-section">
-    <div class="donation-card">
-        <div class="esewa-badge">Support Us</div>
-        <h2>Love our tools?</h2>
-        <p>If you find these free tools helpful, consider supporting our work by making a small donation.</p>
-        
-        <div class="qr-container">
-            <!-- IMPORTANT: Replace 'your-esewa-qr.jpg' with the actual link to your QR code image -->
-            <img src="esewa.jpeg" alt="Scan to pay with eSewa" class="esewa-qr">
-        </div>
-        
-        <div class="esewa-details">
-            <p class="scan-text">Scan the QR code above</p>
-        </div>
-    </div>
-</section>
-<!-- Donation Section End -->
+  .nav-links a {
+    font-size: 14px;
+    color: var(--text2);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.2s;
+    letter-spacing: 0.2px;
+  }
 
-        <section id="contact" class="content-section">
-            <h2 class="section-title">✉️ Get In Touch</h2>
-            <form id="contact-form" action="https://getform.io/f/ayvqkvkb" method="POST">
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                </div>
-                <textarea name="Message" placeholder="Your Message" rows="5" required></textarea>
-                <button type="submit" class="cta-button">Send Message</button>
-            </form>
-        </section>    
-    </main>
+  .nav-links a:hover { color: var(--text); }
 
-    <footer class="main-footer">
-        <div class="footer-content">
-            <a href="terms.html" class="footer-link">Privacy & Terms</a>
-            <p>&copy; 2026 Rai Paruhang. All rights reserved.</p>
-            <div class="social-links">
-                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://x.com/Paruhang005" target="_blank"><i class="fab fa-x-twitter"></i></a>
-            </div>
-        </div>
-    </footer>
+  .nav-cta {
+    background: var(--accent);
+    color: #fff !important;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    transition: opacity 0.2s !important;
+  }
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "CollectionPage",
-          "@id": "https://raiparuhang.com.np/#collectionpage",
-          "name": "Rai Paruhang Tools",
-          "description": "Privacy-first online tools for PDF and Image processing.",
-          "url": "https://raiparuhang.com.np/"
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://raiparuhang.com.np/#website",
-          "url": "https://raiparuhang.com.np/",
-          "name": "Rai Paruhang"
-        }
-      ]
+  .nav-cta:hover { opacity: 0.88; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+
+  .hamburger span {
+    width: 22px; height: 2px;
+    background: var(--text2);
+    border-radius: 2px;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    background: rgba(6,8,15,0.97);
+    border-bottom: 1px solid var(--border);
+    padding: 24px max(24px,5vw);
+    z-index: 99;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .mobile-menu.open { display: flex; }
+
+  .mobile-menu a {
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s;
+  }
+
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { color: var(--text); }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px max(24px,5vw) 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(79,142,255,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 80% 60%, rgba(34,211,160,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(79,142,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79,142,255,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 80%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--green-bg);
+    border: 1px solid rgba(34,211,160,0.25);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--green);
+    margin-bottom: 28px;
+    letter-spacing: 0.5px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--green);
+  }
+
+  h1 {
+    font-size: clamp(36px, 7vw, 68px);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  h1 span {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 60%, var(--green) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: clamp(15px, 2.5vw, 18px);
+    color: var(--text2);
+    max-width: 500px;
+    margin: 0 auto 36px;
+    font-weight: 300;
+    line-height: 1.7;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.2s;
+    letter-spacing: -0.2px;
+  }
+
+  .btn-primary:hover {
+    background: #6fa3ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(79,142,255,0.35);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--text2);
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 400;
+    border: 1px solid var(--border2);
+    transition: all 0.2s;
+  }
+
+  .btn-ghost:hover {
+    border-color: rgba(99,140,255,0.4);
+    color: var(--text);
+    background: rgba(79,142,255,0.06);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- TRUST STRIP ---- */
+  .trust-strip {
+    display: flex;
+    justify-content: center;
+    gap: clamp(20px, 5vw, 56px);
+    padding: 20px max(24px,5vw) 60px;
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text3);
+    font-size: 13px;
+    font-family: var(--mono);
+    letter-spacing: 0.3px;
+  }
+
+  .trust-item svg {
+    width: 18px; height: 18px;
+    color: var(--green);
+    flex-shrink: 0;
+  }
+
+  /* ---- SECURITY BANNER ---- */
+  .security-banner {
+    margin: 0 max(24px,5vw) 80px;
+    background: linear-gradient(135deg, rgba(34,211,160,0.06) 0%, rgba(79,142,255,0.06) 100%);
+    border: 1px solid rgba(34,211,160,0.2);
+    border-radius: var(--radius-lg);
+    padding: clamp(28px,5vw,48px);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 28px;
+    align-items: center;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .security-icon {
+    width: 72px; height: 72px;
+    background: var(--green-bg);
+    border: 1px solid rgba(34,211,160,0.3);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .security-icon svg {
+    width: 36px; height: 36px;
+    color: var(--green);
+  }
+
+  .security-content h2 {
+    font-size: clamp(18px,3vw,24px);
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: -0.4px;
+  }
+
+  .security-content p {
+    color: var(--text2);
+    font-size: 15px;
+    line-height: 1.65;
+    max-width: 640px;
+  }
+
+  .security-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(34,211,160,0.08);
+    border: 1px solid rgba(34,211,160,0.2);
+    border-radius: 100px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-family: var(--mono);
+    color: var(--green);
+    letter-spacing: 0.2px;
+  }
+
+  .pill::before {
+    content: '✓';
+    font-size: 10px;
+  }
+
+  /* ---- TOOLS SECTION ---- */
+  section.tools {
+    padding: 0 max(24px,5vw) 100px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    margin-bottom: 48px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .section-header h2 {
+    font-size: clamp(28px,4vw,42px);
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: var(--text);
+  }
+
+  .section-header p {
+    color: var(--text2);
+    font-size: 16px;
+    margin-top: 10px;
+    max-width: 500px;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%,300px),1fr));
+    gap: 16px;
+  }
+
+  .tool-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
+
+  }
+
+  .tool-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(79,142,255,0.04) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .tool-card:hover {
+    border-color: var(--border2);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.35), 0 0 0 1px rgba(79,142,255,0.1);
+  }
+
+  .tool-card:hover::before { opacity: 1; }
+
+  .tool-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .icon-blue   { background: rgba(79,142,255,0.12); }
+  .icon-green  { background: rgba(34,211,160,0.12); }
+  .icon-purple { background: rgba(147,112,255,0.12); }
+  .icon-amber  { background: rgba(251,191,36,0.12); }
+
+  .tool-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.2px;
+  }
+
+  .tool-card p {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .tool-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4px;
+  }
+
+  .tool-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    color: var(--text3);
+    text-transform: uppercase;
+  }
+
+  .arrow-icon {
+    width: 28px; height: 28px;
+    background: var(--surface2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .tool-card:hover .arrow-icon {
+    background: var(--accent);
+    transform: translate(2px, -2px);
+  }
+
+  .arrow-icon svg { width: 14px; height: 14px; color: var(--text2); }
+  .tool-card:hover .arrow-icon svg { color: #fff; }
+
+  /* ---- HOW IT WORKS ---- */
+  .how-it-works {
+    padding: 80px max(24px,5vw) 100px;
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hiw-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0;
+    margin-top: 48px;
+    position: relative;
+  }
+
+  .step {
+    padding: 28px 32px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .step:not(:last-child) {
+    border-right: 1px solid var(--border);
+  }
+
+  .step-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    font-weight: 500;
+  }
+
+  .step-icon {
+    font-size: 28px;
+    margin: 4px 0;
+  }
+
+  .step h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.2px;
+  }
+
+  .step p {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.65;
+  }
+
+  /* ---- ABOUT ---- */
+  .about-section {
+    padding: 100px max(24px,5vw);
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .about-text .section-tag { margin-bottom: 12px; }
+
+  .about-text h2 {
+    font-size: clamp(28px,4vw,40px);
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+
+  .about-text p {
+    color: var(--text2);
+    font-size: 16px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .about-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .profile-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .profile-avatar {
+    width: 60px; height: 60px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--accent), var(--green));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+    letter-spacing: -1px;
+  }
+
+  .profile-info h4 {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+
+  .profile-info span {
+    font-size: 13px;
+    color: var(--text2);
+    font-family: var(--mono);
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .stat-box {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .stat-box .num {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--accent);
+    font-family: var(--mono);
+    letter-spacing: -1px;
+  }
+
+  .stat-box .label {
+    font-size: 12px;
+    color: var(--text3);
+    margin-top: 4px;
+    font-family: var(--mono);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* ---- SUPPORT ---- */
+  .support-section {
+    padding: 80px max(24px,5vw);
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .support-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .support-inner h2 {
+    font-size: clamp(24px,4vw,36px);
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    margin-bottom: 12px;
+  }
+
+  .support-inner > p {
+    color: var(--text2);
+    font-size: 16px;
+    margin-bottom: 36px;
+  }
+
+  .qr-card {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+  }
+
+  .qr-card img {
+    width: 160px; height: 160px;
+    border-radius: 12px;
+    display: block;
+  }
+
+  .qr-card p {
+    font-size: 14px;
+    color: var(--text2);
+    font-family: var(--mono);
+    letter-spacing: 0.3px;
+  }
+
+  /* ---- CONTACT ---- */
+  .contact-section {
+    padding: 100px max(24px,5vw);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .contact-section h2 {
+    font-size: clamp(24px,4vw,36px);
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    margin-bottom: 8px;
+  }
+
+  .contact-section > p {
+    color: var(--text2);
+    font-size: 15px;
+    margin-bottom: 36px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    font-size: 13px;
+    color: var(--text2);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 15px;
+    font-family: var(--sans);
+    color: var(--text);
+    width: 100%;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    resize: vertical;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: var(--text3); }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(79,142,255,0.15);
+  }
+
+  .form-submit {
+    width: 100%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 15px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: var(--sans);
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: -0.2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .form-submit:hover {
+    background: #6fa3ff;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(79,142,255,0.3);
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px max(24px,5vw);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-left {
+    font-size: 13px;
+    color: var(--text3);
+    font-family: var(--mono);
+  }
+
+  .footer-left a {
+    color: var(--text3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-left a:hover { color: var(--text2); }
+
+  .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .footer-right a {
+    color: var(--text3);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s;
+    font-family: var(--mono);
+  }
+
+  .footer-right a:hover { color: var(--text); }
+
+  /* ---- SCROLL ANIMATION ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+
+    .security-banner {
+      grid-template-columns: 1fr;
+      text-align: center;
+      margin: 0 16px 60px;
     }
-    </script>
+
+    .security-icon { margin: 0 auto; }
+
+    .about-section {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding: 60px max(24px,5vw);
+    }
+
+    .steps-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .step:not(:last-child) {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+
+    footer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .hero { padding: 90px 20px 60px; }
+
+    h1 { letter-spacing: -1px; }
+  }
+
+  @media (max-width: 480px) {
+    .trust-strip { gap: 16px; }
+    .trust-item { font-size: 12px; }
+    .about-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <span class="dot"></span>
+    Rai Paruhang
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#tools" class="nav-cta">Try Tools</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="closeMobile()">Home</a>
+  <a href="#tools" onclick="closeMobile()">Tools</a>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">100% Client-Side &bull; Zero Server Upload</div>
+    <h1>Fast, Free, and <span>Totally Private</span> Web Tools</h1>
+    <p class="hero-sub">
+      Powerful file conversion and manipulation tools — all running in your browser. Your files never touch a server. Ever.
+    </p>
+    <div class="hero-actions">
+      <a href="#tools" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+        Explore Tools
+      </a>
+      <a href="#about" class="btn-ghost">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-item">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    No uploads to servers
+  </div>
+  <div class="trust-item">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+    Instant processing
+  </div>
+  <div class="trust-item">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    Files stay private
+  </div>
+  <div class="trust-item">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+    Completely free
+  </div>
+</div>
+
+<!-- SECURITY BANNER -->
+<div class="security-banner reveal" id="security">
+  <div class="security-icon">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+  </div>
+  <div class="security-content">
+    <h2>Your data is 100% secure — always.</h2>
+    <p>
+      Every tool on this site runs entirely inside your browser using JavaScript. Your files are processed locally on your own device — no data is ever uploaded to any server, logged, tracked, or shared with anyone. Not even us.
+    </p>
+    <div class="security-pills">
+      <span class="pill">No server uploads</span>
+      <span class="pill">No data logging</span>
+      <span class="pill">No tracking</span>
+      <span class="pill">Works offline</span>
+      <span class="pill">Open source friendly</span>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<section class="tools" id="tools">
+  <div class="section-header reveal">
+    <span class="section-tag">// tools</span>
+    <h2>Everything you need,<br>right in your browser.</h2>
+    <p>7 free tools. No account. No limits. No data leaving your device.</p>
+  </div>
+  <div class="tools-grid">
+
+    <a href="https://raiparuhang.com.np/image-to-pdf" class="tool-card reveal">
+      <div class="tool-icon icon-blue">🖼️</div>
+      <h3>Image to PDF</h3>
+      <p>Convert JPG, PNG, and WebP images into high-quality PDF documents instantly.</p>
+      <div class="tool-arrow">
+        <span class="tool-tag">image → pdf</span>
+        <div class="arrow-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://raiparuhang.com.np/pdf-to-image" class="tool-card reveal">
+      <div class="tool-icon icon-green">📄</div>
+      <h3>PDF to Image</h3>
+      <p>Extract high-resolution images from your PDF documents in seconds.</p>
+      <div class="tool-arrow">
+        <span class="tool-tag">pdf → image</span>
+        <div class="arrow-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://raiparuhang.com.np/image-converter" class="tool-card reveal">
+      <div class="tool-icon icon-purple">🔄</div>
+      <h3>Image Converter</h3>
+      <p>Seamlessly convert between JPG, PNG, and WebP formats with no quality loss.</p>
+      <div class="tool-arrow">
+        <span class="tool-tag">format convert</span>
+        <div class="arrow-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://raiparuhang.com.np/image-size-resizer" class="tool-card reveal">
+      <div class="tool-icon icon-amber">📐</div>
+      <h3>Image Resizer</h3>
+      <p>Adjust image dimensions for social media, web use, or any custom size.</p>
+      <div class="tool-arrow">
+        <span class="tool-tag">resize</span>
+        <div class="arrow-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://raiparuhang.com.np/image-size-reducer" class="tool-card reveal">
+      <div class="tool-icon icon-blue">🗜️</div>
+      <h3>Image Compressor</h3>
+      <p>Reduce file size dramatically without any visible loss in visual quality.</p>
+      <div class="tool-arrow">
+        <span class="tool-tag">compress</span>
+        <div class="arrow-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://raiparuhang.com.np/pdf-merger" class="tool-card reveal">
+      <div class="tool-icon icon-green">📎</div>
+      <h3>PDF Merger</h3>
+      <p>Combine multiple PDF files into one clean, merged document in a click.</p>
+      <div class="tool-arrow">
+        <span class="tool-tag">merge pdfs</span>
+        <div class="arrow-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://raiparuhang.com.np/qr-code-generator" class="tool-card reveal">
+      <div class="tool-icon icon-purple">⬛</div>
+      <h3>QR Code Generator</h3>
+      <p>Generate QR codes for your business, links, or contacts with a live preview.</p>
+      <div class="tool-arrow">
+        <span class="tool-tag">generate qr</span>
+        <div class="arrow-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<div class="how-it-works" id="how">
+  <div class="hiw-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">// how it works</span>
+      <h2>Processing happens<br>on your device.</h2>
+    </div>
+    <div class="steps-grid reveal">
+      <div class="step">
+        <span class="step-num">01</span>
+        <div class="step-icon">📂</div>
+        <h3>Select your file</h3>
+        <p>Pick any file from your device. It loads directly into your browser's memory — never uploaded anywhere.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <div class="step-icon">⚙️</div>
+        <h3>Browser processes it</h3>
+        <p>Our JavaScript runs the conversion locally using Web APIs. All computation stays on your machine.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <div class="step-icon">⬇️</div>
+        <h3>Download your result</h3>
+        <p>Get your converted file instantly. The original and output never touch any server.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-section">
+    <div class="about-text reveal">
+      <span class="section-tag">// about</span>
+      <h2>Built for privacy,<br>by a developer in Nepal.</h2>
+      <p>
+        I'm Paruhang Rai, a full-stack developer based in Nepal. I believe that performing simple file operations shouldn't require handing your data to third-party servers.
+      </p>
+      <p>
+        Every tool on this site is designed from the ground up to be client-side, meaning your files never leave your browser. My goal is to give everyone access to fast, secure, and genuinely free utilities.
+      </p>
+    </div>
+    <div class="about-card reveal">
+      <div class="profile-row">
+        <div class="profile-avatar">PR</div>
+        <div class="profile-info">
+          <h4>Paruhang Rai</h4>
+          <span>// Full Stack Developer · Nepal</span>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="stat-box">
+          <div class="num">7</div>
+          <div class="label">Free Tools</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">0</div>
+          <div class="label">Server Uploads</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">100%</div>
+          <div class="label">Free Forever</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">0</div>
+          <div class="label">Data Logged</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<div class="support-section">
+  <div class="support-inner reveal">
+    <span class="section-tag">// support</span>
+    <h2>Love the tools? Buy me a coffee ☕</h2>
+    <p>If these free tools save you time, consider supporting the project with a small donation via eSewa.</p>
+    <div class="qr-card">
+      <img src="https://raiparuhang.com.np/esewa.jpeg" alt="eSewa QR code for donation">
+      <p>Scan with eSewa to donate</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-section reveal">
+    <span class="section-tag">// contact</span>
+    <h2>Get in touch</h2>
+    <p>Have a suggestion, found a bug, or want a new tool? Drop a message.</p>
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" placeholder="Your name">
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" placeholder="your@email.com">
+    </div>
+    <div class="form-group">
+      <label>Message</label>
+      <textarea rows="5" placeholder="Tell me what's on your mind..."></textarea>
+    </div>
+    <button class="form-submit" type="button">
+      Send Message
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    © 2026 Rai Paruhang · Nepal &nbsp;·&nbsp;
+    <a href="https://raiparuhang.com.np/terms.html">Privacy & Terms</a>
+  </div>
+  <div class="footer-right">
+    <a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter / X</a>
+    <a href="#tools">Tools</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() {
+    mobileMenu.classList.remove('open');
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Stagger tool cards
+  document.querySelectorAll('.tool-card').forEach((card, i) => {
+    card.style.transitionDelay = (i * 60) + 'ms';
+  });
+</script>
 </body>
 </html>
