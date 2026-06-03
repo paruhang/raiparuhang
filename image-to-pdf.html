@@ -3,21 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Image to PDF Converter - Convert JPG to PDF Privately Online</title>
-<meta name="description" content="Convert JPG, PNG, GIF and WebP images to PDF instantly in your browser. 100% client-side, no server uploads. Free, fast, and private.">
-   <!-- Modern SVG Favicon (Infinite scaling for desktop & high-res screens) -->
+<title>Free Image to PDF Converter (100% Private, Client-Side)</title>
+<meta name="description" content="Convert JPG, PNG, WebP, and GIF files into clean PDFs directly in your browser. Totally free, zero server uploads, and no file limits. 100% private.">
+ <!-- Modern SVG Favicon (Infinite scaling for desktop & high-res screens) -->
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-
 <!-- For Safari pinned tabs color blending -->
 <link rel="mask-icon" href="favicon.svg" color="#4f8eff">
+<link rel="canonical" href="https://raiparuhang.com.np/image-to-pdf" />
+<!-- Open Graph for sharing this specific sub-tool -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://raiparuhang.com.np/image-to-pdf">
+<meta property="og:title" content="Free Image to PDF Converter - 100% Private & Client-Side">
+<meta property="og:description" content="Convert JPG, PNG, WebP, and GIF images to PDF locally in your web browser. No file uploads, completely private, and blazing fast.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 /* Visibility helpers (replaces style.display toggling) */
 .ui-hidden { display: none !important; }
 #imageListSection { display: flex; flex-direction: column; gap: 12px; }
@@ -528,6 +533,76 @@ footer {
   .img-thumb { width: 44px; height: 44px; }
 }
 </style>
+
+<script type="application/ld+json" defer>
+{
+ "@type":"SoftwareApplication",
+ "name":"Image to PDF Converter",
+ "applicationCategory":"UtilitiesApplication",
+ "operatingSystem":"Web Browser",
+ "browserRequirements":"JavaScript Enabled",
+ "offers":{
+   "@type":"Offer",
+   "price":"0",
+   "priceCurrency":"USD"
+ },
+ "featureList":[
+   "Client-side conversion",
+   "No uploads",
+   "Drag and drop",
+   "Batch conversion",
+   "PDF page customization"
+ ]
+}
+</script>
+
+<!-- schema markup -->
+<script type="application/ld+json" defer>
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+  {
+ "@context":"https://schema.org",
+ "@type":"SoftwareApplication",
+ "name":"Image to PDF Converter",
+ "applicationCategory":"UtilitiesApplication",
+ "operatingSystem":"Any",
+ "offers":{
+   "@type":"Offer",
+   "price":"0"
+ }
+}
+    {
+      "@type": "Question",
+      "name": "Is my data safe? Are files uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely not. Every operation runs entirely inside your browser using JavaScript and the Web File API. Your images are never sent to any server—not even ours. The conversion happens 100% on your own device."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which image formats are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JPG, JPEG, PNG, WebP, GIF (first frame), and BMP are supported. Any format your browser's Canvas API can render will work."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a file size or page limit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No server-side limits at all. The only limit is your device's RAM and browser memory. For very large batches (100+ images), we recommend processing in batches to avoid browser slowdowns."
+      }
+    }
+  ]
+}
+</script>
+
+
+
 </head>
 <body>
 
@@ -755,6 +830,19 @@ footer {
 </div>
 
 <!-- FAQ -->
+ <!-- SEO CONTENT STRIP -->
+<section style="max-width: 720px; margin: 40px auto; padding: 0 max(20px,4vw); border-top: 1px solid var(--border); padding-top: 40px;">
+      <h2 style="font-size: 22px; margin-bottom: 12px; font-weight: 600;">How to Convert Photos to PDF Online Without Uploading</h2>
+  <p style="color: var(--text2); font-size: 14px; margin-bottom: 20px;">
+    Traditional online converters require you to upload your sensitive images to an external server, creating a privacy risk. This <strong>client-side image converter</strong> processes everything locally. Whether you need to compile document photos for an application or combine images into a single organized file, you can convert JPG to PDF safely from any desktop or mobile device.
+  </p>
+  
+  <h3 style="font-size: 16px; margin-bottom: 8px; font-weight: 600; color: var(--accent);">Supported Document Formats:</h3>
+  <p style="color: var(--text2); font-size: 14px;">
+    Our tool accepts high-resolution smartphone photographs, standard system files, and web assets. It supports seamless conversion for standard formats like JPEG and PNG, as well as modern, highly-compressed formats like WebP.
+  </p>
+</section>
+
 <div class="faq-section">
   <h2>Frequently Asked Questions</h2>
 
@@ -837,16 +925,32 @@ let selectedBg = '#ffffff';
 let pdfBlob = null;
 let dragSrcIdx = null;
 
-// ---- FILE INPUT ----
-document.getElementById('fileInput').addEventListener('change', e => addFiles(e.target.files));
-
-// ---- DRAG & DROP on upload zone ----
+// ---- FILE INPUT & DRAG/DROP ZONE ----
+const fileInput = document.getElementById('fileInput');
 const zone = document.getElementById('uploadZone');
-zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+
+// Handle file explorer picking
+fileInput.addEventListener('change', e => addFiles(e.target.files));
+
+// Drag & Drop behaviors
+zone.addEventListener('dragover', e => { 
+  e.preventDefault(); 
+  zone.classList.add('dragover'); 
+});
+
 zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+
 zone.addEventListener('drop', e => {
-  e.preventDefault(); zone.classList.remove('dragover');
+  e.preventDefault(); 
+  zone.classList.remove('dragover');
   addFiles(e.dataTransfer.files);
+});
+
+// Trigger upload ONLY if clicking the zone itself or non-button text elements
+zone.addEventListener('click', e => {
+  if (!e.target.closest('.btn-upload')) {
+    fileInput.click();
+  }
 });
 
 function addFiles(files) {
