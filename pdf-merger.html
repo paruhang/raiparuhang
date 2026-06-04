@@ -671,7 +671,17 @@ async function mergePDFs() {
       setProgress(Math.round((i / files.length) * 90), `Merging: ${f.name} (${i+1}/${files.length})`);
       await new Promise(r => setTimeout(r, 15));
 
-      const srcDoc = await PDFDocument.load(f.arrayBuffer.slice(0));
+let srcDoc;
+try {
+  srcDoc = await PDFDocument.load(f.arrayBuffer.slice(0), {
+    ignoreEncryption: true,   // load PDFs with restrictions without throwing
+  });
+} catch (loadErr) {
+  console.warn(`Skipping "${f.name}": ${loadErr.message}`);
+  setProgress(Math.round((i / files.length) * 90), `⚠ Skipped: ${f.name}`);
+  await new Promise(r => setTimeout(r, 400));
+  continue; // skip this file, keep merging the rest
+}      
       const srcPageCount = srcDoc.getPageCount();
       const rangeStr = document.getElementById(`range-${f.id}`)?.value || '';
       const pageIndices = parseRange(rangeStr, srcPageCount);
@@ -696,26 +706,34 @@ async function mergePDFs() {
     if (addBookmarks && bookmarks.length > 0) {
       try {
         merged.setTitle('Merged PDF');
-        // PDF-lib basic outline support
-        const outlineItems = bookmarks.map(bm => {
-          const page = merged.getPage(bm.pageIndex);
-          return merged.context.obj({
-            Title: PDFLib.PDFString.of(bm.title),
-            Dest: [page.ref, PDFLib.PDFName.of('Fit')],
-          });
-        });
-        // Wire up outline chain
-        outlineItems.forEach((item, idx) => {
-          if (idx > 0) item.set(PDFLib.PDFName.of('Prev'), outlineItems[idx-1]);
-          if (idx < outlineItems.length-1) item.set(PDFLib.PDFName.of('Next'), outlineItems[idx+1]);
-        });
-        const outlineRef = merged.context.obj({
-          Type: PDFLib.PDFName.of('Outlines'),
-          First: outlineItems[0],
-          Last: outlineItems[outlineItems.length-1],
-          Count: PDFLib.PDFNumber.of(outlineItems.length),
-        });
-        merged.catalog.set(PDFLib.PDFName.of('Outlines'), outlineRef);
+// Register each item as an indirect object → gives it a PDFRef (e.g. "5 0 R")
+const itemRefs = bookmarks.map(bm => {
+  const page = merged.getPage(bm.pageIndex);
+  const item = merged.context.obj({
+    Title: PDFLib.PDFString.of(bm.title),
+    Dest: [page.ref, PDFLib.PDFName.of('Fit')],
+  });
+  return merged.context.register(item); // returns PDFRef, not the object itself
+});
+
+// Link Prev/Next by ref — serializer writes "5 0 R" not the inline object
+itemRefs.forEach((ref, idx) => {
+  const item = merged.context.lookup(ref);
+  if (idx > 0)
+    item.set(PDFLib.PDFName.of('Prev'), itemRefs[idx - 1]);
+  if (idx < itemRefs.length - 1)
+    item.set(PDFLib.PDFName.of('Next'), itemRefs[idx + 1]);
+});
+
+// Register the outline root as indirect too
+const outlineRoot = merged.context.obj({
+  Type: PDFLib.PDFName.of('Outlines'),
+  First: itemRefs[0],
+  Last:  itemRefs[itemRefs.length - 1],
+  Count: PDFLib.PDFNumber.of(itemRefs.length),
+});
+const outlineRootRef = merged.context.register(outlineRoot);
+merged.catalog.set(PDFLib.PDFName.of('Outlines'), outlineRootRef);
       } catch(e) { /* outline is optional, don't fail */ }
     }
 
