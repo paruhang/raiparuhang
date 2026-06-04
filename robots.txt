@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Sitemaps help bots find your content faster
 Sitemap: https://raiparuhang.com.np/sitemap.xml
