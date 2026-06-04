@@ -18,8 +18,48 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Image to PDF Converter",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web Browser",
+  "browserRequirements": "JavaScript Enabled",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": [
+    "Client-side conversion", "No uploads",
+    "Drag and drop", "Batch conversion", "PDF page customization"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is my data safe? Are files uploaded to a server?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Absolutely not. Every operation runs entirely inside your browser using JavaScript and the Web File API. Your images are never sent to any server—not even ours." }
+    },
+    {
+      "@type": "Question",
+      "name": "Which image formats are supported?",
+      "acceptedAnswer": { "@type": "Answer", "text": "JPG, JPEG, PNG, WebP, GIF (first frame), and BMP are supported." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a file size or page limit?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No server-side limits. The only limit is your device RAM and browser memory." }
+          }
+  ]
+}
+</script>
 
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -534,73 +574,6 @@ footer {
 }
 </style>
 
-<script type="application/ld+json" defer>
-{
- "@type":"SoftwareApplication",
- "name":"Image to PDF Converter",
- "applicationCategory":"UtilitiesApplication",
- "operatingSystem":"Web Browser",
- "browserRequirements":"JavaScript Enabled",
- "offers":{
-   "@type":"Offer",
-   "price":"0",
-   "priceCurrency":"USD"
- },
- "featureList":[
-   "Client-side conversion",
-   "No uploads",
-   "Drag and drop",
-   "Batch conversion",
-   "PDF page customization"
- ]
-}
-</script>
-
-<!-- schema markup -->
-<script type="application/ld+json" defer>
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-  {
- "@context":"https://schema.org",
- "@type":"SoftwareApplication",
- "name":"Image to PDF Converter",
- "applicationCategory":"UtilitiesApplication",
- "operatingSystem":"Any",
- "offers":{
-   "@type":"Offer",
-   "price":"0"
- }
-}
-    {
-      "@type": "Question",
-      "name": "Is my data safe? Are files uploaded to a server?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Absolutely not. Every operation runs entirely inside your browser using JavaScript and the Web File API. Your images are never sent to any server—not even ours. The conversion happens 100% on your own device."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Which image formats are supported?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "JPG, JPEG, PNG, WebP, GIF (first frame), and BMP are supported. Any format your browser's Canvas API can render will work."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is there a file size or page limit?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No server-side limits at all. The only limit is your device's RAM and browser memory. For very large batches (100+ images), we recommend processing in batches to avoid browser slowdowns."
-      }
-    }
-  ]
-}
-</script>
-
 
 
 </head>
@@ -897,7 +870,6 @@ footer {
 </footer>
 
 <script>
-const { jsPDF } = window.jspdf;
 
 // ---- UTILS ----
 function formatBytes(b) {
@@ -930,8 +902,10 @@ const fileInput = document.getElementById('fileInput');
 const zone = document.getElementById('uploadZone');
 
 // Handle file explorer picking
-fileInput.addEventListener('change', e => addFiles(e.target.files));
-
+fileInput.addEventListener('change', e => {
+  addFiles(e.target.files);
+  fileInput.value = ''; // reset so same file can be re-added
+});
 // Drag & Drop behaviors
 zone.addEventListener('dragover', e => { 
   e.preventDefault(); 
@@ -1217,6 +1191,7 @@ function selectBgCustom(val) {
 
 // ---- CONVERT ----
 async function convertToPDF() {
+const { jsPDF } = window.jspdf;
   if (!images.length) return;
   const btn = document.getElementById('convertBtn');
   btn.disabled = true; btn.textContent = 'Converting...';
@@ -1255,7 +1230,7 @@ async function convertToPDF() {
       continue;
     }
     const { dx, dy, dw, dh } = calcFitPdf(imgData.w, imgData.h, pageW, pageH, margin, fit, images[i].rotation);
-    pdf.addImage(imgData.dataUrl, 'JPEG', dx, dy, dw, dh);
+    pdf.addImage(imgData.dataUrl, imgData.fmt, dx, dy, dw, dh);
 
     if (pageNums) {
       pdf.setFontSize(9); pdf.setTextColor(140, 140, 140);
@@ -1266,12 +1241,17 @@ async function convertToPDF() {
   setProgress(100, 'Finalising PDF...');
   await new Promise(r => setTimeout(r, 80));
 
-  pdfBlob = pdf.output('blob');
-  const url = URL.createObjectURL(pdfBlob);
-  const size = formatBytes(pdfBlob.size);
+// ✅ correct order
+pdfBlob = pdf.output('blob');
+const size = formatBytes(pdfBlob.size);
+const dl = document.getElementById('downloadLink');  // ← declare FIRST
 
-  const dl = document.getElementById('downloadLink');
-  dl.href = url;
+if (dl.href && dl.href.startsWith('blob:')) {         // ← now safe
+  URL.revokeObjectURL(dl.href);
+}
+const url = URL.createObjectURL(pdfBlob);
+dl.href = url;                                        // ← single assignment
+dl.download = filename + '.pdf';
   dl.download = filename + '.pdf';
   document.getElementById('resultMeta').textContent = `${images.length} page${images.length > 1 ? 's' : ''} · ${size}`;
   document.getElementById('resultCard').classList.add('show');
@@ -1316,7 +1296,10 @@ function processImage(dataUrl, rotation, grayscale, quality) {
       if (grayscale) ctx.filter = 'grayscale(100%)';
       ctx.drawImage(img, -img.naturalWidth / 2, -img.naturalHeight / 2);
       ctx.restore();
-      resolve({ dataUrl: canvas.toDataURL('image/jpeg', quality), w: cw, h: ch });
+      const hasPng = img.src.startsWith('data:image/png');
+    const fmt = hasPng ? 'image/png' : 'image/jpeg';
+    const q = hasPng ? 1 : quality; // PNG is lossless, quality param ignored
+    resolve({ dataUrl: canvas.toDataURL(fmt, q), fmt: hasPng ? 'PNG' : 'JPEG', w: cw, h: ch });
     };
     img.onerror = () => resolve(null); // graceful failure — caller checks for null
     img.src = dataUrl;
