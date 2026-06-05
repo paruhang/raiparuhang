@@ -1,157 +1,930 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Dynamic QR Code Generator | raiparuhang</title>
-    <meta name="description" content="Instantly generate custom, dynamic QR codes using RaiParuhang's free online tool.">
-    <link rel="icon" type="image/ico" href="raiparuhang.ico">
-    <link rel="stylesheet" href="styledefault.css">
-    <link rel="stylesheet" href="qrcodegenerator.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free QR Code Generator — URL, WiFi, vCard, Text & More | Rai Paruhang</title>
+<meta name="description" content="Generate custom QR codes for URLs, WiFi, vCards, email, SMS, and plain text. Custom colors, logo overlay, multiple sizes. 100% client-side — nothing uploaded.">
+ <!-- Modern SVG Favicon (Infinite scaling for desktop & high-res screens) -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<!-- For Safari pinned tabs color blending -->
+<link rel="mask-icon" href="favicon.svg" color="#4f8eff">
+<link rel="canonical" href="https://raiparuhang.com.np/pdf-merger" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style"
+  href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap"
+  onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap">
+</noscript>
+<!-- QR code library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#06080f;--bg2:#0d1120;--bg3:#111827;
+  --surface:#161d2e;--surface2:#1e2840;
+  --border:rgba(99,140,255,.12);--border2:rgba(99,140,255,.22);
+  --accent:#4f8eff;--accent2:#7eb3ff;
+  --green:#22d3a0;--green-bg:rgba(34,211,160,.1);
+  --red:#ff5b5b;--red-bg:rgba(255,91,91,.1);
+  --amber:#f5a623;--amber-bg:rgba(245,166,35,.08);
+  --text:#e8edf8;--text2:#8b99bb;--text3:#556080;
+  --mono:'DM Mono',monospace;--sans:'Sora',sans-serif;
+  --radius:14px;--radius-lg:20px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;min-height:100vh}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 max(24px,5vw);height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:17px;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:-.3px;display:flex;align-items:center;gap:10px}
+.nav-logo .dot{width:8px;height:8px;background:var(--accent);border-radius:50%;box-shadow:0 0 8px var(--accent);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:14px;color:var(--text2);text-decoration:none;font-weight:400;transition:color .2s;letter-spacing:.2px}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--accent)}
+.nav-cta{background:var(--accent);color:#fff!important;padding:8px 18px;border-radius:8px;font-weight:600!important;font-size:13px!important;transition:opacity .2s!important}
+.nav-cta:hover{opacity:.88}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{width:22px;height:2px;background:var(--text2);border-radius:2px;display:block;transition:all .3s}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(6,8,15,.97);border-bottom:1px solid var(--border);padding:24px max(24px,5vw);z-index:99;flex-direction:column;gap:20px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--text2);text-decoration:none;font-size:16px;padding:8px 0;border-bottom:1px solid var(--border);transition:color .2s}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu a:hover,.mobile-menu a.active{color:var(--accent)}
+@media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}}
+
+/* PAGE HEADER */
+.page-header{padding:96px max(24px,5vw) 40px;max-width:980px;margin:0 auto;text-align:center}
+.page-badge{display:inline-flex;align-items:center;gap:8px;background:var(--green-bg);border:1px solid rgba(34,211,160,.25);border-radius:100px;padding:5px 14px;font-family:var(--mono);font-size:11px;color:var(--green);margin-bottom:20px;letter-spacing:.5px}
+.page-badge::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%;box-shadow:0 0 5px var(--green)}
+.page-header h1{font-size:clamp(26px,5vw,50px);font-weight:700;letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px}
+.page-header h1 span{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 60%,var(--green) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-header p{color:var(--text2);font-size:15px;max-width:500px;margin:0 auto;font-weight:300}
+
+/* WRAPPER */
+.tool-wrapper{max-width:980px;margin:0 auto;padding:0 max(24px,5vw) 80px;display:flex;flex-direction:column;gap:20px}
+
+/* SECURITY STRIP */
+.security-strip{display:flex;align-items:center;gap:8px;justify-content:center;padding:13px;background:var(--green-bg);border:1px solid rgba(34,211,160,.15);border-radius:12px;font-size:12px;font-family:var(--mono);color:var(--green);letter-spacing:.3px;flex-wrap:wrap;text-align:center}
+.security-strip svg{width:15px;height:15px;flex-shrink:0}
+
+/* TWO-COL */
+.two-col{display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start}
+@media(max-width:860px){.two-col{grid-template-columns:1fr}}
+
+/* TYPE TABS */
+.type-tabs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,110px),1fr));gap:7px}
+.type-tab{padding:10px 8px;border-radius:11px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;text-align:center;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:5px}
+.type-tab.active{border-color:var(--accent);background:rgba(79,142,255,.1)}
+.type-tab svg{width:20px;height:20px;color:var(--text3);transition:color .2s}
+.type-tab.active svg{color:var(--accent)}
+.type-tab span{font-size:11px;font-family:var(--mono);color:var(--text2);display:block;letter-spacing:.3px}
+.type-tab.active span{color:var(--accent)}
+.type-tab:not(.active):hover{border-color:var(--border2);background:var(--surface2)}
+
+/* CARD */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.card-header{display:flex;align-items:center;gap:8px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.card-header svg{width:15px;height:15px;color:var(--accent);flex-shrink:0}
+.card-header h3{font-size:13px;font-weight:600}
+.card-body{padding:18px;display:flex;flex-direction:column;gap:14px}
+
+/* FORM */
+.field{display:flex;flex-direction:column;gap:7px}
+.field label{font-size:11px;color:var(--text2);font-family:var(--mono);letter-spacing:.4px;text-transform:uppercase}
+.field input[type=text],.field input[type=url],.field input[type=email],.field input[type=tel],.field input[type=password],.field input[type=number],.field select,.field textarea{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 13px;font-size:14px;font-family:var(--sans);color:var(--text);width:100%;outline:none;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;appearance:none;resize:vertical}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b99bb' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,142,255,.15)}
+.field textarea{min-height:80px}
+.two-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.char-count{font-size:11px;color:var(--text3);font-family:var(--mono);text-align:right;margin-top:3px}
+.char-count.warn{color:var(--amber)}
+.char-count.over{color:var(--red)}
+
+/* QR PREVIEW PANEL */
+.qr-panel{display:flex;flex-direction:column;gap:16px;position:sticky;top:80px}
+.qr-canvas-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.qr-display-area{padding:20px;background:var(--bg3);display:flex;align-items:center;justify-content:center;position:relative;min-height:200px;overflow:hidden;width:100%;box-sizing:border-box}
+.qr-placeholder{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--text3)}
+.qr-placeholder svg{width:48px;height:48px;opacity:.3}
+.qr-placeholder p{font-size:13px;font-family:var(--mono);letter-spacing:.3px}
+/* White frame that makes the QR pop on any background */
+#qrContainer{
+  display:none;
+  background:#fff;
+  border-radius:12px;
+  padding:10px;
+  box-shadow:0 4px 24px rgba(0,0,0,.35);
+  line-height:0;
+  width:min(100%,280px);
+  max-width:100%;
+  box-sizing:border-box;
+  flex-shrink:1;
+}
+/* qrcodejs injects both a canvas and an img (IE fallback) — hide the img duplicate */
+#qrContainer img{ display:none!important; }
+/* Canvas fills container width, stays square, never overflows */
+#qrContainer canvas{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-width:100%!important;
+  border-radius:4px;
+  image-rendering:pixelated;
+  aspect-ratio:1/1;
+}
+.qr-meta{padding:14px 18px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.qr-meta-label{font-size:11px;color:var(--text3);font-family:var(--mono);letter-spacing:.3px}
+.qr-meta-val{font-size:12px;color:var(--text2);font-family:var(--mono)}
+
+/* DOWNLOAD ACTIONS */
+.dl-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn-dl{display:inline-flex;align-items:center;gap:7px;border:none;border-radius:9px;padding:10px 16px;font-size:13px;font-weight:600;font-family:var(--sans);cursor:pointer;transition:all .2s;white-space:nowrap;text-decoration:none}
+.btn-dl.primary{background:var(--green);color:#06080f}
+.btn-dl.primary:hover{background:#30e8b5;transform:translateY(-1px)}
+.btn-dl.secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border)}
+.btn-dl.secondary:hover{border-color:var(--border2);color:var(--text)}
+.btn-dl svg{width:14px;height:14px}
+.btn-copy{display:inline-flex;align-items:center;gap:7px;background:var(--surface2);color:var(--text2);border:1px solid var(--border);border-radius:9px;padding:10px 16px;font-size:13px;font-family:var(--mono);cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn-copy:hover{border-color:var(--border2);color:var(--text)}
+.btn-copy.copied{border-color:rgba(34,211,160,.4);color:var(--green);background:var(--green-bg)}
+.btn-copy svg{width:13px;height:13px}
+
+/* STYLE CARD */
+.color-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.swatch{width:28px;height:28px;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:all .2s;flex-shrink:0}
+.swatch.active{border-color:var(--accent);transform:scale(1.15)}
+input[type=color]{width:28px;height:28px;border-radius:8px;border:none;padding:0;cursor:pointer;background:none;overflow:hidden;flex-shrink:0}
+
+/* SIZE TABS */
+.size-tabs{display:flex;gap:6px}
+.size-tab{flex:1;padding:9px 6px;border-radius:9px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;text-align:center;transition:all .2s;font-family:var(--mono);font-size:12px;color:var(--text2)}
+.size-tab.active{border-color:var(--accent);background:rgba(79,142,255,.1);color:var(--accent)}
+
+/* ERROR CORRECTION */
+.ec-tabs{display:flex;gap:6px}
+.ec-tab{flex:1;padding:9px 6px;border-radius:9px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;text-align:center;transition:all .2s}
+.ec-tab.active{border-color:var(--accent);background:rgba(79,142,255,.1)}
+.ec-tab .ec-lbl{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--text2);display:block}
+.ec-tab.active .ec-lbl{color:var(--accent)}
+.ec-tab .ec-desc{font-size:10px;color:var(--text3);display:block;margin-top:1px}
+
+/* LOGO UPLOAD */
+.logo-drop{border:2px dashed var(--border2);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg3)}
+.logo-drop:hover{border-color:var(--accent);background:rgba(79,142,255,.04)}
+.logo-drop p{font-size:13px;color:var(--text2);margin-bottom:8px}
+.logo-drop span{font-size:11px;font-family:var(--mono);color:var(--text3)}
+#logoInput{display:none}
+.logo-preview{display:none;align-items:center;gap:10px;padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:10px}
+.logo-preview.show{display:flex}
+.logo-preview img{width:36px;height:36px;border-radius:7px;object-fit:contain;background:#fff}
+.logo-preview span{flex:1;font-size:12px;font-family:var(--mono);color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.logo-preview button{width:26px;height:26px;border-radius:7px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text2);transition:all .2s;flex-shrink:0}
+.logo-preview button svg{width:11px;height:11px}
+.logo-preview button:hover{background:var(--red-bg);border-color:rgba(255,91,91,.3);color:var(--red)}
+
+/* SLIDER */
+.slider-row{display:flex;align-items:center;gap:10px}
+input[type=range]{flex:1;-webkit-appearance:none;appearance:none;height:4px;background:var(--bg3);border-radius:2px;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;border:2px solid var(--bg);box-shadow:0 0 6px rgba(79,142,255,.4)}
+.range-val{font-family:var(--mono);font-size:13px;color:var(--accent);min-width:36px;text-align:right}
+
+/* TOGGLE */
+.trow{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)}
+.trow:last-child{border-bottom:none}
+.trow-lbl .tn{font-size:13px;font-weight:500}
+.trow-lbl .td{font-size:11px;color:var(--text3);margin-top:1px}
+.toggle{width:40px;height:22px;background:var(--bg3);border-radius:100px;border:1px solid var(--border);cursor:pointer;position:relative;transition:all .2s;flex-shrink:0}
+.toggle.on{background:var(--accent);border-color:var(--accent)}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:14px;height:14px;background:var(--text3);border-radius:50%;transition:all .2s}
+.toggle.on::after{left:21px;background:#fff}
+
+
+
+/* FAQ */
+.faq-section{padding:60px max(24px,5vw) 80px;max-width:720px;margin:0 auto}
+.faq-section h2{font-size:clamp(20px,3vw,28px);font-weight:700;letter-spacing:-.7px;margin-bottom:28px}
+.faq-item{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden}
+.faq-q{padding:16px 20px;font-size:15px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;user-select:none;transition:background .2s}
+.faq-q:hover{background:var(--surface)}
+.faq-q svg{width:16px;height:16px;color:var(--text3);flex-shrink:0;transition:transform .3s}
+.faq-q.open svg{transform:rotate(180deg)}
+.faq-a{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .3s,padding .3s;font-size:14px;color:var(--text2);line-height:1.7}
+.faq-a.open{max-height:220px;padding:0 20px 16px}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.footer-left{font-size:12px;color:var(--text3);font-family:var(--mono)}
+.footer-left a{color:var(--text3);text-decoration:none;transition:color .2s}
+.footer-left a:hover{color:var(--text2)}
+.footer-right{display:flex;gap:16px}
+.footer-right a{color:var(--text3);font-size:12px;text-decoration:none;font-family:var(--mono);transition:color .2s}
+.footer-right a:hover{color:var(--text)}
+
+@media(max-width:540px){
+  .type-tabs{grid-template-columns:repeat(3,1fr)}
+  .two-fields{grid-template-columns:1fr}
+  .dl-actions{flex-direction:column}
+  .history-grid{grid-template-columns:repeat(3,1fr)}
+}
+</style>
 </head>
 <body>
 
-    <div class="dashboard-container">
+<!-- NAV -->
+<nav>
+  <a href="https://raiparuhang.com.np" class="nav-logo"><span class="dot"></span>Rai Paruhang</a>
+  <ul class="nav-links">
+    <li><a href="https://raiparuhang.com.np/#home">Home</a></li>
+    <li><a href="https://raiparuhang.com.np/#tools" class="active">Tools</a></li>
+    <li><a href="https://raiparuhang.com.np/#about">About</a></li>
+    <li><a href="https://raiparuhang.com.np/#contact">Contact</a></li>
+    <li><a href="https://raiparuhang.com.np/#tools" class="nav-cta">All Tools</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="https://raiparuhang.com.np/#home" onclick="closeMobile()">Home</a>
+  <a href="https://raiparuhang.com.np/#tools" class="active" onclick="closeMobile()">Tools</a>
+  <a href="https://raiparuhang.com.np/#about" onclick="closeMobile()">About</a>
+  <a href="https://raiparuhang.com.np/#contact" onclick="closeMobile()">Contact</a>
+</div>
 
+<!-- HEADER -->
+<div class="page-header">
+  <div class="page-badge">100% Client-Side · No Server Upload</div>
+  <h1>QR Code <span>Generator</span></h1>
+  <p>Generate QR codes for URLs, WiFi, contacts, email, SMS, and more. Custom colors, logo overlay, multiple sizes — all in your browser.</p>
+</div>
 
-        <main class="main-body">
-    <header class="main-header">
-        <div class="logo">
-            <a href="https://raiparuhang.com.np">raiparuhang<span class="dot">.com.np</span></a>
+<!-- TOOL -->
+<div class="tool-wrapper">
+
+  <div class="security-strip">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Your data never leaves your browser — QR codes are generated 100% locally
+  </div>
+
+  <div class="two-col">
+
+    <!-- LEFT: inputs -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+
+      <!-- TYPE SELECTOR -->
+      <div class="card">
+        <div class="card-header">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          <h3>QR Code Type</h3>
         </div>
-        <nav class="main-nav">
-            <ul class="nav-list">
-                <li><a href="index.html#tools">Back to Tools</a></li>
-            </ul>
-        </nav>
-        <button class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
-    </header>
-
-            <div class="content-area">
-                <div class="privacy-badge"><i class="fas fa-shield-halved"></i> 100% Client-Side</div>
-
-                <h1>Qr code generator free online</h1>
-
-                <nav class="mobile-tabs">
-                    <button class="tab-link active" data-tab="url" onclick="switchTab(event, 'url')">
-                        <i class="fas fa-link"></i> URL
-                    </button>
-                    <button class="tab-link" data-tab="wifi" onclick="switchTab(event, 'wifi')">
-                        <i class="fas fa-wifi"></i> WiFi
-                    </button>
-                    <button class="tab-link" data-tab="text" onclick="switchTab(event, 'text')">
-                        <i class="fas fa-font"></i> Text
-                    </button>
-                </nav>
-
-                <div class="grid-layout">
-
-                    <div class="inputs-column">
-                        <section class="card fade-in">
-                            <div class="card-header">
-                                <span class="step-num">1</span>
-                                <h3>Enter Content</h3>
-                            </div>
-                            <div id="url" class="tab-panel active">
-                                <div class="input-group">
-                                    <label>Website URL</label>
-                                    <input type="url" id="qr-url" placeholder="https://raiparuhang.com.np" oninput="updateQR()">
-                                </div>
-                            </div>
-                            <div id="wifi" class="tab-panel">
-                                <div class="input-group">
-                                    <label>Network Name (SSID)</label>
-                                    <input type="text" id="wifi-ssid" placeholder="My Network" oninput="updateQR()">
-                                </div>
-                                <div class="input-row">
-                                    <div class="input-group">
-                                        <label>Password</label>
-                                        <input type="password" id="wifi-pass" placeholder="••••••••" oninput="updateQR()">
-                                    </div>
-                                    <div class="input-group">
-                                        <label>Security</label>
-                                        <select id="wifi-type" onchange="updateQR()">
-                                            <option value="WPA">WPA/WPA2</option>
-                                            <option value="WEP">WEP</option>
-                                            <option value="nopass">None</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="text" class="tab-panel">
-                                <div class="input-group">
-                                    <label>Your Message</label>
-                                    <textarea id="qr-text" rows="4" placeholder="Type here..." oninput="updateQR()"></textarea>
-                                </div>
-                            </div>
-                        </section>
-
-                        <section class="card fade-in delay-1">
-                            <div class="card-header">
-                                <span class="step-num">2</span>
-                                <h3>Customize Design</h3>
-                            </div>
-                            <div class="input-row">
-                                <div class="input-group">
-                                    <label>Dot Pattern</label>
-                                    <select id="dot-style" onchange="updateQR()">
-                                        <option value="rounded">Smooth Rounded</option>
-                                        <option value="dots">Modern Dots</option>
-                                        <option value="square">Classic Square</option>
-                                    </select>
-                                </div>
-                                <div class="input-group">
-                                    <label>Brand Color</label>
-                                    <input type="color" id="qr-color" value="#6366f1" oninput="updateQR()">
-                                </div>
-                            </div>
-                            <div class="input-group">
-                                <label>Add Logo (Center)</label>
-                                <input type="file" id="logo-input" accept="image/*" onchange="handleLogo(event)">
-                            </div>
-                        </section>
-                    </div>
-
-                    <div class="preview-column">
-                        <div class="preview-sticky">
-                            <div class="preview-card">
-                                <div class="badge">Live Preview</div>
-                                <div id="canvas-container"></div>
-                                <div class="action-buttons">
-                                    <button class="btn-main" onclick="downloadQR('png')">
-                                        <i class="fas fa-download"></i> Download PNG
-                                    </button>
-                                    <button class="btn-sub" onclick="downloadQR('svg')">Export as SVG</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+        <div class="card-body">
+          <div class="type-tabs">
+            <div class="type-tab active" onclick="setType('url')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <span>URL</span>
             </div>
-                <div class="feat">
-                    <strong><p>What Can You Do ?</p></strong>
-                <h2>You can easily convert link to qr code for free.</h2>
-                <h3>You can create qr code with logo on the center.</h3>
-                <h4>Help your customer easily connect to your wifi with wifi code qr generator.</h4>
-                <h5>Just hide your message with text into qr code.</h5>
-                </div>
-    <footer class="main-footer">
-        <div class="footer-content">
-            <a href="terms.html" class="footer-link">Privacy & Terms</a>
-            <p>&copy; 2025 Rai Paruhang. All rights reserved.</p>
-            <div class="social-links">
-                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://x.com/Paruhang005" target="_blank"><i class="fab fa-x-twitter"></i></a>
+            <div class="type-tab" onclick="setType('text')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              <span>Text</span>
             </div>
+            <div class="type-tab" onclick="setType('wifi')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+              <span>WiFi</span>
+            </div>
+            <div class="type-tab" onclick="setType('vcard')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span>vCard</span>
+            </div>
+            <div class="type-tab" onclick="setType('email')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span>Email</span>
+            </div>
+            <div class="type-tab" onclick="setType('sms')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span>SMS</span>
+            </div>
+            <div class="type-tab" onclick="setType('phone')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.28 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.1a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>Phone</span>
+            </div>
+            <div class="type-tab" onclick="setType('location')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Location</span>
+            </div>
+            <div class="type-tab" onclick="setType('image')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <span>Image</span>
+            </div>
+          </div>
         </div>
-    </footer>
-        </main>
+      </div>
+
+      <!-- DYNAMIC INPUT FORM -->
+      <div class="card" id="inputCard">
+        <div class="card-header">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" id="inputIcon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <h3 id="inputTitle">URL / Website Link</h3>
+        </div>
+        <div class="card-body" id="inputBody">
+          <!-- filled dynamically -->
+        </div>
+      </div>
+
     </div>
 
-    <script src="qrcodegenerator.js"></script>
+    <!-- RIGHT: QR preview + style -->
+    <div class="qr-panel">
+
+      <!-- QR PREVIEW -->
+      <div class="qr-canvas-card">
+        <div class="qr-display-area" id="qrDisplayArea">
+          <div class="qr-placeholder" id="qrPlaceholder">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="7" y="7" width="3" height="3" fill="currentColor" stroke="none"/><rect x="14" y="14" width="3" height="3" fill="currentColor" stroke="none"/><line x1="14" y1="14" x2="21" y2="14"/><line x1="14" y1="21" x2="14" y2="14"/><line x1="21" y1="14" x2="21" y2="21"/><line x1="14" y1="21" x2="21" y2="21"/></svg>
+            <p>QR preview appears here</p>
+          </div>
+          <div id="qrContainer"></div>
+        </div>
+        <div class="qr-meta">
+          <div>
+            <div class="qr-meta-label">Type</div>
+            <div class="qr-meta-val" id="metaType">—</div>
+          </div>
+          <div>
+            <div class="qr-meta-label">Size</div>
+            <div class="qr-meta-val" id="metaSize">—</div>
+          </div>
+          <div>
+            <div class="qr-meta-label">Data length</div>
+            <div class="qr-meta-val" id="metaLen">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DOWNLOAD -->
+      <div class="card" id="dlCard" style="display:none;">
+        <div class="card-header">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <h3>Download</h3>
+        </div>
+        <div class="card-body">
+          <div class="dl-actions">
+            <button class="btn-dl primary" onclick="downloadQR('png')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              PNG
+            </button>
+            <button class="btn-dl secondary" onclick="downloadQR('svg')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              SVG
+            </button>
+            <button class="btn-copy" id="copyBtn" onclick="copyToClipboard()">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span id="copyBtnLabel">Copy</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STYLE CARD -->
+      <div class="card">
+        <div class="card-header">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+          <h3>Style</h3>
+        </div>
+        <div class="card-body">
+
+          <div class="field">
+            <label>Size</label>
+            <div class="size-tabs">
+              <div class="size-tab" onclick="setSize(128,this)">S<br><span style="font-size:9px">128px</span></div>
+              <div class="size-tab" onclick="setSize(200,this)">M<br><span style="font-size:9px">200px</span></div>
+              <div class="size-tab active" onclick="setSize(300,this)">L<br><span style="font-size:9px">300px</span></div>
+              <div class="size-tab" onclick="setSize(512,this)">XL<br><span style="font-size:9px">512px</span></div>
+              <div class="size-tab" onclick="setSize(1024,this)">2K<br><span style="font-size:9px">1024px</span></div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Error Correction</label>
+            <div class="ec-tabs">
+              <div class="ec-tab" onclick="setEC('L',this)"><span class="ec-lbl">L</span><span class="ec-desc">7%</span></div>
+              <div class="ec-tab active" onclick="setEC('M',this)"><span class="ec-lbl">M</span><span class="ec-desc">15%</span></div>
+              <div class="ec-tab" onclick="setEC('Q',this)"><span class="ec-lbl">Q</span><span class="ec-desc">25%</span></div>
+              <div class="ec-tab" onclick="setEC('H',this)"><span class="ec-lbl">H</span><span class="ec-desc">30%</span></div>
+            </div>
+            <span style="font-size:11px;color:var(--text3);font-family:var(--mono);">Use H when adding a logo overlay</span>
+          </div>
+
+          <div class="field">
+            <label>QR Color</label>
+            <div class="color-row">
+              <div class="swatch active" style="background:#000000" data-color="#000000" onclick="pickColor('fg',this)"></div>
+              <div class="swatch" style="background:#1a1a2e" data-color="#1a1a2e" onclick="pickColor('fg',this)"></div>
+              <div class="swatch" style="background:#4f8eff" data-color="#4f8eff" onclick="pickColor('fg',this)"></div>
+              <div class="swatch" style="background:#22d3a0" data-color="#22d3a0" onclick="pickColor('fg',this)"></div>
+              <div class="swatch" style="background:#ff5b5b" data-color="#ff5b5b" onclick="pickColor('fg',this)"></div>
+              <div class="swatch" style="background:#f5a623" data-color="#f5a623" onclick="pickColor('fg',this)"></div>
+              <input type="color" id="fgColorPicker" value="#000000" title="Custom color" onchange="setCustomColor('fg',this.value)">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Background Color</label>
+            <div class="color-row">
+              <div class="swatch active" style="background:#ffffff" data-color="#ffffff" onclick="pickColor('bg',this)" id="bgSwatchWhite"></div>
+              <div class="swatch" style="background:#f5f5f0" data-color="#f5f5f0" onclick="pickColor('bg',this)"></div>
+              <div class="swatch" style="background:#0d1120" data-color="#0d1120" onclick="pickColor('bg',this)"></div>
+              <div class="swatch" style="background:#111827" data-color="#111827" onclick="pickColor('bg',this)"></div>
+              <input type="color" id="bgColorPicker" value="#ffffff" title="Custom bg" onchange="setCustomColor('bg',this.value)">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Quiet Zone (margin)</label>
+            <div class="slider-row">
+              <input type="range" id="marginSlider" min="0" max="8" value="4" step="1" oninput="document.getElementById('marginVal').textContent=this.value;generate()">
+              <span class="range-val" id="marginVal">4</span>
+            </div>
+          </div>
+
+          <!-- Logo -->
+          <div class="field">
+            <label>Logo Overlay <span style="color:var(--text3)">(optional)</span></label>
+            <div class="logo-drop" onclick="document.getElementById('logoInput').click()" id="logoDrop">
+              <p>Click to add a logo/icon</p>
+              <span>PNG or SVG with transparent background works best</span>
+            </div>
+            <input type="file" id="logoInput" accept="image/*">
+            <div class="logo-preview" id="logoPreview">
+              <img id="logoPreviewImg" src="" alt="Logo">
+              <span id="logoPreviewName">logo.png</span>
+              <button onclick="removeLogo()">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+            <div class="field" id="logoSizeRow" style="display:none;">
+              <label>Logo size</label>
+              <div class="slider-row">
+                <input type="range" id="logoSize" min="10" max="35" value="20" step="1" oninput="document.getElementById('logoSizeVal').textContent=this.value+'%';generate()">
+                <span class="range-val" id="logoSizeVal">20%</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">Is my data sent to a server?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">Never. All QR codes are generated entirely in your browser using JavaScript. No data is transmitted, stored, or shared with anyone — not even Rai Paruhang.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">Which QR code types are supported?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">URL/website links, plain text, WiFi network credentials, vCard contact info, email (with subject and body), SMS messages, phone numbers, GPS locations, and image URLs.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">What does Error Correction level mean?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">Error correction lets a QR code be scanned even if part of it is obscured or damaged. L = 7% recovery, M = 15%, Q = 25%, H = 30%. Use H when you add a logo overlay, since the logo covers part of the code.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">Can I add my logo to the QR code?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">Yes! Upload any image as a logo and it will be centered over the QR code. Use Error Correction level H when adding a logo so the code remains scannable even with the logo covering the center.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">What download formats are available?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">PNG (raster, up to 1024×1024 px for high-quality print) and SVG (vector, infinitely scalable — perfect for print on any size). Both are completely free to download.</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">© 2026 Rai Paruhang · <a href="https://raiparuhang.com.np/terms.html">Privacy &amp; Terms</a></div>
+  <div class="footer-right">
+    <a href="https://raiparuhang.com.np/#tools">All Tools</a>
+    <a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter/X</a>
+    <a href="https://www.linkedin.com/in/paruhang-rai/" target="_blank" rel="noopener">Linkedin</a>
+  </div>
+</footer>
+
+<script>
+/* ── STATE ── */
+let qrType = 'url';
+let qrSize = 300;
+let ecLevel = 'M';
+let fgColor = '#000000';
+let bgColor = '#ffffff';
+let logoDataUrl = null;
+let qrData = '';
+let qrInstance = null;
+
+/* ── NAV ── */
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open')}
+
+/* ── TYPE FORMS ── */
+const typeConfig = {
+  url:      { title:'URL / Website Link',    icon:'globe' },
+  text:     { title:'Plain Text',            icon:'file'  },
+  wifi:     { title:'WiFi Network',          icon:'wifi'  },
+  vcard:    { title:'Contact (vCard)',        icon:'user'  },
+  email:    { title:'Email',                 icon:'mail'  },
+  sms:      { title:'SMS Message',           icon:'msg'   },
+  phone:    { title:'Phone Number',          icon:'phone' },
+  location: { title:'GPS Location',          icon:'pin'   },
+  image:    { title:'Image URL',              icon:'image' },
+};
+
+const typeForms = {
+  url: ()=>`
+    <div class="field">
+      <label>Website URL</label>
+      <input type="url" id="f_url" placeholder="https://example.com" oninput="generate()">
+    </div>`,
+  text: ()=>`
+    <div class="field">
+      <label>Text content</label>
+      <textarea id="f_text" placeholder="Enter any text…" rows="4" oninput="updateCharCount();generate()"></textarea>
+      <div class="char-count" id="charCount">0 characters</div>
+    </div>`,
+  wifi: ()=>`
+    <div class="field"><label>Network Name (SSID)</label><input type="text" id="f_ssid" placeholder="My WiFi Network" oninput="generate()"></div>
+    <div class="field"><label>Password</label><input type="password" id="f_pass" placeholder="WiFi password" oninput="generate()"></div>
+    <div class="field"><label>Security</label>
+      <select id="f_sec" onchange="generate()">
+        <option value="WPA">WPA/WPA2</option>
+        <option value="WEP">WEP</option>
+        <option value="">None (open)</option>
+      </select>
+    </div>
+    <div class="trow">
+      <div class="trow-lbl"><div class="tn">Hidden network</div></div>
+      <div class="toggle" id="f_hidden" onclick="this.classList.toggle('on');generate()"></div>
+    </div>`,
+  vcard: ()=>`
+    <div class="two-fields">
+      <div class="field"><label>First Name</label><input type="text" id="f_fn" placeholder="John" oninput="generate()"></div>
+      <div class="field"><label>Last Name</label><input type="text" id="f_ln" placeholder="Doe" oninput="generate()"></div>
+    </div>
+    <div class="field"><label>Phone</label><input type="tel" id="f_phone" placeholder="+1 555 000 0000" oninput="generate()"></div>
+    <div class="field"><label>Email</label><input type="email" id="f_email" placeholder="john@example.com" oninput="generate()"></div>
+    <div class="field"><label>Organisation</label><input type="text" id="f_org" placeholder="Company name" oninput="generate()"></div>
+    <div class="field"><label>Website</label><input type="url" id="f_web" placeholder="https://example.com" oninput="generate()"></div>
+    <div class="field"><label>Address</label><input type="text" id="f_addr" placeholder="123 Main St, City, Country" oninput="generate()"></div>`,
+  email: ()=>`
+    <div class="field"><label>To (email address)</label><input type="email" id="f_to" placeholder="recipient@example.com" oninput="generate()"></div>
+    <div class="field"><label>Subject</label><input type="text" id="f_subj" placeholder="Email subject" oninput="generate()"></div>
+    <div class="field"><label>Body</label><textarea id="f_body" placeholder="Email body text…" rows="3" oninput="generate()"></textarea></div>`,
+  sms: ()=>`
+    <div class="field"><label>Phone Number</label><input type="tel" id="f_tel" placeholder="+1 555 000 0000" oninput="generate()"></div>
+    <div class="field"><label>Message</label><textarea id="f_msg" placeholder="Your SMS message…" rows="3" oninput="generate()"></textarea></div>`,
+  phone: ()=>`
+    <div class="field"><label>Phone Number</label><input type="tel" id="f_num" placeholder="+1 555 000 0000" oninput="generate()"></div>`,
+  location: ()=>`
+    <div class="two-fields">
+      <div class="field"><label>Latitude</label><input type="number" id="f_lat" placeholder="27.7172" step="any" oninput="generate()"></div>
+      <div class="field"><label>Longitude</label><input type="number" id="f_lng" placeholder="85.3240" step="any" oninput="generate()"></div>
+    </div>
+    <div class="field"><label>Label (optional)</label><input type="text" id="f_loclbl" placeholder="Kathmandu, Nepal" oninput="generate()"></div>`,
+  image: ()=>`
+    <div class="field">
+      <label>Image URL</label>
+      <input type="url" id="f_imgurl" placeholder="https://example.com/photo.jpg" oninput="generate();updateImgPreview()">
+    </div>
+    <div id="imgPreviewWrap" style="display:none;margin-top:4px;border-radius:10px;overflow:hidden;border:1px solid var(--border);background:var(--bg3);max-height:160px;display:none;align-items:center;justify-content:center;">
+      <img id="imgPreviewEl" src="" alt="Preview" style="max-width:100%;max-height:160px;object-fit:contain;display:block;border-radius:9px;">
+    </div>
+    <p style="font-size:11px;color:var(--text3);font-family:var(--mono);margin-top:4px;">The QR code will encode the image URL so scanners open it directly.</p>`,
+};
+
+function setType(t){
+  qrType = t;
+  document.querySelectorAll('.type-tab').forEach((el,i)=>{
+    const types=['url','text','wifi','vcard','email','sms','phone','location','image'];
+    el.classList.toggle('active', types[i]===t);
+  });
+  document.getElementById('inputTitle').textContent = typeConfig[t].title;
+  document.getElementById('inputBody').innerHTML = typeForms[t]();
+  generate();
+}
+
+/* ── BUILD DATA STRING ── */
+function buildData(){
+  const g = id => { const el=document.getElementById(id); return el ? el.value.trim() : ''; };
+  const tog = id => { const el=document.getElementById(id); return el ? el.classList.contains('on') : false; };
+  switch(qrType){
+    case 'url':      return g('f_url') || '';
+    case 'text':     return g('f_text') || '';
+    case 'phone':    return g('f_num') ? 'tel:'+g('f_num') : '';
+    case 'email': {
+      const to=g('f_to'), subj=g('f_subj'), body=g('f_body');
+      if(!to) return '';
+      let s='mailto:'+to;
+      const params=[];
+      if(subj) params.push('subject='+encodeURIComponent(subj));
+      if(body) params.push('body='+encodeURIComponent(body));
+      if(params.length) s+='?'+params.join('&');
+      return s;
+    }
+    case 'sms': {
+      const tel=g('f_tel'), msg=g('f_msg');
+      if(!tel) return '';
+      return msg ? `sms:${tel}?body=${encodeURIComponent(msg)}` : `sms:${tel}`;
+    }
+    case 'wifi': {
+      const ssid=g('f_ssid'), pass=g('f_pass'), sec=g('f_sec'), hidden=tog('f_hidden');
+      if(!ssid) return '';
+      // Escape special chars required by the WIFI QR format spec (RFC-like)
+      const wesc = s => s.replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/"/g,'\\"').replace(/:/g,'\\:');
+      return `WIFI:T:${sec};S:${wesc(ssid)};P:${wesc(pass)};H:${hidden?'true':'false'};;`;
+    }
+    case 'vcard': {
+      const fn=g('f_fn'), ln=g('f_ln');
+      if(!fn && !ln) return '';
+      const CRLF='\r\n';
+      let v='BEGIN:VCARD'+CRLF+'VERSION:3.0'+CRLF;
+      v+=`N:${ln};${fn};;;`+CRLF;
+      v+=`FN:${fn} ${ln}`+CRLF;
+      if(g('f_phone')) v+=`TEL:${g('f_phone')}`+CRLF;
+      if(g('f_email')) v+=`EMAIL:${g('f_email')}`+CRLF;
+      if(g('f_org')) v+=`ORG:${g('f_org')}`+CRLF;
+      if(g('f_web')) v+=`URL:${g('f_web')}`+CRLF;
+      if(g('f_addr')) v+=`ADR:;;${g('f_addr')};;;;`+CRLF;
+      v+='END:VCARD';
+      return v;
+    }
+    case 'location': {
+      const lat=g('f_lat'), lng=g('f_lng'), lbl=g('f_loclbl');
+      if(!lat||!lng) return '';
+      // Include optional label as a query param so map apps display the name
+      return lbl ? `geo:${lat},${lng}?q=${encodeURIComponent(lbl)}` : `geo:${lat},${lng}`;
+    }
+    case 'image': {
+      return g('f_imgurl') || '';
+    }
+    default: return '';
+  }
+}
+
+/* ── GENERATE ── */
+function generate(){
+  const data = buildData();
+  qrData = data;
+
+  // update char count for text
+  updateCharCount();
+
+  if(!data){
+    document.getElementById('qrPlaceholder').style.display='flex';
+    document.getElementById('qrContainer').style.display='none';
+    document.getElementById('dlCard').style.display='none';
+    document.getElementById('metaType').textContent='—';
+    document.getElementById('metaSize').textContent='—';
+    document.getElementById('metaLen').textContent='—';
+    return;
+  }
+
+  const container = document.getElementById('qrContainer');
+  container.innerHTML = '';
+
+  // Fix #4: read margin slider and apply as padding on the container
+  const margin = parseInt(document.getElementById('marginSlider').value) * 4;
+  container.style.padding = margin + 'px';
+
+  try {
+    const squareSize = qrSize;
+    qrInstance = new QRCode(container, {
+      text: data,
+      width: squareSize,
+      height: squareSize,
+      colorDark: fgColor,
+      colorLight: bgColor,
+      correctLevel: QRCode.CorrectLevel[ecLevel],
+    });
+
+    // After short delay (QRCode renders async), overlay logo if set
+    setTimeout(()=>{
+      if(logoDataUrl) overlayLogo();
+    }, 120);
+
+    document.getElementById('qrPlaceholder').style.display='none';
+    container.style.display='flex'; // Fix #12: consistent flex
+    document.getElementById('dlCard').style.display='block';
+    document.getElementById('metaType').textContent=qrType.toUpperCase();
+    document.getElementById('metaSize').textContent=qrSize+'×'+qrSize;
+    document.getElementById('metaLen').textContent=data.length+' chars';
+
+  } catch(e) {
+    console.warn('QR generation error:', e);
+  }
+}
+
+function overlayLogo(){
+  const canvas = document.querySelector('#qrContainer canvas');
+  if(!canvas || !logoDataUrl) return;
+  const ctx = canvas.getContext('2d');
+  const img = new Image();
+  img.onload = () => {
+    const pct = parseInt(document.getElementById('logoSize').value)/100;
+    const lw = canvas.width * pct, lh = lw;
+    const lx = (canvas.width-lw)/2, ly = (canvas.height-lh)/2;
+    const r = 8, bx = lx-4, by = ly-4, bw = lw+8, bh = lh+8;
+    // white backing — with roundRect fallback for older browsers
+    ctx.fillStyle = bgColor;
+    ctx.beginPath();
+    if(ctx.roundRect) {
+      ctx.roundRect(bx, by, bw, bh, r);
+    } else {
+      ctx.moveTo(bx+r, by);
+      ctx.lineTo(bx+bw-r, by); ctx.quadraticCurveTo(bx+bw, by, bx+bw, by+r);
+      ctx.lineTo(bx+bw, by+bh-r); ctx.quadraticCurveTo(bx+bw, by+bh, bx+bw-r, by+bh);
+      ctx.lineTo(bx+r, by+bh); ctx.quadraticCurveTo(bx, by+bh, bx, by+bh-r);
+      ctx.lineTo(bx, by+r); ctx.quadraticCurveTo(bx, by, bx+r, by);
+      ctx.closePath();
+    }
+    ctx.fill();
+    ctx.drawImage(img, lx, ly, lw, lh);
+  };
+  img.src = logoDataUrl;
+}
+
+/* ── CHAR COUNT ── */
+function updateCharCount(){
+  const el = document.getElementById('charCount');
+  const inp = document.getElementById('f_text');
+  if(!el||!inp) return;
+  const len = inp.value.length;
+  el.textContent = len+' characters';
+  el.className = 'char-count'+(len>2953?' over':len>2000?' warn':'');
+}
+
+/* ── STYLE CONTROLS ── */
+function setSize(s, el){
+  qrSize=s;
+  document.querySelectorAll('.size-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  generate();
+}
+function setEC(l, el){
+  ecLevel=l;
+  document.querySelectorAll('.ec-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  generate();
+}
+function pickColor(which, el){
+  const group = which==='fg' ? '.color-row:nth-of-type(1)' : '.color-row:nth-of-type(2)';
+  el.closest('.color-row').querySelectorAll('.swatch').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+  if(which==='fg'){ fgColor=el.dataset.color; document.getElementById('fgColorPicker').value=fgColor; }
+  else { bgColor=el.dataset.color; document.getElementById('bgColorPicker').value=bgColor; }
+  generate();
+}
+function setCustomColor(which, val){
+  if(which==='fg'){ fgColor=val; document.querySelectorAll('.card-body .color-row:first-of-type .swatch').forEach(s=>s.classList.remove('active')); }
+  else { bgColor=val; document.querySelectorAll('.card-body .color-row:last-of-type .swatch').forEach(s=>s.classList.remove('active')); }
+  generate();
+}
+
+/* ── LOGO ── */
+document.getElementById('logoInput').addEventListener('change', e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    logoDataUrl=ev.target.result;
+    document.getElementById('logoPreviewImg').src=logoDataUrl;
+    document.getElementById('logoPreviewName').textContent=f.name;
+    document.getElementById('logoPreview').classList.add('show');
+    document.getElementById('logoDrop').style.display='none';
+    document.getElementById('logoSizeRow').style.display='';
+    // auto-set EC to H
+    ecLevel='H';
+    document.querySelectorAll('.ec-tab').forEach((el,i)=>el.classList.toggle('active',i===3));
+    generate();
+  };
+  r.readAsDataURL(f);
+});
+function removeLogo(){
+  logoDataUrl=null;
+  document.getElementById('logoPreview').classList.remove('show');
+  document.getElementById('logoDrop').style.display='';
+  document.getElementById('logoSizeRow').style.display='none';
+  document.getElementById('logoInput').value='';
+  generate();
+}
+
+/* ── DOWNLOAD ── */
+function downloadQR(fmt){
+  if(!qrData) return;
+  if(fmt==='png'){
+    const canvas = document.querySelector('#qrContainer canvas');
+    if(!canvas) return;
+    const a=document.createElement('a');
+    a.href=canvas.toDataURL('image/png');
+    a.download='qrcode.png'; a.click();
+  } else if(fmt==='svg'){
+    // Accurate SVG export: detect module size by scanning the first row of dark pixels,
+    // then sample the centre of each module cell to classify dark vs light.
+    const canvas = document.querySelector('#qrContainer canvas');
+    if(!canvas) return;
+    const ctx=canvas.getContext('2d');
+    const w=canvas.width, h=canvas.height;
+    const imgData=ctx.getImageData(0,0,w,h);
+    const d=imgData.data;
+
+    // Helper: is pixel at (px,py) closer to fgColor than bgColor?
+    function isDark(px,py){
+      const i=(py*w+px)*4;
+      return d[i]<128; // simple luminance threshold
+    }
+
+    // Detect module size: scan row 0 from left; find first dark pixel, then measure run
+    let firstDark=-1, moduleSize=1;
+    for(let x=0;x<w;x++){
+      if(isDark(x,0)){ firstDark=x; break; }
+    }
+    if(firstDark>=0){
+      let run=0;
+      for(let x=firstDark;x<w&&isDark(x,0);x++) run++;
+      moduleSize=Math.max(1,run);
+    }
+    // Quiet zone offset: how many modules of light precede first dark pixel
+    const quietPx = firstDark>=0 ? firstDark : 0;
+
+    let svgRects='';
+    for(let py=quietPx;py<h-quietPx;py+=moduleSize){
+      for(let px=quietPx;px<w-quietPx;px+=moduleSize){
+        const sampleX=Math.min(px+Math.floor(moduleSize/2),w-1);
+        const sampleY=Math.min(py+Math.floor(moduleSize/2),h-1);
+        if(isDark(sampleX,sampleY)){
+          svgRects+=`<rect x="${px}" y="${py}" width="${moduleSize}" height="${moduleSize}" fill="${fgColor}"/>`;
+        }
+      }
+    }
+    const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${qrSize}" height="${qrSize}" viewBox="0 0 ${w} ${h}"><rect width="${w}" height="${h}" fill="${bgColor}"/>${svgRects}</svg>`;
+    const blob=new Blob([svg],{type:'image/svg+xml'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download='qrcode.svg'; a.click();
+    URL.revokeObjectURL(url);
+  }
+}
+
+/* ── COPY TO CLIPBOARD ── */
+async function copyToClipboard(){
+  const canvas=document.querySelector('#qrContainer canvas');
+  if(!canvas) return;
+  const lbl=document.getElementById('copyBtnLabel');
+  try {
+    canvas.toBlob(async blob=>{
+      await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);
+      const btn=document.getElementById('copyBtn');
+      btn.classList.add('copied'); lbl.textContent='Copied!';
+      setTimeout(()=>{ btn.classList.remove('copied'); lbl.textContent='Copy'; }, 2000);
+    });
+  } catch(e){
+    // fallback: copy data string
+    await navigator.clipboard.writeText(qrData);
+    const btn=document.getElementById('copyBtn');
+    btn.classList.add('copied'); lbl.textContent='Copied text!';
+    setTimeout(()=>{ btn.classList.remove('copied'); lbl.textContent='Copy'; }, 2000);
+  }
+}
+
+/* ── IMAGE PREVIEW ── */
+function updateImgPreview(){
+  const url = (document.getElementById('f_imgurl')||{}).value||'';
+  const wrap = document.getElementById('imgPreviewWrap');
+  const img  = document.getElementById('imgPreviewEl');
+  if(!wrap||!img) return;
+  if(!url){ wrap.style.display='none'; return; }
+  img.onload  = ()=>{ wrap.style.display='flex'; };
+  img.onerror = ()=>{ wrap.style.display='none'; };
+  img.src = url;
+}
+
+/* ── FAQ ── */
+function faq(el){ el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
+
+/* ── INIT ── */
+setType('url');
+</script>
 </body>
 </html>
