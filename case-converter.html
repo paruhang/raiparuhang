@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text Case Converter — UPPERCASE, lowercase, camelCase & More | Rai Paruhang</title>
+<meta name="description" content="Convert text to UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case and 8 more formats instantly. Free online case converter — no login required.">
+ <!-- Modern SVG Favicon (Infinite scaling for desktop & high-res screens) -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<!-- For Safari pinned tabs color blending -->
+<link rel="mask-icon" href="favicon.svg" color="#4f8eff">
+<link rel="canonical" href="https://raiparuhang.com.np/case-converter/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#06080f;--bg2:#0d1120;--bg3:#111827;
+  --surface:#161d2e;--surface2:#1e2840;
+  --border:rgba(99,140,255,.12);--border2:rgba(99,140,255,.22);
+  --accent:#4f8eff;--accent2:#7eb3ff;
+  --green:#22d3a0;--green-bg:rgba(34,211,160,.1);
+  --red:#ff5b5b;--red-bg:rgba(255,91,91,.1);
+  --amber:#f5a623;--amber-bg:rgba(245,166,35,.08);
+  --teal:#06b6d4;--teal-bg:rgba(6,182,212,.08);
+  --text:#e8edf8;--text2:#8b99bb;--text3:#556080;
+  --mono:'DM Mono',monospace;--sans:'Sora',sans-serif;
+  --radius:14px;--radius-lg:20px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;min-height:100vh}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 max(24px,5vw);height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:17px;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:-.3px;display:flex;align-items:center;gap:10px}
+.nav-logo .dot{width:8px;height:8px;background:var(--accent);border-radius:50%;box-shadow:0 0 8px var(--accent);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:14px;color:var(--text2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--accent);color:#fff!important;padding:8px 18px;border-radius:8px;font-weight:600!important;font-size:13px!important;transition:opacity .2s!important}
+.nav-cta:hover{opacity:.88}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{width:22px;height:2px;background:var(--text2);border-radius:2px;display:block}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(6,8,15,.97);border-bottom:1px solid var(--border);padding:24px max(24px,5vw);z-index:99;flex-direction:column;gap:20px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--text2);text-decoration:none;font-size:16px;padding:8px 0;border-bottom:1px solid var(--border);transition:color .2s}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu a:hover{color:var(--accent)}
+@media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}}
+
+/* PAGE HEADER */
+.page-header{padding:96px max(24px,5vw) 40px;max-width:1060px;margin:0 auto;text-align:center}
+.page-badge{display:inline-flex;align-items:center;gap:8px;background:var(--teal-bg);border:1px solid rgba(6,182,212,.25);border-radius:100px;padding:5px 14px;font-family:var(--mono);font-size:11px;color:var(--teal);margin-bottom:20px;letter-spacing:.5px}
+.page-badge::before{content:'';width:5px;height:5px;background:var(--teal);border-radius:50%;box-shadow:0 0 5px var(--teal)}
+.page-header h1{font-size:clamp(26px,5vw,50px);font-weight:700;letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px}
+.page-header h1 span{background:linear-gradient(135deg,var(--teal) 0%,var(--accent2) 55%,var(--green) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-header p{color:var(--text2);font-size:15px;max-width:560px;margin:0 auto;font-weight:300}
+
+/* WRAPPER */
+.tool-wrapper{max-width:1060px;margin:0 auto;padding:0 max(24px,5vw) 80px;display:flex;flex-direction:column;gap:20px}
+
+/* CASE SELECTOR GRID */
+.case-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+@media(max-width:900px){.case-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:560px){.case-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:380px){.case-grid{grid-template-columns:repeat(2,1fr)}}
+
+.case-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:12px 10px;cursor:pointer;transition:all .18s;text-align:left;display:flex;flex-direction:column;gap:5px;position:relative;overflow:hidden}
+.case-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.02),transparent);pointer-events:none}
+.case-card:hover{border-color:var(--border2);background:var(--surface2)}
+.case-card.active{border-color:var(--teal);background:var(--teal-bg);box-shadow:0 0 0 1px rgba(6,182,212,.2)}
+.case-card.active .cc-name{color:var(--teal)}
+.cc-name{font-size:11px;font-weight:700;font-family:var(--mono);color:var(--text3);letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .18s}
+.cc-preview{font-size:11px;font-family:var(--mono);color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4;margin-top:1px;min-height:16px}
+.case-card.active .cc-preview{color:var(--text)}
+.cc-desc{font-size:10px;color:var(--text3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.case-card.active .cc-desc{color:var(--teal);opacity:.8}
+
+/* IO GRID */
+.io-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch}
+@media(max-width:720px){.io-grid{grid-template-columns:1fr;gap:12px}}
+
+.io-pane{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);display:flex;flex-direction:column;overflow:hidden;min-height:280px}
+.io-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border);gap:8px;flex-wrap:wrap}
+.io-label{font-size:12px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;color:var(--text3);font-family:var(--mono);display:flex;align-items:center;gap:6px}
+.io-label svg{width:13px;height:13px}
+.io-actions{display:flex;gap:6px;flex-wrap:wrap}
+.btn-xs{display:inline-flex;align-items:center;gap:5px;background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:5px 10px;font-size:11px;font-family:var(--mono);color:var(--text3);cursor:pointer;transition:all .18s;white-space:nowrap}
+.btn-xs:hover{border-color:var(--border2);color:var(--text);background:var(--surface2)}
+.btn-xs.active-state{border-color:var(--green);color:var(--green);background:var(--green-bg)}
+.btn-xs svg{width:11px;height:11px}
+.io-textarea{flex:1;background:transparent;border:none;outline:none;resize:none;font-family:var(--mono);font-size:14px;color:var(--text);line-height:1.75;padding:16px;width:100%;-webkit-appearance:none}
+.io-textarea::placeholder{color:var(--text3)}
+.io-textarea:read-only{cursor:default;color:var(--text2)}
+.io-footer{padding:9px 16px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.stats-chips{display:flex;gap:8px;flex-wrap:wrap}
+.stat-chip{font-size:10px;font-family:var(--mono);color:var(--text3);display:flex;align-items:center;gap:3px}
+.stat-chip strong{color:var(--text2)}
+
+/* SWAP BUTTON (center column) */
+.swap-col{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 10px}
+@media(max-width:720px){.swap-col{display:none}}
+.btn-swap{width:36px;height:36px;background:var(--surface2);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;flex-shrink:0}
+.btn-swap:hover{border-color:var(--teal);background:var(--teal-bg)}
+.btn-swap svg{width:16px;height:16px;color:var(--text3)}
+.btn-swap:hover svg{color:var(--teal)}
+
+/* ACTIVE CASE BANNER */
+.active-banner{display:flex;align-items:center;gap:10px;padding:11px 16px;background:var(--teal-bg);border:1px solid rgba(6,182,212,.2);border-radius:12px;font-size:12px;font-family:var(--mono);color:var(--teal)}
+.active-banner svg{width:14px;height:14px;flex-shrink:0}
+.active-banner strong{color:var(--text)}
+
+/* REFERENCE TABLE */
+.ref-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.ref-header{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.ref-header svg{width:15px;height:15px;color:var(--accent)}
+.ref-header h3{font-size:13px;font-weight:600}
+.ref-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12px;font-family:var(--mono)}
+th{color:var(--text3);font-weight:500;padding:8px 14px;text-align:left;border-bottom:1px solid var(--border);letter-spacing:.4px;text-transform:uppercase;font-size:11px;white-space:nowrap}
+td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--surface2)}
+td strong{color:var(--text)}
+.tag{display:inline-flex;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:500}
+.tag-dev{background:rgba(79,142,255,.1);color:var(--accent)}
+.tag-write{background:var(--green-bg);color:var(--green)}
+.tag-fun{background:var(--amber-bg);color:var(--amber)}
+
+/* FAQ */
+.faq-section{padding:60px max(24px,5vw) 80px;max-width:720px;margin:0 auto}
+.faq-section h2{font-size:clamp(20px,3vw,28px);font-weight:700;letter-spacing:-.7px;margin-bottom:28px}
+.faq-item{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden}
+.faq-q{padding:16px 20px;font-size:15px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;user-select:none;transition:background .2s}
+.faq-q:hover{background:var(--surface)}
+.faq-q svg{width:16px;height:16px;color:var(--text3);flex-shrink:0;transition:transform .3s}
+.faq-q.open svg{transform:rotate(180deg)}
+.faq-a{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .35s,padding .35s;font-size:14px;color:var(--text2);line-height:1.75}
+.faq-a.open{max-height:400px;padding:0 20px 16px}
+code{font-family:var(--mono);font-size:12px;background:var(--surface2);padding:1px 6px;border-radius:4px;color:var(--teal)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.footer-left{font-size:12px;color:var(--text3);font-family:var(--mono)}
+.footer-left a{color:var(--text3);text-decoration:none;transition:color .2s}
+.footer-left a:hover{color:var(--text2)}
+.footer-right{display:flex;gap:16px}
+.footer-right a{color:var(--text3);font-size:12px;text-decoration:none;font-family:var(--mono);transition:color .2s}
+.footer-right a:hover{color:var(--text)}
+
+/* CHAR HIGHLIGHT for output */
+.io-textarea.changed{animation:textPop .18s ease}
+@keyframes textPop{0%{opacity:.5}100%{opacity:1}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://raiparuhang.com.np" class="nav-logo"><span class="dot"></span>Rai Paruhang</a>
+  <ul class="nav-links">
+    <li><a href="https://raiparuhang.com.np/#home">Home</a></li>
+    <li><a href="https://raiparuhang.com.np/#about">About</a></li>
+    <li><a href="https://raiparuhang.com.np/#contact">Contact</a></li>
+    <li><a href="https://raiparuhang.com.np/tools" class="nav-cta">All Tools</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="https://raiparuhang.com.np/#home" onclick="closeMobile()">Home</a>
+  <a href="https://raiparuhang.com.np/tools" class="active" onclick="closeMobile()">Tools</a>
+  <a href="https://raiparuhang.com.np/#about" onclick="closeMobile()">About</a>
+  <a href="https://raiparuhang.com.np/#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-badge">12 Case Formats</div>
+  <h1>Text <span>Case Converter</span></h1>
+  <p>Instantly convert text to UPPERCASE, lowercase, Title Case, camelCase, snake_case, and 7 more formats. Type or paste — it converts in real time.</p>
+</div>
+
+<div class="tool-wrapper">
+
+  <!-- ACTIVE CASE BANNER -->
+  <div class="active-banner" id="activeBanner">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    Active format: <strong id="activeName">UPPERCASE</strong> &nbsp;—&nbsp; <span id="activeDesc">All characters in upper case</span>
+  </div>
+
+  <!-- CASE SELECTOR GRID -->
+  <div class="case-grid" id="caseGrid"></div>
+
+  <!-- IO GRID -->
+  <div class="io-grid">
+
+    <!-- INPUT -->
+    <div class="io-pane">
+      <div class="io-header">
+        <div class="io-label">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          Input
+        </div>
+        <div class="io-actions">
+          <button class="btn-xs" onclick="pasteInput()" title="Paste from clipboard">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
+            Paste
+          </button>
+          <button class="btn-xs" onclick="clearInput()">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+            Clear
+          </button>
+        </div>
+      </div>
+      <textarea class="io-textarea" id="inputText" placeholder="Type or paste your text here…&#10;&#10;Works with any case format: UPPERCASE, lowercase, camelCase, snake_case, Title Case — all will be detected and converted correctly." oninput="onInput()"></textarea>
+      <div class="io-footer">
+        <div class="stats-chips">
+          <div class="stat-chip"><strong id="inChars">0</strong>&nbsp;chars</div>
+          <div class="stat-chip"><strong id="inWords">0</strong>&nbsp;words</div>
+          <div class="stat-chip"><strong id="inLines">0</strong>&nbsp;lines</div>
+          <div class="stat-chip"><strong id="inSentences">0</strong>&nbsp;sentences</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SWAP COLUMN -->
+    <div class="swap-col">
+      <button class="btn-swap" onclick="swapText()" title="Swap input ↔ output">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+      </button>
+    </div>
+
+    <!-- OUTPUT -->
+    <div class="io-pane">
+      <div class="io-header">
+        <div class="io-label">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          Output — <span id="outputLabel" style="color:var(--teal)">UPPERCASE</span>
+        </div>
+        <div class="io-actions">
+          <button class="btn-xs" id="copyBtn" onclick="copyOutput()">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+          <button class="btn-xs" onclick="downloadOutput()">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            .txt
+          </button>
+          <button class="btn-xs" onclick="useAsInput()">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.54"/></svg>
+            Use as input
+          </button>
+        </div>
+      </div>
+      <textarea class="io-textarea" id="outputText" readonly placeholder="Converted text appears here…"></textarea>
+      <div class="io-footer">
+        <div class="stats-chips">
+          <div class="stat-chip"><strong id="outChars">0</strong>&nbsp;chars</div>
+          <div class="stat-chip"><strong id="outWords">0</strong>&nbsp;words</div>
+          <div class="stat-chip"><strong id="outLines">0</strong>&nbsp;lines</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- REFERENCE TABLE -->
+  <div class="ref-section">
+    <div class="ref-header">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <h3>Format Reference</h3>
+    </div>
+    <div class="ref-wrap">
+      <table>
+        <thead>
+          <tr><th>Format</th><th>Example</th><th>Used In</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>UPPERCASE</strong></td><td>HELLO WORLD</td><td><span class="tag tag-write">Writing</span></td><td>Headings, acronyms, emphasis</td></tr>
+          <tr><td><strong>lowercase</strong></td><td>hello world</td><td><span class="tag tag-write">Writing</span></td><td>Casual text, hashtags, filenames</td></tr>
+          <tr><td><strong>Title Case</strong></td><td>Hello World</td><td><span class="tag tag-write">Writing</span></td><td>Article titles, headings, book names</td></tr>
+          <tr><td><strong>Sentence case</strong></td><td>Hello world</td><td><span class="tag tag-write">Writing</span></td><td>Normal sentences, captions, labels</td></tr>
+          <tr><td><strong>camelCase</strong></td><td>helloWorld</td><td><span class="tag tag-dev">Developer</span></td><td>JavaScript variables, JSON keys, React props</td></tr>
+          <tr><td><strong>PascalCase</strong></td><td>HelloWorld</td><td><span class="tag tag-dev">Developer</span></td><td>Class names, React components, TypeScript types</td></tr>
+          <tr><td><strong>snake_case</strong></td><td>hello_world</td><td><span class="tag tag-dev">Developer</span></td><td>Python variables, SQL columns, file names</td></tr>
+          <tr><td><strong>kebab-case</strong></td><td>hello-world</td><td><span class="tag tag-dev">Developer</span></td><td>CSS classes, HTML attributes, URL slugs</td></tr>
+          <tr><td><strong>CONSTANT_CASE</strong></td><td>HELLO_WORLD</td><td><span class="tag tag-dev">Developer</span></td><td>Constants, environment variables, macros</td></tr>
+          <tr><td><strong>dot.case</strong></td><td>hello.world</td><td><span class="tag tag-dev">Developer</span></td><td>Config keys, i18n/l10n identifiers</td></tr>
+          <tr><td><strong>aLtErNaTiNg</strong></td><td>hElLo wOrLd</td><td><span class="tag tag-fun">Fun</span></td><td>Sarcastic mocking text (SpongeBob meme)</td></tr>
+          <tr><td><strong>iNVERSE</strong></td><td>HEllo WOrld</td><td><span class="tag tag-fun">Fun</span></td><td>Flips every character's case</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">What's the difference between Title Case and Sentence case?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">Title Case capitalises the first letter of every word — <code>The Quick Brown Fox</code>. Sentence case only capitalises the first letter of the entire string (or each sentence) — <code>The quick brown fox</code>. Use Title Case for article headlines and book titles; Sentence case for labels, captions, and UI text.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">Can I convert camelCase or snake_case back to normal text?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">Yes — the converter intelligently detects word boundaries in any format before converting. Paste <code>getUserProfileData</code> and convert it to Title Case to get <code>Get User Profile Data</code>. It handles camelCase, PascalCase, snake_case, kebab-case, and CONSTANT_CASE as input.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">What's camelCase and when do I use it?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">camelCase joins words without spaces, capitalising the first letter of each word except the first — <code>myVariableName</code>. It's the standard for variable and function names in JavaScript, Java, and many other languages. PascalCase is the same but with the first letter also capitalised — used for class names and React components.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">Does this work with multiple lines and paragraphs?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">Yes. All formats except developer cases (camelCase, snake_case, etc.) preserve your line breaks and paragraph structure. Developer formats work best on single identifiers, but will process multiple words correctly. You can paste an entire document and convert it.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">What is "Use as input" for?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">It moves the converted output back into the input field so you can chain conversions. For example: paste some text → convert to Title Case → click "Use as input" → convert to kebab-case. Useful for multi-step transformations.</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">© 2026 Rai Paruhang · <a href="https://raiparuhang.com.np/terms.html">Privacy &amp; Terms</a></div>
+  <div class="footer-right">
+    <a href="https://raiparuhang.com.np/#tools">All Tools</a>
+    <a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter</a>
+  </div>
+</footer>
+
+<script>
+/* ── NAV ── */
+document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('open'));
+function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+/* ── WORD EXTRACTOR (normalises any case format to word array) ── */
+function toWords(text) {
+  return text
+    .replace(/([a-z])([A-Z])/g, '$1 $2')          // camel → words
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')    // UPPER → words
+    .replace(/[-_./]+/g, ' ')                       // separators → space
+    .split(/\s+/)
+    .map(w => w.toLowerCase())
+    .filter(Boolean);
+}
+
+/* ── CONVERTERS ── */
+const converters = {
+  upper:       t => t.toUpperCase(),
+  lower:       t => t.toLowerCase(),
+  title:       t => t.replace(/(\b\w)/g, c => c.toUpperCase()).replace(/(\B\w)/g, c => c.toLowerCase()),
+  sentence:    t => t.toLowerCase().replace(/(^\s*[a-z])/gm, c => c.toUpperCase()),
+  camel:       t => { const w = toWords(t); return w.map((w, i) => i === 0 ? w : w.charAt(0).toUpperCase() + w.slice(1)).join(''); },
+  pascal:      t => toWords(t).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(''),
+  snake:       t => toWords(t).join('_'),
+  kebab:       t => toWords(t).join('-'),
+  constant:    t => toWords(t).join('_').toUpperCase(),
+  dot:         t => toWords(t).join('.'),
+  alternating: t => [...t].map((c, i) => i % 2 === 0 ? c.toLowerCase() : c.toUpperCase()).join(''),
+  inverse:     t => [...t].map(c => c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()).join(''),
+};
+
+/* ── CASE DEFINITIONS ── */
+const CASES = [
+  { id: 'upper',       name: 'UPPERCASE',     desc: 'All characters capitalised',          sample: 'HELLO WORLD'  },
+  { id: 'lower',       name: 'lowercase',     desc: 'All characters in lower case',        sample: 'hello world'  },
+  { id: 'title',       name: 'Title Case',    desc: 'First letter of every word capped',   sample: 'Hello World'  },
+  { id: 'sentence',    name: 'Sentence case', desc: 'First letter of sentence only',       sample: 'Hello world'  },
+  { id: 'camel',       name: 'camelCase',     desc: 'JS variables, JSON keys',             sample: 'helloWorld'   },
+  { id: 'pascal',      name: 'PascalCase',    desc: 'Classes, React components',           sample: 'HelloWorld'   },
+  { id: 'snake',       name: 'snake_case',    desc: 'Python, SQL, file names',             sample: 'hello_world'  },
+  { id: 'kebab',       name: 'kebab-case',    desc: 'CSS classes, URL slugs',              sample: 'hello-world'  },
+  { id: 'constant',    name: 'CONSTANT_CASE', desc: 'Constants, env variables',            sample: 'HELLO_WORLD'  },
+  { id: 'dot',         name: 'dot.case',      desc: 'Config keys, i18n identifiers',       sample: 'hello.world'  },
+  { id: 'alternating', name: 'aLtErNaTiNg',  desc: 'Sarcastic mocking text',              sample: 'hElLo wOrLd'  },
+  { id: 'inverse',     name: 'iNVERSE',       desc: 'Flips every character\'s case',       sample: 'hELLO wORLD'  },
+];
+
+let activeCase = 'upper';
+
+/* ── BUILD GRID ── */
+function buildGrid() {
+  const grid = document.getElementById('caseGrid');
+  CASES.forEach(c => {
+    const card = document.createElement('button');
+    card.className = 'case-card' + (c.id === activeCase ? ' active' : '');
+    card.id = 'card-' + c.id;
+    card.onclick = () => selectCase(c.id);
+    card.innerHTML = `
+      <div class="cc-name">${c.name}</div>
+      <div class="cc-preview" id="preview-${c.id}">${c.sample}</div>
+      <div class="cc-desc">${c.desc}</div>`;
+    grid.appendChild(card);
+  });
+}
+
+/* ── SELECT CASE ── */
+function selectCase(id) {
+  activeCase = id;
+  document.querySelectorAll('.case-card').forEach(el => el.classList.remove('active'));
+  document.getElementById('card-' + id).classList.add('active');
+  const def = CASES.find(c => c.id === id);
+  document.getElementById('activeName').textContent = def.name;
+  document.getElementById('activeDesc').textContent = def.desc;
+  document.getElementById('outputLabel').textContent = def.name;
+  convert();
+}
+
+/* ── LIVE PREVIEW IN CARDS ── */
+function updatePreviews(input) {
+  const src = input.trim() || 'Hello World';
+  // Trim preview to ~18 chars
+  CASES.forEach(c => {
+    const raw = converters[c.id](src);
+    const preview = raw.length > 20 ? raw.slice(0, 18) + '…' : raw;
+    const el = document.getElementById('preview-' + c.id);
+    if (el) el.textContent = preview;
+  });
+}
+
+/* ── STATS ── */
+function countText(text) {
+  const chars = text.length;
+  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+  const lines = text ? text.split('\n').length : 0;
+  const sentences = text.trim() ? (text.match(/[^.!?]*[.!?]+/g) || [text]).length : 0;
+  return { chars, words, lines, sentences };
+}
+
+/* ── MAIN CONVERT ── */
+function convert() {
+  const input = document.getElementById('inputText').value;
+  const output = input ? converters[activeCase](input) : '';
+  const out = document.getElementById('outputText');
+  out.value = output;
+  out.classList.remove('changed');
+  void out.offsetWidth; // reflow for animation
+  out.classList.add('changed');
+
+  const inStats = countText(input);
+  document.getElementById('inChars').textContent = inStats.chars.toLocaleString();
+  document.getElementById('inWords').textContent = inStats.words.toLocaleString();
+  document.getElementById('inLines').textContent = inStats.lines.toLocaleString();
+  document.getElementById('inSentences').textContent = inStats.sentences.toLocaleString();
+
+  const outStats = countText(output);
+  document.getElementById('outChars').textContent = outStats.chars.toLocaleString();
+  document.getElementById('outWords').textContent = outStats.words.toLocaleString();
+  document.getElementById('outLines').textContent = outStats.lines.toLocaleString();
+
+  updatePreviews(input);
+}
+
+function onInput() { convert(); }
+
+/* ── ACTIONS ── */
+async function pasteInput() {
+  try {
+    const text = await navigator.clipboard.readText();
+    document.getElementById('inputText').value = text;
+    convert();
+  } catch (_) { document.getElementById('inputText').focus(); }
+}
+
+function clearInput() {
+  document.getElementById('inputText').value = '';
+  document.getElementById('outputText').value = '';
+  ['inChars','inWords','inLines','inSentences','outChars','outWords','outLines'].forEach(id => {
+    document.getElementById(id).textContent = '0';
+  });
+  updatePreviews('');
+}
+
+function copyOutput() {
+  const text = document.getElementById('outputText').value;
+  if (!text) return;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.classList.add('active-state');
+    btn.innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" width="11" height="11"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+    setTimeout(() => {
+      btn.classList.remove('active-state');
+      btn.innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="11" height="11"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
+    }, 2000);
+  });
+}
+
+function downloadOutput() {
+  const text = document.getElementById('outputText').value;
+  if (!text) return;
+  const def = CASES.find(c => c.id === activeCase);
+  const blob = new Blob([text], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `text-${def.id}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function useAsInput() {
+  const out = document.getElementById('outputText').value;
+  if (!out) return;
+  document.getElementById('inputText').value = out;
+  convert();
+}
+
+function swapText() {
+  const inp = document.getElementById('inputText');
+  const out = document.getElementById('outputText');
+  if (!out.value) return;
+  inp.value = out.value;
+  convert();
+}
+
+/* ── FAQ ── */
+function faq(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
+
+/* ── INIT ── */
+buildGrid();
+// Seed with demo text
+document.getElementById('inputText').value = 'The quick brown fox jumps over the lazy dog';
+convert();
+</script>
+</body>
+</html>
