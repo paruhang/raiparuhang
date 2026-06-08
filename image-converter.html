@@ -19,6 +19,38 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap">
 </noscript>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Image Format Converter",
+  "url": "https://raiparuhang.com.np/image-converter",
+  "description": "Seamlessly convert images between JPG, PNG, and WebP formats with no quality loss. Runs entirely in your browser — no uploads, completely private and free.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "browserRequirements": "Requires a modern web browser with JavaScript enabled",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Convert JPG to PNG",
+    "Convert PNG to WebP",
+    "Convert WebP to JPG",
+    "No quality loss",
+    "No file upload required",
+    "100% client-side processing",
+    "Free forever"
+  ],
+  "author": {
+    "@type": "Person",
+    "name": "Paruhang Rai"
+  }
+}
+</script>
+
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -59,7 +91,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.85);
 
 /* ── PAGE HEADER ── */
 .page-header{padding:96px max(24px,5vw) 40px;max-width:980px;margin:0 auto;text-align:center}
-.page-badge{display:inline-flex;align-items:center;gap:8px;background:var(--green-bg);border:1px solid rgba(34,211,160,.25);border-radius:100px;padding:5px 14px;font-family:var(--mono);font-size:11px;color:var(--green);margin-bottom:20px;letter-spacing:.5px}
+.page-badge{display:inline-flex;align-items:center;gap:8px;background:var(--green-bg);border:1px solid #ff6b4a;border-radius:100px;padding:5px 14px;font-family:var(--mono);font-size:11px;color:var(--green);margin-bottom:20px;letter-spacing:.5px}
 .page-badge::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%;box-shadow:0 0 5px var(--green)}
 .page-header h1{font-size:clamp(26px,5vw,50px);font-weight:700;letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px}
 .page-header h1 span{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 60%,var(--green) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}

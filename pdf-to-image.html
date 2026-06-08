@@ -20,6 +20,36 @@
 </noscript>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "PDF to Image Converter",
+  "url": "https://raiparuhang.com.np/pdf-to-image",
+  "description": "Extract high-resolution images from PDF documents in seconds. Runs entirely in your browser — no uploads, no server processing, completely private and free.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "browserRequirements": "Requires a modern web browser with JavaScript enabled",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Extract images from PDF",
+    "High-resolution output",
+    "No file upload required",
+    "100% client-side processing",
+    "Free forever"
+  ],
+  "author": {
+    "@type": "Person",
+    "name": "Paruhang Rai"
+  }
+}
+</script>
+
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -242,28 +272,6 @@ footer { border-top: 1px solid var(--border); padding: 28px max(24px,5vw); displ
 }
 </style>
 
-<!-- schema markup -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [{
-    "@type": "Question",
-    "name": "Is my PDF uploaded to a server?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Never. The conversion runs entirely locally in your browser using PDF.js. Your file never leaves your device — no upload, no server, and no data retained."
-    }
-  }, {
-    "@type": "Question",
-    "name": "Which image formats can I export to?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "You can export your PDF pages to high-quality JPG, lossless PNG, or modern WebP formats depending on your optimization needs."
-    }
-  }]
-}
-</script>
 </head>
 <body>
 
