@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Base64 Encoder & Decoder — Free Online Tool | Rai Paruhang</title>
+<meta name="description" content="Encode and decode Base64 online instantly. Supports text, files, and image data URIs. URL-safe mode, MIME line-wrap, live validation and size stats. Free, client-side, no uploads.">
+<link rel="alternate" hreflang="en" href="https://raiparuhang.com.np/base-64-encoder">
+<link rel="alternate" hreflang="x-default" href="https://raiparuhang.com.np/base-64-encoder">
+ <!-- Modern SVG Favicon (Infinite scaling for desktop & high-res screens) -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<!-- For Safari pinned tabs color blending -->
+<link rel="mask-icon" href="favicon.svg" color="#4f8eff">
+<link rel="canonical" href="https://raiparuhang.com.np/base-64-encoder"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#06080f;--bg3:#111827;--surface:#161d2e;--surface2:#1e2840;
+  --border:rgba(99,140,255,.12);--border2:rgba(99,140,255,.22);
+  --accent:#4f8eff;
+  --sky:#0ea5e9;--sky2:#38bdf8;--sky-bg:rgba(14,165,233,.08);--sky-bd:rgba(14,165,233,.25);
+  --green:#22d3a0;--green-bg:rgba(34,211,160,.1);--green-bd:rgba(34,211,160,.25);
+  --red:#f87171;--red-bg:rgba(248,113,113,.1);--red-bd:rgba(248,113,113,.25);
+  --amber:#f59e0b;--amber-bg:rgba(245,158,11,.08);
+  --text:#e8edf8;--text2:#8b99bb;--text3:#556080;
+  --mono:'DM Mono',monospace;--sans:'Sora',sans-serif;
+  --radius:14px;--radius-lg:20px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;min-height:100vh}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 max(24px,5vw);height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:17px;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:-.3px;display:flex;align-items:center;gap:10px}
+.nav-logo .dot{width:8px;height:8px;background:var(--accent);border-radius:50%;box-shadow:0 0 8px var(--accent);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:14px;color:var(--text2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--accent);color:#fff!important;padding:8px 18px;border-radius:8px;font-weight:600!important;font-size:13px!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{width:22px;height:2px;background:var(--text2);border-radius:2px;display:block}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(6,8,15,.97);border-bottom:1px solid var(--border);padding:24px max(24px,5vw);z-index:99;flex-direction:column;gap:20px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--text2);text-decoration:none;font-size:16px;padding:8px 0;border-bottom:1px solid var(--border)}
+.mobile-menu a:last-child{border-bottom:none}
+@media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}}
+
+/* HEADER */
+.page-header{padding:96px max(24px,5vw) 40px;max-width:1020px;margin:0 auto;text-align:center}
+.page-badge{display:inline-flex;align-items:center;gap:8px;background:var(--sky-bg);border:1px solid var(--sky-bd);border-radius:100px;padding:5px 14px;font-family:var(--mono);font-size:11px;color:var(--sky2);margin-bottom:20px;letter-spacing:.5px}
+.page-badge::before{content:'';width:5px;height:5px;background:var(--sky);border-radius:50%;box-shadow:0 0 6px var(--sky)}
+.page-header h1{font-size:clamp(26px,5vw,50px);font-weight:700;letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px}
+.page-header h1 span{background:linear-gradient(135deg,var(--sky) 0%,var(--sky2) 50%,#bae6fd 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-header p{color:var(--text2);font-size:15px;max-width:540px;margin:0 auto;font-weight:300}
+
+/* WRAPPER */
+.tool-wrapper{max-width:1020px;margin:0 auto;padding:0 max(24px,5vw) 80px;display:flex;flex-direction:column;gap:16px}
+
+/* SECURITY STRIP */
+.sec-strip{display:flex;align-items:center;gap:8px;justify-content:center;padding:12px;background:var(--green-bg);border:1px solid var(--green-bd);border-radius:12px;font-size:12px;font-family:var(--mono);color:var(--green);letter-spacing:.3px;flex-wrap:wrap;text-align:center}
+.sec-strip svg{width:14px;height:14px;flex-shrink:0}
+
+/* DIRECTION + MODE CONTROLS */
+.controls-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.dir-tabs{display:flex;gap:5px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:5px}
+.dir-tab{display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;border:none;background:transparent;color:var(--text2);font-size:13px;font-weight:500;font-family:var(--sans);cursor:pointer;transition:all .2s;white-space:nowrap}
+.dir-tab svg{width:14px;height:14px;flex-shrink:0}
+.dir-tab.active{background:var(--sky-bg);color:var(--sky2);border:1px solid var(--sky-bd)}
+.dir-tab:not(.active):hover{background:var(--surface2);color:var(--text)}
+.mode-tabs{display:flex;gap:5px}
+.mode-tab{padding:7px 14px;border-radius:9px;border:1px solid var(--border);background:var(--surface);color:var(--text3);font-size:12px;font-family:var(--mono);cursor:pointer;transition:all .2s;white-space:nowrap}
+.mode-tab.active{background:var(--sky-bg);border-color:var(--sky-bd);color:var(--sky2);font-weight:500}
+.mode-tab:not(.active):hover{border-color:var(--border2);color:var(--text2)}
+
+/* AUTO DETECT BADGE */
+.auto-badge{display:none;align-items:center;gap:8px;padding:10px 16px;background:var(--sky-bg);border:1px solid var(--sky-bd);border-radius:10px;font-size:12px;font-family:var(--mono);color:var(--sky2)}
+.auto-badge.show{display:flex}
+.auto-badge svg{width:13px;height:13px;flex-shrink:0}
+.auto-badge.decoding{background:var(--green-bg);border-color:var(--green-bd);color:var(--green)}
+
+/* IO GRID */
+.io-grid{display:grid;grid-template-columns:1fr 48px 1fr;gap:0;align-items:stretch}
+@media(max-width:720px){.io-grid{grid-template-columns:1fr;gap:12px}}
+
+.io-pane{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);display:flex;flex-direction:column;min-height:280px}
+.io-header{display:flex;align-items:center;gap:8px;padding:11px 16px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:6px}
+.io-label{font-size:11px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:.4px;font-weight:600;display:flex;align-items:center;gap:5px}
+.io-label svg{width:12px;height:12px}
+.io-label.sky{color:var(--sky2)}
+.io-label.sky svg{color:var(--sky)}
+.io-btns{display:flex;gap:5px;margin-left:auto;flex-wrap:wrap}
+.btn-xs{display:inline-flex;align-items:center;gap:4px;background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:5px 10px;font-size:11px;font-family:var(--mono);color:var(--text3);cursor:pointer;transition:all .15s;white-space:nowrap}
+.btn-xs:hover{border-color:var(--border2);color:var(--text2);background:var(--surface2)}
+.btn-xs.ok{border-color:var(--green-bd);color:var(--green);background:var(--green-bg)}
+.btn-xs svg{width:10px;height:10px}
+.io-textarea{flex:1;background:transparent;border:none;outline:none;resize:none;font-family:var(--mono);font-size:13px;color:var(--text);line-height:1.75;padding:16px;width:100%;-webkit-appearance:none}
+.io-textarea::placeholder{color:var(--text3)}
+.io-textarea.readonly{color:var(--text2);cursor:default}
+.io-footer{padding:9px 16px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}
+.io-stat{font-size:10px;font-family:var(--mono);color:var(--text3)}
+.io-stat strong{color:var(--text2)}
+
+/* SWAP COL */
+.swap-col{display:flex;align-items:center;justify-content:center}
+@media(max-width:720px){.swap-col{display:none}}
+.btn-swap{width:36px;height:36px;background:var(--surface2);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s}
+.btn-swap:hover{border-color:var(--sky-bd);background:var(--sky-bg)}
+.btn-swap svg{width:16px;height:16px;color:var(--text3)}
+.btn-swap:hover svg{color:var(--sky2)}
+
+/* STATS STRIP */
+.stats-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:600px){.stats-strip{grid-template-columns:1fr 1fr}}
+.stat-cell{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;display:flex;flex-direction:column;gap:3px}
+.sc-lbl{font-size:10px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:.4px}
+.sc-val{font-size:16px;font-family:var(--mono);font-weight:500;color:var(--text)}
+.sc-sub{font-size:10px;font-family:var(--mono);color:var(--text3)}
+.sc-val.sky{color:var(--sky2)}
+.sc-val.ok{color:var(--green)}
+.sc-val.err{color:var(--red)}
+
+/* SIZE COMPARISON BAR */
+.size-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.size-hdr{padding:11px 16px;border-bottom:1px solid var(--border);font-size:11px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:.4px;display:flex;align-items:center;gap:6px}
+.size-hdr svg{width:12px;height:12px;color:var(--sky2)}
+.size-body{padding:16px;display:flex;flex-direction:column;gap:10px}
+.size-row{display:flex;flex-direction:column;gap:5px}
+.size-row-label{display:flex;justify-content:space-between;font-size:11px;font-family:var(--mono);color:var(--text3)}
+.size-row-label strong{color:var(--text2)}
+.size-bar-wrap{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden}
+.size-bar{height:100%;border-radius:4px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.overhead-row{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-family:var(--mono);font-size:12px}
+.overhead-lbl{color:var(--text3)}
+.overhead-val{font-weight:500;color:var(--sky2)}
+.overhead-val.shrink{color:var(--green)}
+
+/* OPTIONS CARD */
+.opts-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.opts-hdr{padding:11px 16px;border-bottom:1px solid var(--border);font-size:11px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:.4px;display:flex;align-items:center;gap:6px}
+.opts-hdr svg{width:12px;height:12px;color:var(--sky2)}
+.opts-body{padding:14px 16px;display:flex;flex-direction:column;gap:0}
+.opt-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)}
+.opt-row:last-child{border-bottom:none}
+.opt-info .opt-name{font-size:13px;font-weight:500}
+.opt-info .opt-desc{font-size:11px;color:var(--text3);font-family:var(--mono);margin-top:1px}
+.toggle{width:38px;height:21px;background:var(--bg3);border-radius:100px;border:1px solid var(--border);cursor:pointer;position:relative;transition:all .2s;flex-shrink:0}
+.toggle.on{background:var(--sky);border-color:var(--sky)}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:13px;height:13px;background:var(--text3);border-radius:50%;transition:all .2s}
+.toggle.on::after{left:20px;background:#fff}
+
+/* FILE MODE */
+.file-drop{border:2px dashed var(--border);border-radius:var(--radius-lg);padding:40px 24px;display:flex;flex-direction:column;align-items:center;gap:12px;cursor:pointer;transition:all .25s;background:var(--surface);text-align:center}
+.file-drop:hover,.file-drop.dragging{border-color:var(--sky);background:var(--sky-bg)}
+.file-drop-icon{width:48px;height:48px;background:var(--sky-bg);border:1px solid var(--sky-bd);border-radius:14px;display:flex;align-items:center;justify-content:center}
+.file-drop-icon svg{width:22px;height:22px;color:var(--sky2)}
+.file-drop h3{font-size:16px;font-weight:600}
+.file-drop p{font-size:13px;color:var(--text3);font-family:var(--mono)}
+.btn-file{background:var(--sky);color:#fff;border:none;border-radius:9px;padding:9px 20px;font-size:13px;font-weight:600;font-family:var(--sans);cursor:pointer;transition:all .2s}
+.btn-file:hover{opacity:.88}
+.file-result{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;display:none}
+.file-result.show{display:block}
+.file-info-bar{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border)}
+.file-icon{width:36px;height:36px;background:var(--sky-bg);border:1px solid var(--sky-bd);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.file-icon svg{width:16px;height:16px;color:var(--sky2)}
+.file-meta{flex:1;min-width:0}
+.file-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.file-details{font-size:11px;font-family:var(--mono);color:var(--text3);margin-top:1px}
+.file-b64-area{font-family:var(--mono);font-size:12px;color:var(--text2);padding:14px 16px;background:var(--bg3);height:180px;overflow-y:auto;word-break:break-all;line-height:1.7}
+.file-b64-area::-webkit-scrollbar{width:4px}
+.file-b64-area::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:2px}
+.file-actions{display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--border)}
+.btn-dl{display:inline-flex;align-items:center;gap:6px;background:var(--sky);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:600;font-family:var(--sans);cursor:pointer;transition:all .2s}
+.btn-dl:hover{opacity:.88}
+.btn-dl svg{width:12px;height:12px}
+
+/* IMAGE PREVIEW */
+.img-preview-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;display:none}
+.img-preview-card.show{display:block}
+.img-preview-hdr{padding:11px 16px;border-bottom:1px solid var(--border);font-size:11px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:.4px;display:flex;align-items:center;gap:6px}
+.img-preview-hdr svg{width:12px;height:12px;color:var(--sky2)}
+.img-preview-body{padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.img-preview-body img{max-width:100%;max-height:280px;border-radius:8px;border:1px solid var(--border)}
+.img-meta{font-size:11px;font-family:var(--mono);color:var(--text3)}
+
+/* VALIDATION */
+.valid-indicator{display:flex;align-items:center;gap:6px;font-size:11px;font-family:var(--mono);padding:3px 0}
+.valid-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* REF TABLE */
+.ref-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.ref-hdr{display:flex;align-items:center;gap:8px;padding:14px 20px;border-bottom:1px solid var(--border)}
+.ref-hdr svg{width:15px;height:15px;color:var(--accent)}
+.ref-hdr h3{font-size:13px;font-weight:600}
+.ref-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12px;font-family:var(--mono)}
+th{color:var(--text3);font-weight:500;padding:8px 16px;text-align:left;border-bottom:1px solid var(--border);letter-spacing:.4px;text-transform:uppercase;font-size:11px;white-space:nowrap}
+td{padding:10px 16px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:middle;word-break:break-all}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--surface2)}
+td strong{color:var(--text)}
+.tag{display:inline-flex;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:500;white-space:nowrap}
+.t-d{background:var(--sky-bg);color:var(--sky2)}
+.t-c{background:rgba(34,211,160,.1);color:var(--green)}
+
+/* FAQ */
+.faq-section{padding:60px max(24px,5vw) 80px;max-width:720px;margin:0 auto}
+.faq-section h2{font-size:clamp(20px,3vw,28px);font-weight:700;letter-spacing:-.7px;margin-bottom:28px}
+.faq-item{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden}
+.faq-q{padding:16px 20px;font-size:15px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;user-select:none;transition:background .2s}
+.faq-q:hover{background:var(--surface)}
+.faq-q svg{width:16px;height:16px;color:var(--text3);flex-shrink:0;transition:transform .3s}
+.faq-q.open svg{transform:rotate(180deg)}
+.faq-a{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .35s,padding .35s;font-size:14px;color:var(--text2);line-height:1.75}
+.faq-a.open{max-height:500px;padding:0 20px 16px}
+code{font-family:var(--mono);font-size:12px;background:var(--surface2);padding:1px 6px;border-radius:4px;color:var(--sky2)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.footer-left{font-size:12px;color:var(--text3);font-family:var(--mono)}
+.footer-left a{color:var(--text3);text-decoration:none}
+.footer-right{display:flex;gap:16px}
+.footer-right a{color:var(--text3);font-size:12px;text-decoration:none;font-family:var(--mono)}
+
+#fileInput{display:none}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://raiparuhang.com.np" class="nav-logo"><span class="dot"></span>Rai Paruhang</a>
+  <ul class="nav-links">
+    <li><a href="https://raiparuhang.com.np/#tools">Tools</a></li>
+    <li><a href="https://youtube.com/@SimplePrompts" target="_blank" rel="noopener">YouTube</a></li>
+    <li><a href="https://raiparuhang.com.np/contact.html">Contact</a></li>
+    <li><a href="https://raiparuhang.com.np/#tools" class="nav-cta">All Tools</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="https://raiparuhang.com.np/#tools" onclick="closeMobile()">Tools</a>
+  <a href="https://youtube.com/@SimplePrompts" target="_blank" rel="noopener" onclick="closeMobile()">YouTube</a>
+  <a href="https://raiparuhang.com.np/contact.html" onclick="closeMobile()">Contact</a>
+</div>
+
+<div class="page-header">
+  <div class="page-badge">Encode · Decode · Files · Images</div>
+  <h1>Base64 <span>Encoder & Decoder</span></h1>
+  <p>Convert text, files, and images to and from Base64 instantly. URL-safe mode, MIME line wrapping, live byte stats. Runs entirely in your browser.</p>
+</div>
+
+<div class="tool-wrapper">
+
+  <!-- SECURITY STRIP -->
+  <div class="sec-strip">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    100% client-side &nbsp;·&nbsp; Files never leave your device &nbsp;·&nbsp; No server, no storage, no tracking
+  </div>
+
+  <!-- CONTROLS ROW -->
+  <div class="controls-row">
+    <div class="dir-tabs">
+      <button class="dir-tab active" id="dirEncode" onclick="setDir('encode')">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="17 11 12 6 7 11"/><line x1="12" y1="18" x2="12" y2="6"/></svg>
+        Encode
+      </button>
+      <button class="dir-tab" id="dirDecode" onclick="setDir('decode')">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="7 13 12 18 17 13"/><line x1="12" y1="6" x2="12" y2="18"/></svg>
+        Decode
+      </button>
+      <button class="dir-tab" id="dirAuto" onclick="setDir('auto')">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.54"/></svg>
+        Auto-detect
+      </button>
+    </div>
+    <div class="mode-tabs">
+      <button class="mode-tab active" id="modeText" onclick="setMode('text')">Text</button>
+      <button class="mode-tab" id="modeFile" onclick="setMode('file')">File</button>
+    </div>
+  </div>
+
+  <!-- AUTO-DETECT BADGE -->
+  <div class="auto-badge" id="autoBadge">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <span id="autoBadgeTxt">Detecting…</span>
+  </div>
+
+  <!-- TEXT MODE -->
+  <div id="textMode">
+    <div class="io-grid">
+
+      <!-- INPUT -->
+      <div class="io-pane">
+        <div class="io-header">
+          <div class="io-label" id="inLabel">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Plain Text
+          </div>
+          <div class="io-btns">
+            <button class="btn-xs" onclick="pasteInput()">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
+              Paste
+            </button>
+            <button class="btn-xs" onclick="clearAll()">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+              Clear
+            </button>
+          </div>
+        </div>
+        <textarea class="io-textarea" id="inputTA" placeholder="Type or paste your input here…" oninput="run()"></textarea>
+        <div class="io-footer">
+          <div class="io-stat"><strong id="inBytes">0</strong> bytes</div>
+          <div class="valid-indicator" id="validIndicator" style="display:none">
+            <div class="valid-dot" id="validDot"></div>
+            <span id="validTxt"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SWAP -->
+      <div class="swap-col">
+        <button class="btn-swap" onclick="swapIO()" title="Swap input ↔ output">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+        </button>
+      </div>
+
+      <!-- OUTPUT -->
+      <div class="io-pane">
+        <div class="io-header">
+          <div class="io-label sky" id="outLabel">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Base64
+          </div>
+          <div class="io-btns">
+            <button class="btn-xs" id="copyOutBtn" onclick="copyOutput()">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+            <button class="btn-xs" onclick="downloadOutput()">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              .txt
+            </button>
+            <button class="btn-xs" onclick="useAsInput()">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.54"/></svg>
+              Use as input
+            </button>
+          </div>
+        </div>
+        <textarea class="io-textarea readonly" id="outputTA" readonly placeholder="Result appears here…"></textarea>
+        <div class="io-footer">
+          <div class="io-stat"><strong id="outBytes">0</strong> bytes</div>
+          <div class="io-stat" id="errorMsg" style="color:var(--red);display:none"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- IMAGE PREVIEW -->
+    <div class="img-preview-card" id="imgPreview">
+      <div class="img-preview-hdr">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        Image Preview
+      </div>
+      <div class="img-preview-body">
+        <img id="imgPreviewEl" src="" alt="Preview">
+        <div class="img-meta" id="imgMeta"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILE MODE -->
+  <div id="fileMode" style="display:none">
+    <div class="file-drop" id="fileDrop" onclick="document.getElementById('fileInput').click()">
+      <div class="file-drop-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+      </div>
+      <h3>Drop a file to encode</h3>
+      <p>Any file type — images, PDFs, documents, binaries</p>
+      <button class="btn-file" onclick="event.stopPropagation();document.getElementById('fileInput').click()">Choose File</button>
+      <p style="font-size:11px;color:var(--text3)">Up to 10 MB</p>
+    </div>
+    <div class="file-result" id="fileResult">
+      <div class="file-info-bar">
+        <div class="file-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div class="file-meta">
+          <div class="file-name" id="fName">—</div>
+          <div class="file-details" id="fDetails">—</div>
+        </div>
+        <button class="btn-xs" onclick="clearFile()">✕ Remove</button>
+      </div>
+      <div class="file-b64-area" id="fileB64Area"></div>
+      <div class="file-actions">
+        <button class="btn-dl" onclick="copyFileB64()">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy Base64
+        </button>
+        <button class="btn-xs" onclick="dlFileB64()">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/></svg>
+          Download .b64
+        </button>
+      </div>
+    </div>
+    <input type="file" id="fileInput">
+  </div>
+
+  <!-- STATS STRIP -->
+  <div class="stats-strip" id="statsStrip">
+    <div class="stat-cell"><div class="sc-lbl">Input size</div><div class="sc-val" id="statIn">—</div><div class="sc-sub" id="statInSub">bytes</div></div>
+    <div class="stat-cell"><div class="sc-lbl">Output size</div><div class="sc-val sky" id="statOut">—</div><div class="sc-sub" id="statOutSub">bytes</div></div>
+    <div class="stat-cell"><div class="sc-lbl">Size change</div><div class="sc-val" id="statOverhead">—</div><div class="sc-sub" id="statOverheadSub">overhead</div></div>
+    <div class="stat-cell"><div class="sc-lbl">Valid Base64</div><div class="sc-val" id="statValid">—</div><div class="sc-sub" id="statValidSub">—</div></div>
+  </div>
+
+  <!-- SIZE COMPARISON BAR -->
+  <div class="size-card">
+    <div class="size-hdr">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+      Size Comparison
+    </div>
+    <div class="size-body">
+      <div class="size-row">
+        <div class="size-row-label"><span>Input</span><strong id="sizeInLbl">— bytes</strong></div>
+        <div class="size-bar-wrap"><div class="size-bar" id="sizeInBar" style="width:75%;background:var(--sky);opacity:.5"></div></div>
+      </div>
+      <div class="size-row">
+        <div class="size-row-label"><span>Output</span><strong id="sizeOutLbl">— bytes</strong></div>
+        <div class="size-bar-wrap"><div class="size-bar" id="sizeOutBar" style="width:100%;background:var(--sky)"></div></div>
+      </div>
+      <div class="overhead-row">
+        <span class="overhead-lbl">Base64 encoding adds approximately <strong>33%</strong> overhead — every 3 bytes of input become 4 bytes of Base64</span>
+        <span class="overhead-val" id="overheadVal"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTIONS -->
+  <div class="opts-card">
+    <div class="opts-hdr">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+      Options
+    </div>
+    <div class="opts-body">
+      <div class="opt-row">
+        <div class="opt-info">
+          <div class="opt-name">URL-safe Base64</div>
+          <div class="opt-desc">Replaces + with - and / with _ · Removes = padding · Safe in URLs and filenames</div>
+        </div>
+        <div class="toggle" id="togUrlSafe" onclick="this.classList.toggle('on');run()"></div>
+      </div>
+      <div class="opt-row">
+        <div class="opt-info">
+          <div class="opt-name">MIME line wrapping</div>
+          <div class="opt-desc">Inserts line break every 76 characters · Required by MIME/email standards</div>
+        </div>
+        <div class="toggle" id="togLineWrap" onclick="this.classList.toggle('on');run()"></div>
+      </div>
+      <div class="opt-row">
+        <div class="opt-info">
+          <div class="opt-name">Strip whitespace from input</div>
+          <div class="opt-desc">Removes spaces, tabs, and line breaks before decoding · Useful for pasted Base64</div>
+        </div>
+        <div class="toggle on" id="togStrip" onclick="this.classList.toggle('on');run()"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFERENCE TABLE -->
+  <div class="ref-section">
+    <div class="ref-hdr">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <h3>Common Base64 Use Cases</h3>
+    </div>
+    <div class="ref-wrap">
+      <table>
+        <thead><tr><th>Use Case</th><th>Example / Format</th><th>Variant</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Image data URI</strong></td><td>data:image/png;base64,iVBORw0K…</td><td><span class="tag t-c">Standard</span></td><td>Embed images inline in HTML/CSS</td></tr>
+          <tr><td><strong>JWT tokens</strong></td><td>eyJhbGciOiJIUzI1NiJ9.eyJzdWI…</td><td><span class="tag t-d">URL-safe</span></td><td>Header.Payload.Signature, no padding</td></tr>
+          <tr><td><strong>HTTP Basic Auth</strong></td><td>Authorization: Basic dXNlcjpwYXNz</td><td><span class="tag t-c">Standard</span></td><td>username:password encoded</td></tr>
+          <tr><td><strong>Email attachments</strong></td><td>Content-Transfer-Encoding: base64</td><td><span class="tag t-c">MIME (76-char wrap)</span></td><td>MIME email standard requires line breaks</td></tr>
+          <tr><td><strong>CSS/HTML data URIs</strong></td><td>background: url(data:image/svg+xml;base64,…)</td><td><span class="tag t-c">Standard</span></td><td>Inline fonts, icons, small images</td></tr>
+          <tr><td><strong>API file upload</strong></td><td>{"file": "JVBERi0xLjQ…"}</td><td><span class="tag t-c">Standard</span></td><td>Send binary files in JSON payloads</td></tr>
+          <tr><td><strong>URL query params</strong></td><td>?data=SGVsbG8t V29ybGQ</td><td><span class="tag t-d">URL-safe</span></td><td>Avoids + and / breaking URL parsing</td></tr>
+          <tr><td><strong>Cookie values</strong></td><td>Set-Cookie: session=dG9rZW4…</td><td><span class="tag t-d">URL-safe</span></td><td>Safe characters for cookie storage</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div class="faq-section">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">What is Base64 encoding?<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="faq-a">Base64 is an encoding scheme that converts binary data into a string of 64 printable ASCII characters (A–Z, a–z, 0–9, +, /). It's used whenever binary data needs to be stored or transmitted over systems that handle only text — like embedding an image in HTML, sending files in JSON, or encoding credentials for HTTP Basic Auth. It's an <em>encoding</em>, not encryption — anyone can decode it.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">Why does Base64 add 33% overhead?<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="faq-a">Base64 maps every 3 bytes (24 bits) of input into 4 ASCII characters (each representing 6 bits). So 3 bytes in → 4 bytes out = a 33.3% size increase. If the input isn't divisible by 3, <code>=</code> padding characters are added to make it so. This overhead is the price of making binary data text-safe.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">What is URL-safe Base64?<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="faq-a">Standard Base64 uses <code>+</code> and <code>/</code> which have special meanings in URLs (<code>+</code> = space, <code>/</code> = path separator). URL-safe Base64 replaces them with <code>-</code> and <code>_</code> respectively, and usually omits the <code>=</code> padding. This variant is used in JWT tokens, OAuth flows, and anywhere Base64 appears in a URL or filename.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">Is Base64 the same as encryption?<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="faq-a">No — Base64 is purely an encoding format, not encryption. It provides zero security. Anyone with a Base64 string can decode it instantly, as this tool demonstrates. Never use Base64 to "hide" sensitive data. For security, use actual encryption (AES, RSA, etc.) and then optionally Base64-encode the cipher output for transport.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">What is MIME line wrapping?<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="faq-a">The MIME email standard (RFC 2045) requires Base64-encoded content to be wrapped at 76 characters per line. This was originally for compatibility with old mail systems that couldn't handle very long lines. If you're using Base64 for email attachments or MIME-formatted content, enable this option. For web use (data URIs, JWT, APIs) you don't need it — line breaks would break things.</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-left">© 2026 Rai Paruhang · <a href="https://raiparuhang.com.np/terms.html">Privacy &amp; Terms</a></div>
+  <div class="footer-right">
+    <a href="https://raiparuhang.com.np/#tools">All Tools</a>
+    <a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter</a>
+  </div>
+</footer>
+
+<script>
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open')}
+
+/* ── STATE ── */
+let dir = 'encode'; // encode | decode | auto
+let mode = 'text';  // text | file
+let fileB64 = '';
+let fileName = '';
+
+/* ── ENCODE / DECODE ── */
+function encodeB64(text) {
+  try {
+    const urlSafe = document.getElementById('togUrlSafe').classList.contains('on');
+    const wrap = document.getElementById('togLineWrap').classList.contains('on');
+    let b64 = btoa(unescape(encodeURIComponent(text)));
+    if (urlSafe) b64 = b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+    if (wrap) b64 = b64.match(/.{1,76}/g).join('\n');
+    return { ok: true, result: b64 };
+  } catch(e) {
+    return { ok: false, error: 'Encoding failed: ' + e.message };
+  }
+}
+
+function decodeB64(text) {
+  try {
+    const strip = document.getElementById('togStrip').classList.contains('on');
+    let clean = strip ? text.replace(/\s/g, '') : text.trim();
+    // Normalize URL-safe chars
+    clean = clean.replace(/-/g, '+').replace(/_/g, '/');
+    // Add padding if needed
+    while (clean.length % 4 !== 0) clean += '=';
+    const decoded = decodeURIComponent(escape(atob(clean)));
+    return { ok: true, result: decoded };
+  } catch(e) {
+    return { ok: false, error: 'Invalid Base64 — cannot decode' };
+  }
+}
+
+function isLikelyBase64(text) {
+  const clean = text.replace(/\s/g, '');
+  if (clean.length < 4) return false;
+  // Standard or URL-safe base64
+  const stdOk = /^[A-Za-z0-9+/]+=*$/.test(clean) && clean.length % 4 === 0;
+  const urlOk = /^[A-Za-z0-9\-_]+$/.test(clean);
+  // Also try to decode it
+  try {
+    const norm = clean.replace(/-/g, '+').replace(/_/g, '/');
+    const padded = norm + '='.repeat((4 - norm.length % 4) % 4);
+    atob(padded);
+    return stdOk || urlOk;
+  } catch(_) { return false; }
+}
+
+/* ── MAIN RUN ── */
+function run() {
+  const input = document.getElementById('inputTA').value;
+  const errEl = document.getElementById('errorMsg');
+  errEl.style.display = 'none';
+  document.getElementById('imgPreview').classList.remove('show');
+
+  let actualDir = dir;
+  if (dir === 'auto') {
+    if (!input.trim()) {
+      document.getElementById('autoBadge').classList.remove('show');
+      clearStats();
+      document.getElementById('outputTA').value = '';
+      return;
+    }
+    const looks = isLikelyBase64(input);
+    actualDir = looks ? 'decode' : 'encode';
+    const badge = document.getElementById('autoBadge');
+    badge.classList.add('show');
+    badge.className = 'auto-badge show' + (looks ? ' decoding' : '');
+    document.getElementById('autoBadgeTxt').textContent = looks
+      ? '⟳ Looks like Base64 — decoding automatically'
+      : '⟳ Plain text detected — encoding to Base64';
+  }
+
+  if (!input) { clearStats(); document.getElementById('outputTA').value = ''; return; }
+
+  let res;
+  if (actualDir === 'encode') {
+    res = encodeB64(input);
+    updateLabels(false);
+  } else {
+    res = decodeB64(input);
+    updateLabels(true);
+  }
+
+  if (res.ok) {
+    document.getElementById('outputTA').value = res.result;
+    errEl.style.display = 'none';
+    updateStats(input, res.result, actualDir);
+    // Image preview
+    if (actualDir === 'decode' && res.result.startsWith('data:image/')) {
+      showImgPreview(res.result);
+    } else if (actualDir === 'encode') {
+      // Check if input was a data URI
+      const dataUri = 'data:application/octet-stream;base64,' + res.result;
+      // Don't auto-preview text encoded to base64
+    }
+    // Validate decoded output for encode direction
+    validateB64(actualDir === 'encode' ? res.result : input);
+  } else {
+    document.getElementById('outputTA').value = '';
+    errEl.textContent = res.error;
+    errEl.style.display = 'block';
+    clearStats();
+    setValidation(false, 'Invalid Base64');
+    document.getElementById('validIndicator').style.display = 'flex';
+  }
+}
+
+function updateLabels(decoding) {
+  const inL = document.getElementById('inLabel');
+  const outL = document.getElementById('outLabel');
+  if (decoding) {
+    inL.innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Base64 Input`;
+    inL.className = 'io-label sky';
+    outL.innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Decoded Text`;
+    outL.className = 'io-label';
+  } else {
+    inL.innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Plain Text`;
+    inL.className = 'io-label';
+    outL.innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Base64 Output`;
+    outL.className = 'io-label sky';
+  }
+  // Update textarea placeholders
+  document.getElementById('inputTA').placeholder = decoding ? 'Paste Base64 string here…' : 'Type or paste your plain text here…';
+}
+
+/* ── STATS ── */
+function byteSize(str) { return new Blob([str]).size; }
+function fmtBytes(b) {
+  if (b === 0) return '0 B';
+  if (b < 1024) return b + ' B';
+  if (b < 1048576) return (b / 1024).toFixed(1) + ' KB';
+  return (b / 1048576).toFixed(2) + ' MB';
+}
+
+function updateStats(input, output, actualDir) {
+  const inB = byteSize(input);
+  const outB = byteSize(output);
+  const diff = outB - inB;
+  const pct = inB > 0 ? ((diff / inB) * 100).toFixed(1) : 0;
+  const overhead = diff >= 0 ? `+${pct}%` : `${pct}%`;
+
+  document.getElementById('inBytes').textContent = fmtBytes(inB);
+  document.getElementById('outBytes').textContent = fmtBytes(outB);
+  document.getElementById('statIn').textContent = fmtBytes(inB);
+  document.getElementById('statOut').textContent = fmtBytes(outB);
+  document.getElementById('statOverhead').textContent = overhead;
+  document.getElementById('statOverhead').className = 'sc-val' + (diff < 0 ? ' ok' : '');
+  document.getElementById('statOverheadSub').textContent = diff >= 0 ? 'size increase' : 'size decrease';
+
+  // Size bars
+  const maxB = Math.max(inB, outB);
+  document.getElementById('sizeInBar').style.width = (maxB > 0 ? (inB / maxB) * 100 : 0) + '%';
+  document.getElementById('sizeOutBar').style.width = (maxB > 0 ? (outB / maxB) * 100 : 0) + '%';
+  document.getElementById('sizeInLbl').textContent = fmtBytes(inB);
+  document.getElementById('sizeOutLbl').textContent = fmtBytes(outB);
+  document.getElementById('overheadVal').textContent = overhead;
+  document.getElementById('overheadVal').className = 'overhead-val' + (diff < 0 ? ' shrink' : '');
+}
+
+function validateB64(b64str) {
+  const clean = b64str.replace(/\s/g, '').replace(/-/g, '+').replace(/_/g, '/');
+  const padded = clean + '='.repeat((4 - clean.length % 4) % 4);
+  let valid = false;
+  try { atob(padded); valid = /^[A-Za-z0-9+/=]+$/.test(padded); } catch(_) {}
+  const isUrl = /^[A-Za-z0-9\-_]+$/.test(b64str.replace(/\s/g,''));
+  const variant = isUrl && !valid ? 'URL-safe' : 'Standard';
+  setValidation(valid || isUrl, valid || isUrl ? `Valid · ${variant}` : 'Invalid Base64');
+  document.getElementById('statValid').textContent = valid || isUrl ? '✓ Yes' : '✗ No';
+  document.getElementById('statValid').className = 'sc-val' + (valid || isUrl ? ' ok' : ' err');
+  document.getElementById('statValidSub').textContent = valid || isUrl ? variant : 'Check input';
+  document.getElementById('validIndicator').style.display = 'flex';
+}
+
+function setValidation(ok, txt) {
+  document.getElementById('validDot').style.background = ok ? 'var(--green)' : 'var(--red)';
+  document.getElementById('validTxt').textContent = txt;
+  document.getElementById('validTxt').style.color = ok ? 'var(--green)' : 'var(--red)';
+}
+
+function clearStats() {
+  ['statIn','statOut','statOverhead','statValid'].forEach(id => document.getElementById(id).textContent = '—');
+  document.getElementById('inBytes').textContent = '0';
+  document.getElementById('outBytes').textContent = '0';
+  document.getElementById('sizeInBar').style.width = '75%';
+  document.getElementById('sizeOutBar').style.width = '100%';
+  document.getElementById('overheadVal').textContent = '';
+  document.getElementById('validIndicator').style.display = 'none';
+}
+
+/* ── IMAGE PREVIEW ── */
+function showImgPreview(dataUri) {
+  const img = document.getElementById('imgPreviewEl');
+  img.src = dataUri;
+  img.onload = () => {
+    document.getElementById('imgMeta').textContent = `${img.naturalWidth} × ${img.naturalHeight}px`;
+    document.getElementById('imgPreview').classList.add('show');
+  };
+}
+
+/* ── DIRECTION CONTROL ── */
+function setDir(d) {
+  dir = d;
+  ['dirEncode','dirDecode','dirAuto'].forEach(id => document.getElementById(id).classList.remove('active'));
+  document.getElementById('dir' + d.charAt(0).toUpperCase() + d.slice(1)).classList.add('active');
+  if (d !== 'auto') {
+    document.getElementById('autoBadge').classList.remove('show');
+    updateLabels(d === 'decode');
+  }
+  run();
+}
+
+/* ── MODE CONTROL ── */
+function setMode(m) {
+  mode = m;
+  ['modeText','modeFile'].forEach(id => document.getElementById(id).classList.remove('active'));
+  document.getElementById('mode' + m.charAt(0).toUpperCase() + m.slice(1)).classList.add('active');
+  document.getElementById('textMode').style.display = m === 'text' ? '' : 'none';
+  document.getElementById('fileMode').style.display = m === 'file' ? '' : 'none';
+}
+
+/* ── IO ACTIONS ── */
+async function pasteInput() {
+  try { const t = await navigator.clipboard.readText(); document.getElementById('inputTA').value = t; run(); }
+  catch(_) { document.getElementById('inputTA').focus(); }
+}
+
+function clearAll() {
+  document.getElementById('inputTA').value = '';
+  document.getElementById('outputTA').value = '';
+  document.getElementById('errorMsg').style.display = 'none';
+  document.getElementById('imgPreview').classList.remove('show');
+  if (dir === 'auto') document.getElementById('autoBadge').classList.remove('show');
+  clearStats();
+}
+
+function copyOutput() {
+  const t = document.getElementById('outputTA').value;
+  if (!t) return;
+  navigator.clipboard.writeText(t).then(() => {
+    const btn = document.getElementById('copyOutBtn');
+    btn.classList.add('ok');
+    btn.innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+    setTimeout(() => {
+      btn.classList.remove('ok');
+      btn.innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="10" height="10"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
+    }, 2000);
+  });
+}
+
+function downloadOutput() {
+  const t = document.getElementById('outputTA').value;
+  if (!t) return;
+  const blob = new Blob([t], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = dir === 'encode' ? 'encoded.b64' : 'decoded.txt';
+  a.click(); URL.revokeObjectURL(url);
+}
+
+function swapIO() {
+  const out = document.getElementById('outputTA').value;
+  if (!out) return;
+  document.getElementById('inputTA').value = out;
+  setDir(dir === 'encode' ? 'decode' : 'encode');
+}
+
+function useAsInput() {
+  const out = document.getElementById('outputTA').value;
+  if (!out) return;
+  document.getElementById('inputTA').value = out;
+  run();
+}
+
+/* ── FILE MODE ── */
+const fileDrop = document.getElementById('fileDrop');
+fileDrop.addEventListener('dragover', e => { e.preventDefault(); fileDrop.classList.add('dragging'); });
+fileDrop.addEventListener('dragleave', () => fileDrop.classList.remove('dragging'));
+fileDrop.addEventListener('drop', e => {
+  e.preventDefault(); fileDrop.classList.remove('dragging');
+  const f = e.dataTransfer.files[0];
+  if (f) handleFile(f);
+});
+document.getElementById('fileInput').addEventListener('change', e => {
+  if (e.target.files[0]) handleFile(e.target.files[0]);
+});
+
+async function handleFile(file) {
+  if (file.size > 10 * 1024 * 1024) { alert('File too large. Max 10 MB.'); return; }
+  fileName = file.name;
+  const reader = new FileReader();
+  reader.onload = () => {
+    fileB64 = reader.result.split(',')[1];
+    document.getElementById('fName').textContent = file.name;
+    document.getElementById('fDetails').textContent = `${fmtBytes(file.size)} · ${file.type || 'unknown type'} · ${fileB64.length.toLocaleString()} Base64 chars`;
+    document.getElementById('fileB64Area').textContent = fileB64;
+    document.getElementById('fileResult').classList.add('show');
+    // Stats
+    updateStats(file.name, fileB64, 'encode');
+    document.getElementById('statIn').textContent = fmtBytes(file.size);
+    document.getElementById('statOut').textContent = fmtBytes(byteSize(fileB64));
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearFile() {
+  fileB64 = ''; fileName = '';
+  document.getElementById('fileResult').classList.remove('show');
+  document.getElementById('fileInput').value = '';
+}
+
+function copyFileB64() {
+  if (!fileB64) return;
+  navigator.clipboard.writeText(fileB64);
+}
+
+function dlFileB64() {
+  if (!fileB64) return;
+  const blob = new Blob([fileB64], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url;
+  a.download = (fileName || 'file') + '.b64';
+  a.click(); URL.revokeObjectURL(url);
+}
+
+/* ── FAQ ── */
+function faq(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
+
+/* ── INIT ── */
+updateLabels(false);
+</script>
+</body>
+</html>
