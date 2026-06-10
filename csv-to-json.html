@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSV to JSON & JSON to CSV Converter — Free, Private, Online | Rai Paruhang</title>
+<meta name="description" content="Convert CSV to JSON and JSON to CSV instantly in your browser. Paste text or upload files. Preview table, copy output, download. 100% client-side — nothing uploaded.">
+<link rel="alternate" hreflang="en" href="https://raiparuhang.com.np/csv-to-json"/>
+<link rel="alternate" hreflang="x-default" href="https://raiparuhang.com.np/csv-to-json"/>
+ <!-- Modern SVG Favicon (Infinite scaling for desktop & high-res screens) -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<!-- For Safari pinned tabs color blending -->
+<link rel="mask-icon" href="favicon.svg" color="#4f8eff">
+<link rel="canonical" href="https://raiparuhang.com.np/csv-to-json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- ✅ 1. SoftwareApplication SCHEMA/csv-to-json -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "CSV to JSON Converter",
+  "url": "https://raiparuhang.com.np/csv-to-json",
+  "description": "Free online CSV to JSON converter. Instantly convert CSV files and pasted CSV data to clean, formatted JSON directly in your browser. Supports custom delimiters, nested objects, array output, and key mapping. No file uploads, no server, 100% private and free.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "browserRequirements": "Requires a modern web browser with JavaScript enabled",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Convert CSV to JSON instantly in browser",
+    "Paste CSV data or upload CSV file",
+    "Custom delimiter support (comma, semicolon, tab, pipe)",
+    "Formatted and minified JSON output",
+    "Array of objects or nested JSON output",
+    "Custom key mapping and renaming",
+    "Download output as .json file",
+    "Copy JSON to clipboard",
+    "No file upload required",
+    "100% client-side processing",
+    "Free forever"
+  ],
+  "author": {
+    "@type": "Person",
+    "name": "Paruhang Rai",
+    "url": "https://raiparuhang.com.np/"
+  }
+}
+</script>
+ 
+ 
+<!-- ✅ 2. FAQPage SCHEMA —/csv-to-json -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does the CSV to JSON converter upload my file to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All conversion happens entirely inside your browser using JavaScript. Your CSV data is never uploaded to any server, stored, or shared with anyone. This is especially important when your CSV contains sensitive business or personal data."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What delimiters are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The converter supports comma (,), semicolon (;), tab, and pipe (|) delimiters. You can also set a custom delimiter for non-standard CSV formats."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does the JSON output look like?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "By default the converter outputs an array of objects where each row becomes a JSON object and each column header becomes a key. For example: [{\"name\":\"John\",\"age\":\"30\"},{\"name\":\"Jane\",\"age\":\"25\"}]."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I convert a CSV file without headers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. If your CSV has no header row you can disable the header option and the converter will use auto-generated keys like col1, col2, col3 for each column."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I download the converted JSON file?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. After conversion you can download the output as a .json file directly to your device or copy it to the clipboard with one click."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#06080f;--bg2:#0d1120;--bg3:#111827;
+  --surface:#161d2e;--surface2:#1e2840;
+  --border:rgba(99,140,255,.12);--border2:rgba(99,140,255,.22);
+  --accent:#4f8eff;--accent2:#7eb3ff;
+  --green:#22d3a0;--green-bg:rgba(34,211,160,.1);
+  --red:#ff5b5b;--red-bg:rgba(255,91,91,.1);
+  --amber:#f5a623;--amber-bg:rgba(245,166,35,.08);
+  --purple:#a78bfa;--purple-bg:rgba(167,139,250,.08);
+  --text:#e8edf8;--text2:#8b99bb;--text3:#556080;
+  --mono:'DM Mono',monospace;--sans:'Sora',sans-serif;
+  --radius:14px;--radius-lg:20px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;min-height:100vh}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 max(24px,5vw);height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:17px;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:-.3px;display:flex;align-items:center;gap:10px}
+.nav-logo .dot{width:8px;height:8px;background:var(--accent);border-radius:50%;box-shadow:0 0 8px var(--accent);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:14px;color:var(--text2);text-decoration:none;font-weight:400;transition:color .2s;letter-spacing:.2px}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--accent)}
+.nav-cta{background:var(--accent);color:#fff!important;padding:8px 18px;border-radius:8px;font-weight:600!important;font-size:13px!important;transition:opacity .2s!important}
+.nav-cta:hover{opacity:.88}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{width:22px;height:2px;background:var(--text2);border-radius:2px;display:block;transition:all .3s}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(6,8,15,.97);border-bottom:1px solid var(--border);padding:24px max(24px,5vw);z-index:99;flex-direction:column;gap:20px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--text2);text-decoration:none;font-size:16px;padding:8px 0;border-bottom:1px solid var(--border);transition:color .2s}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu a:hover,.mobile-menu a.active{color:var(--accent)}
+@media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}}
+
+/* PAGE HEADER */
+.page-header{padding:96px max(24px,5vw) 40px;max-width:980px;margin:0 auto;text-align:center}
+.page-badge{display:inline-flex;align-items:center;gap:8px;background:var(--green-bg);border:1px solid rgba(34,211,160,.25);border-radius:100px;padding:5px 14px;font-family:var(--mono);font-size:11px;color:var(--green);margin-bottom:20px;letter-spacing:.5px}
+.page-badge::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%;box-shadow:0 0 5px var(--green)}
+.page-header h1{font-size:clamp(26px,5vw,50px);font-weight:700;letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px}
+.page-header h1 span{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 60%,var(--green) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-header p{color:var(--text2);font-size:15px;max-width:520px;margin:0 auto;font-weight:300}
+
+/* WRAPPER */
+.tool-wrapper{max-width:980px;margin:0 auto;padding:0 max(24px,5vw) 80px;display:flex;flex-direction:column;gap:20px}
+
+/* SECURITY STRIP */
+.security-strip{display:flex;align-items:center;gap:8px;justify-content:center;padding:13px;background:var(--green-bg);border:1px solid rgba(34,211,160,.15);border-radius:12px;font-size:12px;font-family:var(--mono);color:var(--green);letter-spacing:.3px;flex-wrap:wrap;text-align:center}
+.security-strip svg{width:15px;height:15px;flex-shrink:0}
+
+/* MODE TABS */
+.mode-tabs{display:flex;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:6px}
+.mode-tab{flex:1;padding:12px 16px;border-radius:12px;border:none;background:transparent;color:var(--text2);font-size:14px;font-weight:500;font-family:var(--sans);cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap}
+.mode-tab svg{width:16px;height:16px;flex-shrink:0}
+.mode-tab.active{background:var(--accent);color:#fff}
+.mode-tab:not(.active):hover{background:var(--surface2);color:var(--text)}
+
+/* MAIN EDITOR GRID */
+.editor-grid{display:grid;grid-template-columns:1fr 44px 1fr;gap:0;align-items:stretch}
+@media(max-width:700px){.editor-grid{grid-template-columns:1fr;gap:12px}}
+
+/* PANEL */
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column}
+.panel-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.panel-header-left{display:flex;align-items:center;gap:8px}
+.panel-header-left svg{width:15px;height:15px;color:var(--accent)}
+.panel-header h3{font-size:13px;font-weight:600}
+.panel-header-right{display:flex;gap:7px;flex-wrap:wrap}
+.panel-body{flex:1;display:flex;flex-direction:column}
+
+/* TEXTAREA */
+.code-area{flex:1;width:100%;min-height:320px;background:var(--bg3);border:none;outline:none;padding:16px;font-family:var(--mono);font-size:13px;color:var(--text);line-height:1.65;resize:vertical;tab-size:2}
+.code-area::placeholder{color:var(--text3)}
+.code-area.output-area{color:var(--text2);cursor:default;resize:none}
+
+/* LINE COUNT */
+.panel-footer{padding:8px 16px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.panel-footer-info{display:flex;gap:16px;flex-wrap:wrap}
+.foot-stat{font-size:11px;font-family:var(--mono);color:var(--text3);display:flex;align-items:center;gap:4px}
+.foot-stat svg{width:11px;height:11px}
+.foot-stat.valid{color:var(--green)}
+.foot-stat.error{color:var(--red)}
+
+/* SWAP/CONVERT CENTER COL */
+.center-col{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:0 6px}
+@media(max-width:700px){.center-col{flex-direction:row;justify-content:center;padding:0}}
+.btn-convert-arrow{width:36px;height:36px;border-radius:50%;background:var(--accent);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.btn-convert-arrow:hover{background:#6fa3ff;transform:scale(1.1)}
+.btn-convert-arrow svg{width:16px;height:16px}
+.convert-label{font-size:10px;font-family:var(--mono);color:var(--text3);letter-spacing:.5px;text-align:center;writing-mode:vertical-rl;transform:rotate(180deg)}
+@media(max-width:700px){.convert-label{writing-mode:horizontal-tb;transform:none}}
+
+/* UPLOAD ZONE (small) */
+.mini-upload{border:1px dashed var(--border2);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all .2s;margin:12px 16px 0;background:var(--bg3)}
+.mini-upload:hover{border-color:var(--accent);background:rgba(79,142,255,.04)}
+.mini-upload svg{width:16px;height:16px;color:var(--text3);flex-shrink:0}
+.mini-upload span{font-size:12px;color:var(--text2);font-family:var(--mono)}
+.mini-upload small{font-size:10px;color:var(--text3);margin-left:auto}
+
+/* SETTINGS ROW */
+.settings-row{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--bg2)}
+.settings-row label{font-size:11px;color:var(--text2);font-family:var(--mono);letter-spacing:.3px}
+.settings-row select,.settings-row input[type=text]{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:12px;font-family:var(--mono);color:var(--text);outline:none;transition:border-color .2s;-webkit-appearance:none}
+.settings-row select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%238b99bb' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:24px}
+.settings-row select:focus,.settings-row input:focus{border-color:var(--accent)}
+.toggle-sm{width:36px;height:20px;background:var(--bg3);border-radius:100px;border:1px solid var(--border);cursor:pointer;position:relative;transition:all .2s;flex-shrink:0}
+.toggle-sm.on{background:var(--accent);border-color:var(--accent)}
+.toggle-sm::after{content:'';position:absolute;top:3px;left:3px;width:12px;height:12px;background:var(--text3);border-radius:50%;transition:all .2s}
+.toggle-sm.on::after{left:19px;background:#fff}
+.sep{width:1px;height:16px;background:var(--border);flex-shrink:0}
+
+/* ACTION BUTTONS */
+.btn-action{display:inline-flex;align-items:center;gap:6px;border-radius:8px;padding:7px 13px;font-size:12px;font-family:var(--mono);cursor:pointer;transition:all .2s;white-space:nowrap;border:1px solid var(--border);background:var(--surface2);color:var(--text2)}
+.btn-action:hover{border-color:var(--border2);color:var(--text);background:var(--bg3)}
+.btn-action.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn-action.primary:hover{background:#6fa3ff}
+.btn-action.green{background:var(--green-bg);color:var(--green);border-color:rgba(34,211,160,.25)}
+.btn-action.green:hover{background:var(--green);color:#06080f}
+.btn-action.danger{background:var(--red-bg);color:var(--red);border-color:rgba(255,91,91,.2)}
+.btn-action.danger:hover{background:var(--red);color:#fff}
+.btn-action svg{width:12px;height:12px;flex-shrink:0}
+.btn-action.copied{background:var(--green-bg);color:var(--green);border-color:rgba(34,211,160,.25)}
+
+/* ERROR / SUCCESS BANNER */
+.msg-banner{padding:10px 16px;font-size:12px;font-family:var(--mono);display:none;align-items:center;gap:8px;border-top:1px solid var(--border)}
+.msg-banner.show{display:flex}
+.msg-banner.error{background:var(--red-bg);color:var(--red);border-top-color:rgba(255,91,91,.2)}
+.msg-banner.success{background:var(--green-bg);color:var(--green);border-top-color:rgba(34,211,160,.2)}
+.msg-banner svg{width:13px;height:13px;flex-shrink:0}
+
+/* TABLE PREVIEW */
+.table-preview-section{display:none;flex-direction:column;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.table-preview-section.show{display:flex}
+.table-preview-header{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:1px solid var(--border)}
+.table-preview-header h3{font-size:13px;font-weight:600;display:flex;align-items:center;gap:7px}
+.table-preview-header h3 svg{width:14px;height:14px;color:var(--accent)}
+.table-wrap{overflow:auto;max-height:300px}
+table.preview-table{width:100%;border-collapse:collapse;font-size:12px;font-family:var(--mono)}
+table.preview-table th{background:var(--bg2);padding:8px 14px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--accent);border-bottom:1px solid var(--border);white-space:nowrap;font-weight:600;position:sticky;top:0}
+table.preview-table td{padding:8px 14px;border-bottom:1px solid var(--border);color:var(--text2);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+table.preview-table tr:last-child td{border-bottom:none}
+table.preview-table tr:hover td{background:var(--surface2);color:var(--text)}
+.table-footer{padding:10px 18px;border-top:1px solid var(--border);font-size:11px;font-family:var(--mono);color:var(--text3);display:flex;gap:16px}
+
+/* JSON TREE PREVIEW */
+.json-tree{padding:16px;font-family:var(--mono);font-size:12px;line-height:1.7;overflow:auto;max-height:300px;background:var(--bg3)}
+.jt-key{color:var(--accent2)}
+.jt-str{color:var(--green)}
+.jt-num{color:var(--amber)}
+.jt-bool{color:var(--purple)}
+.jt-null{color:var(--text3)}
+.jt-punc{color:var(--text3)}
+
+/* DIFF / STATS CARD */
+.stats-card{display:none;grid-template-columns:repeat(auto-fill,minmax(min(100%,160px),1fr));gap:10px}
+.stats-card.show{display:grid}
+.stat-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+.stat-box .sv{font-size:20px;font-weight:700;font-family:var(--mono);color:var(--accent)}
+.stat-box .sl{font-size:10px;color:var(--text3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
+
+/* FAQ */
+.faq-section{padding:60px max(24px,5vw) 80px;max-width:720px;margin:0 auto}
+.faq-section h2{font-size:clamp(20px,3vw,28px);font-weight:700;letter-spacing:-.7px;margin-bottom:28px}
+.faq-item{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden}
+.faq-q{padding:16px 20px;font-size:15px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;user-select:none;transition:background .2s}
+.faq-q:hover{background:var(--surface)}
+.faq-q svg{width:16px;height:16px;color:var(--text3);flex-shrink:0;transition:transform .3s}
+.faq-q.open svg{transform:rotate(180deg)}
+.faq-a{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .3s,padding .3s;font-size:14px;color:var(--text2);line-height:1.7}
+.faq-a.open{max-height:220px;padding:0 20px 16px}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.footer-left{font-size:12px;color:var(--text3);font-family:var(--mono)}
+.footer-left a{color:var(--text3);text-decoration:none;transition:color .2s}
+.footer-left a:hover{color:var(--text2)}
+.footer-right{display:flex;gap:16px}
+.footer-right a{color:var(--text3);font-size:12px;text-decoration:none;font-family:var(--mono);transition:color .2s}
+.footer-right a:hover{color:var(--text)}
+
+@media(max-width:600px){
+  .mode-tabs{flex-direction:column}
+  .settings-row{gap:8px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://raiparuhang.com.np" class="nav-logo"><span class="dot"></span>Rai Paruhang</a>
+  <ul class="nav-links">
+    <li><a href="https://raiparuhang.com.np/#home">Home</a></li>
+    <li><a href="https://raiparuhang.com.np/#about">About</a></li>
+    <li><a href="https://raiparuhang.com.np/#contact">Contact</a></li>
+    <li><a href="https://raiparuhang.com.np/tools" class="nav-cta">All Tools</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="https://raiparuhang.com.np/#home" onclick="closeMobile()">Home</a>
+  <a href="https://raiparuhang.com.np/tools" class="active" onclick="closeMobile()">All Tools</a>
+  <a href="https://raiparuhang.com.np/#about" onclick="closeMobile()">About</a>
+  <a href="https://raiparuhang.com.np/#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="page-badge">100% Client-Side · No Server Upload</div>
+  <h1>CSV ↔ <span>JSON Converter</span></h1>
+  <p>Convert CSV to JSON and JSON to CSV instantly. Paste text or upload files. Live preview, table view, format options — all in your browser.</p>
+</div>
+
+<!-- TOOL -->
+<div class="tool-wrapper">
+
+  <div class="security-strip">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Your data never leaves your device — all conversion is 100% local in your browser
+  </div>
+
+  <!-- MODE TABS -->
+  <div class="mode-tabs">
+    <button class="mode-tab active" id="tabCsvJson" onclick="setMode('csv2json')">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      CSV → JSON
+    </button>
+    <button class="mode-tab" id="tabJsonCsv" onclick="setMode('json2csv')">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      JSON → CSV
+    </button>
+  </div>
+
+  <!-- CSV → JSON settings -->
+  <div id="csvSettings" class="settings-row">
+    <label>Delimiter</label>
+    <select id="delimiter">
+      <option value=",">Comma (,)</option>
+      <option value=";">Semicolon (;)</option>
+      <option value="\t">Tab (\t)</option>
+      <option value="|">Pipe (|)</option>
+    </select>
+    <div class="sep"></div>
+    <label>Header row</label>
+    <div class="toggle-sm on" id="togHeader" onclick="this.classList.toggle('on');debounceConvert()"></div>
+    <div class="sep"></div>
+    <label>Indent</label>
+    <select id="jsonIndent">
+      <option value="2">2 spaces</option>
+      <option value="4">4 spaces</option>
+      <option value="0">Minified</option>
+    </select>
+    <div class="sep"></div>
+    <label>Numbers as</label>
+    <select id="numParsing">
+      <option value="auto">Auto-detect</option>
+      <option value="string">Always string</option>
+    </select>
+  </div>
+
+  <!-- JSON → CSV settings -->
+  <div id="jsonSettings" class="settings-row" style="display:none;">
+    <label>Output delimiter</label>
+    <select id="outDelimiter">
+      <option value=",">Comma (,)</option>
+      <option value=";">Semicolon (;)</option>
+      <option value="\t">Tab (\t)</option>
+      <option value="|">Pipe (|)</option>
+    </select>
+    <div class="sep"></div>
+    <label>Quote all fields</label>
+    <div class="toggle-sm" id="togQuote" onclick="this.classList.toggle('on');debounceConvert()"></div>
+    <div class="sep"></div>
+    <label>Include header</label>
+    <div class="toggle-sm on" id="togCsvHeader" onclick="this.classList.toggle('on');debounceConvert()"></div>
+    <div class="sep"></div>
+    <label>Flatten nested</label>
+    <div class="toggle-sm on" id="togFlatten" onclick="this.classList.toggle('on');debounceConvert()"></div>
+  </div>
+
+  <!-- EDITOR -->
+  <div class="editor-grid">
+
+    <!-- INPUT PANEL -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-header-left">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <h3 id="inputLabel">CSV Input</h3>
+        </div>
+        <div class="panel-header-right">
+          <button class="btn-action" onclick="pasteFromClipboard()">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Paste
+          </button>
+          <button class="btn-action" onclick="loadSample()">Sample</button>
+          <button class="btn-action danger" onclick="clearInput()">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+            Clear
+          </button>
+        </div>
+      </div>
+
+      <!-- file upload -->
+      <div class="mini-upload" onclick="document.getElementById('fileInput').click()">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <span id="uploadLabel">Upload CSV file</span>
+        <small id="uploadFormats">CSV, TXT</small>
+      </div>
+      <input type="file" id="fileInput" accept=".csv,.json,.txt" style="display:none;">
+
+      <div class="panel-body">
+        <textarea class="code-area" id="inputArea" placeholder="Paste your CSV here..." spellcheck="false" oninput="debounceConvert()"></textarea>
+      </div>
+
+      <div class="msg-banner" id="inputError">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="inputErrorMsg">Error</span>
+      </div>
+
+      <div class="panel-footer">
+        <div class="panel-footer-info">
+          <span class="foot-stat" id="inputLines">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/></svg>
+            0 lines
+          </span>
+          <span class="foot-stat" id="inputChars">0 chars</span>
+          <span class="foot-stat" id="inputSize">0 B</span>
+        </div>
+        <span class="foot-stat" id="inputValid"></span>
+      </div>
+    </div>
+
+    <!-- CENTER CONVERT ARROW -->
+    <div class="center-col">
+      <button class="btn-convert-arrow" onclick="convert()" title="Convert">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <span class="convert-label" id="convertLabel">CONVERT</span>
+      <button class="btn-convert-arrow" onclick="swapMode()" title="Swap direction" style="background:var(--surface2);border:1px solid var(--border);">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+      </button>
+    </div>
+
+    <!-- OUTPUT PANEL -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-header-left">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          <h3 id="outputLabel">JSON Output</h3>
+        </div>
+        <div class="panel-header-right">
+          <button class="btn-action" id="copyBtn" onclick="copyOutput()">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+          <button class="btn-action green" onclick="downloadOutput()">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </button>
+        </div>
+      </div>
+
+      <div class="panel-body">
+        <textarea class="code-area output-area" id="outputArea" readonly placeholder="Output will appear here..." spellcheck="false"></textarea>
+      </div>
+
+      <div class="msg-banner" id="outputSuccess">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        <span id="outputSuccessMsg">Converted successfully</span>
+      </div>
+
+      <div class="panel-footer">
+        <div class="panel-footer-info">
+          <span class="foot-stat" id="outputLines">0 lines</span>
+          <span class="foot-stat" id="outputChars">0 chars</span>
+          <span class="foot-stat" id="outputSize">0 B</span>
+        </div>
+        <span class="foot-stat" id="outputValid"></span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-card" id="statsCard">
+    <div class="stat-box"><div class="sv" id="statRows">—</div><div class="sl">Rows</div></div>
+    <div class="stat-box"><div class="sv" id="statCols">—</div><div class="sl">Columns</div></div>
+    <div class="stat-box"><div class="sv" id="statSize">—</div><div class="sl">Input Size</div></div>
+    <div class="stat-box"><div class="sv" id="statOutSize">—</div><div class="sl">Output Size</div></div>
+    <div class="stat-box"><div class="sv" id="statRatio">—</div><div class="sl">Size Ratio</div></div>
+  </div>
+
+  <!-- TABLE PREVIEW -->
+  <div class="table-preview-section" id="tablePreview">
+    <div class="table-preview-header">
+      <h3>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+        Table Preview
+      </h3>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span style="font-size:11px;color:var(--text3);font-family:var(--mono);" id="tableInfo">—</span>
+        <button class="btn-action" onclick="document.getElementById('tablePreview').classList.remove('show')">Hide</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table class="preview-table" id="previewTable"></table>
+    </div>
+    <div class="table-footer" id="tableFooter"></div>
+  </div>
+
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">Is my data uploaded to a server?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">Never. All conversion happens entirely in your browser using JavaScript. Your CSV or JSON data never leaves your device — no upload, no server, nothing stored anywhere.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">What CSV formats are supported?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">Standard comma-separated CSV, semicolon-separated (common in European locales), tab-separated (TSV), and pipe-separated formats. Select your delimiter in the settings row above the editor.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">What JSON structure does CSV→JSON produce?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">An array of objects where each object represents one CSV row, and each key is a column header. Example: [{"name":"Alice","age":30},{"name":"Bob","age":25}]. If "Header row" is off, keys become col_0, col_1, etc.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">What JSON structure does JSON→CSV accept?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">An array of objects (most common API format). Each object becomes a CSV row. Keys from the first object are used as column headers. Enable "Flatten nested" to handle objects within objects — nested keys become dot-notation columns like "address.city".</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">Can I upload a file instead of pasting?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">Yes. Click "Upload CSV file" (or "Upload JSON file" in JSON→CSV mode) to load a file directly from your device. The file is read locally — it is never uploaded to any server.</div>
+  </div>
+</div>
+
+  <!--ALTERNATIVE KEYWORDS-->
+<section style="margin: 60px auto; max-width: 780px; padding: 0 20px;">
+  <h2 style="font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6b7280; margin-bottom: 16px;">
+    Also searched as
+  </h2>
+  <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">csv to json without uploading</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">convert csv to json free no upload</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">csv to json browser only private</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">csvjson alternative no server</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">convert spreadsheet to json online</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">csv to json array of objects free</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">offline csv to json converter</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">paste csv convert to json instantly</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">csv to json with custom delimiter</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">secure csv to json no signup</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">tab separated values to json free</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">csv to json download as file free</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">© 2026 Rai Paruhang · <a href="https://raiparuhang.com.np/terms.html">Privacy &amp; Terms</a></div>
+  <div class="footer-right">
+    <a href="https://raiparuhang.com.np/tools">All Tools</a>
+    <a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter</a>
+  </div>
+</footer>
+
+<script>
+/* ── STATE ── */
+let currentMode = 'csv2json'; // 'csv2json' | 'json2csv'
+let debounceTimer = null;
+let lastOutput = '';
+
+/* ── NAV ── */
+document.getElementById('hamburger').addEventListener('click', () =>
+  document.getElementById('mobileMenu').classList.toggle('open'));
+function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+/* ── MODE ── */
+function setMode(m) {
+  currentMode = m;
+  document.getElementById('tabCsvJson').classList.toggle('active', m === 'csv2json');
+  document.getElementById('tabJsonCsv').classList.toggle('active', m === 'json2csv');
+  document.getElementById('csvSettings').style.display = m === 'csv2json' ? '' : 'none';
+  document.getElementById('jsonSettings').style.display = m === 'json2csv' ? '' : 'none';
+  document.getElementById('inputLabel').textContent = m === 'csv2json' ? 'CSV Input' : 'JSON Input';
+  document.getElementById('outputLabel').textContent = m === 'csv2json' ? 'JSON Output' : 'CSV Output';
+  document.getElementById('uploadLabel').textContent = m === 'csv2json' ? 'Upload CSV file' : 'Upload JSON file';
+  document.getElementById('uploadFormats').textContent = m === 'csv2json' ? 'CSV, TXT' : 'JSON';
+  document.getElementById('fileInput').accept = m === 'csv2json' ? '.csv,.txt' : '.json';
+  document.getElementById('inputArea').placeholder = m === 'csv2json'
+    ? 'Paste your CSV here...\n\nname,age,city\nAlice,30,Kathmandu\nBob,25,Pokhara'
+    : 'Paste your JSON here...\n\n[\n  {"name":"Alice","age":30},\n  {"name":"Bob","age":25}\n]';
+  document.getElementById('outputArea').placeholder = m === 'csv2json' ? 'JSON output...' : 'CSV output...';
+  clearOutput();
+  if (document.getElementById('inputArea').value.trim()) debounceConvert();
+}
+
+function swapMode() {
+  const out = document.getElementById('outputArea').value;
+  const inp = document.getElementById('inputArea').value;
+  setMode(currentMode === 'csv2json' ? 'json2csv' : 'csv2json');
+  if (out.trim()) {
+    document.getElementById('inputArea').value = out;
+    updateInputStats();
+    debounceConvert();
+  }
+}
+
+/* ── FILE UPLOAD ── */
+document.getElementById('fileInput').addEventListener('change', e => {
+  const f = e.target.files[0]; if (!f) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    document.getElementById('inputArea').value = ev.target.result;
+    updateInputStats();
+    convert();
+  };
+  reader.readAsText(f);
+});
+
+/* ── DEBOUNCE ── */
+function debounceConvert() {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(convert, 350);
+  updateInputStats();
+}
+
+function updateInputStats() {
+  const v = document.getElementById('inputArea').value;
+  const lines = v ? v.split('\n').length : 0;
+  document.getElementById('inputLines').textContent = lines + ' line' + (lines !== 1 ? 's' : '');
+  document.getElementById('inputChars').textContent = v.length + ' chars';
+  document.getElementById('inputSize').textContent = formatBytes(new Blob([v]).size);
+}
+
+/* ── CONVERT ── */
+function convert() {
+  const input = document.getElementById('inputArea').value.trim();
+  clearOutput();
+  if (!input) return;
+
+  try {
+    if (currentMode === 'csv2json') {
+      const result = csvToJson(input);
+      lastOutput = result.json;
+      document.getElementById('outputArea').value = result.json;
+      updateOutputStats(result.json);
+      updateStats(result.rows, result.cols, input, result.json);
+      renderTablePreview(result.data, result.headers);
+      showSuccess(`${result.rows} rows · ${result.cols} columns converted`);
+    } else {
+      const result = jsonToCsv(input);
+      lastOutput = result.csv;
+      document.getElementById('outputArea').value = result.csv;
+      updateOutputStats(result.csv);
+      updateStats(result.rows, result.cols, input, result.csv);
+      renderTablePreviewFromCsv(result.csv);
+      showSuccess(`${result.rows} rows · ${result.cols} columns converted`);
+    }
+    hideError();
+  } catch (e) {
+    showError(e.message);
+    hideSuccess();
+  }
+}
+
+/* ── CSV → JSON ── */
+function csvToJson(csv) {
+  const delimiterRaw = document.getElementById('delimiter').value;
+  const delim = delimiterRaw === '\\t' ? '\t' : delimiterRaw;
+  const hasHeader = document.getElementById('togHeader').classList.contains('on');
+  const indent = parseInt(document.getElementById('jsonIndent').value);
+  const numParsing = document.getElementById('numParsing').value;
+
+  const lines = parseCSVLines(csv, delim);
+  if (!lines.length) throw new Error('No data found');
+
+  let headers, dataLines;
+  if (hasHeader) {
+    headers = lines[0];
+    dataLines = lines.slice(1);
+  } else {
+    headers = lines[0].map((_, i) => 'col_' + i);
+    dataLines = lines;
+  }
+
+  const data = dataLines.filter(l => l.some(c => c.trim() !== '')).map(row => {
+    const obj = {};
+    headers.forEach((h, i) => {
+      let val = row[i] !== undefined ? row[i] : '';
+      if (numParsing === 'auto') {
+        if (val !== '' && !isNaN(val) && !isNaN(parseFloat(val))) val = parseFloat(val);
+        else if (val.toLowerCase() === 'true') val = true;
+        else if (val.toLowerCase() === 'false') val = false;
+        else if (val.toLowerCase() === 'null' || val === '') val = null;
+      }
+      obj[h] = val;
+    });
+    return obj;
+  });
+
+  const json = JSON.stringify(data, null, indent === 0 ? undefined : indent);
+  return { json, rows: data.length, cols: headers.length, data, headers };
+}
+
+/* ── JSON → CSV ── */
+function jsonToCsv(jsonStr) {
+  const delimiterRaw = document.getElementById('outDelimiter').value;
+  const delim = delimiterRaw === '\\t' ? '\t' : delimiterRaw;
+  const quoteAll = document.getElementById('togQuote').classList.contains('on');
+  const includeHeader = document.getElementById('togCsvHeader').classList.contains('on');
+  const flatten = document.getElementById('togFlatten').classList.contains('on');
+
+  let data = JSON.parse(jsonStr);
+  if (!Array.isArray(data)) {
+    // Try wrapping object in array
+    if (typeof data === 'object' && data !== null) data = [data];
+    else throw new Error('JSON must be an array of objects or a single object');
+  }
+  if (!data.length) throw new Error('JSON array is empty');
+
+  // Flatten nested objects
+  const flatData = flatten ? data.map(flattenObj) : data;
+
+  // Get all unique keys
+  const keys = [];
+  const keySet = new Set();
+  flatData.forEach(row => {
+    Object.keys(row).forEach(k => { if (!keySet.has(k)) { keySet.add(k); keys.push(k); } });
+  });
+
+  function escapeCell(val) {
+    if (val === null || val === undefined) return '';
+    const s = String(val);
+    if (quoteAll || s.includes(delim) || s.includes('"') || s.includes('\n')) {
+      return '"' + s.replace(/"/g, '""') + '"';
+    }
+    return s;
+  }
+
+  const rows = [];
+  if (includeHeader) rows.push(keys.map(escapeCell).join(delim));
+  flatData.forEach(row => {
+    rows.push(keys.map(k => escapeCell(row[k] !== undefined ? row[k] : '')).join(delim));
+  });
+
+  const csv = rows.join('\n');
+  return { csv, rows: flatData.length, cols: keys.length };
+}
+
+function flattenObj(obj, prefix = '') {
+  const res = {};
+  for (const [k, v] of Object.entries(obj)) {
+    const key = prefix ? prefix + '.' + k : k;
+    if (v && typeof v === 'object' && !Array.isArray(v)) {
+      Object.assign(res, flattenObj(v, key));
+    } else {
+      res[key] = Array.isArray(v) ? JSON.stringify(v) : v;
+    }
+  }
+  return res;
+}
+
+/* ── CSV PARSER (handles quoted fields) ── */
+function parseCSVLines(csv, delim) {
+  const lines = [];
+  let cur = [], field = '', inQuote = false;
+  for (let i = 0; i < csv.length; i++) {
+    const c = csv[i];
+    if (inQuote) {
+      if (c === '"' && csv[i+1] === '"') { field += '"'; i++; }
+      else if (c === '"') { inQuote = false; }
+      else { field += c; }
+    } else {
+      if (c === '"') { inQuote = true; }
+      else if (c === delim) { cur.push(field); field = ''; }
+      else if (c === '\n' || (c === '\r' && csv[i+1] === '\n')) {
+        if (c === '\r') i++;
+        cur.push(field); field = '';
+        if (cur.length > 0) lines.push(cur);
+        cur = [];
+      } else { field += c; }
+    }
+  }
+  cur.push(field);
+  if (cur.some(f => f !== '')) lines.push(cur);
+  return lines;
+}
+
+/* ── TABLE PREVIEW ── */
+function renderTablePreview(data, headers) {
+  const section = document.getElementById('tablePreview');
+  const table = document.getElementById('previewTable');
+  if (!data || !data.length) { section.classList.remove('show'); return; }
+
+  const displayRows = data.slice(0, 100);
+  let html = '<thead><tr>' + headers.map(h => `<th>${escHtml(String(h))}</th>`).join('') + '</tr></thead><tbody>';
+  displayRows.forEach(row => {
+    html += '<tr>' + headers.map(h => `<td title="${escHtml(String(row[h]??''))}">${escHtml(truncate(String(row[h]??''), 40))}</td>`).join('') + '</tr>';
+  });
+  html += '</tbody>';
+  table.innerHTML = html;
+  document.getElementById('tableInfo').textContent = `${data.length} rows · ${headers.length} cols`;
+  document.getElementById('tableFooter').textContent = data.length > 100 ? `Showing first 100 of ${data.length} rows` : `${data.length} row${data.length!==1?'s':''} · ${headers.length} column${headers.length!==1?'s':''}`;
+  section.classList.add('show');
+}
+
+function renderTablePreviewFromCsv(csv) {
+  const delimiterRaw = document.getElementById('outDelimiter').value;
+  const delim = delimiterRaw === '\\t' ? '\t' : delimiterRaw;
+  const lines = parseCSVLines(csv, delim);
+  if (lines.length < 2) { document.getElementById('tablePreview').classList.remove('show'); return; }
+  const headers = lines[0];
+  const data = lines.slice(1).map(row => {
+    const obj = {};
+    headers.forEach((h, i) => obj[h] = row[i] ?? '');
+    return obj;
+  });
+  renderTablePreview(data, headers);
+}
+
+/* ── STATS ── */
+function updateStats(rows, cols, inStr, outStr) {
+  const inB = new Blob([inStr]).size;
+  const outB = new Blob([outStr]).size;
+  document.getElementById('statRows').textContent = rows;
+  document.getElementById('statCols').textContent = cols;
+  document.getElementById('statSize').textContent = formatBytes(inB);
+  document.getElementById('statOutSize').textContent = formatBytes(outB);
+  document.getElementById('statRatio').textContent = inB > 0 ? (outB/inB).toFixed(2) + '×' : '—';
+  document.getElementById('statsCard').classList.add('show');
+}
+
+function updateOutputStats(v) {
+  const lines = v ? v.split('\n').length : 0;
+  document.getElementById('outputLines').textContent = lines + ' line' + (lines!==1?'s':'');
+  document.getElementById('outputChars').textContent = v.length + ' chars';
+  document.getElementById('outputSize').textContent = formatBytes(new Blob([v]).size);
+}
+
+/* ── MESSAGES ── */
+function showError(msg) {
+  const b = document.getElementById('inputError');
+  document.getElementById('inputErrorMsg').textContent = msg;
+  b.classList.add('show'); b.classList.add('error');
+}
+function hideError() {
+  document.getElementById('inputError').classList.remove('show');
+}
+function showSuccess(msg) {
+  const b = document.getElementById('outputSuccess');
+  document.getElementById('outputSuccessMsg').textContent = msg;
+  b.classList.add('show'); b.classList.add('success');
+}
+function hideSuccess() {
+  document.getElementById('outputSuccess').classList.remove('show');
+}
+function clearOutput() {
+  document.getElementById('outputArea').value = '';
+  hideSuccess(); hideError();
+  document.getElementById('statsCard').classList.remove('show');
+  document.getElementById('tablePreview').classList.remove('show');
+  document.getElementById('outputLines').textContent = '0 lines';
+  document.getElementById('outputChars').textContent = '0 chars';
+  document.getElementById('outputSize').textContent = '0 B';
+}
+
+/* ── ACTIONS ── */
+async function pasteFromClipboard() {
+  try {
+    const text = await navigator.clipboard.readText();
+    document.getElementById('inputArea').value = text;
+    updateInputStats(); convert();
+  } catch(e) { alert('Clipboard access denied. Please paste manually (Ctrl+V).'); }
+}
+
+function clearInput() {
+  document.getElementById('inputArea').value = '';
+  updateInputStats(); clearOutput();
+  document.getElementById('statsCard').classList.remove('show');
+}
+
+function copyOutput() {
+  const val = document.getElementById('outputArea').value;
+  if (!val) return;
+  navigator.clipboard.writeText(val).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.classList.add('copied'); btn.childNodes[1].textContent = ' Copied!';
+    setTimeout(() => { btn.classList.remove('copied'); btn.childNodes[1].textContent = ' Copy'; }, 2000);
+  });
+}
+
+function downloadOutput() {
+  const val = document.getElementById('outputArea').value;
+  if (!val) return;
+  const ext = currentMode === 'csv2json' ? 'json' : 'csv';
+  const mime = currentMode === 'csv2json' ? 'application/json' : 'text/csv';
+  const blob = new Blob([val], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'converted.' + ext; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function loadSample() {
+  if (currentMode === 'csv2json') {
+    document.getElementById('inputArea').value =
+`name,age,city,country,score
+Alice Johnson,28,Kathmandu,Nepal,92.5
+Bob Smith,34,New York,USA,78
+Priya Sharma,26,Mumbai,India,88.3
+Carlos Gomez,31,Madrid,Spain,
+Emma Wilson,29,London,UK,95.1`;
+  } else {
+    document.getElementById('inputArea').value =
+`[
+  {"name":"Alice Johnson","age":28,"city":"Kathmandu","country":"Nepal","score":92.5},
+  {"name":"Bob Smith","age":34,"city":"New York","country":"USA","score":78},
+  {"name":"Priya Sharma","age":26,"city":"Mumbai","country":"India","score":88.3},
+  {"name":"Carlos Gomez","age":31,"city":"Madrid","country":"Spain","score":null},
+  {"name":"Emma Wilson","age":29,"city":"London","country":"UK","score":95.1}
+]`;
+  }
+  updateInputStats(); convert();
+}
+
+/* ── HELPERS ── */
+function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function truncate(s, n) { return s.length > n ? s.slice(0, n) + '…' : s; }
+function formatBytes(b) {
+  if (b < 1024) return b + ' B';
+  if (b < 1048576) return (b/1024).toFixed(1) + ' KB';
+  return (b/1048576).toFixed(2) + ' MB';
+}
+function faq(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
+
+/* ── INIT ── */
+updateInputStats();
+</script>
+</body>
+</html>
