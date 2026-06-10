@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://raiparuhang.com.np/sitemap.xml
+Content-Signal: ai-train=no, search=yes, ai-input=no
