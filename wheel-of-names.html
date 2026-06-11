@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wheel of Names — Free Random Name Picker & Spinner Wheel | Rai Paruhang</title>
+<meta name="description" content="Free online wheel of names spinner. Add names, spin the wheel and pick a random winner instantly. Perfect for giveaways, classrooms, team picks and decisions. No signup, 100% private.">
+<link rel="canonical" href="https://raiparuhang.com.np/wheel-of-names">
+<link rel="alternate" hreflang="en" href="https://raiparuhang.com.np/wheel-of-names">
+<link rel="alternate" hreflang="x-default" href="https://raiparuhang.com.np/wheel-of-names">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- ✅ 2. SoftwareApplication SCHEMA  -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Wheel of Names — Random Name Picker & Spinner",
+  "url": "https://raiparuhang.com.np/wheel-of-names",
+  "description": "Free online spinning wheel name picker. Add names, spin the wheel and pick a random winner instantly. Supports bulk add, confetti celebration, remove after pick, spin history, custom colors and sound effects. 100% client-side — your names never leave your browser.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "browserRequirements": "Requires a modern web browser with JavaScript enabled",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Spinning wheel name picker",
+    "Random winner selection",
+    "Bulk add names",
+    "Remove picked names from future spins",
+    "Spin history log",
+    "Confetti celebration on win",
+    "Winner popup announcement",
+    "Sound effects while spinning",
+    "Custom color palettes",
+    "Quick Pick without animation",
+    "Shuffle and sort names",
+    "No data saved or uploaded",
+    "100% client-side processing",
+    "Free forever"
+  ],
+  "author": {
+    "@type": "Person",
+    "name": "Paruhang Rai",
+    "url": "https://raiparuhang.com.np/"
+  }
+}
+</script>
+ 
+ 
+<!-- ✅ 3. FAQPage SCHEMA  -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a wheel of names?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A wheel of names is a spinning wheel tool where you add a list of names and spin it to randomly pick a winner. It is widely used for giveaways, classroom activities, team selections, prize draws, and making random decisions fairly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this wheel of names truly random?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The winner is determined using JavaScript's Math.random() which produces a cryptographically unpredictable result. Every name on the wheel has an equal chance of being selected regardless of the visual spin duration."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my names saved or uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All names exist only in your browser memory and are never sent to any server. Nothing is stored, logged, or shared with anyone. If you refresh the page the names will be cleared."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many names can I add to the wheel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There is no hard limit. The wheel renders well up to around 100 names. For very large lists use the Quick Pick button which instantly picks a random name without the animation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I remove a name after it has been picked?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Enable the Remove after pick setting and picked names will be greyed out and excluded from future spins. This ensures every spin has a unique winner. Click Reset to restore all names for a fresh round."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this a free wheelofnames.com alternative?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. This is a free alternative to wheelofnames.com that works entirely in your browser with no ads, no account required, and no data uploaded. It includes all the core features — spinning wheel, bulk add, remove after pick, and winner announcement — completely free."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#06080f;--bg2:#0d1120;--bg3:#111827;
+  --surface:#161d2e;--surface2:#1e2840;
+  --border:rgba(99,140,255,.12);--border2:rgba(99,140,255,.22);
+  --accent:#4f8eff;--accent2:#7eb3ff;
+  --green:#22d3a0;--green-bg:rgba(34,211,160,.1);
+  --red:#ff5b5b;--red-bg:rgba(255,91,91,.1);
+  --amber:#f5a623;--amber-bg:rgba(245,166,35,.08);
+  --text:#e8edf8;--text2:#8b99bb;--text3:#556080;
+  --mono:'DM Mono',monospace;--sans:'Sora',sans-serif;
+  --radius:14px;--radius-lg:20px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;min-height:100vh}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 max(24px,5vw);height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:17px;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:-.3px;display:flex;align-items:center;gap:10px}
+.nav-logo .dot{width:8px;height:8px;background:var(--accent);border-radius:50%;box-shadow:0 0 8px var(--accent);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:14px;color:var(--text2);text-decoration:none;font-weight:400;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--accent)}
+.nav-cta{background:var(--accent);color:#fff!important;padding:8px 18px;border-radius:8px;font-weight:600!important;font-size:13px!important;transition:opacity .2s!important}
+.nav-cta:hover{opacity:.88}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{width:22px;height:2px;background:var(--text2);border-radius:2px;display:block;transition:all .3s}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(6,8,15,.97);border-bottom:1px solid var(--border);padding:24px max(24px,5vw);z-index:99;flex-direction:column;gap:20px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--text2);text-decoration:none;font-size:16px;padding:8px 0;border-bottom:1px solid var(--border);transition:color .2s}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu a:hover,.mobile-menu a.active{color:var(--accent)}
+@media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}}
+
+/* PAGE HEADER */
+.page-header{padding:96px max(24px,5vw) 36px;max-width:1100px;margin:0 auto;text-align:center}
+.page-badge{display:inline-flex;align-items:center;gap:8px;background:var(--green-bg);border:1px solid rgba(34,211,160,.25);border-radius:100px;padding:5px 14px;font-family:var(--mono);font-size:11px;color:var(--green);margin-bottom:20px;letter-spacing:.5px}
+.page-badge::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%;box-shadow:0 0 5px var(--green)}
+.page-header h1{font-size:clamp(26px,5vw,50px);font-weight:700;letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px}
+.page-header h1 span{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 60%,var(--green) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-header p{color:var(--text2);font-size:15px;max-width:500px;margin:0 auto;font-weight:300}
+
+/* TOOL WRAPPER */
+.tool-wrapper{max-width:1100px;margin:0 auto;padding:0 max(24px,5vw) 80px;display:flex;flex-direction:column;gap:20px}
+
+/* SECURITY STRIP */
+.security-strip{display:flex;align-items:center;gap:8px;justify-content:center;padding:12px;background:var(--green-bg);border:1px solid rgba(34,211,160,.15);border-radius:12px;font-size:12px;font-family:var(--mono);color:var(--green);letter-spacing:.3px;flex-wrap:wrap;text-align:center}
+.security-strip svg{width:14px;height:14px;flex-shrink:0}
+
+/* MAIN LAYOUT */
+.main-layout{display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start}
+@media(max-width:900px){.main-layout{grid-template-columns:1fr}}
+
+/* WHEEL SECTION */
+.wheel-section{display:flex;flex-direction:column;align-items:center;gap:20px}
+
+/* WHEEL CONTAINER */
+.wheel-outer{position:relative;display:flex;align-items:center;justify-content:center}
+.wheel-wrap{position:relative;width:min(480px,calc(100vw - 48px));height:min(480px,calc(100vw - 48px))}
+#wheelCanvas{display:block;border-radius:50%;cursor:pointer;filter:drop-shadow(0 8px 40px rgba(79,142,255,.25))}
+/* pointer arrow — positioned on RIGHT side, tip points LEFT into the wheel */
+.wheel-pointer{position:absolute;right:-8px;top:50%;transform:translateY(-50%);z-index:10;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
+.wheel-pointer svg{width:36px;height:36px}
+/* center button */
+.wheel-center-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:10;width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#7eb3ff);border:4px solid rgba(6,8,15,.8);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(79,142,255,.5);transition:all .2s;flex-direction:column;gap:2px}
+.wheel-center-btn:hover{transform:translate(-50%,-50%) scale(1.08);box-shadow:0 6px 28px rgba(79,142,255,.6)}
+.wheel-center-btn:disabled{opacity:.5;cursor:not-allowed;transform:translate(-50%,-50%)}
+.wheel-center-btn svg{width:22px;height:22px;color:#fff}
+.wheel-center-btn span{font-size:9px;font-family:var(--mono);color:#fff;letter-spacing:.5px;font-weight:600}
+
+/* RESULT DISPLAY */
+.result-display{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 24px;text-align:center;min-height:72px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;transition:all .4s}
+.result-display.has-result{border-color:var(--accent);background:rgba(79,142,255,.06)}
+.result-display.winner{border-color:var(--green);background:var(--green-bg);animation:winnerPulse .6s ease}
+@keyframes winnerPulse{0%{transform:scale(.98)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
+.result-label{font-size:11px;font-family:var(--mono);color:var(--text3);letter-spacing:.5px;text-transform:uppercase}
+.result-name{font-size:28px;font-weight:700;letter-spacing:-1px;color:var(--green)}
+.result-placeholder{font-size:14px;color:var(--text3);font-family:var(--mono)}
+
+/* SPIN CONTROLS */
+.spin-controls{display:flex;gap:10px;width:100%;flex-wrap:wrap}
+.btn-spin{flex:1;min-width:140px;background:linear-gradient(135deg,var(--accent),#7eb3ff);color:#fff;border:none;border-radius:12px;padding:14px 24px;font-size:16px;font-weight:700;font-family:var(--sans);cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:10px;letter-spacing:-.3px}
+.btn-spin:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 32px rgba(79,142,255,.35)}
+.btn-spin:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn-spin svg{width:18px;height:18px}
+.btn-ghost{display:inline-flex;align-items:center;gap:7px;background:transparent;color:var(--text2);border:1px solid var(--border2);border-radius:10px;padding:12px 18px;font-size:14px;font-weight:500;font-family:var(--sans);cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn-ghost:hover{border-color:rgba(99,140,255,.4);color:var(--text)}
+.btn-ghost svg{width:14px;height:14px}
+
+/* HISTORY */
+.history-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;width:100%}
+.history-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border)}
+.history-header h3{font-size:13px;font-weight:600;color:var(--text2);display:flex;align-items:center;gap:7px}
+.history-header h3 svg{width:13px;height:13px;color:var(--accent)}
+.history-list{max-height:160px;overflow-y:auto;display:flex;flex-direction:column}
+.history-item{display:flex;align-items:center;gap:10px;padding:8px 16px;border-bottom:1px solid var(--border);font-size:13px}
+.history-item:last-child{border-bottom:none}
+.history-num{font-family:var(--mono);font-size:10px;color:var(--text3);min-width:20px}
+.history-name{flex:1;font-weight:500}
+.history-badge{font-size:10px;font-family:var(--mono);padding:2px 7px;border-radius:4px}
+.hb-winner{background:var(--green-bg);color:var(--green);border:1px solid rgba(34,211,160,.2)}
+.hb-picked{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(245,166,35,.2)}
+.history-empty{padding:16px;text-align:center;font-size:12px;font-family:var(--mono);color:var(--text3)}
+
+/* RIGHT PANEL */
+.right-panel{display:flex;flex-direction:column;gap:14px;position:sticky;top:80px}
+
+/* CARD */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.card-header{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:1px solid var(--border)}
+.card-header-left{display:flex;align-items:center;gap:7px}
+.card-header-left svg{width:14px;height:14px;color:var(--accent)}
+.card-header h3{font-size:13px;font-weight:600}
+.card-body{padding:16px;display:flex;flex-direction:column;gap:12px}
+
+/* NAME INPUT */
+.name-input-row{display:flex;gap:8px}
+.name-input{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 13px;font-size:14px;font-family:var(--sans);color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s}
+.name-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,142,255,.15)}
+.name-input::placeholder{color:var(--text3)}
+.btn-add{background:var(--accent);color:#fff;border:none;border-radius:10px;padding:10px 16px;font-size:14px;font-weight:600;font-family:var(--sans);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px;white-space:nowrap;flex-shrink:0}
+.btn-add:hover{background:#6fa3ff;transform:translateY(-1px)}
+.btn-add svg{width:14px;height:14px}
+
+/* BULK INPUT */
+.bulk-area{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 13px;font-size:13px;font-family:var(--mono);color:var(--text);outline:none;transition:border-color .2s;resize:none;min-height:80px;line-height:1.6}
+.bulk-area:focus{border-color:var(--accent)}
+.bulk-area::placeholder{color:var(--text3)}
+
+/* NAMES LIST */
+.names-list{display:flex;flex-direction:column;gap:6px;max-height:340px;overflow-y:auto}
+.name-item{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;transition:all .2s;cursor:default}
+.name-item:hover{border-color:var(--border2)}
+.name-item.picked{opacity:.45;text-decoration:line-through}
+.name-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.name-text{flex:1;font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.name-count-badge{font-size:10px;font-family:var(--mono);background:rgba(79,142,255,.1);color:var(--accent2);border:1px solid rgba(79,142,255,.15);border-radius:4px;padding:1px 6px;flex-shrink:0}
+.icon-btn{width:26px;height:26px;border-radius:7px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;color:var(--text2);flex-shrink:0}
+.icon-btn svg{width:11px;height:11px}
+.icon-btn:hover{background:var(--red-bg);border-color:rgba(255,91,91,.3);color:var(--red)}
+
+.names-empty{text-align:center;padding:24px;font-size:13px;font-family:var(--mono);color:var(--text3)}
+
+/* FIELD */
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:11px;color:var(--text2);font-family:var(--mono);letter-spacing:.4px;text-transform:uppercase}
+.field select{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:9px 12px;font-size:13px;font-family:var(--sans);color:var(--text);outline:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b99bb' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px;transition:border-color .2s}
+.field select:focus{border-color:var(--accent)}
+
+/* TOGGLE ROW */
+.trow{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)}
+.trow:last-child{border-bottom:none}
+.trow-lbl .tn{font-size:13px;font-weight:500}
+.trow-lbl .td{font-size:11px;color:var(--text3);margin-top:1px}
+.toggle{width:38px;height:21px;background:var(--bg3);border-radius:100px;border:1px solid var(--border);cursor:pointer;position:relative;transition:all .2s;flex-shrink:0}
+.toggle.on{background:var(--accent);border-color:var(--accent)}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:13px;height:13px;background:var(--text3);border-radius:50%;transition:all .2s}
+.toggle.on::after{left:20px;background:#fff}
+
+/* COLOR PALETTE */
+.palette-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:6px}
+.palette-swatch{height:24px;border-radius:6px;cursor:pointer;border:2px solid transparent;transition:all .2s}
+.palette-swatch.active{border-color:#fff;transform:scale(1.15)}
+.palette-swatch:hover:not(.active){transform:scale(1.07)}
+
+/* ACTIONS ROW */
+.actions-row{display:flex;gap:8px;flex-wrap:wrap}
+.btn-sm{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:7px 13px;font-size:12px;font-family:var(--mono);color:var(--text2);cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn-sm:hover{border-color:var(--border2);color:var(--text);background:var(--surface2)}
+.btn-sm.danger:hover{border-color:rgba(255,91,91,.4);color:var(--red);background:var(--red-bg)}
+.btn-sm svg{width:11px;height:11px}
+
+/* WINNER OVERLAY */
+.winner-overlay{position:fixed;inset:0;z-index:200;background:rgba(6,8,15,.88);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;flex-direction:column;gap:20px;cursor:pointer}
+.winner-overlay.show{display:flex}
+.winner-box{background:var(--surface);border:2px solid var(--green);border-radius:var(--radius-lg);padding:40px 60px;text-align:center;max-width:500px;width:90%;box-shadow:0 24px 80px rgba(34,211,160,.2);animation:bounceIn .5s cubic-bezier(.175,.885,.32,1.275)}
+@keyframes bounceIn{0%{opacity:0;transform:scale(.6)}100%{opacity:1;transform:scale(1)}}
+.winner-box .w-label{font-size:12px;font-family:var(--mono);color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.winner-box .w-name{font-size:clamp(28px,5vw,52px);font-weight:700;letter-spacing:-1.5px;color:var(--text);margin-bottom:8px}
+.winner-box .w-sub{font-size:13px;color:var(--text3);font-family:var(--mono)}
+.winner-box .w-close{margin-top:20px;font-size:12px;color:var(--text3);font-family:var(--mono)}
+.confetti-wrap{position:fixed;inset:0;pointer-events:none;z-index:201}
+
+/* FAQ */
+.faq-section{padding:60px max(24px,5vw) 80px;max-width:720px;margin:0 auto}
+.faq-section h2{font-size:clamp(20px,3vw,28px);font-weight:700;letter-spacing:-.7px;margin-bottom:28px}
+.faq-item{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden}
+.faq-q{padding:16px 20px;font-size:15px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;user-select:none;transition:background .2s}
+.faq-q:hover{background:var(--surface)}
+.faq-q svg{width:16px;height:16px;color:var(--text3);flex-shrink:0;transition:transform .3s}
+.faq-q.open svg{transform:rotate(180deg)}
+.faq-a{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .3s,padding .3s;font-size:14px;color:var(--text2);line-height:1.7}
+.faq-a.open{max-height:220px;padding:0 20px 16px}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.footer-left{font-size:12px;color:var(--text3);font-family:var(--mono)}
+.footer-left a{color:var(--text3);text-decoration:none;transition:color .2s}
+.footer-left a:hover{color:var(--text2)}
+.footer-right{display:flex;gap:16px}
+.footer-right a{color:var(--text3);font-size:12px;text-decoration:none;font-family:var(--mono);transition:color .2s}
+.footer-right a:hover{color:var(--text)}
+
+@media(max-width:600px){
+  .spin-controls{flex-direction:column}
+  .btn-spin,.btn-ghost{justify-content:center}
+  .actions-row{flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://raiparuhang.com.np" class="nav-logo"><span class="dot"></span>Rai Paruhang</a>
+  <ul class="nav-links">
+    <li><a href="https://raiparuhang.com.np/#home">Home</a></li>
+    <li><a href="https://raiparuhang.com.np/#about">About</a></li>
+    <li><a href="https://raiparuhang.com.np/#contact">Contact</a></li>
+    <li><a href="https://raiparuhang.com.np/tools" class="nav-cta">All Tools</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="https://raiparuhang.com.np/#home" onclick="closeMobile()">Home</a>
+  <a href="https://raiparuhang.com.np/tools" class="active" onclick="closeMobile()">All Tools</a>
+  <a href="https://raiparuhang.com.np/#about" onclick="closeMobile()">About</a>
+  <a href="https://raiparuhang.com.np/#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="page-badge">Free · No Sign-up · No Data Saved</div>
+  <h1>Wheel of <span>Names</span></h1>
+  <p>Free random name picker and spinner wheel. Add names, spin and pick a winner instantly — perfect for giveaways, classrooms, team selections and decisions.</p>
+</div>
+
+<!-- TOOL -->
+<div class="tool-wrapper">
+
+  <div class="security-strip">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    All data stays in your browser — nothing is saved or sent anywhere
+  </div>
+
+  <div class="main-layout">
+
+    <!-- LEFT: WHEEL -->
+    <div class="wheel-section">
+
+      <!-- WHEEL -->
+      <div class="wheel-outer">
+        <div class="wheel-wrap">
+          <canvas id="wheelCanvas"></canvas>
+          <!-- FIX 1: pointer tip now points LEFT (into the wheel) — tip at x=0, base at x=28 -->
+          <div class="wheel-pointer">
+            <svg viewBox="0 0 36 36" fill="none">
+              <polygon points="0,18 28,6 28,30" fill="#fff" stroke="rgba(0,0,0,.3)" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <!-- center spin button -->
+          <button class="wheel-center-btn" id="spinBtn" onclick="spin()">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span>SPIN</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- RESULT -->
+      <div class="result-display" id="resultDisplay">
+        <span class="result-placeholder">Spin the wheel to pick a name!</span>
+      </div>
+
+      <!-- SPIN CONTROLS -->
+      <div class="spin-controls">
+        <button class="btn-spin" id="spinBtnMain" onclick="spin()">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          Spin the Wheel!
+        </button>
+        <button class="btn-ghost" onclick="pickRandom()">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 8h.01M12 12h.01M17 16h.01M7 16h.01M17 8h.01"/></svg>
+          Quick Pick
+        </button>
+        <button class="btn-ghost" onclick="resetPicked()">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg>
+          Reset
+        </button>
+      </div>
+
+      <!-- HISTORY -->
+      <div class="history-card">
+        <div class="history-header">
+          <h3>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Spin History
+          </h3>
+          <button class="btn-sm" onclick="clearHistory()">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+            Clear
+          </button>
+        </div>
+        <div class="history-list" id="historyList">
+          <div class="history-empty">No spins yet</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+
+      <!-- ADD NAMES -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <h3>Names <span id="nameCountBadge" style="font-size:11px;color:var(--text3);font-family:var(--mono);">(0)</span></h3>
+          </div>
+          <div style="display:flex;gap:6px;">
+            <button class="btn-sm" id="toggleBulkBtn" onclick="toggleBulk()">Bulk Add</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <!-- single add -->
+          <div class="name-input-row" id="singleAddRow">
+            <input type="text" class="name-input" id="nameInput" placeholder="Type a name..." onkeydown="if(event.key==='Enter')addName()">
+            <button class="btn-add" onclick="addName()">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add
+            </button>
+          </div>
+          <!-- bulk add -->
+          <div id="bulkAddRow" style="display:none;flex-direction:column;gap:8px;">
+            <textarea class="bulk-area" id="bulkArea" placeholder="Enter one name per line:&#10;Alice&#10;Bob&#10;Charlie&#10;Diana"></textarea>
+            <div style="display:flex;gap:8px;">
+              <button class="btn-add" style="flex:1;justify-content:center;" onclick="addBulk()">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Add All
+              </button>
+              <button class="btn-sm" onclick="toggleBulk()">Cancel</button>
+            </div>
+          </div>
+
+          <!-- names list -->
+          <div class="names-list" id="namesList">
+            <div class="names-empty">Add names above to get started</div>
+          </div>
+
+          <!-- actions -->
+          <div class="actions-row">
+            <button class="btn-sm" onclick="shuffleNames()">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+              Shuffle
+            </button>
+            <button class="btn-sm" onclick="sortNames()">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/></svg>
+              Sort A–Z
+            </button>
+            <button class="btn-sm" onclick="loadSample()">Sample</button>
+            <button class="btn-sm danger" onclick="clearAllNames()">Clear All</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+            <h3>Settings</h3>
+          </div>
+        </div>
+        <div class="card-body">
+          <!-- FIX 2: Default is 8s; added 10s, 15s, 20s options -->
+          <div class="field">
+            <label>Spin Duration</label>
+            <select id="spinSpeed">
+              <option value="fast">Fast (2s)</option>
+              <option value="normal">Normal (4s)</option>
+              <option value="default" selected>Default (8s)</option>
+              <option value="long10">Long (10s)</option>
+              <option value="long15">Very Long (15s)</option>
+              <option value="long20">Extended (20s)</option>
+              <option value="instant">Instant</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Color Palette</label>
+            <div class="palette-grid" id="paletteGrid"></div>
+          </div>
+          <div>
+            <div class="trow">
+              <div class="trow-lbl"><div class="tn">Remove after pick</div><div class="td">Picked names are greyed out</div></div>
+              <div class="toggle on" id="togRemove" onclick="this.classList.toggle('on');wheelDirty=true;redraw()"></div>
+            </div>
+            <div class="trow">
+              <div class="trow-lbl"><div class="tn">Show winner popup</div><div class="td">Full-screen winner announcement</div></div>
+              <div class="toggle on" id="togPopup" onclick="this.classList.toggle('on')"></div>
+            </div>
+            <div class="trow">
+              <div class="trow-lbl"><div class="tn">Confetti on win</div><div class="td">Celebrate with confetti!</div></div>
+              <div class="toggle on" id="togConfetti" onclick="this.classList.toggle('on')"></div>
+            </div>
+            <div class="trow">
+              <div class="trow-lbl"><div class="tn">Sound effect</div><div class="td">Play tick sound while spinning</div></div>
+              <div class="toggle on" id="togSound" onclick="this.classList.toggle('on')"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- WINNER OVERLAY -->
+<div class="winner-overlay" id="winnerOverlay" onclick="closeWinner()">
+  <div class="confetti-wrap" id="confettiWrap"></div>
+  <div class="winner-box" onclick="event.stopPropagation()">
+    <div class="w-label">🎉 Winner!</div>
+    <div class="w-name" id="winnerName">—</div>
+    <div class="w-sub" id="winnerSub">Congratulations!</div>
+    <div class="w-close">Click anywhere to close</div>
+  </div>
+</div>
+
+<!-- ================================================================
+  6. HOW TO USE SECTION
+================================================================ -->
+<div style="max-width:860px;margin:0 auto 24px;padding:0 max(24px,5vw);">
+  <h2 style="font-size:15px;font-weight:700;color:#e8edf8;margin-bottom:12px;letter-spacing:-.3px;">How to use the Wheel of Names</h2>
+  <ol style="color:#8b99bb;font-size:14px;line-height:2;padding-left:20px;">
+    <li><strong style="color:#e8edf8;">Add names</strong> — type names one by one or use Bulk Add to paste a full list</li>
+    <li><strong style="color:#e8edf8;">Customise</strong> — choose a color palette and set the spin duration</li>
+    <li><strong style="color:#e8edf8;">Spin</strong> — click Spin the Wheel or the centre button to start spinning</li>
+    <li><strong style="color:#e8edf8;">Winner!</strong> — the wheel stops on a random name and announces the winner with confetti</li>
+  </ol>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <h2>Frequently Asked Questions</h2>
+ 
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">
+      What is a wheel of names?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">
+      A wheel of names is a spinning wheel tool where you add a list of names and spin it to randomly pick a winner. It is widely used for giveaways, classroom activities, team selections, prize draws, and making random decisions fairly.
+    </div>
+  </div>
+ 
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">
+      Is this wheel of names truly random?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">
+      Yes. The winner is determined using JavaScript's Math.random() which produces a cryptographically unpredictable result. Every name on the wheel has an equal chance of being selected regardless of the visual spin duration.
+    </div>
+  </div>
+ 
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">
+      Are my names saved or uploaded to a server?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">
+      No. All names exist only in your browser memory and are never sent to any server. Nothing is stored, logged, or shared with anyone. If you refresh the page the names will be cleared.
+    </div>
+  </div>
+ 
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">
+      How many names can I add to the wheel?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">
+      There is no hard limit. The wheel renders well up to around 100 names. For very large lists use the Quick Pick button which instantly picks a random name without the animation.
+    </div>
+  </div>
+ 
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">
+      Can I remove a name after it has been picked?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">
+      Yes. Enable the Remove after pick setting and picked names will be greyed out and excluded from future spins. This ensures every spin produces a unique winner. Click Reset to restore all names for a fresh round.
+    </div>
+  </div>
+ 
+  <div class="faq-item">
+    <div class="faq-q" onclick="faq(this)">
+      Is this a free wheelofnames.com alternative?
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="faq-a">
+      Yes. This is a free alternative to wheelofnames.com that works entirely in your browser with no ads, no account required, and no data uploaded. It includes all the core features — spinning wheel, bulk add, remove after pick, and winner announcement — completely free.
+    </div>
+  </div>
+ 
+</div>
+
+<!-- ================================================================
+  8. ALSO SEARCHED AS 
+================================================================ -->
+<section style="margin: 60px auto; max-width: 780px; padding: 0 20px;">
+  <h2 style="font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6b7280; margin-bottom: 16px;">
+    Also searched as
+  </h2>
+  <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">wheelofnames alternative free</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">random name picker wheel</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">spin wheel name picker free</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">random name picker for classroom</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">giveaway winner picker wheel</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">spinning wheel random picker no signup</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">random student picker wheel</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">prize draw wheel spinner free</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">wheel spinner no ads</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">name wheel picker no upload</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">random team picker wheel free</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">decision maker spinner wheel</span>
+  </div>
+</section>
+
+<!-- ================================================================
+  9. RELATED TOOLS 
+================================================================ -->
+<section style="max-width:780px;margin:0 auto 60px;padding:0 20px;">
+  <h2 style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#556080;margin-bottom:16px;">Related Tools</h2>
+  <div style="display:flex;flex-wrap:wrap;gap:12px;">
+    <a href="https://raiparuhang.com.np/password-generator" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:#161d2e;border:1px solid rgba(99,140,255,.12);border-radius:12px;text-decoration:none;color:#e8edf8;font-size:13px;font-weight:600;flex:1;min-width:180px;">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#4f8eff" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Password Generator
+      <span style="margin-left:auto;font-size:11px;color:#556080;font-family:monospace;">→</span>
+    </a>
+    <a href="https://raiparuhang.com.np/qr-code-generator" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:#161d2e;border:1px solid rgba(99,140,255,.12);border-radius:12px;text-decoration:none;color:#e8edf8;font-size:13px;font-weight:600;flex:1;min-width:180px;">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#22d3a0" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="5" y="5" width="3" height="3" fill="currentColor" stroke="none"/><rect x="16" y="5" width="3" height="3" fill="currentColor" stroke="none"/><rect x="5" y="16" width="3" height="3" fill="currentColor" stroke="none"/></svg>
+      QR Code Generator
+      <span style="margin-left:auto;font-size:11px;color:#556080;font-family:monospace;">→</span>
+    </a>
+    <a href="https://raiparuhang.com.np/bar-code-generator" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:#161d2e;border:1px solid rgba(99,140,255,.12);border-radius:12px;text-decoration:none;color:#e8edf8;font-size:13px;font-weight:600;flex:1;min-width:180px;">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#f5a623" stroke-width="2"><path d="M3 5v14M7 5v14M11 5v14M15 5v14M19 5v14"/></svg>
+      Barcode Generator
+      <span style="margin-left:auto;font-size:11px;color:#556080;font-family:monospace;">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">© 2026 Rai Paruhang · <a href="https://raiparuhang.com.np/terms.html">Privacy &amp; Terms</a></div>
+  <div class="footer-right">
+    <a href="https://raiparuhang.com.np/tools">All Tools</a>
+    <a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter</a>
+    <a href="https://www.linkedin.com/in/paruhang-rai/" target="_blank" rel="noopener">Linkedin</a>
+  </div>
+</footer>
+
+<script>
+/* ── STATE ── */
+let names = [];
+let spinning = false;
+let spinAngle = 0;
+let history = [];
+let activePalette = 0;
+
+/* ── PALETTES ── */
+const palettes = [
+  ['#4f8eff','#22d3a0','#f5a623','#ff5b5b','#a78bfa','#f472b6','#38bdf8','#4ade80'],
+  ['#6366f1','#8b5cf6','#ec4899','#ef4444','#f97316','#eab308','#22c55e','#06b6d4'],
+  ['#0ea5e9','#3b82f6','#8b5cf6','#d946ef','#f43f5e','#fb923c','#facc15','#4ade80'],
+  ['#1e3a5f','#2d5a8e','#4a90d9','#6db3f2','#9ecef8','#c8e6fb','#e8f4fe','#f0f9ff'],
+  ['#1a1a2e','#16213e','#0f3460','#533483','#e94560','#f5a623','#22d3a0','#4f8eff'],
+];
+
+/* ── CANVAS ── */
+const CANVAS_SIZE = 480;
+let canvas, ctx;
+// Offscreen cache — rebuilt only when names/palette change, not every frame
+let wheelCache = null;
+let wheelDirty = true;
+
+function initCanvas() {
+  canvas = document.getElementById('wheelCanvas');
+  const size = Math.min(CANVAS_SIZE, canvas.parentElement.offsetWidth);
+  canvas.width = size; canvas.height = size;
+  ctx = canvas.getContext('2d');
+  redraw();
+}
+
+/* Build wheel slices onto an offscreen canvas at spinAngle=0.
+   Only called when names or palette actually change. */
+function buildWheelCache() {
+  const size = canvas.width;
+  const cx = size / 2, cy = size / 2, r = size / 2 - 6;
+  const active = getActiveNames();
+
+  if (!active.length) { wheelCache = null; wheelDirty = false; return; }
+
+  const oc = document.createElement('canvas');
+  oc.width = size; oc.height = size;
+  const wctx = oc.getContext('2d');
+  const sliceAngle = (2 * Math.PI) / active.length;
+  const palette = palettes[activePalette];
+
+  active.forEach((entry, i) => {
+    const start = i * sliceAngle - Math.PI / 2;   // no spinAngle — applied at draw time
+    const end   = start + sliceAngle;
+    const mid   = start + sliceAngle / 2;
+    const col   = palette[i % palette.length];
+
+    wctx.beginPath();
+    wctx.moveTo(cx, cy);
+    wctx.arc(cx, cy, r, start, end);
+    wctx.closePath();
+    wctx.fillStyle = col;
+    wctx.fill();
+    wctx.strokeStyle = 'rgba(6,8,15,.4)';
+    wctx.lineWidth = 1.5;
+    wctx.stroke();
+
+    wctx.save();
+    wctx.translate(cx, cy);
+    wctx.rotate(mid);
+    wctx.textAlign = 'right';
+    wctx.fillStyle = '#fff';
+    const maxLen = 18;
+    const label = entry.text.length > maxLen ? entry.text.slice(0, maxLen) + '…' : entry.text;
+    const fontSize = Math.max(9, Math.min(15, r * 0.085 * (1 / Math.sqrt(active.length / 6))));
+    wctx.font = `600 ${fontSize}px 'Sora', sans-serif`;
+    wctx.shadowColor = 'rgba(0,0,0,.4)';
+    wctx.shadowBlur = 3;
+    wctx.fillText(label, r - 14, fontSize / 3);
+    wctx.restore();
+  });
+
+  // outer ring
+  wctx.beginPath();
+  wctx.arc(cx, cy, r, 0, 2 * Math.PI);
+  wctx.strokeStyle = 'rgba(255,255,255,.15)';
+  wctx.lineWidth = 4;
+  wctx.stroke();
+
+  // inner hub shadow
+  wctx.beginPath();
+  wctx.arc(cx, cy, r * 0.18, 0, 2 * Math.PI);
+  wctx.fillStyle = 'rgba(6,8,15,.7)';
+  wctx.fill();
+
+  wheelCache = oc;
+  wheelDirty = false;
+}
+
+/* During animation: just rotate & blit the cached image — one drawImage per frame */
+function redraw() {
+  if (!ctx) return;
+  const size = canvas.width;
+  const cx = size / 2, cy = size / 2, r = size / 2 - 6;
+  ctx.clearRect(0, 0, size, size);
+
+  if (wheelDirty) buildWheelCache();
+
+  if (!wheelCache) {
+    drawEmptyWheel(cx, cy, r);
+    return;
+  }
+
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(spinAngle);
+  ctx.drawImage(wheelCache, -cx, -cy);
+  ctx.restore();
+}
+
+function drawEmptyWheel(cx, cy, r) {
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, 2 * Math.PI);
+  ctx.fillStyle = 'rgba(22,29,46,.8)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(99,140,255,.2)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.fillStyle = 'rgba(85,96,128,.6)';
+  ctx.font = '500 14px Sora, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('Add names to spin!', cx, cy);
+}
+
+function getActiveNames() {
+  const removeAfter = document.getElementById('togRemove').classList.contains('on');
+  return names.filter(n => !removeAfter || !n.picked);
+}
+
+/* ── NAV ── */
+document.getElementById('hamburger').addEventListener('click', () =>
+  document.getElementById('mobileMenu').classList.toggle('open'));
+function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+/* ── ADD NAMES ── */
+function addName() {
+  const input = document.getElementById('nameInput');
+  const val = input.value.trim();
+  if (!val) return;
+  val.split(',').map(s => s.trim()).filter(Boolean).forEach(n => {
+    if (!names.find(e => e.text === n)) names.push({ text: n, picked: false });
+  });
+  input.value = '';
+  wheelDirty = true;
+  renderNamesList();
+  redraw();
+}
+
+function addBulk() {
+  const lines = document.getElementById('bulkArea').value.split('\n').map(s => s.trim()).filter(Boolean);
+  lines.forEach(n => { if (!names.find(e => e.text === n)) names.push({ text: n, picked: false }); });
+  document.getElementById('bulkArea').value = '';
+  toggleBulk();
+  wheelDirty = true;
+  renderNamesList();
+  redraw();
+}
+
+function toggleBulk() {
+  const bulk = document.getElementById('bulkAddRow');
+  const single = document.getElementById('singleAddRow');
+  const btn = document.getElementById('toggleBulkBtn');
+  const isOpen = bulk.style.display === 'flex';
+  bulk.style.display = isOpen ? 'none' : 'flex';
+  single.style.display = isOpen ? 'flex' : 'none';
+  btn.textContent = isOpen ? 'Bulk Add' : 'Single Add';
+}
+
+function removeNameAt(i) {
+  names.splice(i, 1);
+  wheelDirty = true;
+  renderNamesList();
+  redraw();
+}
+
+function clearAllNames() {
+  names = [];
+  wheelDirty = true;
+  renderNamesList();
+  redraw();
+  document.getElementById('resultDisplay').innerHTML = '<span class="result-placeholder">Spin the wheel to pick a name!</span>';
+  document.getElementById('resultDisplay').className = 'result-display';
+}
+
+function shuffleNames() {
+  for (let i = names.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [names[i], names[j]] = [names[j], names[i]];
+  }
+  wheelDirty = true;
+  renderNamesList(); redraw();
+}
+
+function sortNames() {
+  names.sort((a, b) => a.text.localeCompare(b.text));
+  wheelDirty = true;
+  renderNamesList(); redraw();
+}
+
+function loadSample() {
+  const sample = ['Alice','Bob','Charlie','Diana','Ethan','Fatima','George','Hannah','Ivan','Julia'];
+  sample.forEach(n => { if (!names.find(e => e.text === n)) names.push({ text: n, picked: false }); });
+  wheelDirty = true;
+  renderNamesList(); redraw();
+}
+
+/* ── RENDER LIST ── */
+function renderNamesList() {
+  const list = document.getElementById('namesList');
+  document.getElementById('nameCountBadge').textContent = `(${names.length})`;
+  if (!names.length) {
+    list.innerHTML = '<div class="names-empty">Add names above to get started</div>';
+    return;
+  }
+  const palette = palettes[activePalette];
+  list.innerHTML = '';
+  names.forEach((n, i) => {
+    const div = document.createElement('div');
+    div.className = 'name-item' + (n.picked ? ' picked' : '');
+    div.innerHTML = `
+      <div class="name-dot" style="background:${palette[i % palette.length]}"></div>
+      <span class="name-text">${escHtml(n.text)}</span>
+      ${n.picked ? '<span class="name-count-badge">picked</span>' : ''}
+      <button class="icon-btn" onclick="removeNameAt(${i})">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>`;
+    list.appendChild(div);
+  });
+}
+
+/* ── SPIN ── */
+function spin() {
+  const active = getActiveNames();
+  if (!active.length || spinning) return;
+
+  spinning = true;
+  const btnMain = document.getElementById('spinBtnMain');
+  const btnCenter = document.getElementById('spinBtn');
+  btnMain.disabled = true; btnCenter.disabled = true;
+  btnMain.innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="18" height="18" style="animation:spin 1s linear infinite"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> Spinning...`;
+
+  // FIX 2: Updated speed map — default 8s, new 10s/15s/20s options
+  const speedMap = {
+    fast:    2000,
+    normal:  4000,
+    default: 8000,
+    long10:  10000,
+    long15:  15000,
+    long20:  20000,
+    instant: 400
+  };
+  const duration = speedMap[document.getElementById('spinSpeed').value] || 8000;
+
+  // Pick winner deterministically
+  const winnerIdx = Math.floor(Math.random() * active.length);
+  const sliceAngle = (2 * Math.PI) / active.length;
+  // Pointer is on the RIGHT (0 rad). Winner slice center must land at 0 rad.
+  // Slice i center in canvas coords: spinAngle + i*sliceAngle - PI/2 + sliceAngle/2
+  // Solve for spinAngle so that equals 0:
+  const targetAngle = -(winnerIdx * sliceAngle + sliceAngle / 2) + Math.PI / 2;
+
+  // FIX 2: Scale extra rotations with duration so longer spins look full & dramatic
+  const minSpins = Math.max(5, Math.floor(duration / 1000));
+  const extraSpins = (minSpins + Math.floor(Math.random() * 4)) * 2 * Math.PI;
+  const endAngle = targetAngle - spinAngle + extraSpins;
+
+  const startAngle = spinAngle;
+  const startTime = performance.now();
+  let tickingEnabled = true;
+  let lastSliceIdx = -1;   // tracks which slice is under the pointer
+
+  // sound ctx — all oscillators routed through masterGain so we can silence instantly
+  let audioCtx = null;
+  let masterGain = null;
+  if (document.getElementById('togSound').classList.contains('on')) {
+    try {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      masterGain = audioCtx.createGain();
+      masterGain.connect(audioCtx.destination);
+    } catch(e) {}
+  }
+
+  function playTick() {
+    if (!audioCtx || !tickingEnabled) return;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(masterGain);
+    osc.frequency.value = 800 + Math.random() * 400;
+    gain.gain.setValueAtTime(0.07, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.025);
+    osc.start(); osc.stop(audioCtx.currentTime + 0.025);
+  }
+
+  /* Returns which slice index is currently under the pointer (right side = 0 rad) */
+  function sliceUnderPointer(angle) {
+    const n = active.length;
+    const raw = ((-angle + Math.PI / 2) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+    return Math.floor(raw / sliceAngle) % n;
+  }
+
+  function easeOut(t) {
+    return 1 - Math.pow(1 - t, 4);
+  }
+
+  function frame(now) {
+    const elapsed = now - startTime;
+    const t = Math.min(elapsed / duration, 1);
+    spinAngle = startAngle + endAngle * easeOut(t);
+
+    // Fire one tick per slice boundary crossing — perfectly in sync with the wheel
+    const currentSliceIdx = sliceUnderPointer(spinAngle);
+    if (currentSliceIdx !== lastSliceIdx) {
+      if (lastSliceIdx !== -1) playTick();
+      lastSliceIdx = currentSliceIdx;
+    }
+
+    redraw();
+
+    if (t < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      tickingEnabled = false;
+      if (masterGain) masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
+      if (audioCtx) audioCtx.close();
+      spinAngle = startAngle + endAngle;
+      redraw();
+      spinning = false;
+      btnMain.disabled = false; btnCenter.disabled = false;
+      btnMain.innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="18" height="18"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> Spin the Wheel!`;
+      const winner = active[winnerIdx];
+      announceWinner(winner);
+    }
+  }
+
+  requestAnimationFrame(frame);
+}
+
+function announceWinner(winner) {
+  const entry = names.find(n => n.text === winner.text);
+  if (entry) entry.picked = true;
+  wheelDirty = true;
+
+  const rd = document.getElementById('resultDisplay');
+  rd.className = 'result-display winner';
+  rd.innerHTML = `<span class="result-label">🎉 Winner!</span><span class="result-name">${escHtml(winner.text)}</span>`;
+
+  history.unshift({ name: winner.text, time: new Date().toLocaleTimeString() });
+  renderHistory();
+  renderNamesList();
+
+  if (document.getElementById('togPopup').classList.contains('on')) {
+    document.getElementById('winnerName').textContent = winner.text;
+    document.getElementById('winnerSub').textContent = `Spin #${history.length}`;
+    document.getElementById('winnerOverlay').classList.add('show');
+    if (document.getElementById('togConfetti').classList.contains('on')) launchConfetti();
+  }
+}
+
+function pickRandom() {
+  const active = getActiveNames();
+  if (!active.length || spinning) return;
+  const winner = active[Math.floor(Math.random() * active.length)];
+  announceWinner(winner);
+}
+
+function resetPicked() {
+  names.forEach(n => n.picked = false);
+  wheelDirty = true;
+  renderNamesList(); redraw();
+  const rd = document.getElementById('resultDisplay');
+  rd.className = 'result-display';
+  rd.innerHTML = '<span class="result-placeholder">Spin the wheel to pick a name!</span>';
+}
+
+function closeWinner() {
+  document.getElementById('winnerOverlay').classList.remove('show');
+  document.getElementById('confettiWrap').innerHTML = '';
+}
+
+/* ── HISTORY ── */
+function renderHistory() {
+  const list = document.getElementById('historyList');
+  if (!history.length) { list.innerHTML = '<div class="history-empty">No spins yet</div>'; return; }
+  list.innerHTML = '';
+  history.slice(0, 20).forEach((h, i) => {
+    const div = document.createElement('div');
+    div.className = 'history-item';
+    div.innerHTML = `<span class="history-num">#${i+1}</span><span class="history-name">${escHtml(h.name)}</span><span class="history-badge hb-winner">${h.time}</span>`;
+    list.appendChild(div);
+  });
+}
+
+function clearHistory() { history = []; renderHistory(); }
+
+/* ── PALETTE ── */
+function initPalette() {
+  const grid = document.getElementById('paletteGrid');
+  palettes.forEach((pal, pi) => {
+    const swatch = document.createElement('div');
+    swatch.className = 'palette-swatch' + (pi === 0 ? ' active' : '');
+    swatch.style.background = `linear-gradient(135deg, ${pal[0]}, ${pal[2]}, ${pal[4]})`;
+    swatch.onclick = () => {
+      activePalette = pi;
+      document.querySelectorAll('.palette-swatch').forEach(s => s.classList.remove('active'));
+      swatch.classList.add('active');
+      wheelDirty = true;
+      renderNamesList(); redraw();
+    };
+    grid.appendChild(swatch);
+  });
+}
+
+/* ── CONFETTI ── */
+function launchConfetti() {
+  const wrap = document.getElementById('confettiWrap');
+  wrap.innerHTML = '';
+  const colors = ['#4f8eff','#22d3a0','#f5a623','#ff5b5b','#a78bfa','#f472b6','#fff'];
+  for (let i = 0; i < 120; i++) {
+    const el = document.createElement('div');
+    el.style.cssText = `
+      position:absolute;
+      left:${Math.random()*100}%;
+      top:-10px;
+      width:${6+Math.random()*8}px;
+      height:${6+Math.random()*8}px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      border-radius:${Math.random()>.5?'50%':'2px'};
+      opacity:${0.7+Math.random()*.3};
+      animation: confettiFall ${1.5+Math.random()*2}s ${Math.random()*1.5}s ease-in forwards;
+      transform: rotate(${Math.random()*360}deg);
+    `;
+    wrap.appendChild(el);
+  }
+  if (!document.getElementById('confettiStyle')) {
+    const s = document.createElement('style');
+    s.id = 'confettiStyle';
+    s.textContent = `@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(${360+Math.random()*360}deg);opacity:0}}`;
+    document.head.appendChild(s);
+  }
+  setTimeout(() => { wrap.innerHTML = ''; }, 5000);
+}
+
+/* ── HELPERS ── */
+function escHtml(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function faq(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
+
+/* ── RESIZE ── */
+function handleResize() {
+  if (!canvas) return;
+  const size = Math.min(CANVAS_SIZE, canvas.parentElement.offsetWidth);
+  if (canvas.width !== size) { canvas.width = size; canvas.height = size; wheelDirty = true; redraw(); }
+}
+
+/* ── INIT ── */
+window.addEventListener('load', () => {
+  initCanvas();
+  initPalette();
+  loadSample();
+});
+window.addEventListener('resize', handleResize);
+const s = document.createElement('style');
+s.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
+document.head.appendChild(s);
+</script>
+</body>
+</html>
