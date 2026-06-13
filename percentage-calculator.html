@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Percentage Calculator — Free Online Percentage Finder & Formula Tool | Rai Paruhang</title>
+<meta name="description" content="Free online percentage calculator. Find percentage of a number, calculate percentage increase or decrease, work out percentage between two numbers. 100% client-side — no signup, no server.">
+<link rel="alternate" hreflang="en" href="https://raiparuhang.com.np/percentage-calculator">
+<link rel="alternate" hreflang="x-default" href="https://raiparuhang.com.np/percentage-calculator">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="mask-icon" href="favicon.svg" color="#4f8eff">
+<link rel="canonical" href="https://raiparuhang.com.np/percentage-calculator">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Percentage Calculator",
+  "url": "https://raiparuhang.com.np/percentage-calculator",
+  "description": "Free online percentage calculator. Find percentage of a number, calculate percentage increase or decrease, work out percentage between two numbers. 100% client-side.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "browserRequirements": "Requires a modern web browser with JavaScript enabled",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": [
+    "Calculate percentage of a number",
+    "Find percentage between two numbers",
+    "Percentage increase and decrease calculator",
+    "Percentage of a percentage",
+    "Add or remove percentage from a number",
+    "100% client-side processing",
+    "Free forever"
+  ],
+  "author": {
+    "@type": "Person",
+    "name": "Paruhang Rai",
+    "url": "https://raiparuhang.com.np/"
+  }
+}
+</script>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#06080f;--bg3:#111827;
+  --surface:#161d2e;--surface2:#1e2840;
+  --border:rgba(99,140,255,.12);--border2:rgba(99,140,255,.22);
+  --accent:#4f8eff;--accent2:#7eb3ff;
+  --green:#22d3a0;--green-bg:rgba(34,211,160,.1);
+  --red:#ff5b5b;--red-bg:rgba(255,91,91,.1);
+  --amber:#f5a623;--amber-bg:rgba(245,166,35,.08);
+  --text:#e8edf8;--text2:#8b99bb;--text3:#556080;
+  --mono:'DM Mono',monospace;--sans:'Sora',sans-serif;
+  --radius:14px;--radius-lg:20px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;min-height:100vh}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 max(24px,5vw);height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:17px;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:-.3px;display:flex;align-items:center;gap:10px}
+.nav-logo .dot{width:8px;height:8px;background:var(--accent);border-radius:50%;box-shadow:0 0 8px var(--accent);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:14px;color:var(--text2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--accent);color:#fff!important;padding:8px 18px;border-radius:8px;font-weight:600!important;font-size:13px!important;transition:opacity .2s!important}
+.nav-cta:hover{opacity:.85}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{width:22px;height:2px;background:var(--text2);border-radius:2px;display:block}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(6,8,15,.97);border-bottom:1px solid var(--border);padding:24px max(24px,5vw);z-index:99;flex-direction:column;gap:20px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--text2);text-decoration:none;font-size:16px;padding:8px 0;border-bottom:1px solid var(--border);transition:color .2s}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu a:hover{color:var(--accent)}
+@media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}}
+
+/* PAGE HEADER */
+.page-header{padding:96px max(24px,5vw) 40px;max-width:860px;margin:0 auto;text-align:center}
+.page-badge{display:inline-flex;align-items:center;gap:8px;background:var(--green-bg);border:1px solid rgba(34,211,160,.25);border-radius:100px;padding:5px 14px;font-family:var(--mono);font-size:11px;color:var(--green);margin-bottom:20px;letter-spacing:.5px}
+.page-badge::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%;box-shadow:0 0 5px var(--green)}
+.page-header h1{font-size:clamp(26px,5vw,50px);font-weight:700;letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px}
+.page-header h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2) 60%,var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-header p{color:var(--text2);font-size:15px;max-width:540px;margin:0 auto;font-weight:300}
+
+/* WRAPPER */
+.tool-wrapper{max-width:860px;margin:0 auto;padding:0 max(24px,5vw) 80px;display:flex;flex-direction:column;gap:20px}
+
+/* TAB LIST */
+.tab-list{display:flex;gap:8px;flex-wrap:wrap}
+.tab-btn{font-family:var(--sans);font-size:13px;font-weight:500;padding:8px 18px;border-radius:100px;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;transition:all .2s;white-space:nowrap}
+.tab-btn:hover{border-color:var(--border2);color:var(--text)}
+.tab-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* CALC CARD */
+.calc-card{display:none;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;animation:fadeUp .2s ease}
+.calc-card.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.calc-card-title{font-size:17px;font-weight:700;margin-bottom:6px;letter-spacing:-.3px}
+.calc-card-desc{font-size:13px;color:var(--text2);margin-bottom:28px;font-family:var(--mono)}
+.calc-card-desc code{background:rgba(79,142,255,.1);color:var(--accent);padding:2px 8px;border-radius:5px;font-family:var(--mono);font-size:12px}
+
+/* INPUT GRID */
+.input-row{display:grid;gap:16px;grid-template-columns:1fr 1fr;margin-bottom:20px}
+@media(max-width:500px){.input-row{grid-template-columns:1fr}}
+
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:11px;color:var(--text2);font-family:var(--mono);letter-spacing:.4px;text-transform:uppercase}
+.field input[type=number]{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:11px 14px;font-size:14px;font-family:var(--mono);color:var(--text);width:100%;outline:none;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;appearance:none}
+.field input[type=number]:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,142,255,.12)}
+.field input::placeholder{color:var(--text3)}
+
+/* RADIO TOGGLE */
+.radio-row{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.radio-row label{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text2);cursor:pointer;padding:7px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;transition:all .2s}
+.radio-row label:has(input:checked){border-color:var(--accent);color:var(--text);background:rgba(79,142,255,.08)}
+.radio-row input[type=radio]{accent-color:var(--accent)}
+
+/* RESULT BOX */
+.result-box{display:none;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-top:4px}
+.result-box.show{display:block;animation:fadeUp .18s ease}
+.result-label{font-size:11px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.5px;color:var(--text3);margin-bottom:8px}
+.result-value{font-family:var(--mono);font-size:30px;font-weight:500;color:var(--green)}
+.result-formula{font-size:12px;font-family:var(--mono);color:var(--text3);margin-top:8px;line-height:1.5}
+.result-copy{margin-top:14px;background:none;border:1px solid var(--border);color:var(--text3);font-family:var(--sans);font-size:12px;padding:6px 14px;border-radius:7px;cursor:pointer;transition:all .2s}
+.result-copy:hover{border-color:rgba(34,211,160,.4);color:var(--green)}
+
+.error-msg{color:var(--red);font-size:12px;font-family:var(--mono);margin-top:8px;display:none}
+
+/* HOW TO */
+.howto-section{max-width:860px;margin:0 auto;padding:0 max(24px,5vw) 60px}
+.howto-section .section-eyebrow{font-size:11px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:12px}
+.howto-section h2{font-size:clamp(20px,3vw,28px);font-weight:700;letter-spacing:-.7px;margin-bottom:8px}
+.howto-section>p{color:var(--text2);font-size:14px;margin-bottom:32px;max-width:560px}
+.howto-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+@media(max-width:500px){.howto-grid{grid-template-columns:1fr}}
+.howto-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:border-color .2s}
+.howto-card:hover{border-color:var(--border2)}
+.howto-num{font-family:var(--mono);font-size:11px;color:var(--accent);background:rgba(79,142,255,.1);border:1px solid rgba(79,142,255,.15);width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:7px;margin-bottom:12px;font-weight:600}
+.howto-card h3{font-size:14px;font-weight:600;margin-bottom:7px}
+.howto-card p{font-size:13px;color:var(--text2);line-height:1.65}
+.formula-chip{display:inline-block;font-family:var(--mono);font-size:11px;background:rgba(34,211,160,.07);border:1px solid rgba(34,211,160,.18);color:var(--green);padding:4px 10px;border-radius:5px;margin-top:12px}
+
+/* ALSO SEARCHED */
+.also-section{max-width:860px;margin:0 auto;padding:0 max(24px,5vw) 40px}
+.also-section h2{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:14px}
+.tag-list{display:flex;flex-wrap:wrap;gap:8px}
+.tag-list span{display:inline-block;padding:5px 13px;border-radius:999px;background:var(--bg3);color:var(--text2);font-size:12px;border:1px solid var(--border)}
+
+/* RELATED TOOLS */
+.related-section{max-width:860px;margin:0 auto 60px;padding:0 max(24px,5vw)}
+.related-section h2{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:14px}
+.related-grid{display:flex;flex-wrap:wrap;gap:12px}
+.related-grid a{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;flex:1;min-width:180px;transition:border-color .2s,background .2s}
+.related-grid a:hover{border-color:var(--border2);background:var(--surface2)}
+.related-grid a .arr{margin-left:auto;font-size:11px;color:var(--text3);font-family:var(--mono)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:26px max(24px,5vw);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-left{font-size:12px;color:var(--text3);font-family:var(--mono)}
+.footer-left a{color:var(--text3);text-decoration:none}
+.footer-left a:hover{color:var(--text2)}
+.footer-right{display:flex;gap:16px}
+.footer-right a{color:var(--text3);font-size:12px;text-decoration:none;font-family:var(--mono);transition:color .2s}
+.footer-right a:hover{color:var(--text)}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--surface2);border:1px solid var(--border2);border-radius:12px;padding:11px 20px;font-size:12px;font-family:var(--mono);color:var(--text);z-index:999;transition:transform .3s,opacity .3s;opacity:0;pointer-events:none;white-space:nowrap;max-width:88vw;text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.toast.ok{border-color:rgba(34,211,160,.4);color:var(--green)}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="https://raiparuhang.com.np" class="nav-logo"><span class="dot"></span>Rai Paruhang</a>
+  <ul class="nav-links">
+    <li><a href="https://raiparuhang.com.np/#home">Home</a></li>
+    <li><a href="https://raiparuhang.com.np/#about">About</a></li>
+    <li><a href="https://raiparuhang.com.np/#contact">Contact</a></li>
+    <li><a href="https://raiparuhang.com.np/tools" class="nav-cta">All Tools</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="https://raiparuhang.com.np/#home" onclick="closeMobile()">Home</a>
+  <a href="https://raiparuhang.com.np/tools" onclick="closeMobile()">All Tools</a>
+  <a href="https://raiparuhang.com.np/#about" onclick="closeMobile()">About</a>
+  <a href="https://raiparuhang.com.np/#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-badge">100% Client-Side · No Signup · Free Forever</div>
+  <h1>Percentage <span>Calculator</span></h1>
+  <p>Find percentage of a number, work out percentage change, calculate percentage between two values — all in your browser, instantly.</p>
+</div>
+
+<!-- TOOL WRAPPER -->
+<div class="tool-wrapper">
+
+  <!-- TABS -->
+  <div class="tab-list" role="tablist">
+    <button class="tab-btn active" onclick="switchTab(0,this)">% of a Number</button>
+    <button class="tab-btn" onclick="switchTab(1,this)">What % is X of Y?</button>
+    <button class="tab-btn" onclick="switchTab(2,this)">% Change</button>
+    <button class="tab-btn" onclick="switchTab(3,this)">% of a %</button>
+    <button class="tab-btn" onclick="switchTab(4,this)">Add / Remove %</button>
+  </div>
+
+  <!-- TAB 0 -->
+  <div class="calc-card active" id="tab-0">
+    <div class="calc-card-title">Calculate Percentage of a Number</div>
+    <div class="calc-card-desc">What is <strong>X%</strong> of <strong>Y</strong>? &nbsp;·&nbsp; Formula: <code>Result = (X ÷ 100) × Y</code></div>
+    <div class="input-row">
+      <div class="field">
+        <label>Percentage (%)</label>
+        <input type="number" id="t0-pct" placeholder="e.g. 25" oninput="calc0()">
+      </div>
+      <div class="field">
+        <label>Number / Amount</label>
+        <input type="number" id="t0-num" placeholder="e.g. 200" oninput="calc0()">
+      </div>
+    </div>
+    <div class="result-box" id="t0-result">
+      <div class="result-label">Result</div>
+      <div class="result-value" id="t0-val"></div>
+      <div class="result-formula" id="t0-form"></div>
+      <button class="result-copy" onclick="copyResult('t0-val',this)">Copy result</button>
+    </div>
+    <div class="error-msg" id="t0-err">Please enter valid numbers.</div>
+  </div>
+
+  <!-- TAB 1 -->
+  <div class="calc-card" id="tab-1">
+    <div class="calc-card-title">Find Percentage Between Two Numbers</div>
+    <div class="calc-card-desc">What percentage is <strong>X</strong> of <strong>Y</strong>? &nbsp;·&nbsp; Formula: <code>Result = (X ÷ Y) × 100</code></div>
+    <div class="input-row">
+      <div class="field">
+        <label>Value (X)</label>
+        <input type="number" id="t1-x" placeholder="e.g. 45" oninput="calc1()">
+      </div>
+      <div class="field">
+        <label>Total (Y)</label>
+        <input type="number" id="t1-y" placeholder="e.g. 180" oninput="calc1()">
+      </div>
+    </div>
+    <div class="result-box" id="t1-result">
+      <div class="result-label">Result</div>
+      <div class="result-value" id="t1-val"></div>
+      <div class="result-formula" id="t1-form"></div>
+      <button class="result-copy" onclick="copyResult('t1-val',this)">Copy result</button>
+    </div>
+    <div class="error-msg" id="t1-err">Please enter valid numbers. Y cannot be zero.</div>
+  </div>
+
+  <!-- TAB 2 -->
+  <div class="calc-card" id="tab-2">
+    <div class="calc-card-title">Percentage Increase / Decrease Calculator</div>
+    <div class="calc-card-desc">Change from <strong>Old</strong> to <strong>New</strong>? &nbsp;·&nbsp; Formula: <code>((New − Old) ÷ |Old|) × 100</code></div>
+    <div class="input-row">
+      <div class="field">
+        <label>Original Value</label>
+        <input type="number" id="t2-old" placeholder="e.g. 80" oninput="calc2()">
+      </div>
+      <div class="field">
+        <label>New Value</label>
+        <input type="number" id="t2-new" placeholder="e.g. 100" oninput="calc2()">
+      </div>
+    </div>
+    <div class="result-box" id="t2-result">
+      <div class="result-label">Percentage Change</div>
+      <div class="result-value" id="t2-val"></div>
+      <div class="result-formula" id="t2-form"></div>
+      <button class="result-copy" onclick="copyResult('t2-val',this)">Copy result</button>
+    </div>
+    <div class="error-msg" id="t2-err">Please enter valid numbers. Original value cannot be zero.</div>
+  </div>
+
+  <!-- TAB 3 -->
+  <div class="calc-card" id="tab-3">
+    <div class="calc-card-title">Percentage of a Percentage</div>
+    <div class="calc-card-desc">What is <strong>X%</strong> of <strong>Y%</strong>? &nbsp;·&nbsp; Formula: <code>Result = (X × Y) ÷ 100</code></div>
+    <div class="input-row">
+      <div class="field">
+        <label>First Percentage (%)</label>
+        <input type="number" id="t3-a" placeholder="e.g. 20" oninput="calc3()">
+      </div>
+      <div class="field">
+        <label>Second Percentage (%)</label>
+        <input type="number" id="t3-b" placeholder="e.g. 50" oninput="calc3()">
+      </div>
+    </div>
+    <div class="result-box" id="t3-result">
+      <div class="result-label">Result</div>
+      <div class="result-value" id="t3-val"></div>
+      <div class="result-formula" id="t3-form"></div>
+      <button class="result-copy" onclick="copyResult('t3-val',this)">Copy result</button>
+    </div>
+    <div class="error-msg" id="t3-err">Please enter valid numbers.</div>
+  </div>
+
+  <!-- TAB 4 -->
+  <div class="calc-card" id="tab-4">
+    <div class="calc-card-title">Add or Remove a Percentage from a Number</div>
+    <div class="calc-card-desc">Apply a percentage on top of or remove it from a value — tax, discount, tip calculations.</div>
+    <div class="radio-row">
+      <label><input type="radio" name="t4-mode" value="add" checked oninput="calc4()"> Add %</label>
+      <label><input type="radio" name="t4-mode" value="remove" oninput="calc4()"> Remove %</label>
+    </div>
+    <div class="input-row">
+      <div class="field">
+        <label>Base Number</label>
+        <input type="number" id="t4-num" placeholder="e.g. 500" oninput="calc4()">
+      </div>
+      <div class="field">
+        <label>Percentage (%)</label>
+        <input type="number" id="t4-pct" placeholder="e.g. 18" oninput="calc4()">
+      </div>
+    </div>
+    <div class="result-box" id="t4-result">
+      <div class="result-label">Result</div>
+      <div class="result-value" id="t4-val"></div>
+      <div class="result-formula" id="t4-form"></div>
+      <button class="result-copy" onclick="copyResult('t4-val',this)">Copy result</button>
+    </div>
+    <div class="error-msg" id="t4-err">Please enter valid numbers.</div>
+  </div>
+
+</div>
+
+<!-- HOW TO SECTION -->
+<section class="howto-section">
+  <div class="section-eyebrow">How To</div>
+  <h2>How to Use the Percentage Calculator</h2>
+  <p>Each tab solves a different percentage problem. Here's how each one works and when to use it.</p>
+  <div class="howto-grid">
+    <div class="howto-card">
+      <div class="howto-num">01</div>
+      <h3>Find percentage of a number</h3>
+      <p>Enter the percentage and the total amount. The calculator multiplies the number by the percentage rate to give you the exact value. Use this to find a discount amount, tax value, or any portion of a number.</p>
+      <span class="formula-chip">Result = (X ÷ 100) × Y</span>
+    </div>
+    <div class="howto-card">
+      <div class="howto-num">02</div>
+      <h3>Work out percentage between two numbers</h3>
+      <p>Enter the partial value (X) and the total (Y). Divides X by Y and multiplies by 100. Perfect for test score percentages, market share, or how much of a goal you've hit.</p>
+      <span class="formula-chip">Result = (X ÷ Y) × 100</span>
+    </div>
+    <div class="howto-card">
+      <div class="howto-num">03</div>
+      <h3>Calculate percentage increase or decrease</h3>
+      <p>Enter the original value and the new value. A positive result means an increase; negative means a decrease. Useful for price changes, salary growth, or comparing any two stats over time.</p>
+      <span class="formula-chip">((New − Old) ÷ |Old|) × 100</span>
+    </div>
+    <div class="howto-card">
+      <div class="howto-num">04</div>
+      <h3>Calculate percentage of a percentage</h3>
+      <p>Enter two percentage values. The tool multiplies them and divides by 100. Useful for compound discounts — for example, 20% of a 50% discount equals 10%.</p>
+      <span class="formula-chip">(X × Y) ÷ 100</span>
+    </div>
+    <div class="howto-card">
+      <div class="howto-num">05</div>
+      <h3>Add or remove a percentage from a number</h3>
+      <p>Enter the base number and the percentage, then choose add or remove. Use "Add %" for price after tax or tip. Use "Remove %" to find the pre-discount price or reverse a percentage applied.</p>
+      <span class="formula-chip">Add: N × (1 + P/100) · Remove: N × (1 − P/100)</span>
+    </div>
+    <div class="howto-card">
+      <div class="howto-num">06</div>
+      <h3>Copy and use your result</h3>
+      <p>Every result includes a Copy button. Click it to copy the value to your clipboard instantly. The formula used is shown below the result so you always know exactly how it was calculated.</p>
+      <span class="formula-chip">Works entirely in your browser</span>
+    </div>
+  </div>
+</section>
+
+<!-- ALSO SEARCHED AS -->
+<section style="margin: 60px auto; max-width: 780px; padding: 0 20px;">
+  <h2 style="font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6b7280; margin-bottom: 16px;">
+    Also searched as
+  </h2>
+  <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">percentage calculator online free</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">find percentage of a number</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">percentage formula calculator</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">percentage increase calculator</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">percentage decrease calculator</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">work out percentage of two numbers</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">number to percentage converter</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">calculate percent of total</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">amount to percentage calculator</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">percentage finder online</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">percentage of a percentage</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">calculate percentage change</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">simple percentage calculator</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">money percentage calculator</span>
+    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">quick percentage calculator</span>
+  </div>
+</section>
+
+
+<!-- RELATED TOOLS -->
+<section class="related-section">
+  <h2>Related Tools</h2>
+  <div class="related-grid">
+    <a href="https://raiparuhang.com.np/csv-to-json">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#22d3a0" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+      CSV ↔ JSON Converter
+      <span class="arr">→</span>
+    </a>
+    <a href="https://raiparuhang.com.np/json-formatter">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#f5a623" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      JSON Formatter
+      <span class="arr">→</span>
+    </a>
+    <a href="https://raiparuhang.com.np/qr-code-generator">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#a78bfa" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h.01M14 17h.01M17 14h.01M17 17h.01M20 14h.01M20 17h.01M20 20h.01"/></svg>
+      QR Code Generator
+      <span class="arr">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">© 2026 Rai Paruhang · <a href="https://raiparuhang.com.np/terms.html">Privacy &amp; Terms</a></div>
+  <div class="footer-right">
+    <a href="https://raiparuhang.com.np/tools">All Tools</a>
+    <a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter/X</a>
+    <a href="https://www.linkedin.com/in/paruhang-rai/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+// NAV
+document.getElementById('hamburger').addEventListener('click', () =>
+  document.getElementById('mobileMenu').classList.toggle('open'));
+function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+// TOAST
+function toast(msg, type='') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast show' + (type ? ' '+type : '');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.className='toast', 3000);
+}
+
+// TABS
+function switchTab(idx, btn) {
+  document.querySelectorAll('.calc-card').forEach((c,i) => c.classList.toggle('active', i===idx));
+  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', i===idx));
+}
+
+// HELPERS
+function fmt(n) {
+  const s = parseFloat(n.toPrecision(8));
+  return s.toLocaleString('en-US', {maximumFractionDigits:8});
+}
+function showResult(id, val, formula) {
+  document.getElementById(id+'-result').classList.add('show');
+  document.getElementById(id+'-val').textContent = val;
+  document.getElementById(id+'-form').textContent = formula;
+  document.getElementById(id+'-err').style.display = 'none';
+}
+function clearResult(id) {
+  document.getElementById(id+'-result').classList.remove('show');
+  document.getElementById(id+'-err').style.display = 'none';
+}
+function showErr(id) {
+  document.getElementById(id+'-result').classList.remove('show');
+  document.getElementById(id+'-err').style.display = 'block';
+}
+
+// CALCULATORS
+function calc0() {
+  const pct = parseFloat(document.getElementById('t0-pct').value);
+  const num = parseFloat(document.getElementById('t0-num').value);
+  if (isNaN(pct) || isNaN(num)) { clearResult('t0'); return; }
+  const res = (pct/100)*num;
+  showResult('t0', fmt(res), `${pct}% of ${fmt(num)} = (${pct} ÷ 100) × ${fmt(num)} = ${fmt(res)}`);
+}
+function calc1() {
+  const x = parseFloat(document.getElementById('t1-x').value);
+  const y = parseFloat(document.getElementById('t1-y').value);
+  if (isNaN(x) || isNaN(y)) { clearResult('t1'); return; }
+  if (y===0) { showErr('t1'); return; }
+  const res = (x/y)*100;
+  showResult('t1', fmt(res)+'%', `${fmt(x)} is ${fmt(res)}% of ${fmt(y)} → (${fmt(x)} ÷ ${fmt(y)}) × 100`);
+}
+function calc2() {
+  const oldV = parseFloat(document.getElementById('t2-old').value);
+  const newV = parseFloat(document.getElementById('t2-new').value);
+  if (isNaN(oldV) || isNaN(newV)) { clearResult('t2'); return; }
+  if (oldV===0) { showErr('t2'); return; }
+  const res = ((newV-oldV)/Math.abs(oldV))*100;
+  const dir = res>=0 ? '▲ Increase' : '▼ Decrease';
+  showResult('t2', (res>=0?'+':'')+fmt(res)+'%', `${dir}: ((${fmt(newV)} − ${fmt(oldV)}) ÷ ${fmt(Math.abs(oldV))}) × 100`);
+}
+function calc3() {
+  const a = parseFloat(document.getElementById('t3-a').value);
+  const b = parseFloat(document.getElementById('t3-b').value);
+  if (isNaN(a)||isNaN(b)) { clearResult('t3'); return; }
+  const res = (a*b)/100;
+  showResult('t3', fmt(res)+'%', `${a}% of ${b}% = (${a} × ${b}) ÷ 100 = ${fmt(res)}%`);
+}
+function calc4() {
+  const num = parseFloat(document.getElementById('t4-num').value);
+  const pct = parseFloat(document.getElementById('t4-pct').value);
+  if (isNaN(num)||isNaN(pct)) { clearResult('t4'); return; }
+  const mode = document.querySelector('input[name="t4-mode"]:checked').value;
+  let res, formula;
+  if (mode==='add') {
+    res = num*(1+pct/100);
+    formula = `${fmt(num)} + ${pct}% = ${fmt(num)} × (1 + ${pct}/100) = ${fmt(res)}`;
+  } else {
+    res = num*(1-pct/100);
+    formula = `${fmt(num)} − ${pct}% = ${fmt(num)} × (1 − ${pct}/100) = ${fmt(res)}`;
+  }
+  showResult('t4', fmt(res), formula);
+}
+
+// COPY
+function copyResult(id, btn) {
+  const val = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(val).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    btn.style.color = 'var(--green)';
+    btn.style.borderColor = 'rgba(34,211,160,.4)';
+    setTimeout(() => { btn.textContent=orig; btn.style.color=''; btn.style.borderColor=''; }, 1800);
+    toast('Copied!', 'ok');
+  });
+}
+</script>
+</body>
+</html>
