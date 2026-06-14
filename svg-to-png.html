@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SVG to PNG Converter — Free Online SVG to PNG File Converter | Rai Paruhang</title>
+<meta name="description" content="Free online SVG to PNG converter. Convert SVG to PNG in high quality, set custom width & height, transparent background support. 100% client-side — your files never leave your browser.">
+<meta name="keywords" content="svg to png, svg to png converter, convert svg to png, turn svg into png, svg into png, svg to png file converter, convert svg file to png, change svg to png, svg to png online, svg to png high quality, svg to png transparent background, svg code to png, svg to png high resolution, batch svg to png, svg to png from url, transform svg to png, turn svg to png, svg to high quality png, convert svg to transparent png, svg to png resize">
+<link rel="alternate" hreflang="en" href="https://raiparuhang.com.np/svg-to-png">
+<link rel="alternate" hreflang="x-default" href="https://raiparuhang.com.np/svg-to-png">
+ <!-- Modern SVG Favicon (Infinite scaling for desktop & high-res screens) -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<!-- For Safari pinned tabs color blending -->
+<link rel="mask-icon" href="favicon.svg" color="#4f8eff">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="mask-icon" href="favicon.svg" color="#4f8eff">
+<link rel="canonical" href="https://raiparuhang.com.np/svg-to-png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "SVG to PNG Converter",
+  "url": "https://raiparuhang.com.np/svg-to-png",
+  "description": "Free online SVG to PNG converter. Convert SVG files to high quality PNG images with custom size and transparent background. 100% client-side, no upload required.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "browserRequirements": "Requires a modern web browser with JavaScript enabled",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": [
+    "Convert SVG to PNG high quality",
+    "SVG to PNG file converter online free",
+    "Turn SVG into PNG with custom width and height",
+    "SVG to transparent PNG background",
+    "SVG code to PNG converter",
+    "SVG to PNG from URL",
+    "Batch SVG to PNG conversion",
+    "SVG to high resolution PNG",
+    "Change SVG to PNG in browser",
+    "100% client-side — files never leave your device"
+  ],
+  "author": {
+    "@type": "Person",
+    "name": "Paruhang Rai",
+    "url": "https://raiparuhang.com.np/"
+  }
+}
+</script>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#06080f;--bg3:#111827;
+  --surface:#161d2e;--surface2:#1e2840;
+  --border:rgba(99,140,255,.12);--border2:rgba(99,140,255,.22);
+  --accent:#4f8eff;--accent2:#7eb3ff;
+  --green:#22d3a0;--green-bg:rgba(34,211,160,.1);
+  --red:#ff5b5b;--red-bg:rgba(255,91,91,.1);
+  --amber:#f5a623;--amber-bg:rgba(245,166,35,.08);
+  --text:#e8edf8;--text2:#8b99bb;--text3:#556080;
+  --mono:'DM Mono',monospace;--sans:'Sora',sans-serif;
+  --radius:14px;--radius-lg:20px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;min-height:100vh}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 max(24px,5vw);height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:17px;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:-.3px;display:flex;align-items:center;gap:10px}
+.nav-logo .dot{width:8px;height:8px;background:var(--accent);border-radius:50%;box-shadow:0 0 8px var(--accent);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:14px;color:var(--text2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--accent);color:#fff!important;padding:8px 18px;border-radius:8px;font-weight:600!important;font-size:13px!important;transition:opacity .2s!important}
+.nav-cta:hover{opacity:.85}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{width:22px;height:2px;background:var(--text2);border-radius:2px;display:block}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(6,8,15,.97);border-bottom:1px solid var(--border);padding:24px max(24px,5vw);z-index:99;flex-direction:column;gap:20px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--text2);text-decoration:none;font-size:16px;padding:8px 0;border-bottom:1px solid var(--border);transition:color .2s}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu a:hover{color:var(--accent)}
+@media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}}
+
+/* PAGE HEADER */
+.page-header{padding:96px max(24px,5vw) 40px;max-width:1100px;margin:0 auto;text-align:center}
+.page-badge{display:inline-flex;align-items:center;gap:8px;background:var(--green-bg);border:1px solid rgba(34,211,160,.25);border-radius:100px;padding:5px 14px;font-family:var(--mono);font-size:11px;color:var(--green);margin-bottom:20px;letter-spacing:.5px}
+.page-badge::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%;box-shadow:0 0 5px var(--green)}
+.page-header h1{font-size:clamp(26px,5vw,50px);font-weight:700;letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px}
+.page-header h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2) 60%,var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-header p{color:var(--text2);font-size:15px;max-width:560px;margin:0 auto;font-weight:300}
+
+/* TOOL WRAPPER */
+.tool-wrapper{max-width:1100px;margin:0 auto;padding:0 max(24px,5vw) 80px;display:flex;flex-direction:column;gap:20px}
+
+/* SECURITY STRIP */
+.security-strip{display:flex;align-items:center;gap:8px;justify-content:center;padding:12px;background:var(--green-bg);border:1px solid rgba(34,211,160,.15);border-radius:12px;font-size:12px;font-family:var(--mono);color:var(--green);letter-spacing:.3px;flex-wrap:wrap;text-align:center}
+.security-strip svg{width:14px;height:14px;flex-shrink:0}
+
+/* TAB SWITCHER */
+.mode-tabs{display:flex;gap:8px;flex-wrap:wrap}
+.mode-tab{font-family:var(--sans);font-size:13px;font-weight:500;padding:8px 18px;border-radius:100px;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;transition:all .2s;white-space:nowrap}
+.mode-tab:hover{border-color:var(--border2);color:var(--text)}
+.mode-tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* PANEL */
+.panel{display:none;animation:fadeUp .2s ease}
+.panel.active{display:flex;flex-direction:column;gap:16px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* UPLOAD ZONE */
+.upload-zone{border:2px dashed var(--border2);border-radius:var(--radius-lg);background:var(--surface);padding:48px 24px;text-align:center;cursor:pointer;transition:all .3s}
+.upload-zone.dragover,.upload-zone:hover{border-color:var(--accent);background:var(--surface2)}
+.upload-icon{width:60px;height:60px;margin:0 auto 18px;background:rgba(79,142,255,.1);border-radius:18px;display:flex;align-items:center;justify-content:center}
+.upload-icon svg{width:28px;height:28px;color:var(--accent)}
+.upload-zone h3{font-size:18px;font-weight:600;margin-bottom:8px}
+.upload-zone p{color:var(--text2);font-size:14px;margin-bottom:20px}
+.fmt-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+.fmt-badge{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:3px 10px;font-family:var(--mono);font-size:11px;color:var(--text2)}
+.btn-upload{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border:none;border-radius:10px;padding:12px 26px;font-size:14px;font-weight:600;font-family:var(--sans);cursor:pointer;transition:all .2s}
+.btn-upload:hover{background:#6fa3ff;transform:translateY(-1px);box-shadow:0 6px 20px rgba(79,142,255,.3)}
+
+/* MAIN LAYOUT */
+.main-layout{display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start}
+@media(max-width:860px){.main-layout{grid-template-columns:1fr}}
+
+/* PREVIEW */
+.preview-area{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.preview-header{padding:12px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.preview-header h3{font-size:13px;font-weight:600;color:var(--text2)}
+.preview-filename{font-size:11px;font-family:var(--mono);color:var(--text3);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.preview-canvas-wrap{background:repeating-conic-gradient(#1a2030 0% 25%,#141928 0% 50%) 0 0/20px 20px;min-height:320px;display:flex;align-items:center;justify-content:center;padding:24px}
+.preview-canvas-wrap img,.preview-canvas-wrap svg{max-width:100%;max-height:320px;object-fit:contain}
+.preview-placeholder{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--text3)}
+.preview-placeholder svg{width:40px;height:40px;opacity:.3}
+.preview-placeholder p{font-size:13px;font-family:var(--mono)}
+
+/* FILE LIST */
+.file-list{display:flex;flex-direction:column;gap:6px;max-height:200px;overflow-y:auto}
+.file-list::-webkit-scrollbar{width:4px}
+.file-list::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+.file-row{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:9px 12px;cursor:pointer;transition:all .2s}
+.file-row:hover{background:var(--surface2);border-color:var(--border2)}
+.file-row.active{border-color:var(--accent);background:rgba(79,142,255,.06)}
+.file-row-thumb{width:32px;height:32px;border-radius:6px;background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+.file-row-thumb img{width:100%;height:100%;object-fit:cover}
+.file-row-info{flex:1;min-width:0}
+.file-row-name{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.file-row-meta{font-size:11px;font-family:var(--mono);color:var(--text3);margin-top:1px}
+.file-row-status{font-size:10px;font-family:var(--mono);padding:2px 7px;border-radius:5px;white-space:nowrap;flex-shrink:0}
+.status-ready{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(245,166,35,.2)}
+.status-done{background:var(--green-bg);color:var(--green);border:1px solid rgba(34,211,160,.2)}
+.file-row-del{width:20px;height:20px;border-radius:5px;background:transparent;border:none;color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.file-row-del:hover{background:var(--red-bg);color:var(--red)}
+.file-row-del svg{width:10px;height:10px}
+
+/* LIST HEADER */
+.list-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.list-header h3{font-size:13px;font-weight:600;color:var(--text2)}
+.list-actions{display:flex;gap:6px}
+.btn-sm{display:inline-flex;align-items:center;gap:5px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:11px;font-family:var(--mono);color:var(--text2);cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn-sm:hover{border-color:var(--border2);color:var(--text);background:var(--surface2)}
+.btn-sm.danger:hover{border-color:rgba(255,91,91,.4);color:var(--red);background:var(--red-bg)}
+.btn-sm svg{width:10px;height:10px}
+
+/* SETTINGS PANEL */
+.settings-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;position:sticky;top:84px}
+.settings-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.settings-header svg{width:14px;height:14px;color:var(--accent)}
+.settings-header h3{font-size:13px;font-weight:600}
+.settings-body{padding:18px;display:flex;flex-direction:column;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:11px;color:var(--text2);font-family:var(--mono);letter-spacing:.4px;text-transform:uppercase}
+.field input[type=number],.field input[type=text],.field select{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:9px 12px;font-size:13px;font-family:var(--mono);color:var(--text);width:100%;outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none}
+.field input:focus,.field select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,142,255,.12)}
+.field input::placeholder{color:var(--text3)}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b99bb' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:30px}
+.hint{font-size:10px;color:var(--text3);font-family:var(--mono)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+/* toggle */
+.toggle-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid var(--border)}
+.toggle-row:last-of-type{border-bottom:none}
+.toggle-lbl .tn{font-size:12px;font-weight:500}
+.toggle-lbl .td{font-size:10px;color:var(--text3);margin-top:1px}
+.tog{width:36px;height:20px;background:var(--bg3);border-radius:100px;border:1px solid var(--border);cursor:pointer;position:relative;transition:all .2s;flex-shrink:0}
+.tog.on{background:var(--accent);border-color:var(--accent)}
+.tog::after{content:'';position:absolute;top:3px;left:3px;width:12px;height:12px;background:var(--text3);border-radius:50%;transition:all .2s}
+.tog.on::after{left:19px;background:#fff}
+/* convert btn */
+.btn-convert{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:11px;padding:14px;font-size:15px;font-weight:700;font-family:var(--sans);cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:-.2px}
+.btn-convert:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 8px 28px rgba(79,142,255,.35)}
+.btn-convert:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+/* URL & CODE PANELS */
+.url-panel,.code-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px}
+.url-panel h3,.code-panel h3{font-size:15px;font-weight:700;margin-bottom:6px;letter-spacing:-.3px}
+.url-panel p,.code-panel p{font-size:13px;color:var(--text2);margin-bottom:20px}
+.url-row{display:flex;gap:10px}
+.url-row input{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:11px 14px;font-size:13px;font-family:var(--mono);color:var(--text);outline:none;transition:border-color .2s}
+.url-row input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,142,255,.12)}
+.url-row input::placeholder{color:var(--text3)}
+.btn-fetch{display:inline-flex;align-items:center;gap:7px;background:var(--accent);color:#fff;border:none;border-radius:10px;padding:11px 18px;font-size:13px;font-weight:600;font-family:var(--sans);cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn-fetch:hover{background:#6fa3ff}
+.code-textarea{width:100%;min-height:200px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;font-size:12px;font-family:var(--mono);color:var(--text);outline:none;resize:vertical;transition:border-color .2s;line-height:1.6}
+.code-textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,142,255,.12)}
+.code-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:7px;background:var(--accent);color:#fff;border:none;border-radius:10px;padding:11px 20px;font-size:13px;font-weight:600;font-family:var(--sans);cursor:pointer;transition:all .2s}
+.btn-primary:hover{background:#6fa3ff;transform:translateY(-1px)}
+.btn-secondary{display:inline-flex;align-items:center;gap:7px;background:transparent;color:var(--text2);border:1px solid var(--border2);border-radius:10px;padding:11px 18px;font-size:13px;font-family:var(--sans);cursor:pointer;transition:all .2s}
+.btn-secondary:hover{border-color:var(--accent);color:var(--text)}
+
+/* DOWNLOAD SECTION */
+.dl-section{display:none;background:var(--green-bg);border:1px solid rgba(34,211,160,.25);border-radius:var(--radius-lg);padding:20px;flex-direction:column;gap:14px}
+.dl-section.show{display:flex}
+.dl-top{display:flex;align-items:center;gap:12px}
+.dl-icon{width:44px;height:44px;background:rgba(34,211,160,.15);border:1px solid rgba(34,211,160,.3);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.dl-icon svg{width:22px;height:22px;color:var(--green)}
+.dl-info h3{font-size:15px;font-weight:600;color:var(--green)}
+.dl-info p{font-size:11px;color:var(--text2);font-family:var(--mono);margin-top:2px}
+.dl-buttons{display:flex;gap:10px;flex-wrap:wrap}
+.btn-dl{display:inline-flex;align-items:center;gap:7px;background:var(--green);color:#06080f;border:none;border-radius:10px;padding:11px 18px;font-size:13px;font-weight:700;font-family:var(--sans);cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn-dl:hover{background:#30e8b5;transform:translateY(-1px)}
+.btn-dl svg{width:14px;height:14px}
+.btn-dl-outline{display:inline-flex;align-items:center;gap:7px;background:rgba(34,211,160,.1);color:var(--green);border:1px solid rgba(34,211,160,.3);border-radius:10px;padding:11px 18px;font-size:13px;font-weight:600;font-family:var(--sans);cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn-dl-outline:hover{background:rgba(34,211,160,.2)}
+.btn-more{display:inline-flex;align-items:center;gap:7px;background:transparent;color:var(--text2);border:1px solid var(--border2);border-radius:10px;padding:11px 18px;font-size:13px;font-family:var(--sans);cursor:pointer;transition:all .2s}
+.btn-more:hover{border-color:var(--border2);color:var(--text)}
+
+/* SPINNER */
+.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* HOW TO */
+.howto-section{max-width:1100px;margin:0 auto;padding:0 max(24px,5vw) 60px}
+.section-eyebrow{font-size:11px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:12px}
+.howto-section h2{font-size:clamp(20px,3vw,28px);font-weight:700;letter-spacing:-.7px;margin-bottom:8px}
+.howto-section>p{color:var(--text2);font-size:14px;margin-bottom:32px;max-width:560px}
+.howto-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.howto-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:border-color .2s}
+.howto-card:hover{border-color:var(--border2)}
+.howto-num{font-family:var(--mono);font-size:11px;color:var(--accent);background:rgba(79,142,255,.1);border:1px solid rgba(79,142,255,.15);width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:7px;margin-bottom:12px;font-weight:600}
+.howto-card h3{font-size:14px;font-weight:600;margin-bottom:7px}
+.howto-card p{font-size:13px;color:var(--text2);line-height:1.65}
+.formula-chip{display:inline-block;font-family:var(--mono);font-size:11px;background:rgba(34,211,160,.07);border:1px solid rgba(34,211,160,.18);color:var(--green);padding:4px 10px;border-radius:5px;margin-top:12px}
+
+/* ALSO SEARCHED */
+.also-section{max-width:1100px;margin:0 auto;padding:0 max(24px,5vw) 40px}
+.also-section h2{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:14px}
+.tag-list{display:flex;flex-wrap:wrap;gap:8px}
+.tag-list span{display:inline-block;padding:5px 13px;border-radius:999px;background:var(--bg3);color:var(--text2);font-size:12px;border:1px solid var(--border)}
+
+/* RELATED */
+.related-section{max-width:1100px;margin:0 auto 60px;padding:0 max(24px,5vw)}
+.related-section h2{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:14px}
+.related-grid{display:flex;flex-wrap:wrap;gap:12px}
+.related-grid a{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;flex:1;min-width:180px;transition:border-color .2s,background .2s}
+.related-grid a:hover{border-color:var(--border2);background:var(--surface2)}
+.related-grid a .arr{margin-left:auto;font-size:11px;color:var(--text3);font-family:var(--mono)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:26px max(24px,5vw);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-left{font-size:12px;color:var(--text3);font-family:var(--mono)}
+.footer-left a{color:var(--text3);text-decoration:none}
+.footer-left a:hover{color:var(--text2)}
+.footer-right{display:flex;gap:16px}
+.footer-right a{color:var(--text3);font-size:12px;text-decoration:none;font-family:var(--mono);transition:color .2s}
+.footer-right a:hover{color:var(--text)}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--surface2);border:1px solid var(--border2);border-radius:12px;padding:11px 20px;font-size:12px;font-family:var(--mono);color:var(--text);z-index:999;transition:transform .3s,opacity .3s;opacity:0;pointer-events:none;white-space:nowrap;max-width:88vw;text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.toast.ok{border-color:rgba(34,211,160,.4);color:var(--green)}
+.toast.err{border-color:rgba(255,91,91,.4);color:var(--red)}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="https://raiparuhang.com.np" class="nav-logo"><span class="dot"></span>Rai Paruhang</a>
+  <ul class="nav-links">
+    <li><a href="https://raiparuhang.com.np/#home">Home</a></li>
+    <li><a href="https://raiparuhang.com.np/#about">About</a></li>
+    <li><a href="https://raiparuhang.com.np/#contact">Contact</a></li>
+    <li><a href="https://raiparuhang.com.np/tools" class="nav-cta">All Tools</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="https://raiparuhang.com.np/#home" onclick="closeMobile()">Home</a>
+  <a href="https://raiparuhang.com.np/tools" onclick="closeMobile()">All Tools</a>
+  <a href="https://raiparuhang.com.np/#about" onclick="closeMobile()">About</a>
+  <a href="https://raiparuhang.com.np/#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-badge">100% Client-Side · No Server Upload · Free Forever</div>
+  <h1>SVG to <span>PNG Converter</span></h1>
+  <p>Convert SVG to PNG in high quality — upload a file, paste SVG code, or load from URL. Set custom width, height, scale, and transparent background. Your files never leave your browser.</p>
+</div>
+
+<div class="tool-wrapper">
+
+  <div class="security-strip">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Your SVG files are converted entirely in your browser — nothing is uploaded to any server
+  </div>
+
+  <!-- MODE TABS -->
+  <div class="mode-tabs">
+    <button class="mode-tab active" onclick="switchMode('file',this)">Upload SVG File</button>
+    <button class="mode-tab" onclick="switchMode('code',this)">Paste SVG Code</button>
+    <button class="mode-tab" onclick="switchMode('url',this)">Load from URL</button>
+  </div>
+
+  <!-- FILE MODE -->
+  <div class="panel active" id="panel-file">
+    <div class="upload-zone" id="uploadZone">
+      <div class="upload-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+      </div>
+      <h3>Drop SVG files here to convert</h3>
+      <p>Supports single and batch SVG to PNG conversion — drop multiple files at once</p>
+      <div class="fmt-row">
+        <span class="fmt-badge">SVG</span>
+        <span class="fmt-badge">Batch</span>
+        <span class="fmt-badge">Transparent BG</span>
+        <span class="fmt-badge">High Quality</span>
+      </div>
+      <button class="btn-upload" onclick="document.getElementById('fileInput').click()">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Choose SVG Files
+      </button>
+      <input type="file" id="fileInput" accept=".svg,image/svg+xml" multiple style="display:none">
+    </div>
+
+    <div id="mainLayout" style="display:none">
+      <div class="main-layout">
+        <!-- LEFT -->
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <!-- Preview -->
+          <div class="preview-area">
+            <div class="preview-header">
+              <h3>Preview</h3>
+              <span class="preview-filename" id="previewFilename">—</span>
+            </div>
+            <div class="preview-canvas-wrap" id="previewWrap">
+              <div class="preview-placeholder">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <p>Select a file to preview</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- File list -->
+          <div>
+            <div class="list-header" style="margin-bottom:10px">
+              <h3 id="listTitle">0 files</h3>
+              <div class="list-actions">
+                <button class="btn-sm" onclick="document.getElementById('fileInput').click()">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  Add More
+                </button>
+                <button class="btn-sm danger" onclick="clearAll()">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+                  Clear All
+                </button>
+              </div>
+            </div>
+            <div class="file-list" id="fileList"></div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Settings -->
+        <div class="settings-panel">
+          <div class="settings-header">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+            <h3>Export Settings</h3>
+          </div>
+          <div class="settings-body">
+            <div class="two-col">
+              <div class="field">
+                <label>Width (px)</label>
+                <input type="number" id="expW" placeholder="Auto" min="1" max="8000">
+              </div>
+              <div class="field">
+                <label>Height (px)</label>
+                <input type="number" id="expH" placeholder="Auto" min="1" max="8000">
+              </div>
+            </div>
+            <div class="field">
+              <label>Scale / Resolution</label>
+              <select id="expScale">
+                <option value="1">1x — Standard</option>
+                <option value="2" selected>2x — High Quality</option>
+                <option value="3">3x — Ultra HD</option>
+                <option value="4">4x — Print Ready</option>
+              </select>
+              <span class="hint">Higher scale = larger, sharper PNG</span>
+            </div>
+            <div>
+              <div class="toggle-row">
+                <div class="toggle-lbl"><div class="tn">Transparent background</div><div class="td">Keep SVG alpha channel</div></div>
+                <div class="tog on" id="togTransparent" onclick="this.classList.toggle('on')"></div>
+              </div>
+              <div class="toggle-row">
+                <div class="toggle-lbl"><div class="tn">Preserve aspect ratio</div><div class="td">Scale proportionally</div></div>
+                <div class="tog on" id="togAspect" onclick="this.classList.toggle('on')"></div>
+              </div>
+            </div>
+            <button class="btn-convert" id="convertBtn" onclick="convertAll()">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" width="17" height="17"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+              Convert to PNG
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Download -->
+      <div class="dl-section" id="dlSection">
+        <div class="dl-top">
+          <div class="dl-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+          <div class="dl-info"><h3>Conversion Complete!</h3><p id="dlMeta">—</p></div>
+        </div>
+        <div class="dl-buttons" id="dlButtons"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CODE MODE -->
+  <div class="panel" id="panel-code">
+    <div class="code-panel">
+      <h3>Paste SVG Code → PNG</h3>
+      <p>Paste your raw SVG markup below and convert it to a PNG image instantly. Useful for converting SVG code from HTML, icon libraries, or design tools.</p>
+      <textarea class="code-textarea" id="svgCodeInput" placeholder='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">&#10;  <circle cx="50" cy="50" r="40" fill="#4f8eff"/>&#10;</svg>'></textarea>
+      <div class="code-actions">
+        <button class="btn-primary" onclick="convertCode()">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" width="14" height="14"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/></svg>
+          Convert to PNG
+        </button>
+        <button class="btn-secondary" onclick="document.getElementById('svgCodeInput').value=''">Clear</button>
+      </div>
+      <div class="dl-section" id="dlSectionCode" style="margin-top:16px">
+        <div class="dl-top">
+          <div class="dl-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+          <div class="dl-info"><h3>SVG Code Converted!</h3><p id="dlMetaCode">Ready to download</p></div>
+        </div>
+        <div class="dl-buttons" id="dlButtonsCode"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- URL MODE -->
+  <div class="panel" id="panel-url">
+    <div class="url-panel">
+      <h3>Load SVG from URL → PNG</h3>
+      <p>Enter a direct URL to an SVG file to convert SVG to PNG online without downloading the file first.</p>
+      <div class="url-row">
+        <input type="text" id="svgUrlInput" placeholder="https://example.com/icon.svg">
+        <button class="btn-fetch" onclick="fetchAndConvert()">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Fetch & Convert
+        </button>
+      </div>
+      <p style="font-size:12px;color:var(--text3);font-family:var(--mono);margin-top:10px">Note: URL must be publicly accessible. Some servers may block cross-origin requests.</p>
+      <div class="dl-section" id="dlSectionUrl" style="margin-top:16px">
+        <div class="dl-top">
+          <div class="dl-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+          <div class="dl-info"><h3>SVG Converted from URL!</h3><p id="dlMetaUrl">Ready to download</p></div>
+        </div>
+        <div class="dl-buttons" id="dlButtonsUrl"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- HOW TO -->
+<section class="howto-section">
+  <div class="section-eyebrow">How To</div>
+  <h2>How to Convert SVG to PNG Online</h2>
+  <p>Three ways to turn SVG into PNG — upload a file, paste SVG code, or load from a URL. Each converts entirely in your browser with no server upload.</p>
+  <div class="howto-grid">
+    <div class="howto-card">
+      <div class="howto-num">01</div>
+      <h3>Upload your SVG file</h3>
+      <p>Drag and drop one or multiple SVG files onto the upload zone, or click "Choose SVG Files" to browse. The tool supports batch SVG to PNG conversion — all files are processed locally in your browser.</p>
+      <span class="formula-chip">Supports batch + single file</span>
+    </div>
+    <div class="howto-card">
+      <div class="howto-num">02</div>
+      <h3>Set width, height & scale</h3>
+      <p>Leave width and height blank to use the SVG's natural dimensions, or enter custom pixel values to resize the output PNG. Use the Scale option to export at 2x or 3x for high resolution PNG output suitable for retina displays or print.</p>
+      <span class="formula-chip">Up to 4x — print ready</span>
+    </div>
+    <div class="howto-card">
+      <div class="howto-num">03</div>
+      <h3>Convert SVG to transparent PNG</h3>
+      <p>Enable "Transparent background" to preserve the SVG alpha channel in your PNG output. This keeps the background see-through instead of filling it with white — perfect for logos, icons, and overlays.</p>
+      <span class="formula-chip">Alpha channel preserved</span>
+    </div>
+    <div class="howto-card">
+      <div class="howto-num">04</div>
+      <h3>Convert SVG code to PNG</h3>
+      <p>Switch to the "Paste SVG Code" tab and drop in raw SVG markup. This is useful when you have SVG inline in HTML, copied from an icon library, or exported from a design tool like Figma or Illustrator.</p>
+      <span class="formula-chip">SVG code → PNG instantly</span>
+    </div>
+    <div class="howto-card">
+      <div class="howto-num">05</div>
+      <h3>Convert SVG from URL to PNG</h3>
+      <p>Use the "Load from URL" tab to enter a direct link to any publicly hosted SVG file. The tool fetches the SVG and converts it to PNG in your browser — no download needed first.</p>
+      <span class="formula-chip">SVG URL → PNG download</span>
+    </div>
+    <div class="howto-card">
+      <div class="howto-num">06</div>
+      <h3>Download your PNG</h3>
+      <p>After conversion, click "Download PNG" to save your file. For batch conversions with multiple SVG files, download them individually or all at once. All PNG files are named after the original SVG filename.</p>
+      <span class="formula-chip">Instant download · no watermark</span>
+    </div>
+  </div>
+</section>
+
+<!-- ALSO SEARCHED AS -->
+<section class="also-section">
+  <h2>Also searched as</h2>
+  <div class="tag-list">
+    <span>turn svg into png</span>
+    <span>convert svg file to png</span>
+    <span>svg to png file converter online</span>
+    <span>change svg to png</span>
+    <span>svg to png high quality</span>
+    <span>svg to transparent png</span>
+    <span>svg code to png converter</span>
+    <span>svg to png high resolution</span>
+    <span>transform svg to png</span>
+    <span>svg into png online free</span>
+    <span>svg to high res png</span>
+    <span>svg to png from url</span>
+    <span>batch svg to png</span>
+    <span>svg to png without losing quality</span>
+    <span>svg to png transparent background</span>
+    <span>svg html to png</span>
+    <span>export svg as png</span>
+    <span>save svg as png</span>
+    <span>svg to png resize</span>
+    <span>online svg to png converter free</span>
+  </div>
+</section>
+
+<!-- RELATED TOOLS -->
+<section class="related-section">
+  <h2>Related Tools</h2>
+  <div class="related-grid">
+    <a href="https://raiparuhang.com.np/image-converter">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#4f8eff" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+      Image Format Converter
+      <span class="arr">→</span>
+    </a>
+    <a href="https://raiparuhang.com.np/image-compressor">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#22d3a0" stroke-width="2"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="20" x2="20.41" y2="9.59"/><line x1="3.59" y1="14.41" x2="14" y2="4"/></svg>
+      Image Compressor
+      <span class="arr">→</span>
+    </a>
+    <a href="https://raiparuhang.com.np/image-to-pdf">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#f5a623" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Image to PDF
+      <span class="arr">→</span>
+    </a>
+    <a href="https://raiparuhang.com.np/image-size-resizer">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#a78bfa" stroke-width="2"><path d="M21 21H3V3"/><path d="M21 3L3 21"/></svg>
+      Image Resizer
+      <span class="arr">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">© 2026 Rai Paruhang · <a href="https://raiparuhang.com.np/terms.html">Privacy &amp; Terms</a></div>
+  <div class="footer-right">
+    <a href="https://raiparuhang.com.np/tools">All Tools</a>
+    <a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter/X</a>
+    <a href="https://www.linkedin.com/in/paruhang-rai/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+// NAV
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open')}
+
+// TOAST
+function toast(msg,type=''){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.className='toast show'+(type?' '+type:'');
+  clearTimeout(el._t);el._t=setTimeout(()=>el.className='toast',3000);
+}
+
+// MODE TABS
+function switchMode(mode,btn){
+  document.querySelectorAll('.mode-tab').forEach((b,i)=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+mode).classList.add('active');
+}
+
+// ── FILE MODE ──────────────────────────────────────────────────
+let files=[];
+let activeIdx=0;
+
+document.getElementById('fileInput').addEventListener('change',e=>addFiles([...e.target.files]));
+const zone=document.getElementById('uploadZone');
+zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('dragover')});
+zone.addEventListener('dragleave',()=>zone.classList.remove('dragover'));
+zone.addEventListener('drop',e=>{
+  e.preventDefault();zone.classList.remove('dragover');
+  const valid=[...e.dataTransfer.files].filter(f=>f.type==='image/svg+xml'||f.name.endsWith('.svg'));
+  if(!valid.length){toast('Only SVG files supported','err');return;}
+  addFiles(valid);
+});
+
+function addFiles(rawFiles){
+  const existing=new Set(files.map(f=>f.name+f.size));
+  const fresh=rawFiles.filter(f=>!existing.has(f.name+f.size));
+  if(!fresh.length){toast('Files already added');return;}
+  let loaded=0;
+  fresh.forEach(file=>{
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      files.push({name:file.name,size:file.size,svgText:ev.target.result,pngBlob:null,pngUrl:null});
+      if(++loaded===fresh.length){
+        document.getElementById('uploadZone').style.display='none';
+        document.getElementById('mainLayout').style.display='block';
+        document.getElementById('dlSection').classList.remove('show');
+        renderList();
+        setActive(files.length-fresh.length);
+      }
+    };
+    reader.readAsText(file);
+  });
+}
+
+function renderList(){
+  const list=document.getElementById('fileList');
+  document.getElementById('listTitle').textContent=files.length+' file'+(files.length!==1?'s':'');
+  list.innerHTML='';
+  files.forEach((f,i)=>{
+    const row=document.createElement('div');
+    row.className='file-row'+(i===activeIdx?' active':'');
+    row.onclick=()=>setActive(i);
+    const statusCls=f.pngBlob?'status-done':'status-ready';
+    const statusTxt=f.pngBlob?'done':'ready';
+    row.innerHTML=`
+      <div class="file-row-thumb"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#4f8eff" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+      <div class="file-row-info">
+        <div class="file-row-name" title="${f.name}">${f.name}</div>
+        <div class="file-row-meta">${fmtBytes(f.size)}</div>
+      </div>
+      <span class="file-row-status ${statusCls}">${statusTxt}</span>
+      <button class="file-row-del" onclick="event.stopPropagation();removeFile(${i})" title="Remove">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>`;
+    list.appendChild(row);
+  });
+}
+
+function setActive(i){
+  activeIdx=i;renderList();renderPreview();
+}
+
+function renderPreview(){
+  const f=files[activeIdx];if(!f)return;
+  document.getElementById('previewFilename').textContent=f.name;
+  const wrap=document.getElementById('previewWrap');
+  const blob=new Blob([f.svgText],{type:'image/svg+xml'});
+  const url=URL.createObjectURL(blob);
+  wrap.innerHTML=`<img src="${url}" alt="${f.name}" style="max-width:100%;max-height:320px;object-fit:contain" onload="URL.revokeObjectURL('${url}')">`;
+}
+
+function removeFile(i){
+  files.splice(i,1);
+  if(!files.length){clearAll();return;}
+  if(activeIdx>=files.length)activeIdx=files.length-1;
+  renderList();renderPreview();
+}
+
+function clearAll(){
+  files=[];activeIdx=0;
+  document.getElementById('uploadZone').style.display='';
+  document.getElementById('mainLayout').style.display='none';
+  document.getElementById('dlSection').classList.remove('show');
+  document.getElementById('fileInput').value='';
+}
+
+// CONVERT
+async function svgToPng(svgText,opts={}){
+  const {width,height,scale=2,transparent=true}=opts;
+  return new Promise((resolve,reject)=>{
+    const parser=new DOMParser();
+    const doc=parser.parseFromString(svgText,'image/svg+xml');
+    const svgEl=doc.documentElement;
+    const pErr=svgEl.querySelector('parsererror');
+    if(pErr){reject(new Error('Invalid SVG'));return;}
+
+    // get natural dimensions
+    let nw=parseFloat(svgEl.getAttribute('width'))||0;
+    let nh=parseFloat(svgEl.getAttribute('height'))||0;
+    const vb=svgEl.getAttribute('viewBox');
+    if((!nw||!nh)&&vb){const p=vb.split(/[\s,]+/);nw=parseFloat(p[2]);nh=parseFloat(p[3]);}
+    if(!nw)nw=512;if(!nh)nh=512;
+
+    let tw=width||nw;
+    let th=height||nh;
+    if(width&&!height){th=Math.round(nh*(width/nw));}
+    if(height&&!width){tw=Math.round(nw*(height/nh));}
+
+    // force dimensions on svg
+    svgEl.setAttribute('width',tw);
+    svgEl.setAttribute('height',th);
+    const serialized=new XMLSerializer().serializeToString(svgEl);
+    const blob=new Blob([serialized],{type:'image/svg+xml'});
+    const url=URL.createObjectURL(blob);
+    const img=new Image();
+    img.onload=()=>{
+      const canvas=document.createElement('canvas');
+      canvas.width=tw*scale;canvas.height=th*scale;
+      const ctx=canvas.getContext('2d');
+      if(!transparent){ctx.fillStyle='#ffffff';ctx.fillRect(0,0,canvas.width,canvas.height);}
+      ctx.drawImage(img,0,0,canvas.width,canvas.height);
+      URL.revokeObjectURL(url);
+      canvas.toBlob(b=>resolve(b),'image/png');
+    };
+    img.onerror=()=>{URL.revokeObjectURL(url);reject(new Error('Failed to render SVG'));};
+    img.src=url;
+  });
+}
+
+async function convertAll(){
+  if(!files.length)return;
+  const btn=document.getElementById('convertBtn');
+  btn.disabled=true;btn.innerHTML='<span class="spin"></span> Converting…';
+  document.getElementById('dlSection').classList.remove('show');
+
+  const w=parseInt(document.getElementById('expW').value)||undefined;
+  const h=parseInt(document.getElementById('expH').value)||undefined;
+  const scale=parseFloat(document.getElementById('expScale').value)||2;
+  const transparent=document.getElementById('togTransparent').classList.contains('on');
+
+  for(let i=0;i<files.length;i++){
+    const f=files[i];
+    try{
+      const blob=await svgToPng(f.svgText,{width:w,height:h,scale,transparent});
+      f.pngBlob=blob;
+      if(f.pngUrl)URL.revokeObjectURL(f.pngUrl);
+      f.pngUrl=URL.createObjectURL(blob);
+    }catch(e){toast('Error converting '+f.name,'err');}
+    renderList();
+  }
+
+  btn.disabled=false;
+  btn.innerHTML=`<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" width="17" height="17"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg> Convert to PNG`;
+
+  buildDownload();
+  toast(`Converted ${files.filter(f=>f.pngBlob).length} file(s) to PNG`,'ok');
+}
+
+function buildDownload(){
+  const done=files.filter(f=>f.pngBlob);
+  if(!done.length)return;
+  document.getElementById('dlMeta').textContent=`${done.length} PNG file${done.length>1?'s':''} ready`;
+  const btns=document.getElementById('dlButtons');
+  btns.innerHTML='';
+  done.forEach(f=>{
+    const btn=document.createElement('button');
+    btn.className=done.length===1?'btn-dl':'btn-dl-outline';
+    const fname=f.name.replace(/\.svg$/i,'')+'.png';
+    btn.innerHTML=`<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> ${done.length===1?'Download PNG':fname}`;
+    btn.onclick=()=>dlBlob(f.pngBlob,fname);
+    btns.appendChild(btn);
+  });
+  const more=document.createElement('button');
+  more.className='btn-more';
+  more.innerHTML=`<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" width="14" height="14"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg> Convert More`;
+  more.onclick=clearAll;
+  btns.appendChild(more);
+  document.getElementById('dlSection').classList.add('show');
+  document.getElementById('dlSection').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+// CODE MODE
+async function convertCode(){
+  const code=document.getElementById('svgCodeInput').value.trim();
+  if(!code){toast('Please paste SVG code first','err');return;}
+  const scale=2;const transparent=true;
+  try{
+    const blob=await svgToPng(code,{scale,transparent});
+    const btns=document.getElementById('dlButtonsCode');
+    btns.innerHTML='';
+    const btn=document.createElement('button');
+    btn.className='btn-dl';
+    btn.innerHTML=`<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download PNG`;
+    btn.onclick=()=>dlBlob(blob,'converted.png');
+    btns.appendChild(btn);
+    document.getElementById('dlSectionCode').classList.add('show');
+    toast('SVG code converted to PNG!','ok');
+  }catch(e){toast('Invalid SVG code — please check your markup','err');}
+}
+
+// URL MODE
+async function fetchAndConvert(){
+  const url=document.getElementById('svgUrlInput').value.trim();
+  if(!url){toast('Please enter a URL','err');return;}
+  const btn=document.querySelector('#panel-url .btn-fetch');
+  btn.disabled=true;btn.innerHTML='<span class="spin"></span> Fetching…';
+  try{
+    const res=await fetch(url);
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const text=await res.text();
+    if(!text.includes('<svg')&&!text.includes('<SVG'))throw new Error('Not a valid SVG file');
+    const blob=await svgToPng(text,{scale:2,transparent:true});
+    const fname=(url.split('/').pop().replace(/\?.*$/,'')||'converted')+'.png';
+    const btns=document.getElementById('dlButtonsUrl');
+    btns.innerHTML='';
+    const dlBtn=document.createElement('button');
+    dlBtn.className='btn-dl';
+    dlBtn.innerHTML=`<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download PNG`;
+    dlBtn.onclick=()=>dlBlob(blob,fname);
+    btns.appendChild(dlBtn);
+    document.getElementById('dlSectionUrl').classList.add('show');
+    toast('SVG converted from URL!','ok');
+  }catch(e){toast('Failed: '+e.message+'. Try a public SVG URL.','err');}
+  btn.disabled=false;btn.innerHTML=`<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Fetch & Convert`;
+}
+
+// HELPERS
+function dlBlob(blob,filename){
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=filename;
+  document.body.appendChild(a);a.click();
+  document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url),5000);
+  toast('Downloaded!','ok');
+}
+function fmtBytes(b){if(b<1024)return b+' B';if(b<1048576)return (b/1024).toFixed(1)+' KB';return (b/1048576).toFixed(2)+' MB';}
+</script>
+</body>
+</html>
