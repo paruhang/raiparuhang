@@ -529,6 +529,7 @@ footer { border-top: 1px solid var(--border); padding: 28px max(24px,5vw); displ
     </button>
   </div>
 </div>
+
 <!--related tools-->
 <section style="max-width:780px;margin:0 auto 60px;padding:0 20px;">
   <h2 style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#556080;margin-bottom:16px;">Related Tools</h2>
@@ -550,7 +551,8 @@ footer { border-top: 1px solid var(--border); padding: 28px max(24px,5vw); displ
     </a>
   </div>
 </section>
- <!--how to section-->
+
+<!--how to section-->
 <section style="max-width: 780px; margin: 3rem auto; padding: 0 1.25rem; font-family: system-ui, -apple-system, sans-serif; color: rgb(76, 149, 110); line-height: 1.7;">
 
   <h2 style="font-size: 1.6rem; font-weight: 600; margin: 0 0 0.5rem;">How to merge PDF files online</h2>
@@ -767,7 +769,7 @@ function renderList() {
         </div>
       </div>
       <div class="pdf-card-info">
-        <div class="pdf-card-name">${f.name}</div>
+      <div class="pdf-card-name"></div>
         <div class="pdf-card-meta">
           <span class="meta-tag">
             <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
@@ -803,6 +805,7 @@ function renderList() {
       }
     });
     list.appendChild(card);
+    card.querySelector('.pdf-card-name').textContent = f.name;
     renderThumbnail(f, i);
   });
 }
@@ -866,7 +869,7 @@ async function mergePDFs() {
   try {
     const merged = await PDFDocument.create();
     const bookmarks = [];
-    let totalPages = 0;
+    let totalPages = 0; let mergedCount = 0;
 
     for (let i = 0; i < files.length; i++) {
       const f = files[i];
@@ -888,12 +891,17 @@ try {
       const rangeStr = document.getElementById(`range-${f.id}`)?.value || '';
       const pageIndices = parseRange(rangeStr, srcPageCount);
 
+    if (pageIndices.length === 0) {
+    setProgress(Math.round((i / files.length) * 90), `⚠ Skipped: ${f.name} (empty range)`);
+    await new Promise(r => setTimeout(r, 400));
+    continue;
+    }
       if (addBookmarks) {
         bookmarks.push({ title: f.name.replace(/\.pdf$/i, ''), pageIndex: totalPages });
-      }
-
-      const copied = await merged.copyPages(srcDoc, pageIndices);
-      copied.forEach(p => merged.addPage(p));
+      }    
+    const copied = await merged.copyPages(srcDoc, pageIndices);
+          copied.forEach(p => merged.addPage(p));
+          mergedCount++;
       totalPages += pageIndices.length;
 
       // odd-page padding
@@ -950,7 +958,7 @@ merged.catalog.set(PDFLib.PDFName.of('Outlines'), outlineRootRef);
     dl.href = url;
     dl.download = filename + '.pdf';
     document.getElementById('resultMeta').textContent =
-      `${files.length} file${files.length>1?'s':''} · ${totalPages} pages · ${formatBytes(blob.size)}`;
+      `${mergedCount} file${mergedCount>1?'s':''} · ${totalPages} pages · ${formatBytes(blob.size)}`
     document.getElementById('resultCard').classList.add('show');
 
     setProgress(100, 'Done!');
