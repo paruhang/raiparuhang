@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JSON Formatter, Validator & Beautifier — Free Online Tool | Rai Paruhang</title>
-<meta name="description" content="Format, validate, minify and beautify JSON instantly in your browser. Syntax highlighting, error detection, tree view, path finder. 100% client-side — nothing uploaded.">
+<title>JSON Formatter, Validator & Beautifier — Free Online Tool</title>
+<meta name="description" content="Format, validate, minify, and beautify JSON instantly. Syntax highlighting, error detection, tree view, and path finder — 100% client-side, nothing ever uploaded.">
 <link rel="alternate" hreflang="en" href="https://raiparuhang.com.np/json-formatter">
 <link rel="alternate" hreflang="x-default" href="https://raiparuhang.com.np/json-formatter">
  <!-- Modern SVG Favicon (Infinite scaling for desktop & high-res screens) -->
@@ -57,64 +57,6 @@
 }
 </script>
  
- 
-<!-- ✅ 2. FAQPage SCHEMA —/json-formatter -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Is my JSON data uploaded to a server?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. All formatting, validation and processing happens entirely in your browser using JavaScript. Your JSON data never leaves your device — nothing is uploaded or stored anywhere. This is especially important when your JSON contains sensitive API keys, user data, or business information."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What does Format vs Minify do?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Format (beautify) adds indentation and line breaks to make JSON human-readable. Minify removes all whitespace to produce the smallest possible output — useful for APIs, network transmission, and reducing payload size."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How does error detection work?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The validator uses JavaScript's native JSON.parse() to detect syntax errors in real time as you type. When an error is found, the exact line and character position is shown in the error banner at the bottom of the input panel."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the Tree View?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Tree View renders your JSON as an interactive collapsible tree. Click any node to expand or collapse it. Click any key to see its full dot-notation path such as users[0].address.city. Great for exploring large or deeply nested JSON structures."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What does Sort Keys do?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Sort Keys alphabetically sorts all object keys at every level of nesting. This makes it much easier to compare two JSON objects side by side or find specific keys quickly in large structures."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What are Escape and Unescape?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Escape converts a JSON string into an escaped version with backslash-escaped quotes and newlines, suitable for embedding inside another JSON string or URL. Unescape reverses this, converting escaped characters back to their original readable form."
-      }
-    }
-  ]
-}
-</script>
 
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -325,16 +267,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.85);
 .stat-box .sl{font-size:10px;color:var(--text3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
 .stat-box.green .sv{color:var(--green)}.stat-box.red .sv{color:var(--red)}
 
-/* FAQ */
-.faq-section{padding:60px max(24px,5vw) 80px;max-width:720px;margin:0 auto}
-.faq-section h2{font-size:clamp(20px,3vw,28px);font-weight:700;letter-spacing:-.7px;margin-bottom:28px}
-.faq-item{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden}
-.faq-q{padding:16px 20px;font-size:15px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;user-select:none;transition:background .2s}
-.faq-q:hover{background:var(--surface)}
-.faq-q svg{width:16px;height:16px;color:var(--text3);flex-shrink:0;transition:transform .3s}
-.faq-q.open svg{transform:rotate(180deg)}
-.faq-a{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .3s,padding .3s;font-size:14px;color:var(--text2);line-height:1.7}
-.faq-a.open{max-height:220px;padding:0 20px 16px}
+
 
 /* FOOTER */
 footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
@@ -376,8 +309,8 @@ footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:fle
 <!-- HEADER -->
 <div class="page-header">
   <div class="page-badge">100% Client-Side · No Server Upload</div>
-  <h1>JSON <span>Formatter</span></h1>
-  <p>Format, validate, minify and explore JSON with syntax highlighting, tree view, path finder and error detection — all in your browser.</p>
+  <h1>JSON <span>Formatter</span> & Validator</h1>
+  <p>Format, validate, minify and view JSON with syntax highlighting, tree view, path finder and error detection — all in your browser.</p>
 </div>
 
 <!-- TOOL -->
@@ -567,54 +500,6 @@ footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:fle
   </div>
 
 </div>
-
-<!-- FAQ -->
-<div class="faq-section">
-  <h2>Frequently Asked Questions</h2>
-  <div class="faq-item">
-    <div class="faq-q" onclick="faq(this)">Is my JSON data uploaded to a server?<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-    <div class="faq-a">Never. All formatting, validation and processing happens entirely in your browser using JavaScript. Your JSON data never leaves your device — nothing is uploaded or stored anywhere.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="faq(this)">What does "Format" vs "Minify" do?<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-    <div class="faq-a">Format (beautify) adds indentation and line breaks to make JSON readable. Minify removes all whitespace to produce the smallest possible output — useful for APIs and network transmission.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="faq(this)">How does error detection work?<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-    <div class="faq-a">The validator uses JavaScript's native JSON.parse() to detect syntax errors in real time as you type. When an error is found, the exact line and character position is shown in the error banner at the bottom of the input panel.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="faq(this)">What is the Tree View?<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-    <div class="faq-a">Tree View renders your JSON as an interactive collapsible tree. Click any node to expand or collapse it. Click any key to see its full dot-notation path (e.g. users[0].address.city). Great for exploring large or nested JSON structures.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="faq(this)">What does "Sort Keys" do?<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-    <div class="faq-a">Sort Keys alphabetically sorts all object keys at every level of nesting. This makes it easier to compare two JSON objects or find keys quickly in large structures.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="faq(this)">What are Escape / Unescape?<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-    <div class="faq-a">Escape converts a JSON string into an escaped version (with \" and \n) suitable for embedding inside another JSON string or a URL. Unescape reverses this, converting escaped characters back to their original form.</div>
-  </div>
-</div>
-
-
-<section style="margin: 60px auto; max-width: 780px; padding: 0 20px;">
-  <h2 style="font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6b7280; margin-bottom: 16px;">
-    Also searched as
-  </h2>
-  <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">json formatter no upload</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">json beautifier no server</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">json validator online private</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">format json browser only</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">jsonformatter.org alternative</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">json minifier free no signup</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">offline json formatter tool</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">json tree view online free</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">json sort keys online free</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">json escape unescape tool private</span>
-  </div>
-</section>
 <!--related tools-->
 <section style="max-width:780px;margin:0 auto 60px;padding:0 20px;">
   <h2 style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#556080;margin-bottom:16px;">Related Tools</h2>
@@ -634,7 +519,95 @@ footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:fle
     </a>
   </div>
 </section>
+<!--how to section-->
+<section style="max-width: 780px; margin: 3rem auto; padding: 0 1.25rem; font-family: system-ui, -apple-system, sans-serif; color: rgb(76, 149, 110); line-height: 1.7;">
 
+  <h2 style="font-size: 1.6rem; font-weight: 600; margin: 0 0 0.5rem;">How to format, validate, and view JSON online</h2>
+  <p style="font-size: 1rem; color: #cbc1c1; margin: 0 0 2rem;">
+    Formatting or validating JSON with Rai Paruhang takes seconds — no account, no upload, and nothing installed.
+    Here is everything you need to know, including tree view, path finder, and device-specific tips.
+  </p>
+
+  <!-- Main 3 steps -->
+  <ol style="padding: 0; margin: 0 0 2.5rem; list-style: none; display: flex; flex-direction: column; gap: 1rem;">
+    <li style="display: flex; gap: 1rem; align-items: flex-start; background: #f8f8f6; border-radius: 10px; padding: 1rem 1.25rem;">
+      <span style="min-width: 32px; height: 32px; background: #1a1a1a; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 600;">1</span>
+      <div>
+        <p style="font-weight: 600; margin: 0 0 0.25rem;">Paste or upload your JSON</p>
+        <p style="margin: 0; color: #555; font-size: 0.95rem;">Paste raw JSON directly into the input box, or drag and drop a <code style="background: #eee; padding: 1px 5px; border-radius: 4px; font-size: 0.875rem;">.json</code> file. It works even if the JSON is minified, malformed, or missing quotes.</p>
+      </div>
+    </li>
+    <li style="display: flex; gap: 1rem; align-items: flex-start; background: #f8f8f6; border-radius: 10px; padding: 1rem 1.25rem;">
+      <span style="min-width: 32px; height: 32px; background: #1a1a1a; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 600;">2</span>
+      <div>
+        <p style="font-weight: 600; margin: 0 0 0.25rem;">Format, validate, or minify</p>
+        <p style="margin: 0; color: #555; font-size: 0.95rem;">Click <em>Format</em> to beautify with proper indentation, <em>Validate</em> to check for syntax errors, or <em>Minify</em> to compress it to a single line. Errors are highlighted with the exact line and character where they occur.</p>
+      </div>
+    </li>
+    <li style="display: flex; gap: 1rem; align-items: flex-start; background: #f8f8f6; border-radius: 10px; padding: 1rem 1.25rem;">
+      <span style="min-width: 32px; height: 32px; background: #1a1a1a; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 600;">3</span>
+      <div>
+        <p style="font-weight: 600; margin: 0 0 0.25rem;">Explore, copy, or download</p>
+        <p style="margin: 0; color: #555; font-size: 0.95rem;">Switch to tree view to expand and collapse nested objects and arrays, or use Path Finder to click any value and get its exact JSON path. Copy the result or download it as a file.</p>
+      </div>
+    </li>
+  </ol>
+
+  <!-- Sub-sections -->
+  <div style="display: flex; flex-direction: column; gap: 2rem;">
+
+    <div>
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem; color: rgb(76, 149, 110);">How to format JSON online</h3>
+      <p style="margin: 0; color: #cbc1c1; font-size: 0.95rem;">
+        Paste any JSON — minified, compact, or messy — and click <em>Format</em>. The output is re-indented with consistent spacing and syntax highlighting, making nested objects and arrays easy to read at a glance.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">How to validate JSON and find errors</h3>
+      <p style="margin: 0; color: #cbc1c1; font-size: 0.95rem;">
+        Click <em>Validate</em> to check your JSON for syntax issues like trailing commas, missing quotes, or unclosed brackets. If something is wrong, the exact line and character position is shown so you can fix it immediately instead of hunting through the whole file.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">How to view JSON in tree view</h3>
+      <p style="margin: 0; color: #cbc1c1; font-size: 0.95rem;">
+        Switch to <em>Tree View</em> to render your JSON as a collapsible structure. Click any object or array to expand or collapse it — useful for navigating large API responses or deeply nested config files without scrolling through raw text.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">How to minify JSON</h3>
+      <p style="margin: 0; color: #cbc1c1; font-size: 0.95rem;">
+        Click <em>Minify</em> to strip all whitespace and line breaks, compressing your JSON to a single line. This is useful for reducing payload size before sending data over an API or storing it in a database field.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">How to find a value with Path Finder</h3>
+      <p style="margin: 0; color: #cbc1c1; font-size: 0.95rem;">
+        Click any key or value in the formatted output, and Path Finder shows the exact path to it — for example <code style="background: #2d2c2c; padding: 1px 5px; border-radius: 4px; font-size: 0.875rem;">data.users[2].email</code>. Copy the path directly for use in code, <code style="background: #2d2c2c; padding: 1px 5px; border-radius: 4px; font-size: 0.875rem;">jq</code> queries, or debugging.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">How to format or validate JSON on Mac, Windows, iPhone, or Android</h3>
+      <p style="margin: 0; color: #cbc1c1; font-size: 0.95rem;">
+        This tool works in any modern browser — no extension or plugin required, on any device. Use Safari or Chrome on Mac, Chrome or Edge on Windows, or Safari and Chrome on mobile. There is nothing to install and no permissions to grant.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">How to format JSON without uploading it</h3>
+      <p style="margin: 0; color: #cbc1c1; font-size: 0.95rem;">
+        Unlike many JSON tools, this one never sends your data to a server. All formatting, validation, and tree rendering happens locally in your browser using JavaScript — making it safe for private API responses, internal config files, or proprietary data structures.
+      </p>
+    </div>
+
+  </div>
+
+</section>
 
 <!-- FOOTER -->
 <footer>
@@ -679,7 +652,10 @@ function syncScroll(){
   const ta=document.getElementById('inputArea');
   document.getElementById('lineNums').scrollTop=ta.scrollTop;
 }
-
+function hasUnsafeBigInt(raw){
+  const nums = raw.match(/-?\d{16,}\b/g) || [];
+  return nums.some(n => !Number.isSafeInteger(Number(n)));
+}
 function processJSON(){
 
   const raw=document.getElementById('inputArea').value.trim();
@@ -702,7 +678,7 @@ function processJSON(){
   if(!raw){setStatus('empty','Empty');setOutput('',true);document.getElementById('statsGrid').style.display='none';if(treeVisible)document.getElementById('treeBody').innerHTML='';return;}
   try{
     parsedJSON=JSON.parse(raw);
-    setStatus('valid','Valid JSON');
+    setStatus('valid', hasUnsafeBigInt(raw) ? 'Valid JSON (large numbers may lose precision)' : 'Valid JSON');
     const indent=getIndent();
     formattedOutput=JSON.stringify(parsedJSON,null,indent);
     isMinified=false;
@@ -731,7 +707,7 @@ function getIndent(){
 function formatJSON(){if(!parsedJSON){processJSON();return;}const indent=getIndent();formattedOutput=JSON.stringify(parsedJSON,null,indent);isMinified=false;document.getElementById('outputMode').textContent='beautified';setOutput(formattedOutput,false);updateOutputStats(formattedOutput);}
 function minifyJSON(){if(!parsedJSON)return;formattedOutput=JSON.stringify(parsedJSON);isMinified=true;document.getElementById('outputMode').textContent='minified';setOutput(formattedOutput,false);updateOutputStats(formattedOutput);}
 function sortKeys(){if(!parsedJSON)return;parsedJSON=sortDeep(parsedJSON);document.getElementById('inputArea').value=JSON.stringify(parsedJSON,null,getIndent());onInputChange();}
-function sortDeep(obj){if(Array.isArray(obj))return obj.map(sortDeep);if(obj&&typeof obj==='object')return Object.keys(obj).sort().reduce((acc,k)=>{acc[k]=sortDeep(obj[k]);return acc},{});return obj;}
+function sortDeep(obj){if(Array.isArray(obj))return obj.map(sortDeep);if(obj&&typeof obj==='object')return Object.keys(obj).sort().reduce((acc,k)=>{Object.defineProperty(acc,k,{value:sortDeep(obj[k]),enumerable:true,writable:true,configurable:true});return acc},{});return obj;}
 function escapeJSON(){const v=document.getElementById('inputArea').value;document.getElementById('inputArea').value=JSON.stringify(v);onInputChange();}
 function unescapeJSON(){
   const v = document.getElementById('inputArea').value.trim();
@@ -795,6 +771,7 @@ function showError(e){
   const lineMatch=msg.match(/line (\d+)/i);
   const colMatch=msg.match(/column (\d+)/i)||msg.match(/position (\d+)/i);
   let detail='';if(lineMatch)detail+='Line '+lineMatch[1];if(colMatch)detail+=(detail?' · ':'')+' Position '+colMatch[1];
+  if(!detail)detail='Check for a trailing comma or mismatched bracket';
   document.getElementById('errorDetail').textContent=detail;
   document.getElementById('errorBanner').classList.add('show');
 }
@@ -877,7 +854,7 @@ function doSearch(){
   const q=document.getElementById('searchInput').value;
 
   if(!q||!formattedOutput){
-    document.getElementById('searchCount').textContent='';return;}searchMatches=[];searchIdx=0;const re=new RegExp(escapeRegex(q),'gi');let match;while((match=re.exec(formattedOutput))!==null)searchMatches.push(match.index);document.getElementById('searchCount').textContent=searchMatches.length?`${searchIdx+1}/${searchMatches.length}`:'No results';renderSearchHighlight();}
+    document.getElementById('searchCount').textContent='';return;}searchMatches=[];searchIdx=0;const re=new RegExp('('+escapeRegex(q)+')(?![^<]*>)','gi');let match;while((match=re.exec(highlightJSON(formattedOutput)))!==null)searchMatches.push(match.index);document.getElementById('searchCount').textContent=searchMatches.length?`${searchIdx+1}/${searchMatches.length}`:'No results';renderSearchHighlight();}
 function searchNav(dir){
   if(!searchMatches.length) return;
   searchIdx = (searchIdx + dir + searchMatches.length) % searchMatches.length;
@@ -914,7 +891,7 @@ function handleKeydown(e){
   if(e.key==='Tab'){
     const ta = e.target;
     const start = ta.selectionStart, end = ta.selectionEnd;
-    if (start !== end) return; // Prevent deleting selected text
+    if (start !== end) { e.preventDefault(); return; }// Prevent deleting selected text
     e.preventDefault();
     const indent = getIndent() === '\t' ? '\t' : ' '.repeat(typeof getIndent() === 'number' ? getIndent() : 2);
     ta.value = ta.value.slice(0, start) + indent + ta.value.slice(end);
@@ -922,7 +899,7 @@ function handleKeydown(e){
     onInputChange();
   }
   if((e.ctrlKey||e.metaKey)&&e.shiftKey&&e.key==='F'){e.preventDefault();formatJSON();}
-  if((e.ctrlKey||e.metaKey)&&e.key==='m'){e.preventDefault();minifyJSON();}
+  if((e.ctrlKey||e.metaKey)&&e.shiftKey&&e.key==='M'){e.preventDefault();minifyJSON();}
   if((e.ctrlKey||e.metaKey)&&e.key==='f'){e.preventDefault();if(!searchVisible)toggleSearch();}
 }
 
