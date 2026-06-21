@@ -68,7 +68,7 @@ function cardHTML(tool) {
     <span class="card-cta">Open tool
       <svg class="arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
     </span>
-    <a class="card-link" href="${toolUrl(tool.slug)}" target="_blank" rel="noopener" aria-label="Open ${tool.name}"></a>
+    <a class="card-link" href="${toolUrl(tool.slug)}" aria-label="Open ${tool.name}"></a>
   </article>`;
 }
 
