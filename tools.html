@@ -1,1013 +1,112 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
- <meta name="google-adsense-account" content="ca-pub-8424476643034432">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Online Tools — Rai Paruhang</title>
-<meta name="description" content="Free browser-based tools for QR codes, image conversion, PDF utilities, and more. 100% client-side — your files never leave your device.">
-<link rel="alternate" hreflang="en" href="https://raiparuhang.com.np/tools">
-<link rel="alternate" hreflang="x-default" href="https://raiparuhang.com.np/tools">
- <!-- Modern SVG Favicon (Infinite scaling for desktop & high-res screens) -->
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<!-- For Safari pinned tabs color blending -->
-<link rel="mask-icon" href="favicon.svg" color="#4f8eff">
-<link rel="canonical" href="https://raiparuhang.com.np/tools">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-<!-- tools software schemas -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "name": "Free Online Tools — Rai Paruhang",
-  "url": "https://raiparuhang.com.np/tools",
-  "description": "Free browser-based tools for QR codes, image conversion, PDF utilities, password generation, and more. 100% client-side — your files never leave your device.",
-  "inLanguage": "en",
-  "author": {
-    "@type": "Person",
-    "name": "Paruhang Rai",
-    "url": "https://raiparuhang.com.np/"
-  },
-  "mainEntity": {
-    "@type": "ItemList",
-    "name": "Free Online Tools",
-    "description": "All tools run entirely in your browser — your files and data never leave your device.",
-    "numberOfItems": 17,
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "QR Code Generator",
-        "url": "https://raiparuhang.com.np/qr-code-generator",
-        "description": "Create QR codes for URLs, WiFi, text, email, and more instantly."
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Barcode Generator",
-        "url": "https://raiparuhang.com.np/bar-code-generator",
-        "description": "Generate EAN, UPC, Code 128 barcodes instantly in your browser."
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Password Generator",
-        "url": "https://raiparuhang.com.np/password-generator",
-        "description": "Generate strong, secure random passwords instantly in your browser."
-      },
-      {
-        "@type": "ListItem",
-        "position": 4,
-        "name": "Image Converter",
-        "url": "https://raiparuhang.com.np/image-converter",
-        "description": "Convert images between JPG, PNG, WebP and more formats instantly."
-      },
-      {
-        "@type": "ListItem",
-        "position": 5,
-        "name": "Image Resizer",
-        "url": "https://raiparuhang.com.np/image-size-resizer",
-        "description": "Resize images quickly with custom dimensions directly in your browser."
-      },
-      {
-        "@type": "ListItem",
-        "position": 6,
-        "name": "Aspect Ratio Calculator",
-        "url": "https://raiparuhang.com.np/aspect-ratio-calculator",
-        "description": "Calculate image dimensions and aspect ratios instantly and accurately."
-      },
-      {
-        "@type": "ListItem",
-        "position": 7,
-        "name": "Image Compressor",
-        "url": "https://raiparuhang.com.np/image-compressor",
-        "description": "Compress JPG, PNG and WebP images with real-time before/after preview."
-      },
-      {
-        "@type": "ListItem",
-        "position": 8,
-        "name": "PDF to Image",
-        "url": "https://raiparuhang.com.np/pdf-to-image",
-        "description": "Convert PDF pages into high-quality images instantly in your browser."
-      },
-      {
-        "@type": "ListItem",
-        "position": 9,
-        "name": "Image to PDF",
-        "url": "https://raiparuhang.com.np/image-to-pdf",
-        "description": "Convert multiple images into a single PDF instantly and securely."
-      },
-      {
-        "@type": "ListItem",
-        "position": 10,
-        "name": "PDF Merger",
-        "url": "https://raiparuhang.com.np/pdf-merger",
-        "description": "Merge multiple PDF files into a single document easily and quickly."
-      },
-      {
-        "@type": "ListItem",
-        "position": 11,
-        "name": "PDF to Word",
-        "url": "https://raiparuhang.com.np/pdf-to-word",
-        "description": "Convert PDF files into editable Word documents instantly in your browser."
-      },
-      {
-        "@type": "ListItem",
-        "position": 12,
-        "name": "Word Counter",
-        "url": "https://raiparuhang.com.np/word-counter",
-        "description": "Count words, characters, sentences and paragraphs. Estimate reading time and keyword density."
-      },
-      {
-        "@type": "ListItem",
-        "position": 13,
-        "name": "Case Converter",
-        "url": "https://raiparuhang.com.np/case-converter",
-        "description": "Convert text to uppercase, lowercase, Title Case, camelCase and more."
-      },
-      {
-        "@type": "ListItem",
-        "position": 14,
-        "name": "CSV to JSON Converter",
-        "url": "https://raiparuhang.com.np/csv-to-json",
-        "description": "Convert CSV to JSON and JSON to CSV instantly in your browser."
-      },
-      {
-        "@type": "ListItem",
-        "position": 15,
-        "name": "Base64 Encoder & Decoder",
-        "url": "https://raiparuhang.com.np/base-64-encoder",
-        "description": "Encode and decode Base64 online instantly. Supports text, files, and image data URIs."
-      }
-      {
-        "@type": "ListItem",
-        "position": 16,
-        "name": "Json Formatter",
-        "url": "https://raiparuhang.com.np/json-formatter",
-        "description": "Format, Validate json datas using javascript on your browser."
-      }
-      {
-        "@type": "ListItem",
-        "position": 17,
-        "name": "Json Formatter",
-        "url": "https://raiparuhang.com.np/wheel-of-names",
-        "description": "generate random name, spin satisfying wheel, add custom names or bulk names."
-      }        
-    ]
-  }
-}
-</script>
- 
- 
-<!-- ================================================================
-  FAQPage SCHEMA for /tools page
-================================================================ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Are these tools completely free?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, all tools on Rai Paruhang are 100% free with no account required and no usage limits."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do my files get uploaded to a server?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Every tool runs entirely in your browser using JavaScript. Your files are never uploaded to any server, logged, or shared with anyone."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What tools are available?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Rai Paruhang offers 15 free tools: Image to PDF, PDF to Image, PDF Merger, PDF to Word, Image Converter, Image Resizer, Image Compressor, Aspect Ratio Calculator, QR Code Generator, Barcode Generator, Password Generator, Word Counter, Case Converter, CSV to JSON Converter, and Base64 Encoder and Decoder."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do I need to create an account to use the tools?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No account or sign-up is needed. All tools are instantly accessible with no registration required."
-      }
-    }
-  ]
-}
-</script>
-
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#06080f;--bg2:#0d1120;--bg3:#111827;
-  --surface:#161d2e;--surface2:#1e2840;
-  --border:rgba(99,140,255,.12);--border2:rgba(99,140,255,.22);
-  --accent:#4f8eff;--accent2:#7eb3ff;
-  --green:#22d3a0;--green-bg:rgba(34,211,160,.1);
-  --red:#ff5b5b;--red-bg:rgba(255,91,91,.1);
-  --amber:#f5a623;--amber-bg:rgba(245,166,35,.08);
-  --purple:#a78bfa;--purple-bg:rgba(167,139,250,.1);
-  --pink:#f472b6;--pink-bg:rgba(244,114,182,.1);
-  --text:#e8edf8;--text2:#8b99bb;--text3:#556080;
-  --mono:'DM Mono',monospace;--sans:'Sora',sans-serif;
-  --radius:14px;--radius-lg:20px;
-}
-html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;min-height:100vh}
-
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 max(24px,5vw);height:64px;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-size:17px;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:-.3px;display:flex;align-items:center;gap:10px}
-.nav-logo .dot{width:8px;height:8px;background:var(--accent);border-radius:50%;box-shadow:0 0 8px var(--accent);animation:pulse 2.4s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
-.nav-links{display:flex;gap:32px;list-style:none}
-.nav-links a{font-size:14px;color:var(--text2);text-decoration:none;font-weight:400;transition:color .2s;letter-spacing:.2px}
-.nav-links a:hover{color:var(--text)}
-.nav-links a.active{color:var(--accent)}
-.nav-cta{background:var(--accent);color:#fff!important;padding:8px 18px;border-radius:8px;font-weight:600!important;font-size:13px!important;transition:opacity .2s!important}
-.nav-cta:hover{opacity:.88}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
-.hamburger span{width:22px;height:2px;background:var(--text2);border-radius:2px;display:block}
-.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(6,8,15,.97);border-bottom:1px solid var(--border);padding:24px max(24px,5vw);z-index:99;flex-direction:column;gap:20px}
-.mobile-menu.open{display:flex}
-.mobile-menu a{color:var(--text2);text-decoration:none;font-size:16px;padding:8px 0;border-bottom:1px solid var(--border);transition:color .2s}
-.mobile-menu a:last-child{border-bottom:none}
-.mobile-menu a:hover,.mobile-menu a.active{color:var(--accent)}
-@media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}}
-
-/* ── PAGE HEADER ── */
-.page-header{padding:96px max(24px,5vw) 48px;max-width:860px;margin:0 auto}
-.page-badge{display:inline-flex;align-items:center;gap:8px;background:var(--green-bg);border:1px solid rgba(34,211,160,.25);border-radius:100px;padding:5px 14px;font-family:var(--mono);font-size:11px;color:var(--green);margin-bottom:20px;letter-spacing:.5px}
-.page-badge::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%;box-shadow:0 0 5px var(--green)}
-.page-header h1{font-size:clamp(28px,5vw,52px);font-weight:700;letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px}
-.page-header h1 span{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 60%,var(--green) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.page-header p{color:var(--text2);font-size:15px;max-width:500px;font-weight:300}
-
-/* ── SEARCH + FILTER BAR ── */
-.toolbar{max-width:860px;margin:0 auto;padding:0 max(24px,5vw) 32px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.search-box{flex:1;min-width:200px;position:relative}
-.search-box svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--text3);pointer-events:none}
-.search-box input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px 13px 10px 38px;font-size:14px;font-family:var(--sans);color:var(--text);outline:none;transition:border-color .2s}
-.search-box input::placeholder{color:var(--text3)}
-.search-box input:focus{border-color:var(--accent)}
-.filter-chips{display:flex;gap:8px;flex-wrap:wrap}
-.chip{padding:7px 14px;border-radius:100px;border:1px solid var(--border);background:var(--surface);font-size:12px;font-family:var(--mono);color:var(--text2);cursor:pointer;transition:all .2s;letter-spacing:.3px;white-space:nowrap}
-.chip.active{border-color:var(--accent);background:rgba(79,142,255,.1);color:var(--accent)}
-.chip:hover:not(.active){border-color:var(--border2);color:var(--text)}
-.tool-count{font-size:12px;font-family:var(--mono);color:var(--text3);white-space:nowrap;margin-left:auto}
-
-/* ── MAIN WRAPPER ── */
-.tools-wrapper{max-width:860px;margin:0 auto;padding:0 max(24px,5vw) 100px;display:flex;flex-direction:column;gap:0}
-
-/* ── CATEGORY SECTION ── */
-.cat-section{margin-bottom:48px}
-.cat-section[data-hidden]{display:none}
-.cat-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--border)}
-.cat-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.cat-icon svg{width:17px;height:17px}
-.cat-title{font-size:16px;font-weight:700;letter-spacing:-.3px}
-.cat-desc{font-size:13px;color:var(--text3);font-family:var(--mono);margin-left:auto}
-
-/* ── TOOL GRID ── */
-.tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-@media(max-width:760px){.tool-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:480px){.tool-grid{grid-template-columns:1fr}}
-
-/* ── TOOL CARD ── */
-.tool-row{display:flex;flex-direction:column;gap:0;padding:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;color:inherit;transition:all .22s;position:relative;overflow:hidden}
-.tool-row::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(79,142,255,.05) 0%,transparent 60%);opacity:0;transition:opacity .25s;pointer-events:none}
-.tool-row:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.35)}
-.tool-row:hover::after{opacity:1}
-.tool-row[data-hidden]{display:none}
-
-.tool-card-top{padding:20px 20px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-.tool-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.tool-icon svg{width:20px;height:20px}
-
-.tool-card-body{padding:0 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
-.tool-name{font-size:14px;font-weight:600;letter-spacing:-.2px;line-height:1.3}
-.tool-desc{font-size:12px;color:var(--text2);line-height:1.6}
-
-.tool-card-footer{padding:12px 20px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;margin-top:auto}
-.tool-card-footer .open-lbl{font-size:11px;font-family:var(--mono);color:var(--text3);letter-spacing:.3px;transition:color .2s}
-.tool-row:hover .open-lbl{color:var(--accent)}
-.tool-card-footer svg{width:13px;height:13px;color:var(--text3);transition:color .2s}
-.tool-row:hover .tool-card-footer svg{color:var(--accent)}
-
-.badge{font-size:10px;font-family:var(--mono);letter-spacing:.4px;padding:3px 9px;border-radius:100px;font-weight:500;white-space:nowrap}
-.badge-live{background:var(--green-bg);color:var(--green);border:1px solid rgba(34,211,160,.25)}
-.badge-soon{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(245,166,35,.2)}
-.badge-new{background:rgba(79,142,255,.1);color:var(--accent);border:1px solid rgba(79,142,255,.25)}
-
-/* coming-soon cards */
-.tool-row.coming-soon{cursor:default;pointer-events:none;opacity:.5}
-.tool-row.coming-soon:hover{transform:none;box-shadow:none}
-
-/* ── COLOUR VARIANTS per category ── */
-.accent-blue  .tool-icon{background:rgba(79,142,255,.12)} .accent-blue  .tool-icon svg{color:var(--accent)}
-.accent-green .tool-icon{background:var(--green-bg)}      .accent-green .tool-icon svg{color:var(--green)}
-.accent-amber .tool-icon{background:var(--amber-bg)}      .accent-amber .tool-icon svg{color:var(--amber)}
-.accent-purple.tool-icon{background:var(--purple-bg)}     .accent-purple .tool-icon svg{color:var(--purple)}
-.accent-pink  .tool-icon{background:var(--pink-bg)}       .accent-pink  .tool-icon svg{color:var(--pink)}
-.accent-red   .tool-icon{background:var(--red-bg)}        .accent-red   .tool-icon svg{color:var(--red)}
-
-.cat-icon.accent-blue {background:rgba(79,142,255,.12)} .cat-icon.accent-blue  svg{color:var(--accent)}
-.cat-icon.accent-green{background:var(--green-bg)}      .cat-icon.accent-green svg{color:var(--green)}
-.cat-icon.accent-amber{background:var(--amber-bg)}      .cat-icon.accent-amber svg{color:var(--amber)}
-.cat-icon.accent-purple{background:var(--purple-bg)}    .cat-icon.accent-purple svg{color:var(--purple)}
-.cat-icon.accent-pink {background:var(--pink-bg)}       .cat-icon.accent-pink  svg{color:var(--pink)}
-
-/* ── EMPTY STATE ── */
-#emptyState{display:none;text-align:center;padding:80px 24px;color:var(--text3)}
-#emptyState svg{width:48px;height:48px;opacity:.25;margin-bottom:16px}
-#emptyState p{font-size:14px;font-family:var(--mono)}
-
-/* ── SECURITY STRIP ── */
-.security-strip{display:flex;align-items:center;gap:8px;justify-content:center;padding:13px;background:var(--green-bg);border:1px solid rgba(34,211,160,.15);border-radius:12px;font-size:12px;font-family:var(--mono);color:var(--green);letter-spacing:.3px;flex-wrap:wrap;text-align:center;margin-bottom:40px}
-.security-strip svg{width:15px;height:15px;flex-shrink:0}
-
-/* ── FOOTER ── */
-footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
-.footer-left{font-size:12px;color:var(--text3);font-family:var(--mono)}
-.footer-left a{color:var(--text3);text-decoration:none;transition:color .2s}
-.footer-left a:hover{color:var(--text2)}
-.footer-right{display:flex;gap:16px}
-.footer-right a{color:var(--text3);font-size:12px;text-decoration:none;font-family:var(--mono);transition:color .2s}
-.footer-right a:hover{color:var(--text)}
-
-@media(max-width:600px){.cat-desc{display:none}}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>All tools — Raiparuhang</title>
+  <meta name="description" content="Search the full directory of in-browser tools: generators, image and PDF utilities, converters, text and developer tools." />
+  <link rel="canonical" href="https://raiparuhang.com.np/tools">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html"><span class="brand-mark">R</span><span>Raiparuhang</span></a>
+      <nav class="nav-links">
+        <a data-nav href="/">Home</a>
+        <a data-nav href="/tools">Tools</a>
+        <a data-nav href="/about">About</a>
+        <a data-nav href="/contact">Contact</a>
+      </nav>
+      <a class="nav-cta" href="#tools-grid">Jump to grid →</a>
+      <button class="nav-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+    <div class="nav-mobile">
+      <a data-nav href="/">Home</a>
+      <a data-nav href="/tools">Tools</a>
+      <a data-nav href="/about">About</a>
+      <a data-nav href="/contact">Contact</a>
+    </div>
+  </header>
 
-<!-- NAV -->
-<nav>
-  <a href="https://raiparuhang.com.np" class="nav-logo"><span class="dot"></span>Rai Paruhang</a>
-  <ul class="nav-links">
-    <li><a href="https://raiparuhang.com.np/#home">Home</a></li>
-    <li><a href="https://raiparuhang.com.np/#about">About</a></li>
-    <li><a href="https://raiparuhang.com.np/#contact">Contact</a></li>
-    <li><a href="/tools" class="nav-cta">Tools</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="document.getElementById('mobileMenu').classList.toggle('open')">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="https://raiparuhang.com.np/#home">Home</a>
-  <a href="/tools.html" class="active">Tools</a>
-  <a href="https://raiparuhang.com.np/#about">About</a>
-  <a href="https://raiparuhang.com.np/#contact">Contact</a>
-</div>
-
-<!-- HEADER -->
-<div class="page-header">
-  <div class="page-badge">All Tools · 100% Client-Side</div>
-  <h1>Free <span>Online Tools</span></h1>
-</div>
-<div style="max-width:860px;margin:0 auto 24px auto;padding:0 24px;color:#8b99bb;font-size:14px;line-height:1.8;">
-  <p>
-    Explore a powerful collection of free online tools built by Rai Paruhang. 
-    This platform offers fast, secure, and 100% client-side web utilities.
-    All tools run directly in your browser without uploading any files to a server, ensuring complete privacy, speed, and security. 
-    Whether you need to generate passwords, convert images, compress files, create PDFs, or process text, everything is available instantly with no sign-up required.
-  </p>
-</div>
-
-<!-- TOOLBAR -->
-<div class="toolbar">
-  <div class="search-box">
-    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input type="text" id="searchInput" placeholder="Search tools…" oninput="filterTools()" autocomplete="off">
-  </div>
-  <div class="filter-chips">
-    <div class="chip active" onclick="filterChip(this,'all')">All</div>
-    <div class="chip" onclick="filterChip(this,'generators')">Generators</div>
-    <div class="chip" onclick="filterChip(this,'converters')">Converters</div>
-    <div class="chip" onclick="filterChip(this,'image')">Image</div>
-    <div class="chip" onclick="filterChip(this,'text')">Text</div>
-  </div>
-  <span class="tool-count" id="toolCount"></span>
-</div>
-
-<!-- TOOLS -->
-<div class="tools-wrapper">
-
-  <div class="security-strip">
-    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    All tools run entirely in your browser — your files and data never leave your device
-  </div>
-
-  <!-- ════ GENERATORS ════ -->
-  <div class="cat-section" data-cat="generators">
-    <div class="cat-header">
-      <div class="cat-icon accent-blue">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+  <main>
+    <section style="padding: 3rem 0 1rem; border-bottom: 1px solid var(--hairline);">
+      <div class="container">
+        <span class="mono">— Directory</span>
+        <h1 style="margin-top:.5rem; font-size: clamp(2rem, 4vw, 3.25rem);">Every tool, one page.</h1>
+        <p style="color:var(--ink-60); max-width:580px; margin-top:1rem;">Filter by category or search by name. All tools open on raiparuhang.com.np in a new tab.</p>
       </div>
-      <div>
-        <div class="cat-title">Generators</div>
+    </section>
+
+    <div class="toolbar">
+      <div class="container">
+        <div class="toolbar-row">
+          <label class="search">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input id="tool-search" type="search" placeholder="Search tools…" autocomplete="off" />
+          </label>
+          <div class="chips">
+            <button class="chip active" data-cat="All">All</button>
+            <button class="chip" data-cat="Generators">Generators</button>
+            <button class="chip" data-cat="Image">Image</button>
+            <button class="chip" data-cat="PDF">PDF</button>
+            <button class="chip" data-cat="Converters">Converters</button>
+            <button class="chip" data-cat="Text">Text</button>
+            <button class="chip" data-cat="Developer">Developer</button>
+          </div>
+        </div>
       </div>
-      <span class="cat-desc">5 live</span>
     </div>
 
-    <div class="tool-grid">
-
-    <a class="tool-row" href="https://raiparuhang.com.np/qr-code-generator" data-cat="generators" data-name="qr code generator url wifi vcard text">
-      <div class="tool-card-top">
-        <div class="tool-icon accent-blue">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="5" y="5" width="3" height="3" fill="currentColor" stroke="none"/><rect x="16" y="5" width="3" height="3" fill="currentColor" stroke="none"/><rect x="5" y="16" width="3" height="3" fill="currentColor" stroke="none"/><path d="M14 14h3v3h-3zM17 17h3v3h-3zM14 17v3"/></svg>
-        </div>
-        <span class="badge badge-live">LIVE</span>
+    <section style="padding: 1.5rem 0 4rem;">
+      <div class="container">
+        <div id="result-meta" class="result-meta"></div>
+        <div id="tools-grid" class="bento" style="margin-top: 1rem;"></div>
+        <div id="empty-state" class="empty" style="display:none; margin-top:1rem;">No tools match that search.</div>
       </div>
-      <div class="tool-card-body">
-        <div class="tool-name">QR Code Generator</div>
-        <div class="tool-desc">Create QR codes for URLs, WiFi, text, email, and more instantly.</div>
-      </div>
-      <div class="tool-card-footer">
-        <span class="open-lbl">Open tool</span>
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </a>
-
-    <a class="tool-row" href="https://raiparuhang.com.np/bar-code-generator" data-cat="generators" data-name="generate barcode instantly with live preview">
-      <div class="tool-card-top">
-        <div class="tool-icon accent-blue">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 5v14M7 5v14M11 5v14M15 5v14M19 5v14M6 5v14M10 5v14M14 5v14M18 5v14M21 5v14"/></svg>
-        </div>
-        <span class="badge badge-live">LIVE</span>
-      </div>
-      <div class="tool-card-body">
-        <div class="tool-name">Barcode Generator</div>
-        <div class="tool-desc">Generate EAN, UPC, Code 128 barcodes instantly in your browser.</div>
-      </div>
-      <div class="tool-card-footer">
-        <span class="open-lbl">Open tool</span>
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </a>
-
-    <a class="tool-row" href="https://raiparuhang.com.np/password-generator" data-cat="generators" data-name="generate secure password instantly with multiple security option">
-      <div class="tool-card-top">
-        <div class="tool-icon accent-blue">
-<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 7a4 4 0 014 4c0 1.054-.407 2.012-1.07 2.73L21 17v3h-3v-2h-2v-2h-2l-1.27-1.27A3.99 3.99 0 0115 15a4 4 0 01-4-4 4 4 0 014-4zM15 11h.01" /></svg>
-
-        </div>
-        <span class="badge badge-live">LIVE</span>
-      </div>
-      <div class="tool-card-body">
-        <div class="tool-name">Password Generator</div>
-        <div class="tool-desc">Generate strong, secure random passwords instantly in your browser.</div>
-      </div>
-      <div class="tool-card-footer">
-        <span class="open-lbl">Open tool</span>
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </a>
-
-    <a class="tool-row" href="https://raiparuhang.com.np/wheel-of-names" data-cat="generators" data-name=" Add names one by one or paste a bulk list, customise the wheel colors, and spin to get a fair random winner every time. ">
-      <div class="tool-card-top">
-        <div class="tool-icon accent-blue">
-<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="24" height="24"><circle cx="12" cy="12" r="9" stroke-linecap="round" stroke-linejoin="round" /><circle cx="12" cy="12" r="2" stroke-linecap="round" stroke-linejoin="round" /><path d="M12 3v7M12 14v7M3 12h7M14 12h7" stroke-linecap="round" stroke-linejoin="round" /></svg>
-        </div>
-        <span class="badge badge-live">LIVE</span>
-      </div>
-      <div class="tool-card-body">
-        <div class="tool-name">Wheel Of Names</div>
-        <div class="tool-desc"> The Wheel of Names is a free online spinner that randomly picks a name from your list with a satisfying spin animation. </div>
-      </div>
-      <div class="tool-card-footer">
-        <span class="open-lbl">Open tool</span>
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </a>
-    <a class="tool-row" href="https://raiparuhang.com.np/percentage-calculator" data-cat="generators" data-name=" calculate percentage online with formulas , percentage increment, percentage of percentage. ">
-      <div class="tool-card-top">
-        <div class="tool-icon accent-blue">
-<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="24" height="24"> <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h.01M15 17h.01M19 5L5 19" /></svg>
-        </div>
-        <span class="badge badge-live">LIVE</span>
-      </div>
-      <div class="tool-card-body">
-        <div class="tool-name">Percentage Calculator</div>
-        <div class="tool-desc"> Calculate percentage with formulas, percentage between two values, percentage increase or decrease, percentage of a percentage.  </div>
-      </div>
-      <div class="tool-card-footer">
-        <span class="open-lbl">Open tool</span>
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </a>
-    </div><!-- /tool-grid -->
-  </div>
-
-  <!-- ════ IMAGE TOOLS ════ -->
-  <div class="cat-section" data-cat="image">
-    <div class="cat-header">
-      <div class="cat-icon accent-green">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-      </div>
-      <div>
-        <div class="cat-title">Image Tools</div>
-      </div>
-      <span class="cat-desc">5 live</span>
-    </div>
-
-    <div class="tool-grid">
-
-    <a class="tool-row" href="https://raiparuhang.com.np/image-converter" data-cat="image-tools" data-name="image converter to png, jpg, webp, gif">
-      <div class="tool-card-top">
-        <div class="tool-icon accent-green">
-<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="24" height="24">
-  <!-- Inner Picture Frame Layout -->
-  <rect x="7" y="7" width="10" height="10" rx="1.5" stroke-linecap="round" stroke-linejoin="round" />
-  <circle cx="10.5" cy="10.5" r="1" />
-  <path d="M7 14l2.5-2.5 3.5 3.5M12 13l2-2 3 3" stroke-linecap="round" stroke-linejoin="round" />
-  <!-- Exterior Swap Arrows -->
-  <path d="M19 8a7 7 0 00-13.2-2M5 16a7 7 0 0013.2 2" stroke-linecap="round" />
-  <path d="M17 4h3v3M7 20H4v-3" stroke-linecap="round" stroke-linejoin="round" />
-</svg>
-        </div>
-        <span class="badge badge-live">LIVE</span>
-      </div>
-      <div class="tool-card-body">
-        <div class="tool-name">Image Converter</div>
-        <div class="tool-desc">Convert images between JPG, PNG, WebP and more formats instantly.</div>
-      </div>
-      <div class="tool-card-footer">
-        <span class="open-lbl">Open tool</span>
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </a>
-
-    <a class="tool-row" href="https://raiparuhang.com.np/image-size-resizer" data-cat="image-tools" data-name="image converter to png, jpg, webp, gif">
-      <div class="tool-card-top">
-        <div class="tool-icon accent-green">
-<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="24" height="24">
-  <!-- Dynamic Scaling Corner Marks -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M5 8V5h3M19 16v3h-3" />
-  <!-- Main Inner Image Bounds -->
-  <rect x="7" y="7" width="10" height="10" rx="1" stroke-linecap="round" stroke-linejoin="round" />
-  <!-- Diagonal Transformation Line -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M3 3l6 6M21 21l-6-6" />
-</svg>
-        </div>
-        <span class="badge badge-live">LIVE</span>
-      </div>
-      <div class="tool-card-body">
-        <div class="tool-name">Image Resizer</div>
-        <div class="tool-desc">Resize images quickly with custom dimensions directly in your browser.</div>
-      </div>
-      <div class="tool-card-footer">
-        <span class="open-lbl">Open tool</span>
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </a>
-
-    <a class="tool-row" href="https://raiparuhang.com.np/aspect-ratio-calculator" data-cat="image-tools" data-name="image converter to png, jpg, webp, gif">
-      <div class="tool-card-top">
-        <div class="tool-icon accent-green">
-<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="24" height="24">
-  <!-- Outer Frame Boundary -->
-  <rect x="3" y="4" width="18" height="12" rx="2" stroke-linecap="round" stroke-linejoin="round" />
-  <!-- Inner Proportional Box Marks -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M7 8h4v4M17 12h-4V8" />
-  <!-- Center Screen Aspect Guide Line -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M3 16l6 4M21 16l-6 4" />
-</svg>
-        </div>
-        <span class="badge badge-live">LIVE</span>
-      </div>
-      <div class="tool-card-body">
-        <div class="tool-name">Aspect Ratio Calculator</div>
-        <div class="tool-desc">Calculate image dimensions and aspect ratios instantly and accurately.</div>
-      </div>
-      <div class="tool-card-footer">
-        <span class="open-lbl">Open Tool</span>
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </a>
-
-<a class="tool-row" href="https://raiparuhang.com.np/image-compressor" data-cat="image-tools" data-name="compress image jpg png webp reduce file size">
-  <div class="tool-card-top">
-    <div class="tool-icon accent-green">
-<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="24" height="24">
-  <!-- Outlined File Canvas -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 3h6M14 3v5h5M5 20V4a2 2 0 012-2h7l5 5v13a2 2 0 01-2 2H7a2 2 0 01-2-2z" />
-  <!-- Compression Arrow Heads -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v4m0 0l-2-2m2 2l2-2M12 18v-4m0 0l-2 2m2-2l2 2" />
-</svg>
-    </div>
-    <span class="badge badge-live">LIVE</span>
-  </div>
-  <div class="tool-card-body">
-    <div class="tool-name">Image Compressor</div>
-    <div class="tool-desc">Compress JPG, PNG and WebP images with real-time before/after preview. Target file size, batch support.</div>
-  </div>
-  <div class="tool-card-footer">
-    <span class="open-lbl">Open tool</span>
-    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-  </div>
-</a>
-
-<a class="tool-row" href="https://raiparuhang.com.np/svg-to-png" data-cat="image-tools" data-name="svg to png direct upload file, provide code or url">
-  <div class="tool-card-top">
-    <div class="tool-icon accent-green">
-<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="24" height="24">
-  <!-- Inner Picture Frame Layout -->
-  <rect x="7" y="7" width="10" height="10" rx="1.5" stroke-linecap="round" stroke-linejoin="round" />
-  <circle cx="10.5" cy="10.5" r="1" />
-  <path d="M7 14l2.5-2.5 3.5 3.5M12 13l2-2 3 3" stroke-linecap="round" stroke-linejoin="round" />
-  <!-- Exterior Swap Arrows -->
-  <path d="M19 8a7 7 0 00-13.2-2M5 16a7 7 0 0013.2 2" stroke-linecap="round" />
-  <path d="M17 4h3v3M7 20H4v-3" stroke-linecap="round" stroke-linejoin="round" />
-</svg>
-    </div>
-    <span class="badge badge-live">LIVE</span>
-  </div>
-  <div class="tool-card-body">
-    <div class="tool-name">SVG to PNG</div>
-    <div class="tool-desc">SVG into PNG — upload a file, paste SVG code, or load from a URL.</div>
-  </div>
-  <div class="tool-card-footer">
-    <span class="open-lbl">Open tool</span>
-    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-  </div>
-</a>
-
-    </div><!-- /tool-grid -->
-  </div>
-  <!-- ════ PDF TOOLS ════ -->
-  <div class="cat-section" data-cat="pdf">
-    <div class="cat-header">
-      <div class="cat-icon accent-green">
-<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="24" height="24">
-  <!-- Document File Outer Frame -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M14 3v5h5M5 20V4a2 2 0 012-2h7l5 5v13a2 2 0 01-2 2H7a2 2 0 01-2-2z" />
-  <!-- Minimalist 'PDF' Badge Track Lines Inside -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M7 13h2a1.5 1.5 0 000-3H7v5M12 10v5h1.5a1.5 1.5 0 000-5H12zM17 10h2m-2 2.5h1.5M17 10v5" />
-</svg>
-      </div>
-      <div>
-        <div class="cat-title">Pdf Tools</div>
-      </div>
-      <span class="cat-desc">3 live</span>
-    </div>
-
-    <div class="tool-grid">
-
-    <a class="tool-row" href="https://raiparuhang.com.np/pdf-to-image" data-cat="pdf" data-name="convert pdf to png, jpg, webp, gif">
-      <div class="tool-card-top">
-        <div class="tool-icon accent-green">
-<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="24" height="24">
-  <!-- Left PDF File Card (With simulated 'P' line details) -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M4 3h5l3 3v8a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2z" />
-  <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h3v2H4m0-2v4" />
-  
-  <!-- Right Image Card (With mountain/sun illustration) -->
-  <rect x="13" y="9" width="9" height="11" rx="1.5" stroke-linecap="round" stroke-linejoin="round" />
-  <circle cx="16" cy="12.5" r="0.75" fill="currentColor" />
-  <path stroke-linecap="round" stroke-linejoin="round" d="M13 17l2-2 1.5 1.5M15.5 15.5l2-2 1.5 1.5" />
-  
-  <!-- Conversion Transition Arrow -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M10 11h4m-1.5-2l1.5 2-1.5 2" />
-</svg>
-        </div>
-        <span class="badge badge-live">LIVE</span>
-      </div>
-      <div class="tool-card-body">
-        <div class="tool-name">Pdf To Image</div>
-        <div class="tool-desc">Convert PDF pages into high-quality images instantly in browser.</div>
-      </div>
-      <div class="tool-card-footer">
-        <span class="open-lbl">Open tool</span>
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </a>
-
-    <a class="tool-row" href="https://raiparuhang.com.np/image-to-pdf" data-cat="pdf" data-name="image converter png, jpg, webp, gif to pdf">
-      <div class="tool-card-top">
-        <div class="tool-icon accent-green">
-<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="24" height="24">
-  <!-- Main Combined Document Outer Box -->
-  <rect x="3" y="3" width="18" height="18" rx="2" stroke-linecap="round" stroke-linejoin="round" />
-  
-  <!-- Center Splitting Boundary Line -->
-  <line x1="11" y1="3" x2="11" y2="21" stroke-dasharray="3 3" />
-  
-  <!-- PDF Label Representation Left Side -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M6 8h2a1.5 1.5 0 010 3H6V8zm0 3v3" />
-  
-  <!-- Graphic Image Landscape Right Side -->
-  <circle cx="15.5" cy="8.5" r="1" />
-  <path stroke-linecap="round" stroke-linejoin="round" d="M11 16l2.5-2.5 4.5 4.5" />
-</svg>
-        </div>
-        <span class="badge badge-live">LIVE</span>
-      </div>
-      <div class="tool-card-body">
-        <div class="tool-name">Image to PDF</div>
-        <div class="tool-desc">Convert multiple images into a single PDF instantly and securely.</div>
-      </div>
-      <div class="tool-card-footer">
-        <span class="open-lbl">Open tool</span>
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </a>
-
-    <a class="tool-row" href="https://raiparuhang.com.np/pdf-merger" data-cat="pdf" data-name="merge multiple pdf into single pdf file">
-      <div class="tool-card-top">
-        <div class="tool-icon accent-green">
-<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="24" height="24">
-  <!-- Master File Outline Frame -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M14 3v5h5M5 20V4a2 2 0 012-2h7l5 5v13a2 2 0 01-2 2H7a2 2 0 01-2-2z" />
-  <!-- Left Inward Merge Arrow -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M8 9l3 3m0 0H9m2 0V10" />
-  <!-- Right Inward Merge Arrow -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M16 9l-3 3m0 0h2m-2 0V10" />
-  <!-- Resulting Combined Data Block Line -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 15h6" />
-</svg>
-        </div>
-        <span class="badge badge-live">LIVE</span>
-      </div>
-      <div class="tool-card-body">
-        <div class="tool-name">Pdf Merger</div>
-        <div class="tool-desc">Merge multiple PDF files into a single document easily and quickly.</div>
-      </div>
-      <div class="tool-card-footer">
-        <span class="open-lbl">Open tool</span>
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </a>
-
-    </div><!-- /tool-grid -->
-  </div>
-
-  <!-- ════ CONVERTERS ════ -->
-  <div class="cat-section" data-cat="converters">
-    <div class="cat-header">
-      <div class="cat-icon accent-amber">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-      </div>
-      <div>
-        <div class="cat-title">Converters</div>
-      </div>
-      <span class="cat-desc">2 Live</span>
-    </div>
-
-    <div class="tool-grid">
-
-    <a class="tool-row" href="https://raiparuhang.com.np/pdf-to-word" data-cat="converters" data-name="convert pdf-to-word">
-      <div class="tool-card-top">
-        <div class="tool-icon accent-amber">
-<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="24" height="24">
-  <!-- Left PDF Document Card -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M4 3h4l2 2v9a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2z" />
-  <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h2.5a1 1 0 010 2H4m0-2v4" />
-  
-  <!-- Right Word Document Card -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M16 8h4l2 2v9a2 2 0 01-2 2h-6a2 2 0 01-2-2v-9a2 2 0 012-2z" />
-  <!-- Minimalist 'W' Shape inside the Word Document -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M15 13l1.5 4 1-2.5 1 2.5 1.5-4" />
-  
-  <!-- Central Exchange Arrow -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 11h4m-1.5-2l1.5 2-1.5 2" />
-</svg>
-        </div>
-        <span class="badge badge-live">LIVE</span>
-      </div>
-      <div class="tool-card-body">
-        <div class="tool-name">PDF to Word</div>
-        <div class="tool-desc">Convert PDF files into editable Word documents instantly in browser.</div>
-      </div>
-      <div class="tool-card-footer">
-        <span class="open-lbl">Open tool</span>
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </a>
-
-    <a class="tool-row" href="https://raiparuhang.com.np/csv-to-json" data-cat="converters" data-name="convert csv to json and json to csv easily">
-      <div class="tool-card-top">
-        <div class="tool-icon accent-amber">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-        </div>
-        <span class="badge badge-live">LIVE</span>
-      </div>
-      <div class="tool-card-body">
-        <div class="tool-name">CSV ↔ JSON</div>
-        <div class="tool-desc">Convert csv to json instantly with live preview on your browser</div>
-      </div>
-      <div class="tool-card-footer">
-        <span class="open-lbl">Open Tool</span>
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </a>
-
-    </div><!-- /tool-grid -->
-  </div>
-
-  <!-- ════ TEXT TOOLS ════ -->
-  <div class="cat-section" data-cat="text">
-    <div class="cat-header">
-      <div class="cat-icon accent-purple">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
-      </div>
-      <div>
-        <div class="cat-title">Text Tools</div>
-      </div>
-      <span class="cat-desc">2 Live</span>
-    </div>
-
-    <div class="tool-grid">
-
-    <a class="tool-row" href="https://raiparuhang.com.np/word-counter" data-cat="text" data-name="text tools">
-      <div class="tool-card-top">
-        <div class="tool-icon accent-purple">
-<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="24" height="24">
-  <!-- Simulated Paragraph Lines -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h12M4 14h14" />
-  <!-- Modern Metrics/Counter Representation (123 Symbol Stack) -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M5 19h2m-1 0v-2M10 17h2v2h-2v-2zm0 2h2M15 17h2v1h-2v1h2" />
-</svg>
-
-        </div>
-        <span class="badge badge-live">LIVE</span>
-      </div>
-      <div class="tool-card-body">
-        <div class="tool-name">Word Counter</div>
-        <div class="tool-desc">Count words, characters, sentences and paragraphs. Estimate reading time and keyword density.</div>
-      </div>
-      <div class="tool-card-footer">
-        <span class="open-lbl">Open Tool</span>
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </a>
-
-
-     <a class="tool-row" href="https://raiparuhang.com.np/case-converter" data-cat="text" data-name=".....">
-      <div class="tool-card-top">
-        <div class="tool-icon accent-purple">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        </div>
-        <span class="badge badge-live">LIVE</span>
-      </div>
-      <div class="tool-card-body">
-        <div class="tool-name">Case Converter</div>
-        <div class="tool-desc">Convert text to uppercase, lowercase, Title Case, camelCase and more.</div>
-      </div>
-      <div class="tool-card-footer">
-        <span class="open-lbl">Open tool</span>
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </a>
-
-    </div><!-- /tool-grid -->
-  </div>
-  <!-- ════ Developer TOOLS ════ -->
-  <div class="cat-section" data-cat="developer">
-    <div class="cat-header">
-      <div class="cat-icon accent-purple">
-<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="24" height="24">
-  <!-- Main Application Window Outer Frame -->
-  <rect x="3" y="4" width="18" height="16" rx="2" stroke-linecap="round" stroke-linejoin="round" />
-  <!-- Window Header Separator Line -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M3 9h18" />
-  <!-- Window Window Controls (Three Dots) -->
-  <circle cx="6" cy="6.5" r="0.5" fill="currentColor" />
-  <circle cx="8.5" cy="6.5" r="0.5" fill="currentColor" />
-  <circle cx="11" cy="6.5" r="0.5" fill="currentColor" />
-  <!-- Internal Script Representation Lines -->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M7 13h4m-4 3h8" />
-</svg>
-      </div>
-      <div>
-        <div class="cat-title">Developer Tools</div>
-      </div>
-      <span class="cat-desc">2 Live</span>
-    </div>
-
-    <div class="tool-grid">
-
-    <a class="tool-row" href="https://raiparuhang.com.np/base-64-encoder" data-cat="developer" data-name="convert base 64 to plain text and plaint text to base 64">
-      <div class="tool-card-top">
-        <div class="tool-icon accent-purple">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        </div>
-        <span class="badge badge-live">LIVE</span>
-      </div>
-      <div class="tool-card-body">
-        <div class="tool-name">Base64 Encoder</div>
-        <div class="tool-desc">Encode plain text or files to Base64 and decode Base64 strings back to text or binary.</div>
-      </div>
-      <div class="tool-card-footer">
-        <span class="open-lbl">Open Tool</span>
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </a>
-
-    <a class="tool-row" href="https://raiparuhang.com.np/json-formatter" data-cat="developer" data-name="json formatter provides you different features on your browser ex:minify, tree view, sortKeys and many more.">
-      <div class="tool-card-top">
-        <div class="tool-icon accent-purple">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        </div>
-        <span class="badge badge-live">LIVE</span>
-      </div>
-      <div class="tool-card-body">
-        <div class="tool-name">Json Formatter</div>
-        <div class="tool-desc"> formatting, validation and processing happens entirely in your browser using JavaScript.</div>
-      </div>
-      <div class="tool-card-footer">
-        <span class="open-lbl">Open Tool</span>
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </a>
-    </div><!-- /tool-grid -->
-  </div>
-  <!-- EMPTY STATE -->
-  <div id="emptyState">
-    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <p>No tools match "<span id="emptyQuery"></span>"</p>
-  </div>
-
-</div>
+    </section>
+  </main>
 
 <!-- FOOTER -->
-<footer>
-  <div class="footer-left">
-    © 2026 Rai Paruhang · Nepal &nbsp;·&nbsp;
-    <a href="https://raiparuhang.com.np/terms.html">Privacy & Terms</a>
-  </div>
-  <div class="footer-right">
-    <a href="https://raiparuhang.com.np/#about">About</a>
-    <a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter / X</a>
-    <a href="https://www.linkedin.com/in/paruhang-rai/" target="_blank" rel="noopener">Linkedin</a>
-  </div>
-</footer>
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="/">
+          <span class="brand-mark">R</span>
+          <span>Raiparuhang</span>
+        </a>
+        <p style="color:var(--ink-60); margin-top:.85rem; max-width:340px">A small archive of private, in-browser tools — built and maintained by one person.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/tools">All tools</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <ul>
+          <li><a href="https://raiparuhang.com.np" target="_blank" rel="noopener">raiparuhang.com.np ↗</a></li>
+          <li><a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter/X</a></li>
+          <li><a href="https://www.linkedin.com/in/paruhang-rai/" target="_blank" rel="noopener">Linkedin</a></li>
 
-<script>
-let activeChip = 'all';
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Raiparuhang</span>
+      <span class="mono">Built static · HTML · CSS · JS</span>
+      <span class="mono"><a href="https://raiparuhang.com.np/terms">Privacy & Terms</a></span>
+    </div>
+  </footer>
 
-function updateCount(){
-  const rows = document.querySelectorAll('.tool-row:not([data-hidden])');
-  const el = document.getElementById('toolCount');
-  const visible = [...rows].filter(r => !r.classList.contains('coming-soon')).length;
-  const total   = [...rows].length;
-  el.textContent = visible + ' live · ' + total + ' total';
-}
-
-function filterChip(el, cat){
-  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-  el.classList.add('active');
-  activeChip = cat;
-  filterTools();
-}
-
-function filterTools(){
-  const q = document.getElementById('searchInput').value.toLowerCase().trim();
-  let anyVisible = false;
-
-  document.querySelectorAll('.cat-section').forEach(sec => {
-    const secCat = sec.dataset.cat;
-    let secHasVisible = false;
-
-    sec.querySelectorAll('.tool-row').forEach(row => {
-      const rowCat  = row.dataset.cat;
-      const rowName = row.dataset.name || '';
-      const toolName = row.querySelector('.tool-name')?.textContent.toLowerCase() || '';
-      const toolDesc = row.querySelector('.tool-desc')?.textContent.toLowerCase() || '';
-
-      const matchCat  = activeChip === 'all' || rowCat === activeChip || secCat === activeChip;
-      const matchText = !q || rowName.includes(q) || toolName.includes(q) || toolDesc.includes(q);
-
-      if(matchCat && matchText){
-        delete row.dataset.hidden;
-        secHasVisible = true;
-        anyVisible = true;
-      } else {
-        row.dataset.hidden = '1';
-      }
-    });
-
-    if(secHasVisible) delete sec.dataset.hidden;
-    else sec.dataset.hidden = '1';
-  });
-
-  document.getElementById('emptyState').style.display = anyVisible ? 'none' : 'block';
-  document.getElementById('emptyQuery').textContent = q;
-  updateCount();
-}
-
-// init
-updateCount();
-</script>
+  <script src="assets/js/tools.js"></script>
+  <script src="assets/js/nav.js"></script>
+  <script src="assets/js/tools-page.js"></script>
 </body>
 </html>
