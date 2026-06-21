@@ -7,19 +7,18 @@
 <meta name="description" content="Combine multiple PDFs into one — instantly, for free. Your files never leave your browser: no upload, no server, no sign up. 100% private PDF merging.">
 <link rel="alternate" hreflang="en" href="https://raiparuhang.com.np/pdf-merger">
 <link rel="alternate" hreflang="x-default" href="https://raiparuhang.com.np/pdf-merger">
- <!-- Modern SVG Favicon (Infinite scaling for desktop & high-res screens) -->
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<!-- For Safari pinned tabs color blending -->
-<link rel="mask-icon" href="favicon.svg" color="#4f8eff">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="assets/css/styles.css" />
 <link rel="canonical" href="https://raiparuhang.com.np/pdf-merger">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style"
-  href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap"
-  onload="this.onload=null;this.rel='stylesheet'">
-<noscript>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap">
-</noscript>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 
@@ -113,11 +112,10 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #06080f; --bg2: #0d1120; --bg3: #111827;
   --surface: #161d2e; --surface2: #1e2840;
   --border: rgba(99,140,255,0.12); --border2: rgba(99,140,255,0.22);
-  --accent: #4f8eff; --accent2: #7eb3ff;
-  --green: #22d3a0; --green-bg: rgba(34,211,160,0.1);
+  --accent2: #7eb3ff;
+  --green: #0cbb89; --green-bg: rgba(34,211,160,0.1);
   --red: #ff5b5b; --red-bg: rgba(255,91,91,0.1);
   --amber: #f5a623; --amber-bg: rgba(245,166,35,0.08);
   --text: #e8edf8; --text2: #8b99bb; --text3: #556080;
@@ -125,46 +123,19 @@
   --radius: 14px; --radius-lg: 20px;
 }
 html { scroll-behavior: smooth; }
-body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; min-height: 100vh; }
-
-/* ---- NAV ---- */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(6,8,15,0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border); padding: 0 max(24px,5vw);
-  height: 64px; display: flex; align-items: center; justify-content: space-between;
-}
-.nav-logo { font-size: 17px; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.3px; display: flex; align-items: center; gap: 10px; }
-.nav-logo .dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 8px var(--accent); animation: pulse 2.4s ease-in-out infinite; }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(.8)} }
-.nav-links { display: flex; gap: 32px; list-style: none; }
-.nav-links a { font-size: 14px; color: var(--text2); text-decoration: none; font-weight: 400; transition: color 0.2s; letter-spacing: 0.2px; }
-.nav-links a:hover { color: var(--text); }
-.nav-links a.active { color: var(--accent); }
-.nav-cta { background: var(--accent); color: #fff !important; padding: 8px 18px; border-radius: 8px; font-weight: 600 !important; font-size: 13px !important; transition: opacity 0.2s !important; }
-.nav-cta:hover { opacity: 0.88; }
-.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
-.hamburger span { width: 22px; height: 2px; background: var(--text2); border-radius: 2px; display: block; transition: all .3s; }
-.mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: rgba(6,8,15,0.97); border-bottom: 1px solid var(--border); padding: 24px max(24px,5vw); z-index: 99; flex-direction: column; gap: 20px; }
-.mobile-menu.open { display: flex; }
-.mobile-menu a { color: var(--text2); text-decoration: none; font-size: 16px; padding: 8px 0; border-bottom: 1px solid var(--border); transition: color .2s; }
-.mobile-menu a:last-child { border-bottom: none; }
-.mobile-menu a:hover, .mobile-menu a.active { color: var(--accent); }
-@media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: flex; } }
 
 /* ---- PAGE HEADER ---- */
 .page-header { padding: 96px max(24px,5vw) 40px; max-width: 960px; margin: 0 auto; text-align: center; }
 .page-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--green-bg); border: 1px solid rgba(34,211,160,.25); border-radius: 100px; padding: 5px 14px; font-family: var(--mono); font-size: 11px; color: var(--green); margin-bottom: 20px; letter-spacing: .5px; }
 .page-badge::before { content:''; width:5px; height:5px; background:var(--green); border-radius:50%; box-shadow:0 0 5px var(--green); }
-.page-header h1 { font-size: clamp(26px,5vw,50px); font-weight: 700; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 12px; }
+.page-header h1 { font-size: clamp(26px,5vw,50px); margin-bottom: 12px; }
 .page-header h1 span { background: linear-gradient(135deg,var(--accent) 0%,var(--accent2) 60%,var(--green) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-.page-header p { color: var(--text2); font-size: 15px; max-width: 500px; margin: 0 auto; font-weight: 300; }
 
 /* ---- TOOL WRAPPER ---- */
 .tool-wrapper { max-width: 960px; margin: 0 auto; padding: 0 max(24px,5vw) 80px; display: flex; flex-direction: column; gap: 20px; }
 
 /* ---- SECURITY STRIP ---- */
-.security-strip { display: flex; align-items: center; gap: 8px; justify-content: center; padding: 14px; background: var(--green-bg); border: 1px solid rgba(34,211,160,.15); border-radius: 12px; font-size: 12px; font-family: var(--mono); color: var(--green); letter-spacing: .3px; flex-wrap: wrap; text-align: center; }
+.security-strip { display: flex; align-items: center; gap: 8px; justify-content: center; padding: 14px; background: var(--green-bg); border: 1px solid rgba(7, 194, 141, 0.822); border-radius: 12px; font-size: 12px; font-family: var(--mono); color: var(--green); letter-spacing: .3px; flex-wrap: wrap; text-align: center; }
 .security-strip svg { width: 16px; height: 16px; flex-shrink: 0; }
 
 /* ---- UPLOAD ZONE ---- */
@@ -216,7 +187,7 @@ nav {
 .pdf-thumb-wrap .thumb-placeholder svg { width: 20px; height: 20px; }
 
 .pdf-card-info { flex: 1; min-width: 0; }
-.pdf-card-name { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pdf-card-name { font-size: 14px; font-weight: 600; white-space: nowrap; color: var(--muted); overflow: hidden; text-overflow: ellipsis; }
 .pdf-card-meta { font-size: 12px; color: var(--text3); font-family: var(--mono); margin-top: 3px; display: flex; gap: 10px; flex-wrap: wrap; }
 .meta-tag { display: inline-flex; align-items: center; gap: 4px; }
 
@@ -240,7 +211,7 @@ nav {
 
 /* ---- SETTINGS ---- */
 .settings-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
-.settings-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--border); cursor: pointer; user-select: none; }
+.settings-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; color: var(--muted); border-bottom: 1px solid var(--border); cursor: pointer; user-select: none; }
 .settings-header-left { display: flex; align-items: center; gap: 10px; }
 .settings-header h3 { font-size: 14px; font-weight: 600; }
 .settings-header span { font-family: var(--mono); font-size: 11px; color: var(--text3); }
@@ -251,12 +222,12 @@ nav {
 .settings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%,210px),1fr)); gap: 16px; }
 .setting-group { display: flex; flex-direction: column; gap: 8px; }
 .setting-group label { font-size: 12px; color: var(--text2); font-family: var(--mono); letter-spacing: .4px; text-transform: uppercase; }
-.setting-group select, .setting-group input[type=text] { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; font-size: 14px; font-family: var(--sans); color: var(--text); width: 100%; outline: none; transition: border-color .2s, box-shadow .2s; -webkit-appearance: none; appearance: none; }
+.setting-group select, .setting-group input[type=text] { background: var(--ink); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; font-size: 14px; font-family: var(--sans); color: var(--text); width: 100%; outline: none; transition: border-color .2s, box-shadow .2s; -webkit-appearance: none; appearance: none; }
 .setting-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b99bb' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
 .setting-group select:focus, .setting-group input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(79,142,255,.15); }
 .setting-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
 .setting-row:last-child { border-bottom: none; }
-.setting-row-label { display: flex; flex-direction: column; gap: 3px; }
+.setting-row-label { display: flex; flex-direction: column; gap: 3px; color: var(--muted-2);}
 .setting-row-label span:first-child { font-size: 14px; font-weight: 500; }
 .setting-row-label span:last-child { font-size: 12px; color: var(--text3); }
 .toggle { width: 42px; height: 24px; background: var(--bg3); border-radius: 100px; border: 1px solid var(--border); cursor: pointer; position: relative; transition: all .2s; flex-shrink: 0; }
@@ -269,7 +240,7 @@ nav {
 .progress-bar-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 100px; height: 6px; overflow: hidden; display: none; }
 .progress-bar { height: 100%; background: linear-gradient(90deg,var(--accent),var(--green)); border-radius: 100px; width: 0; transition: width .4s; }
 .convert-status { font-family: var(--mono); font-size: 12px; color: var(--text3); text-align: center; display: none; }
-.btn-merge { width: 100%; background: linear-gradient(135deg,var(--accent),#7eb3ff); color: #fff; border: none; border-radius: 12px; padding: 16px 24px; font-size: 16px; font-weight: 700; font-family: var(--sans); cursor: pointer; transition: all .2s; letter-spacing: -.3px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+.btn-merge { width: 100%; background: var(--accent); color: #fff; border: none; border-radius: 12px; padding: 16px 24px; font-size: 16px; font-weight: 700; font-family: var(--sans); cursor: pointer; transition: all .2s; letter-spacing: -.3px; display: flex; align-items: center; justify-content: center; gap: 10px; }
 .btn-merge:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(79,142,255,.35); }
 .btn-merge:disabled { opacity: .4; cursor: not-allowed; transform: none; }
 .btn-merge svg { width: 20px; height: 20px; }
@@ -312,20 +283,12 @@ nav {
 .faq-section h2 { font-size: clamp(20px,3vw,28px); font-weight: 700; letter-spacing: -.7px; margin-bottom: 28px; }
 .faq-item { border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 10px; overflow: hidden; }
 .faq-q { padding: 16px 20px; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; user-select: none; transition: background .2s; }
-.faq-q:hover { background: var(--surface); }
+.faq-q:hover { background: var(--muted-2); }
 .faq-q svg { width: 16px; height: 16px; color: var(--text3); flex-shrink: 0; transition: transform .3s; }
 .faq-q.open svg { transform: rotate(180deg); }
-.faq-a { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height .3s, padding .3s; font-size: 14px; color: var(--text2); line-height: 1.7; }
+.faq-a { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height .3s, padding .3s; font-size: 14px; color: var(--ink-60); line-height: 1.7; }
 .faq-a.open { max-height: 200px; padding: 0 20px 16px; }
 
-/* ---- FOOTER ---- */
-footer { border-top: 1px solid var(--border); padding: 28px max(24px,5vw); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
-.footer-left { font-size: 12px; color: var(--text3); font-family: var(--mono); }
-.footer-left a { color: var(--text3); text-decoration: none; transition: color .2s; }
-.footer-left a:hover { color: var(--text2); }
-.footer-right { display: flex; gap: 16px; }
-.footer-right a { color: var(--text3); font-size: 12px; text-decoration: none; font-family: var(--mono); transition: color .2s; }
-.footer-right a:hover { color: var(--text); }
 
 /* ---- RESPONSIVE ---- */
 @media (max-width: 640px) {
@@ -342,27 +305,36 @@ footer { border-top: 1px solid var(--border); padding: 28px max(24px,5vw); displ
   .icon-btn { width: 28px; height: 28px; }
   .icon-btn svg { width: 12px; height: 12px; }
 }
+
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
-  <a href="https://raiparuhang.com.np" class="nav-logo"><span class="dot"></span>Rai Paruhang</a>
-  <ul class="nav-links">
-    <li><a href="https://raiparuhang.com.np/#home">Home</a></li>
-    <li><a href="https://raiparuhang.com.np/#about">About</a></li>
-    <li><a href="https://raiparuhang.com.np/#contact">Contact</a></li>
-    <li><a href="https://raiparuhang.com.np/tools" class="nav-cta">All Tools</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="https://raiparuhang.com.np/#home" onclick="closeMobile()">Home</a>
-  <a href="https://raiparuhang.com.np/tools" class="active" onclick="closeMobile()">All Tools</a>
-  <a href="https://raiparuhang.com.np/#about" onclick="closeMobile()">About</a>
-  <a href="https://raiparuhang.com.np/#contact" onclick="closeMobile()">Contact</a>
-</div>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">R</span>
+        <span>Raiparuhang</span>
+      </a>
+      <nav class="nav-links">
+        <a data-nav href="/">Home</a>
+        <a data-nav href="/tools">Tools</a>
+        <a data-nav href="/about">About</a>
+        <a data-nav href="/contact">Contact</a>
+      </nav>
+      <a class="nav-cta" href="tools.html">Browse tools →</a>
+      <button class="nav-toggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <div class="nav-mobile">
+      <a data-nav href="/">Home</a>
+      <a data-nav href="/tools">Tools</a>
+      <a data-nav href="/about">About</a>
+      <a data-nav href="/contact">Contact</a>
+    </div>
+  </header>
 
 <!-- PAGE HEADER -->
 <div class="page-header">
@@ -446,7 +418,7 @@ footer { border-top: 1px solid var(--border); padding: 28px max(24px,5vw); displ
         </div>
         <div class="setting-group">
           <label>Page Size</label>
-          <select id="pageSize">
+          <select id="pageSize" style="width: auto;">
             <option value="original" selected>Keep Original</option>
             <option value="a4">Normalize to A4</option>
             <option value="letter">Normalize to Letter</option>
@@ -531,7 +503,7 @@ footer { border-top: 1px solid var(--border); padding: 28px max(24px,5vw); displ
 </div>
 
 <!--related tools-->
-<section style="max-width:780px;margin:0 auto 60px;padding:0 20px;">
+<section style="max-width:780px;margin:0 auto 60px;padding:0 20px;" class="border-line">
   <h2 style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#556080;margin-bottom:16px;">Related Tools</h2>
   <div style="display:flex;flex-wrap:wrap;gap:12px;">
     <a href="https://raiparuhang.com.np/pdf-to-image" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:#161d2e;border:1px solid rgba(99,140,255,.12);border-radius:12px;text-decoration:none;color:#e8edf8;font-size:13px;font-weight:600;flex:1;min-width:180px;">
@@ -553,10 +525,10 @@ footer { border-top: 1px solid var(--border); padding: 28px max(24px,5vw); displ
 </section>
 
 <!--how to section-->
-<section style="max-width: 780px; margin: 3rem auto; padding: 0 1.25rem; font-family: system-ui, -apple-system, sans-serif; color: rgb(76, 149, 110); line-height: 1.7;">
+<section style="max-width: 780px; margin: 3rem auto; padding: 0 1.25rem; font-family: system-ui, -apple-system, sans-serif; color: var(--font-display); line-height: 1.7;" class="border-line">
 
   <h2 style="font-size: 1.6rem; font-weight: 600; margin: 0 0 0.5rem;">How to merge PDF files online</h2>
-  <p style="font-size: 1rem; color: #cbc1c1; margin: 0 0 2rem;">
+  <p style="font-size: 1rem; color: var(--ink-60); margin: 0 0 2rem;">
     Merging PDFs with Rai Paruhang takes under a minute — no account, no upload, and nothing installed.
     Here is everything you need to know, including tips for specific devices and advanced options.
   </p>
@@ -590,43 +562,43 @@ footer { border-top: 1px solid var(--border); padding: 28px max(24px,5vw); displ
   <div style="display: flex; flex-direction: column; gap: 2rem;">
 
     <div>
-      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem; color: rgb(76, 149, 110);">How to merge PDF files on Mac</h3>
-      <p style="margin: 0; color: #cbc1c1; font-size: 0.95rem;">
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem; ">How to merge PDF files on Mac</h3>
+      <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
         Open this page in Safari, Chrome, or Firefox on your Mac — no software installation needed. Drag your PDF files from Finder directly into the upload area, arrange them as needed, then click Merge. The downloaded file lands in your <em>Downloads</em> folder just like any other file. This works on every version of macOS that supports a modern browser, including macOS Ventura, Sonoma, and Sequoia.
       </p>
     </div>
 
     <div>
       <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">How to merge PDF files on Windows</h3>
-      <p style="margin: 0; color: #cbc1c1; font-size: 0.95rem;">
+      <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
         Open this page in Chrome, Edge, or Firefox on your Windows PC. Click <em>Choose PDFs</em> to browse your files, or drag them in from File Explorer. There is no need to install Adobe Acrobat or any other program. The merge happens locally in your browser, so it works even on work computers where you cannot install software.
       </p>
     </div>
 
     <div>
       <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">How to combine PDF files on iPhone or Android</h3>
-      <p style="margin: 0; color: #cbc1c1; font-size: 0.95rem;">
+      <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
         The tool works on mobile browsers too. On iPhone, open the page in Safari and tap <em>Choose PDFs</em> — you can select files from the Files app, iCloud Drive, or your photo library. On Android, use Chrome and pick files from Google Drive or your local storage. After merging, tap the download button and the combined PDF saves to your device. No app download required.
       </p>
     </div>
 
     <div>
       <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">How to combine specific pages from multiple PDFs</h3>
-      <p style="margin: 0; color: #cbc1c1; font-size: 0.95rem;">
-        You do not have to include every page from each file. After uploading, each file card shows a <em>page range</em> input. Type a range like <code style="background: #2d2c2c; padding: 1px 5px; border-radius: 4px; font-size: 0.875rem;">1-3</code> to include only the first three pages, or <code style="background: #2d2c2c; padding: 1px 5px; border-radius: 4px; font-size: 0.875rem;">2, 4, 6</code> to pick individual pages. This is useful when you want to extract and combine specific chapters or sections from several documents without editing each file separately.
+      <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
+        You do not have to include every page from each file. After uploading, each file card shows a <em>page range</em> input. Type a range like <code style="background: #2d2c2c8d; padding: 1px 5px; border-radius: 4px; font-size: 0.875rem;">1-3</code> to include only the first three pages, or <code style="background: #2d2c2c8d; padding: 1px 5px; border-radius: 4px; font-size: 0.875rem;">2, 4, 6</code> to pick individual pages. This is useful when you want to extract and combine specific chapters or sections from several documents without editing each file separately.
       </p>
     </div>
 
     <div>
       <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">How to reorder pages before merging</h3>
-      <p style="margin: 0; color: #cbc1c1; font-size: 0.95rem;">
+      <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
         After uploading your files, drag and drop the file cards to set the page order in the final document. The card you place first becomes the first section of the merged PDF. You can also click <em>Sort A–Z</em> to sort files alphabetically by filename, which is handy when working with numbered documents like <em>chapter-1.pdf</em>, <em>chapter-2.pdf</em>, and so on.
       </p>
     </div>
 
     <div>
       <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">How to merge PDF files without uploading them</h3>
-      <p style="margin: 0; color: #cbc1c1; font-size: 0.95rem;">
+      <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
         Unlike iLovePDF, SmallPDF, or Adobe online tools, this merger does not upload your files to any server. All processing happens directly in your browser using JavaScript. Your documents never leave your device, which makes it safe for confidential files like contracts, medical records, or financial statements. You can even use it offline once the page has loaded.
       </p>
     </div>
@@ -635,9 +607,50 @@ footer { border-top: 1px solid var(--border); padding: 28px max(24px,5vw); displ
 
 </section>
 
+<!-- BUG REPORTS -->
+<section class="bug-section">
+  <div class="bug-section-head">
+    <span class="bug-section-title">Bug Reports</span>
+    <span class="bug-count"></span>
+  </div>
+  <div class="bug-list">
+
+    <!-- COPY THIS CARD FOR EACH BUG -->
+          <!--report-->
+    <div class="bug-card">
+      <div class="bug-card-left">
+        <span class="bug-dot open"></span>
+      </div>
+      <div class="bug-card-body">
+        <div class="bug-card-top">
+          <span class="bug-status open">Open</span>
+          <span class="bug-date">2026-06-20</span>
+        </div>
+        <p class="bug-msg">Merge fails when one of the PDFs is password protected.</p>
+      </div>
+    </div>
+    <!--fix-->
+    <div class="bug-card">
+      <div class="bug-card-left">
+        <span class="bug-dot fixed"></span>
+      </div>
+      <div class="bug-card-body">
+        <div class="bug-card-top">
+          <span class="bug-status fixed">Fixed</span>
+          <span class="bug-date">2026-06-18</span>
+        </div>
+        <p class="bug-msg">Download button not responding on Safari iOS 17.</p>
+      </div>
+    </div>
+
+    <!-- WHEN NO BUGS EXIST, REPLACE THE CARDS WITH THIS -->
+    <!--<div class="bug-empty">No bugs reported yet — looking good.</div>-->
+
+  </div>
+</section>
 
 <!-- FAQ -->
-<div class="faq-section">
+<div class="faq-section border-line">
   <h2>Frequently Asked Questions</h2>
   <div class="faq-item">
     <div class="faq-q" onclick="toggleFaq(this)">How do I merge two PDF files into one?
@@ -680,15 +693,50 @@ footer { border-top: 1px solid var(--border); padding: 28px max(24px,5vw); displ
 
 
 <!-- FOOTER -->
-<footer>
-  <div class="footer-left">© 2026 Rai Paruhang · <a href="https://raiparuhang.com.np/terms.html">Privacy &amp; Terms</a></div>
-  <div class="footer-right">
-    <a href="https://raiparuhang.com.np/tools">All Tools</a>
-    <a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter/X</a>
-    <a href="https://www.linkedin.com/in/paruhang-rai/" target="_blank" rel="noopener">Linkedin</a>
-  </div>
-</footer>
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="/">
+          <span class="brand-mark">R</span>
+          <span>Raiparuhang</span>
+        </a>
+        <p style="color:var(--ink-60); margin-top:.85rem; max-width:340px">A small archive of private, in-browser tools — built and maintained by one person.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/tools">All tools</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <ul>
+          <li><a href="https://raiparuhang.com.np" target="_blank" rel="noopener">raiparuhang.com.np ↗</a></li>
+          <li><a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter/X</a></li>
+          <li><a href="https://www.linkedin.com/in/paruhang-rai/" target="_blank" rel="noopener">Linkedin</a></li>
 
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Raiparuhang</span>
+      <span class="mono">Built static · HTML · CSS · JS</span>
+      <span class="mono"><a href="https://raiparuhang.com.np/terms">Privacy & Terms</a></span>
+    </div>
+  </footer>
+
+
+  <!-- Bug Report Button -->
+<a class="bug-btn" href="https://raiparuhang.com.np/contact" target="_blank" rel="noopener" aria-label="Report a bug">
+  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 2l1.5 1.5M16 2l-1.5 1.5M9 9h6M9 13h6M12 17v2M6.5 7.5A5.5 5.5 0 0 1 17.5 7.5M4 10h2M18 10h2M5 17l2-2M19 17l-2-2"/>
+  </svg>
+  <span class="bug-tip">Report a bug</span>
+</a>
+
+<script src="assets/js/nav.js"></script>
 <script>
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 const { PDFDocument } = PDFLib;
@@ -699,9 +747,6 @@ let dragSrcIdx = null;
 let lbPdfDoc = null;
 let lbPageIdx = 0;
 
-// ---- NAV ----
-document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('open'));
-function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
 
 // ---- UPLOAD ----
 document.getElementById('fileInput').addEventListener('change', e => addFiles(e.target.files));
