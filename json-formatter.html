@@ -66,10 +66,9 @@
 :root{
   --surface:#161d2e;--surface2:#1e2840;
   --border: rgba(99,140,255,0.12); --border2: rgba(99,140,255,0.22);
-  --accent2:#7eb3ff;
-  --green: #0cbb89; --green-bg: rgba(34,211,160,0.1);
+  --green: #0ba177ec; --green-bg: rgba(34,211,160,0.1);
   --red: #ff5b5b; --red-bg: rgba(255,91,91,0.1);
-  --amber: #f5a623; --amber-bg: rgba(245,166,35,0.08);
+  --amber: #d89b38; --amber-bg: rgba(245,166,35,0.08);
   --purple:#a78bfa;--purple-bg:rgba(167,139,250,.08);
   --text:#e8edf8;--text2:#8b99bb;--text3:#556080;
   --mono:'DM Mono',monospace;--sans:'Sora',sans-serif;
@@ -85,7 +84,7 @@ html{scroll-behavior:smooth}
 .page-badge{display:inline-flex;align-items:center;gap:8px;background:var(--green-bg);border:1px solid rgba(34,211,160,.25);border-radius:100px;padding:5px 14px;font-family:var(--mono);font-size:11px;color:var(--green);margin-bottom:20px;letter-spacing:.5px}
 .page-badge::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%;box-shadow:0 0 5px var(--green)}
 .page-header h1{font-size:clamp(26px,5vw,50px);font-weight:700;letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px}
-.page-header h1 span{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 60%,var(--green) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-header h1 span{background:linear-gradient(135deg,var(--accent) 0%,var(--accent) 60%,var(--green) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
 /* WRAPPER */
 .tool-wrapper{max-width:1100px;margin:0 auto;padding:0 max(24px,5vw) 80px;display:flex;flex-direction:column;gap:16px}
@@ -281,7 +280,7 @@ footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:fle
         <a data-nav href="/about">About</a>
         <a data-nav href="/contact">Contact</a>
       </nav>
-      <a class="nav-cta" href="tools.html">Browse tools →</a>
+      <a class="nav-cta" href="/tools">Browse tools →</a>
       <button class="nav-toggle" aria-label="Menu">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>

@@ -114,7 +114,6 @@
 :root {
   --surface: #161d2e; --surface2: #1e2840;
   --border: rgba(99,140,255,0.12); --border2: rgba(99,140,255,0.22);
-  --accent2: #7eb3ff;
   --green: #0cbb89; --green-bg: rgba(34,211,160,0.1);
   --red: #ff5b5b; --red-bg: rgba(255,91,91,0.1);
   --amber: #f5a623; --amber-bg: rgba(245,166,35,0.08);
@@ -129,7 +128,7 @@ html { scroll-behavior: smooth; }
 .page-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--green-bg); border: 1px solid rgba(34,211,160,.25); border-radius: 100px; padding: 5px 14px; font-family: var(--mono); font-size: 11px; color: var(--green); margin-bottom: 20px; letter-spacing: .5px; }
 .page-badge::before { content:''; width:5px; height:5px; background:var(--green); border-radius:50%; box-shadow:0 0 5px var(--green); }
 .page-header h1 { font-size: clamp(26px,5vw,50px); margin-bottom: 12px; }
-.page-header h1 span { background: linear-gradient(135deg,var(--accent) 0%,var(--accent2) 60%,var(--green) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.page-header h1 span{background:linear-gradient(135deg,var(--accent) 0%,var(--accent) 60%,var(--green) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
 /* ---- TOOL WRAPPER ---- */
 .tool-wrapper { max-width: 960px; margin: 0 auto; padding: 0 max(24px,5vw) 80px; display: flex; flex-direction: column; gap: 20px; }
@@ -323,7 +322,7 @@ html { scroll-behavior: smooth; }
         <a data-nav href="/about">About</a>
         <a data-nav href="/contact">Contact</a>
       </nav>
-      <a class="nav-cta" href="tools.html">Browse tools →</a>
+      <a class="nav-cta" href="/tools">Browse tools →</a>
       <button class="nav-toggle" aria-label="Menu">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
@@ -339,7 +338,7 @@ html { scroll-behavior: smooth; }
 <!-- PAGE HEADER -->
 <div class="page-header">
   <div class="page-badge">100% Client-Side · No Server Upload</div>
-  <h1>Merge PDF Online Free & Fast</h1>
+  <h1>Merge <span>PDF Online</span> Free& Fast</h1>
   <p>Combine multiple PDF files into a single document — free, instant, and entirely in your browser. No file upload to any server, no sign-up required.</p>
 </div>
 
