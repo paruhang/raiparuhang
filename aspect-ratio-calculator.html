@@ -4,17 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aspect Ratio Calculator — Find Width, Height & Ratio | Rai Paruhang</title>
-<meta name="description" content="Calculate aspect ratios instantly. Enter any two values — width, height, or ratio — to find the third. Presets, resolution tables, scale tool. Free online calculator.">
+<meta name="description" content="Calculate aspect ratios instantly. Enter any two values — width, height, or ratio — to find the third. Presets, resolution tables, crop calculator, letterbox calculator, and file dimension detection. Free online calculator.">
 <link rel="alternate" hreflang="en" href="https://raiparuhang.com.np/aspect-ratio-calculator">
 <link rel="alternate" hreflang="x-default" href="https://raiparuhang.com.np/aspect-ratio-calculator">
- <!-- Modern SVG Favicon (Infinite scaling for desktop & high-res screens) -->
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<!-- For Safari pinned tabs color blending -->
-<link rel="mask-icon" href="favicon.svg" color="#4f8eff">
-<link rel="canonical" href="https://raiparuhang.com.np/case-converter/>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="assets/css/styles.css" />
+<link rel="canonical" href="https://raiparuhang.com.np/aspect-ratio-calculator">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
 <script type="application/ld+json">
 {
@@ -22,7 +24,7 @@
   "@type": "SoftwareApplication",
   "name": "Aspect Ratio Calculator",
   "url": "https://raiparuhang.com.np/aspect-ratio-calculator",
-  "description": "Calculate and convert image or video aspect ratios instantly. Find the correct width or height for any resolution. Runs entirely in your browser — free and private.",
+  "description": "Calculate and convert image or video aspect ratios instantly. Find the correct width or height for any resolution, detect dimensions from an uploaded file, calculate crop boxes, and work out letterbox/pillarbox bar sizes. Runs entirely in your browser — free and private.",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Web",
   "browserRequirements": "Requires a modern web browser with JavaScript enabled",
@@ -35,7 +37,14 @@
     "Calculate image aspect ratios",
     "Calculate video aspect ratios",
     "Find width from height or vice versa",
-    "Common ratio presets (16:9, 4:3, 1:1)",
+    "Detect dimensions directly from an uploaded image or video file",
+    "Common ratio presets (16:9, 4:3, 1:1) and social/platform size presets",
+    "Nearest standard ratio detection",
+    "Crop calculator with centered crop box and offsets",
+    "Letterbox / pillarbox bar size calculator",
+    "Multi-ratio side-by-side comparison",
+    "Print size and DPI conversion",
+    "Shareable calculation links",
     "100% client-side processing",
     "Free forever"
   ],
@@ -46,97 +55,46 @@
 }
 </script>
 
-<!-- ✅ 9. ASPECT RATIO CALCULATOR -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is an aspect ratio?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "An aspect ratio is the proportional relationship between the width and height of an image or screen, expressed as two numbers separated by a colon — for example 16:9 or 4:3."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I calculate the height from a width using an aspect ratio?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Enter your known width and the desired aspect ratio into the calculator. It will instantly calculate the correct height to maintain that ratio."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does the Aspect Ratio Calculator upload any data?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. All calculations happen instantly in your browser with no data sent to any server."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is the Aspect Ratio Calculator free?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, completely free with no sign-up or account required."
-      }
-    }
-  ]
-}
-</script>
-
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root{
-  --bg:#06080f;--bg2:#0d1120;--bg3:#111827;
-  --surface:#161d2e;--surface2:#1e2840;
+  --surface:#161d2e;--surface2:#1e2840;--bg3:#10192c;
   --border:rgba(99,140,255,.12);--border2:rgba(99,140,255,.22);
-  --accent:#4f8eff;
-  --amber:#f59e0b;--amber2:#fbbf24;--amber-bg:rgba(245,158,11,.08);--amber-bd:rgba(245,158,11,.22);
-  --green:#22d3a0;--green-bg:rgba(34,211,160,.1);
+  --green:#0cbb89;--green-bg:rgba(34,211,160,.1);
+  --red:#ff5b5b;--red-bg:rgba(255,91,91,.1);
+  --amber:#f5a623;--amber2:#fbbf24;--amber-bg:rgba(245,166,35,.08);--amber-bd:rgba(245,166,35,.25);
   --text:#e8edf8;--text2:#8b99bb;--text3:#556080;
-  --mono:'DM Mono',monospace;--sans:'Sora',sans-serif;
+  --mono:'JetBrains Mono',monospace;--sans:'Sora',sans-serif;
   --radius:14px;--radius-lg:20px;
 }
 html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;min-height:100vh}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 max(24px,5vw);height:64px;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-size:17px;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:-.3px;display:flex;align-items:center;gap:10px}
-.nav-logo .dot{width:8px;height:8px;background:var(--accent);border-radius:50%;box-shadow:0 0 8px var(--accent);animation:pulse 2.4s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
-.nav-links{display:flex;gap:32px;list-style:none}
-.nav-links a{font-size:14px;color:var(--text2);text-decoration:none;transition:color .2s}
-.nav-links a:hover{color:var(--text)}
-.nav-cta{background:var(--accent);color:#fff!important;padding:8px 18px;border-radius:8px;font-weight:600!important;font-size:13px!important}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
-.hamburger span{width:22px;height:2px;background:var(--text2);border-radius:2px;display:block}
-.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(6,8,15,.97);border-bottom:1px solid var(--border);padding:24px max(24px,5vw);z-index:99;flex-direction:column;gap:20px}
-.mobile-menu.open{display:flex}
-.mobile-menu a{color:var(--text2);text-decoration:none;font-size:16px;padding:8px 0;border-bottom:1px solid var(--border)}
-.mobile-menu a:last-child{border-bottom:none}
-@media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}}
-.page-header{padding:96px max(24px,5vw) 40px;max-width:980px;margin:0 auto;text-align:center}
-.page-badge{display:inline-flex;align-items:center;gap:8px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:100px;padding:5px 14px;font-family:var(--mono);font-size:11px;color:var(--amber);margin-bottom:20px;letter-spacing:.5px}
+
+/* ---- PAGE HEADER ---- */
+.page-header{padding:96px max(24px,5vw) 40px;max-width:960px;margin:0 auto;text-align:center}
+.page-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--green-bg); border: 1px solid rgba(34,211,160,.25); border-radius: 100px; padding: 5px 14px; font-family: var(--mono); font-size: 11px; color: var(--green); margin-bottom: 20px; letter-spacing: .5px; }
 .page-badge::before{content:'';width:5px;height:5px;background:var(--amber);border-radius:50%;box-shadow:0 0 5px var(--amber)}
-.page-header h1{font-size:clamp(26px,5vw,50px);font-weight:700;letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px}
-.page-header h1 span{background:linear-gradient(135deg,var(--amber),var(--amber2),#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.page-header p{color:var(--text2);font-size:15px;max-width:540px;margin:0 auto;font-weight:300}
-.tool-wrapper{max-width:980px;margin:0 auto;padding:0 max(24px,5vw) 80px;display:flex;flex-direction:column;gap:20px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
-.card-hdr{display:flex;align-items:center;gap:8px;padding:14px 20px;border-bottom:1px solid var(--border)}
-.card-hdr svg{width:15px;height:15px;color:var(--amber);flex-shrink:0}
-.card-hdr h3{font-size:13px;font-weight:600}
-.card-hdr .sub{margin-left:auto;font-size:11px;font-family:var(--mono);color:var(--text3)}
-.card-body{padding:20px;display:flex;flex-direction:column;gap:16px}
+.page-header h1{font-size:clamp(26px,5vw,50px);margin-bottom:12px}
+.page-header h1 span{background:linear-gradient(135deg,var(--accent) 0%,var(--accent) 55%,var(--amber) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-header p{color:var(--ink-60);font-size:15px;max-width:540px;margin:0 auto;font-weight:400}
+
+/* ---- TOOL WRAPPER ---- */
+.tool-wrapper{max-width:960px;margin:0 auto;padding:0 max(24px,5vw) 80px;display:flex;flex-direction:column;gap:20px}
+
+/* ---- TOOL CARD (renamed from .card to avoid clashing with the shared listing-page .card) ---- */
+.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.tool-card-hdr{display:flex;align-items:center;gap:8px;padding:14px 20px;border-bottom:1px solid var(--border)}
+.tool-card-hdr svg{width:15px;height:15px;color:var(--amber);flex-shrink:0}
+.tool-card-hdr h3{font-size:13px;font-weight:600;color:var(--text)}
+.tool-card-hdr .sub{margin-left:auto;font-size:11px;font-family:var(--mono);color:var(--text3)}
+.tool-card-body{padding:20px;display:flex;flex-direction:column;gap:16px}
+
 /* CALC CARD TWO-COL */
 .calc-grid{display:grid;grid-template-columns:1fr 280px;gap:0}
 @media(max-width:760px){.calc-grid{grid-template-columns:1fr}}
 .calc-left{padding:24px;display:flex;flex-direction:column;gap:18px;border-right:1px solid var(--border)}
 @media(max-width:760px){.calc-left{border-right:none;border-bottom:1px solid var(--border)}}
 .calc-right{padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+
 /* THREE INPUTS ROW */
 .three-row{display:grid;grid-template-columns:1fr 24px 1fr 30px 1fr;gap:6px;align-items:end}
 @media(max-width:500px){.three-row{grid-template-columns:1fr;gap:12px}}
@@ -144,41 +102,74 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.85);
 .field label{font-size:11px;font-family:var(--mono);color:var(--text2);text-transform:uppercase;letter-spacing:.4px}
 .big-input{background:var(--bg3);border:1.5px solid var(--border);border-radius:11px;padding:11px 10px;font-size:20px;font-family:var(--mono);font-weight:500;color:var(--text);width:100%;outline:none;transition:border-color .2s,box-shadow .2s;text-align:center;-moz-appearance:textfield}
 .big-input::-webkit-inner-spin-button,.big-input::-webkit-outer-spin-button{-webkit-appearance:none}
-.big-input:focus{border-color:var(--amber);box-shadow:0 0 0 3px rgba(245,158,11,.12)}
-.big-input.calc-out{border-color:rgba(245,158,11,.3);background:var(--amber-bg);color:var(--amber2)}
+.big-input:focus{border-color:var(--amber);box-shadow:0 0 0 3px rgba(245,166,35,.15)}
+.big-input.calc-out{border-color:rgba(245,166,35,.35);background:var(--amber-bg);color:var(--amber2)}
 .sym{display:flex;align-items:flex-end;justify-content:center;padding-bottom:11px;font-size:18px;font-family:var(--mono);color:var(--text3);user-select:none}
 .ratio-pair{display:flex;align-items:flex-end;gap:3px}
 .ratio-input{background:var(--bg3);border:1.5px solid var(--border);border-radius:11px;padding:11px 6px;font-size:20px;font-family:var(--mono);font-weight:500;color:var(--text);width:100%;outline:none;transition:border-color .2s;text-align:center;-moz-appearance:textfield;min-width:0}
 .ratio-input::-webkit-inner-spin-button,.ratio-input::-webkit-outer-spin-button{-webkit-appearance:none}
 .ratio-input:focus{border-color:var(--amber)}
 .rcolon{font-size:20px;font-family:var(--mono);color:var(--text3);padding-bottom:11px;flex-shrink:0;user-select:none}
-/* UNIT TABS */
+
+/* UNIT TABS + DPI */
 .unit-tabs{display:flex;gap:5px}
 .utab{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:6px;font-size:11px;font-family:var(--mono);color:var(--text3);cursor:pointer;transition:all .15s;text-align:center}
 .utab.on{background:var(--amber-bg);border-color:var(--amber-bd);color:var(--amber);font-weight:500}
-/* RATIO NAME */
-.ratio-tag{display:flex;align-items:center;gap:7px;padding:9px 13px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:10px;font-family:var(--mono);font-size:12px;color:var(--amber2);opacity:0;transition:opacity .3s}
+.dpi-row{display:none;align-items:center;gap:8px;margin-top:8px}
+.dpi-row.show{display:flex}
+.dpi-row label{font-size:11px;font-family:var(--mono);color:var(--text3);white-space:nowrap}
+.dpi-input{background:var(--bg3);border:1.5px solid var(--border);border-radius:8px;padding:6px 9px;font-size:12px;font-family:var(--mono);color:var(--text);width:70px;outline:none;-moz-appearance:textfield}
+.dpi-input::-webkit-inner-spin-button,.dpi-input::-webkit-outer-spin-button{-webkit-appearance:none}
+.dpi-input:focus{border-color:var(--amber)}
+
+/* RATIO NAME + COPY + NEAREST */
+.ratio-tag-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ratio-tag{display:flex;align-items:center;gap:7px;padding:9px 13px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:10px;font-family:var(--mono);font-size:12px;color:var(--amber2);opacity:0;transition:opacity .3s;flex:1}
 .ratio-tag.show{opacity:1}
 .ratio-tag svg{width:13px;height:13px;flex-shrink:0}
-/* INFO CHIPS */
-.chips{display:flex;gap:8px;flex-wrap:wrap}
-.chip{flex:1;min-width:72px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:9px 11px}
-.chip-lbl{font-size:10px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:.4px}
-.chip-val{font-size:13px;font-family:var(--mono);color:var(--text2);font-weight:500;margin-top:1px}
-/* RESET BTN */
-.btn-ghost{background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:8px 15px;font-size:12px;font-family:var(--mono);color:var(--text3);cursor:pointer;transition:all .18s;align-self:flex-start}
-.btn-ghost:hover{border-color:var(--border2);color:var(--text2)}
+.copy-btn{background:var(--bg3);border:1px solid var(--border);border-radius:8px;width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text3);transition:all .15s}
+.copy-btn:hover{border-color:var(--amber-bd);color:var(--amber)}
+.copy-btn svg{width:13px;height:13px}
+.nearest-note{font-size:11px;font-family:var(--mono);color:var(--text3);padding:0 2px}
+.nearest-note strong{color:var(--amber2);font-weight:500}
+
+/* INFO CHIPS (renamed from .chips/.chip — those class names are used by the shared toolbar filters) */
+.info-chips{display:flex;gap:8px;flex-wrap:wrap}
+.info-chip{flex:1;min-width:72px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:9px 11px}
+.info-chip-lbl{font-size:10px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:.4px}
+.info-chip-val{font-size:13px;font-family:var(--mono);color:var(--text2);font-weight:500;margin-top:1px}
+
+/* ACTION BUTTONS ROW */
+.action-row{display:flex;gap:8px;flex-wrap:wrap}
+.reset-btn{background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:8px 15px;font-size:12px;font-family:var(--mono);color:var(--text3);cursor:pointer;transition:all .18s}
+.reset-btn:hover{border-color:var(--border2);color:var(--text2)}
+.share-btn{background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:9px;padding:8px 15px;font-size:12px;font-family:var(--mono);color:var(--amber);cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:6px}
+.share-btn:hover{background:rgba(245,166,35,.15)}
+.share-btn svg{width:12px;height:12px}
+
 /* PREVIEW */
 .preview-stage{width:100%;min-height:160px;display:flex;align-items:center;justify-content:center}
 .preview-wrap{position:relative;padding:0 28px 22px 0}
 .preview-rect{background:var(--amber-bg);border:2px solid var(--amber);border-radius:3px;position:relative;display:flex;align-items:center;justify-content:center;transition:width .35s cubic-bezier(.4,0,.2,1),height .35s cubic-bezier(.4,0,.2,1);overflow:hidden;max-width:220px;max-height:180px}
-.preview-rect::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(245,158,11,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(245,158,11,.07) 1px,transparent 1px);background-size:20% 20%}
-.preview-inner-border{position:absolute;inset:7px;border:1px dashed rgba(245,158,11,.22);border-radius:1px;pointer-events:none}
+.preview-rect::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(245,166,35,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(245,166,35,.08) 1px,transparent 1px);background-size:20% 20%}
+.preview-inner-border{position:absolute;inset:7px;border:1px dashed rgba(245,166,35,.25);border-radius:1px;pointer-events:none}
 .preview-lbl{position:relative;z-index:1;font-family:var(--mono);font-size:14px;font-weight:500;color:var(--amber2);letter-spacing:.5px}
 .w-dim{position:absolute;bottom:-20px;left:0;right:0;text-align:center;font-size:9px;font-family:var(--mono);color:var(--text3)}
 .h-dim{position:absolute;top:0;right:-26px;writing-mode:vertical-rl;font-size:9px;font-family:var(--mono);color:var(--text3)}
 .preview-note{font-size:10px;font-family:var(--mono);color:var(--text3);text-align:center}
-/* PRESETS */
+
+/* UPLOAD / FILE DETECTION */
+.upload-zone{border:1.5px dashed var(--border2);border-radius:var(--radius);padding:24px 20px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;transition:all .18s;text-align:center}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--amber);background:var(--amber-bg)}
+.upload-icon{width:30px;height:30px;color:var(--text3);transition:color .18s}
+.upload-zone:hover .upload-icon,.upload-zone.drag .upload-icon{color:var(--amber)}
+.upload-title{font-size:13px;font-weight:600;color:var(--text)}
+.upload-hint{font-size:11px;font-family:var(--mono);color:var(--text3)}
+.upload-result{display:none;align-items:center;gap:10px;padding:10px 14px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:10px;font-family:var(--mono);font-size:12px;color:var(--amber2)}
+.upload-result.show{display:flex}
+.upload-result svg{width:14px;height:14px;flex-shrink:0}
+
+/* PRESETS / PLATFORM GRID */
 .presets-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px}
 .preset-btn{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:10px 8px 9px;cursor:pointer;transition:all .15s;display:flex;flex-direction:column;align-items:center;gap:5px}
 .preset-btn:hover{border-color:var(--amber-bd);background:var(--amber-bg)}
@@ -188,6 +179,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.85);
 .preset-ratio{font-size:11px;font-weight:700;font-family:var(--mono);color:var(--text2);transition:color .15s}
 .preset-btn.on .preset-ratio,.preset-btn:hover .preset-ratio{color:var(--amber)}
 .preset-name{font-size:9px;font-family:var(--mono);color:var(--text3);text-align:center;line-height:1.3}
+
+.platform-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.platform-btn{background:var(--bg3);border:1.5px solid var(--border);border-radius:var(--radius);padding:12px 14px;cursor:pointer;transition:all .15s;text-align:left;display:flex;flex-direction:column;gap:3px}
+.platform-btn:hover{border-color:var(--amber-bd);background:var(--amber-bg)}
+.platform-name{font-size:12px;font-weight:600;color:var(--text)}
+.platform-dim{font-size:11px;font-family:var(--mono);color:var(--text3)}
+.platform-btn:hover .platform-dim{color:var(--amber2)}
+
 /* SCALE TOOL */
 .scale-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end}
 @media(max-width:480px){.scale-grid{grid-template-columns:1fr}}
@@ -197,70 +196,126 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.85);
 .scale-input::-webkit-inner-spin-button,.scale-input::-webkit-outer-spin-button{-webkit-appearance:none}
 .scale-input:focus{border-color:var(--amber)}
 .scale-result{background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:10px;padding:10px 12px;font-size:15px;font-family:var(--mono);color:var(--amber2);text-align:center;min-height:43px;display:flex;align-items:center;justify-content:center}
+
+/* CROP CALCULATOR */
+.crop-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.crop-grid{grid-template-columns:1fr}}
+.crop-inputs{display:flex;flex-direction:column;gap:12px}
+.crop-stage{display:flex;align-items:center;justify-content:center;min-height:160px}
+.crop-outer{position:relative;background:var(--bg3);border:1.5px dashed var(--border2);border-radius:2px}
+.crop-box{position:absolute;background:var(--amber-bg);border:2px solid var(--amber);border-radius:1px}
+.crop-result{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 14px;font-family:var(--mono);font-size:12px;color:var(--text2);line-height:1.8}
+.crop-result strong{color:var(--amber2)}
+
+/* COMPARISON */
+.compare-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:640px){.compare-grid{grid-template-columns:1fr}}
+.compare-item{display:flex;flex-direction:column;align-items:center;gap:10px}
+.compare-select{width:100%;background:var(--bg3);border:1.5px solid var(--border);border-radius:9px;padding:8px 10px;font-size:12px;font-family:var(--mono);color:var(--text);outline:none}
+.compare-select:focus{border-color:var(--amber)}
+.compare-stage{width:100%;min-height:120px;display:flex;align-items:center;justify-content:center}
+.compare-rect{background:var(--amber-bg);border:2px solid var(--amber);border-radius:2px;display:flex;align-items:center;justify-content:center}
+.compare-lbl{font-family:var(--mono);font-size:11px;color:var(--amber2)}
+
+/* LETTERBOX / PILLARBOX */
+.letterbox-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:end}
+@media(max-width:640px){.letterbox-grid{grid-template-columns:1fr 1fr}}
+.letterbox-stage{display:flex;align-items:center;justify-content:center;min-height:160px}
+.letterbox-frame{position:relative;background:#000;border:1px solid var(--border2);border-radius:2px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.letterbox-content{background:var(--amber-bg);border:1.5px solid var(--amber);position:relative;display:flex;align-items:center;justify-content:center}
+.letterbox-lbl{font-family:var(--mono);font-size:11px;color:var(--amber2)}
+.letterbox-result{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 14px;font-family:var(--mono);font-size:12px;color:var(--text2);line-height:1.8;text-align:center}
+.letterbox-result strong{color:var(--amber2)}
+
 /* RESOLUTIONS */
 .res-ratio-pill{margin-left:auto;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:6px;padding:3px 10px;font-size:11px;font-family:var(--mono);color:var(--amber)}
-table{width:100%;border-collapse:collapse;font-size:12px;font-family:var(--mono)}
-th{color:var(--text3);font-weight:500;padding:8px 16px;text-align:left;border-bottom:1px solid var(--border);letter-spacing:.4px;text-transform:uppercase;font-size:11px;white-space:nowrap}
-td{padding:10px 16px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:middle}
-tr:last-child td{border-bottom:none}
-tr:hover td{background:var(--surface2);cursor:pointer}
-tr.cur-res td{background:var(--amber-bg)}
-tr.cur-res td:first-child{color:var(--amber2);font-weight:500}
-td strong{color:var(--text)}
-.tag{display:inline-flex;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:500;white-space:nowrap;margin-right:3px}
+.res-table{width:100%;border-collapse:collapse;font-size:12px;font-family:var(--mono)}
+.res-table th{color:var(--text3);font-weight:500;padding:8px 16px;text-align:left;border-bottom:1px solid var(--border);letter-spacing:.4px;text-transform:uppercase;font-size:11px;white-space:nowrap}
+.res-table td{padding:10px 16px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:middle}
+.res-table tr:last-child td{border-bottom:none}
+.res-table tr:hover td{background:var(--surface2);cursor:pointer}
+.res-table tr.cur-res td{background:var(--amber-bg)}
+.res-table tr.cur-res td:first-child{color:var(--amber2);font-weight:500}
+.res-table td strong{color:var(--text)}
+.res-tag{display:inline-flex;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:500;white-space:nowrap;margin-right:3px}
 .t-v{background:rgba(79,142,255,.1);color:#4f8eff}
 .t-s{background:rgba(34,211,160,.1);color:#22d3a0}
 .t-w{background:rgba(167,139,250,.1);color:#a78bfa}
-.t-p{background:rgba(245,158,11,.1);color:var(--amber)}
+.t-p{background:rgba(245,166,35,.1);color:var(--amber)}
 .no-res{padding:24px;text-align:center;font-family:var(--mono);font-size:13px;color:var(--text3)}
-/* FAQ */
-.faq-section{padding:60px max(24px,5vw) 80px;max-width:720px;margin:0 auto}
-.faq-section h2{font-size:clamp(20px,3vw,28px);font-weight:700;letter-spacing:-.7px;margin-bottom:28px}
-.faq-item{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden}
-.faq-q{padding:16px 20px;font-size:15px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;user-select:none;transition:background .2s}
-.faq-q:hover{background:var(--surface)}
-.faq-q svg{width:16px;height:16px;color:var(--text3);flex-shrink:0;transition:transform .3s}
-.faq-q.open svg{transform:rotate(180deg)}
-.faq-a{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .35s,padding .35s;font-size:14px;color:var(--text2);line-height:1.75}
-.faq-a.open{max-height:400px;padding:0 20px 16px}
+
 code{font-family:var(--mono);font-size:12px;background:var(--surface2);padding:1px 6px;border-radius:4px;color:var(--amber)}
-footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
-.footer-left{font-size:12px;color:var(--text3);font-family:var(--mono)}
-.footer-left a{color:var(--text3);text-decoration:none}
-.footer-right{display:flex;gap:16px}
-.footer-right a{color:var(--text3);font-size:12px;text-decoration:none;font-family:var(--mono)}
+
+/* KEYBOARD HINT */
+.kbd-hint{font-size:10px;font-family:var(--mono);color:var(--text3);text-align:center}
+.kbd-hint kbd{background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-family:var(--mono);color:var(--text2)}
+
+@media (max-width: 640px){
+  .res-table td, .res-table th{padding:8px 10px}
+}
 </style>
 </head>
 <body>
+
 <!-- NAV -->
-<nav>
-  <a href="https://raiparuhang.com.np" class="nav-logo"><span class="dot"></span>Rai Paruhang</a>
-  <ul class="nav-links">
-    <li><a href="https://raiparuhang.com.np/#home">Home</a></li>
-    <li><a href="https://raiparuhang.com.np/#about">About</a></li>
-    <li><a href="https://raiparuhang.com.np/#contact">Contact</a></li>
-    <li><a href="https://raiparuhang.com.np/tools" class="nav-cta">All Tools</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="https://raiparuhang.com.np/#home" onclick="closeMobile()">Home</a>
-  <a href="https://raiparuhang.com.np/tools" class="active" onclick="closeMobile()">All Tools</a>
-  <a href="https://raiparuhang.com.np/#about" onclick="closeMobile()">About</a>
-  <a href="https://raiparuhang.com.np/#contact" onclick="closeMobile()">Contact</a>
-</div>
-<!--Header-->
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="/">
+      <span class="brand-mark">R</span>
+      <span>Raiparuhang</span>
+    </a>
+    <nav class="nav-links">
+      <a data-nav href="/">Home</a>
+      <a data-nav href="/tools">Tools</a>
+      <a data-nav href="/about">About</a>
+      <a data-nav href="/contact">Contact</a>
+    </nav>
+    <a class="nav-cta" href="/tools">Browse tools →</a>
+    <button class="nav-toggle" aria-label="Menu">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+  <div class="nav-mobile">
+    <a data-nav href="/">Home</a>
+    <a data-nav href="/tools">Tools</a>
+    <a data-nav href="/about">About</a>
+    <a data-nav href="/contact">Contact</a>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
 <div class="page-header">
-  <div class="page-badge">Width · Height · Ratio</div>
+  <div class="page-badge">100% Client-Side · No Server Upload</div>
   <h1>Aspect Ratio <span>Calculator</span></h1>
-  <p>Enter any two values — width, height, or ratio — and the third fills in instantly. Includes 12 presets, standard resolutions, and a live visual preview.</p>
+  <p>Enter any two values — width, height, or ratio — and the third fills in instantly. Detect dimensions from a file, calculate crops and letterbox bars, compare ratios side by side, and share a link to your exact calculation.</p>
 </div>
 
 <div class="tool-wrapper">
 
+  <!-- FILE DETECTION -->
+  <div class="tool-card">
+    <div class="tool-card-hdr">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <h3>Detect From File</h3>
+      <span class="sub">Reads pixel dimensions locally — nothing is uploaded</span>
+    </div>
+    <div class="tool-card-body">
+      <div class="upload-zone" id="uploadZone" tabindex="0" role="button" aria-label="Upload an image or video to detect its dimensions">
+        <svg class="upload-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <div class="upload-title">Drop an image or video, or click to browse</div>
+        <div class="upload-hint">Dimensions are read in your browser — nothing leaves your device</div>
+        <input type="file" id="fileInput" accept="image/*,video/*" style="display:none">
+      </div>
+      <div class="upload-result" id="uploadResult">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        <span id="uploadResultTxt"></span>
+      </div>
+    </div>
+  </div>
+
   <!-- MAIN CALCULATOR -->
-  <div class="card">
-    <div class="card-hdr">
+  <div class="tool-card">
+    <div class="tool-card-hdr">
       <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
       <h3>Calculator</h3>
       <span class="sub">Fill any two fields — third auto-calculates</span>
@@ -276,6 +331,10 @@ footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:fle
             <button class="utab" onclick="setUnit('cm',this)">cm</button>
             <button class="utab" onclick="setUnit('in',this)">in</button>
             <button class="utab" onclick="setUnit('%',this)">%</button>
+          </div>
+          <div class="dpi-row" id="dpiRow">
+            <label>DPI (for pixel conversion)</label>
+            <input type="number" class="dpi-input" id="dpiIn" value="300" min="1" oninput="refreshUnitDisplay()">
           </div>
         </div>
 
@@ -303,18 +362,31 @@ footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:fle
           </div>
         </div>
 
-        <div class="ratio-tag" id="ratioTag">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          <span id="ratioTagTxt">—</span>
+        <div class="ratio-tag-row">
+          <div class="ratio-tag" id="ratioTag">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span id="ratioTagTxt">—</span>
+          </div>
+          <button class="copy-btn" id="copyRatioBtn" onclick="copyRatio()" aria-label="Copy ratio" title="Copy ratio">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+        </div>
+        <div class="nearest-note" id="nearestNote"></div>
+
+        <div class="info-chips">
+          <div class="info-chip"><div class="info-chip-lbl">Ratio (decimal)</div><div class="info-chip-val" id="cDec">—</div></div>
+          <div class="info-chip"><div class="info-chip-lbl">Megapixels</div><div class="info-chip-val" id="cMp">—</div></div>
+          <div class="info-chip"><div class="info-chip-lbl">Total pixels</div><div class="info-chip-val" id="cTot">—</div></div>
         </div>
 
-        <div class="chips">
-          <div class="chip"><div class="chip-lbl">Ratio (decimal)</div><div class="chip-val" id="cDec">—</div></div>
-          <div class="chip"><div class="chip-lbl">Megapixels</div><div class="chip-val" id="cMp">—</div></div>
-          <div class="chip"><div class="chip-lbl">Total pixels</div><div class="chip-val" id="cTot">—</div></div>
+        <div class="action-row">
+          <button class="reset-btn" onclick="resetAll()">↺ Reset all</button>
+          <button class="share-btn" onclick="copyShareLink()" id="shareBtn">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>
+            Copy share link
+          </button>
         </div>
-
-        <button class="btn-ghost" onclick="resetAll()">↺ Reset all</button>
+        <div class="kbd-hint">Press <kbd>Esc</kbd> to reset all fields</div>
       </div>
 
       <div class="calc-right">
@@ -335,24 +407,36 @@ footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:fle
   </div>
 
   <!-- PRESETS -->
-  <div class="card">
-    <div class="card-hdr">
+  <div class="tool-card">
+    <div class="tool-card-hdr">
       <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
       <h3>Common Ratio Presets</h3>
     </div>
-    <div class="card-body">
+    <div class="tool-card-body">
       <div class="presets-grid" id="presetsGrid"></div>
     </div>
   </div>
 
+  <!-- PLATFORM SIZES -->
+  <div class="tool-card">
+    <div class="tool-card-hdr">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 4v16"/><path d="M2 9h8"/></svg>
+      <h3>Social &amp; Platform Sizes</h3>
+      <span class="sub">Exact recommended dimensions</span>
+    </div>
+    <div class="tool-card-body">
+      <div class="platform-grid" id="platformGrid"></div>
+    </div>
+  </div>
+
   <!-- SCALE TOOL -->
-  <div class="card">
-    <div class="card-hdr">
+  <div class="tool-card">
+    <div class="tool-card-hdr">
       <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
       <h3>Scale to Size</h3>
       <span class="sub">Uses current ratio</span>
     </div>
-    <div class="card-body">
+    <div class="tool-card-body">
       <div class="scale-grid">
         <div class="scale-field"><label>Target Width</label><input type="number" class="scale-input" id="sW" placeholder="e.g. 1920" min="1" oninput="scaleW()"></div>
         <div class="scale-field"><label>→ Height result</label><div class="scale-result" id="sWR">—</div></div>
@@ -364,9 +448,80 @@ footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:fle
     </div>
   </div>
 
+  <!-- CROP CALCULATOR -->
+  <div class="tool-card">
+    <div class="tool-card-hdr">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></svg>
+      <h3>Crop Calculator</h3>
+      <span class="sub">Centered crop to current ratio</span>
+    </div>
+    <div class="tool-card-body">
+      <div class="crop-grid">
+        <div class="crop-inputs">
+          <div class="scale-grid">
+            <div class="scale-field"><label>Original Width</label><input type="number" class="scale-input" id="cropW" placeholder="e.g. 4000" min="1" oninput="computeCrop()"></div>
+            <div class="scale-field"><label>Original Height</label><input type="number" class="scale-input" id="cropH" placeholder="e.g. 3000" min="1" oninput="computeCrop()"></div>
+          </div>
+          <div class="crop-result" id="cropResult">Enter original dimensions above — the crop box is calculated to fit the ratio set in the Calculator card.</div>
+        </div>
+        <div class="crop-stage">
+          <div class="crop-outer" id="cropOuter" style="width:200px;height:150px">
+            <div class="crop-box" id="cropBox"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MULTI-RATIO COMPARISON -->
+  <div class="tool-card">
+    <div class="tool-card-hdr">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="18" rx="1"/><rect x="14" y="8" width="7" height="13" rx="1"/></svg>
+      <h3>Compare Ratios</h3>
+      <span class="sub">Side-by-side visual comparison</span>
+    </div>
+    <div class="tool-card-body">
+      <div class="compare-grid">
+        <div class="compare-item">
+          <select class="compare-select" id="cmpA" onchange="renderCompare()"></select>
+          <div class="compare-stage"><div class="compare-rect" id="cmpRectA"><span class="compare-lbl" id="cmpLblA"></span></div></div>
+        </div>
+        <div class="compare-item">
+          <select class="compare-select" id="cmpB" onchange="renderCompare()"></select>
+          <div class="compare-stage"><div class="compare-rect" id="cmpRectB"><span class="compare-lbl" id="cmpLblB"></span></div></div>
+        </div>
+        <div class="compare-item">
+          <select class="compare-select" id="cmpC" onchange="renderCompare()"></select>
+          <div class="compare-stage"><div class="compare-rect" id="cmpRectC"><span class="compare-lbl" id="cmpLblC"></span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LETTERBOX / PILLARBOX -->
+  <div class="tool-card">
+    <div class="tool-card-hdr">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="1"/><rect x="6" y="6" width="12" height="12"/></svg>
+      <h3>Letterbox / Pillarbox Calculator</h3>
+      <span class="sub">Content ratio uses the Calculator card</span>
+    </div>
+    <div class="tool-card-body">
+      <div class="letterbox-grid">
+        <div class="scale-field"><label>Frame Width</label><input type="number" class="scale-input" id="lbW" placeholder="e.g. 1920" min="1" oninput="computeLetterbox()"></div>
+        <div class="scale-field"><label>Frame Height</label><input type="number" class="scale-input" id="lbH" placeholder="e.g. 1080" min="1" oninput="computeLetterbox()"></div>
+      </div>
+      <div class="letterbox-stage">
+        <div class="letterbox-frame" id="lbFrame" style="width:220px;height:124px">
+          <div class="letterbox-content" id="lbContent"><span class="letterbox-lbl" id="lbContentLbl"></span></div>
+        </div>
+      </div>
+      <div class="letterbox-result" id="lbResult">Enter a frame size above — bars are calculated for the ratio set in the Calculator card.</div>
+    </div>
+  </div>
+
   <!-- RESOLUTIONS TABLE -->
-  <div class="card">
-    <div class="card-hdr">
+  <div class="tool-card">
+    <div class="tool-card-hdr">
       <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
       <h3>Common Resolutions</h3>
       <span class="res-ratio-pill" id="resTag">—</span>
@@ -376,59 +531,8 @@ footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:fle
 
 </div>
 
-<div class="faq-section">
-  <h2>Frequently Asked Questions</h2>
-  <div class="faq-item">
-    <div class="faq-q" onclick="faq(this)">How do I find the aspect ratio of an image or video?
-      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-    </div>
-    <div class="faq-a">Enter your image's width and height — leave the ratio fields blank. The calculator uses the GCD (greatest common divisor) to simplify the ratio automatically. For example, 1920 × 1080 simplifies to <code>16:9</code>, and 800 × 600 simplifies to <code>4:3</code>.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="faq(this)">How do I calculate height from width and a ratio?
-      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-    </div>
-    <div class="faq-a">Enter your width value, then set the ratio (either by typing in the ratio fields or clicking a preset). The height is calculated as <code>width × ratio_H ÷ ratio_W</code>. Calculated fields are highlighted in amber so you know which value was derived.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="faq(this)">What aspect ratio should I use for YouTube videos?
-      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-    </div>
-    <div class="faq-a">Use <code>16:9</code> for standard YouTube videos — recommended at 1920×1080 (Full HD) or 3840×2160 (4K). For YouTube Shorts, Reels, and TikTok, use <code>9:16</code> vertical at 1080×1920.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="faq(this)">What is the best aspect ratio for social media?
-      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-    </div>
-    <div class="faq-a">It depends on the platform: Instagram feed posts work best at <code>1:1</code> (square) or <code>4:5</code> (portrait). Stories and Reels use <code>9:16</code>. Twitter/X headers use roughly <code>3:1</code>. Facebook cover photos are approximately <code>820:312</code>.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="faq(this)">What is the difference between 16:9 and 16:10?
-      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-    </div>
-    <div class="faq-a"><code>16:9</code> (1.78:1) is the universal standard for TV, online video, and most monitors. <code>16:10</code> (1.6:1) is slightly taller — common in older MacBooks and professional monitors — giving a bit more vertical space for documents and code. Most modern content targets 16:9.</div>
-  </div>
-</div>
-
-<section style="margin: 60px auto; max-width: 780px; padding: 0 20px;">
-  <h2 style="font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6b7280; margin-bottom: 16px;">
-    Also searched as
-  </h2>
-  <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">aspect ratio calculator free online</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">image ratio calculator no upload</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">video aspect ratio converter free</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">16:9 ratio calculator</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">4:3 aspect ratio calculator</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">find width from height ratio</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">screen resolution ratio tool</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">aspect ratio calculator browser only</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">maintain aspect ratio resize tool</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">responsive design ratio calculator</span>
-  </div>
-</section>
 <!--related tools-->
-<section style="max-width:780px;margin:0 auto 60px;padding:0 20px;">
+<section style="max-width:780px;margin:0 auto 60px;padding:0 20px;" class="border-line">
   <h2 style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#556080;margin-bottom:16px;">Related Tools</h2>
   <div style="display:flex;flex-wrap:wrap;gap:12px;">
     <a href="https://raiparuhang.com.np/image-size-resizer" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:#161d2e;border:1px solid rgba(99,140,255,.12);border-radius:12px;text-decoration:none;color:#e8edf8;font-size:13px;font-weight:600;flex:1;min-width:180px;">
@@ -448,20 +552,144 @@ footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:fle
     </a>
   </div>
 </section>
-<!--footer-->
-<footer>
-  <div class="footer-left">© 2026 Rai Paruhang · <a href="https://raiparuhang.com.np/terms.html">Privacy &amp; Terms</a></div>
-  <div class="footer-right">
-    <a href="https://raiparuhang.com.np/tools">All Tools</a>
-        <a href="https://www.linkedin.com/in/paruhang-rai/" target="_blank" rel="noopener">Linkedin</a>
-    <a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter</a>
+
+<!--how to section-->
+<section style="max-width: 780px; margin: 3rem auto; padding: 0 1.25rem; font-family: system-ui, -apple-system, sans-serif; line-height: 1.7;" class="border-line">
+
+  <h2 style="font-size: 1.6rem; font-weight: 600; margin: 0 0 0.5rem;">How to calculate aspect ratio online</h2>
+  <p style="font-size: 1rem; color: var(--ink-60); margin: 0 0 2rem;">
+    This calculator works out width, height, or ratio from any two known values — instantly, with no account and nothing installed.
+    Here's everything you need to know, including tips for specific use cases and devices.
+  </p>
+
+  <ol style="padding: 0; margin: 0 0 2.5rem; list-style: none; display: flex; flex-direction: column; gap: 1rem;">
+    <li style="display: flex; gap: 1rem; align-items: flex-start; background: #f8f8f6; border-radius: 10px; padding: 1rem 1.25rem;">
+      <span style="min-width: 32px; height: 32px; background: #1a1a1a; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 600;">1</span>
+      <div>
+        <p style="font-weight: 600; margin: 0 0 0.25rem;">Enter any two values, or detect them from a file</p>
+        <p style="margin: 0; color: #555; font-size: 0.95rem;">Type in a width, a height, or a ratio (e.g. <code style="background: #eee; padding: 1px 5px; border-radius: 4px; font-size: 0.875rem;">16:9</code>) — any two of the three fields is enough. Or drop an image/video into the "Detect From File" card and the exact pixel dimensions are read automatically.</p>
+      </div>
+    </li>
+    <li style="display: flex; gap: 1rem; align-items: flex-start; background: #f8f8f6; border-radius: 10px; padding: 1rem 1.25rem;">
+      <span style="min-width: 32px; height: 32px; background: #1a1a1a; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 600;">2</span>
+      <div>
+        <p style="font-weight: 600; margin: 0 0 0.25rem;">Pick a preset, a platform size, or browse resolutions</p>
+        <p style="margin: 0; color: #555; font-size: 0.95rem;">Click any of the 12 common presets, or a named platform size like "Instagram Story" for exact pixel dimensions. The resolutions table updates to show standard sizes for the matching ratio.</p>
+      </div>
+    </li>
+    <li style="display: flex; gap: 1rem; align-items: flex-start; background: #f8f8f6; border-radius: 10px; padding: 1rem 1.25rem;">
+      <span style="min-width: 32px; height: 32px; background: #1a1a1a; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 600;">3</span>
+      <div>
+        <p style="font-weight: 600; margin: 0 0 0.25rem;">Scale, crop, or letterbox using the current ratio</p>
+        <p style="margin: 0; color: #555; font-size: 0.95rem;">Once a ratio is set, use <em>Scale to Size</em> to find a matching dimension at a different size, <em>Crop Calculator</em> to find a centered crop box from a larger original, or the <em>Letterbox/Pillarbox Calculator</em> to work out bar sizes when fitting content into a different frame ratio.</p>
+      </div>
+    </li>
+  </ol>
+
+  <div style="display: flex; flex-direction: column; gap: 2rem;">
+
+    <div>
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">How to find the aspect ratio of an image or video</h3>
+      <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
+        Enter your image's width and height — leave the ratio fields blank — or drop the file directly into the "Detect From File" card. The calculator uses the greatest common divisor (GCD) to simplify the ratio automatically. For example, 1920 × 1080 simplifies to <code style="background: #eee; padding: 1px 5px; border-radius: 4px; font-size: 0.875rem;">16:9</code>, and 800 × 600 simplifies to <code style="background: #eee; padding: 1px 5px; border-radius: 4px; font-size: 0.875rem;">4:3</code>. If your dimensions don't match a standard ratio exactly, the nearest standard ratio is shown for reference.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">How to calculate height from width and a ratio</h3>
+      <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
+        Enter your width value, then set the ratio — either by typing in the ratio fields or clicking a preset. The height is calculated as <code style="background: #eee; padding: 1px 5px; border-radius: 4px; font-size: 0.875rem;">width × ratio_H ÷ ratio_W</code>. Calculated fields are highlighted in amber so you always know which value was derived versus typed.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">How to calculate a centered crop</h3>
+      <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
+        Set your target ratio in the Calculator card, then enter your original image's width and height into the Crop Calculator. It works out the largest centered box matching that ratio, along with the pixel offset from each edge — useful for cropping a photo to a specific ratio without distorting it.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">What are letterboxing and pillarboxing?</h3>
+      <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
+        Letterboxing adds black bars above and below content that's wider than the display frame; pillarboxing adds bars on the sides for content that's narrower. Set your content's ratio in the Calculator card and your target frame size in the Letterbox/Pillarbox Calculator to see the exact bar size in pixels.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">What aspect ratio should I use for YouTube videos?</h3>
+      <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
+        Use <code style="background: #eee; padding: 1px 5px; border-radius: 4px; font-size: 0.875rem;">16:9</code> for standard YouTube videos — recommended at 1920×1080 (Full HD) or 3840×2160 (4K). For YouTube Shorts, Reels, and TikTok, use <code style="background: #eee; padding: 1px 5px; border-radius: 4px; font-size: 0.875rem;">9:16</code> vertical at 1080×1920 — both are in the Social &amp; Platform Sizes card above.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">Why does this calculator not upload my data anywhere?</h3>
+      <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
+        All math happens instantly in your browser using JavaScript — nothing is ever sent to a server, including files dropped into the "Detect From File" card, which are only ever read locally to measure their pixel dimensions. That means it works offline once the page has loaded, and it's safe to use with dimensions or files from private or confidential projects.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- BUG REPORTS -->
+<section class="bug-section">
+  <div class="bug-section-head">
+    <span class="bug-section-title">Bug Reports</span>
+    <span class="bug-count"></span>
+  </div>
+  <div class="bug-list">
+    <!-- COPY THE CARD FORMAT BELOW WHEN A BUG IS REPORTED, OR REMOVE THIS PLACEHOLDER -->
+    <div class="bug-empty">No bugs reported yet — looking good.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <a class="brand" href="/">
+        <span class="brand-mark">R</span>
+        <span>Raiparuhang</span>
+      </a>
+      <p style="color:var(--ink-60); margin-top:.85rem; max-width:340px">A small archive of private, in-browser tools — built and maintained by one person.</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="/tools">All tools</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Elsewhere</h4>
+      <ul>
+        <li><a href="https://raiparuhang.com.np" target="_blank" rel="noopener">raiparuhang.com.np ↗</a></li>
+        <li><a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter/X</a></li>
+        <li><a href="https://www.linkedin.com/in/paruhang-rai/" target="_blank" rel="noopener">Linkedin</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 Raiparuhang</span>
+    <span class="mono">Built static · HTML · CSS · JS</span>
+    <span class="mono"><a href="https://raiparuhang.com.np/terms">Privacy &amp; Terms</a></span>
   </div>
 </footer>
 
-<script>
-document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
-function closeMobile(){document.getElementById('mobileMenu').classList.remove('open')}
+<!-- Bug Report Button -->
+<a class="bug-btn" href="https://raiparuhang.com.np/contact" target="_blank" rel="noopener" aria-label="Report a bug">
+  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 2l1.5 1.5M16 2l-1.5 1.5M9 9h6M9 13h6M12 17v2M6.5 7.5A5.5 5.5 0 0 1 17.5 7.5M4 10h2M18 10h2M5 17l2-2M19 17l-2-2"/>
+  </svg>
+  <span class="bug-tip">Report a bug</span>
+</a>
 
+<script src="assets/js/nav.js"></script>
+<script>
 const PRESETS=[
   {w:16,h:9,name:'Widescreen',use:'YouTube, TV, PC'},
   {w:4,h:3,name:'Standard',use:'Old TV, photos'},
@@ -475,6 +703,21 @@ const PRESETS=[
   {w:5,h:4,name:'Near Square',use:'Medium format'},
   {w:3,h:1,name:'Banner',use:'Twitter header'},
   {w:2,h:1,name:'Wide Banner',use:'Panoramic'},
+];
+
+const PLATFORM_SIZES=[
+  {name:'YouTube Thumbnail',w:1280,h:720},
+  {name:'YouTube Shorts / Reels',w:1080,h:1920},
+  {name:'Instagram Post',w:1080,h:1080},
+  {name:'Instagram Story',w:1080,h:1920},
+  {name:'Instagram Portrait',w:1080,h:1350},
+  {name:'Facebook Cover',w:820,h:312},
+  {name:'Twitter / X Header',w:1500,h:500},
+  {name:'Twitter / X Post',w:1600,h:900},
+  {name:'LinkedIn Banner',w:1584,h:396},
+  {name:'TikTok Video',w:1080,h:1920},
+  {name:'Pinterest Pin',w:1000,h:1500},
+  {name:'Zoom Virtual Background',w:1920,h:1080},
 ];
 
 const RESOLUTIONS={
@@ -548,15 +791,52 @@ const NAMES={
 const TLBL={v:'Video',s:'Social',w:'Web',p:'Print'};
 const TCLS={v:'t-v',s:'t-s',w:'t-w',p:'t-p'};
 
+const STANDARD_LIST=Object.keys(NAMES).map(k=>{
+  const [a,b]=k.split(':').map(Number);
+  return {key:k,dec:a/b};
+});
+
+// Ratio options offered in the comparison dropdowns
+const COMPARE_OPTIONS=[
+  {label:'Current ratio',value:'current'},
+  ...Object.keys(NAMES).map(k=>({label:k+' — '+NAMES[k].split('—')[0].trim(),value:k}))
+];
+
 let unit='px', activeKey=null;
 
 function gcd(a,b){return b===0?a:gcd(b,a%b)}
 function simplify(w,h){const g=gcd(Math.round(w),Math.round(h));return[Math.round(w)/g,Math.round(h)/g]}
 
+function nearestStandard(dec){
+  let best=null,bestDiff=Infinity;
+  STANDARD_LIST.forEach(s=>{
+    const diff=Math.abs(s.dec-dec);
+    if(diff<bestDiff){bestDiff=diff;best=s;}
+  });
+  return best?{key:best.key,diff:bestDiff}:null;
+}
+
+function convertToPx(val,u,dpi){
+  if(u==='px')return val;
+  if(u==='in')return val*dpi;
+  if(u==='cm')return (val/2.54)*dpi;
+  return null; // 'dp' and '%' aren't convertible to absolute pixels
+}
+
 function setUnit(u,btn){
   unit=u;
   document.querySelectorAll('.utab').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
+  document.getElementById('dpiRow').classList.toggle('show',u==='cm'||u==='in');
+  refreshUnitDisplay();
+}
+
+function refreshUnitDisplay(){
+  const w=parseFloat(document.getElementById('wIn').value);
+  const h=parseFloat(document.getElementById('hIn').value);
+  const rw=parseFloat(document.getElementById('rW').value);
+  const rh=parseFloat(document.getElementById('rH').value);
+  render(isNaN(w)?null:w, isNaN(h)?null:h, isNaN(rw)?null:rw, isNaN(rh)?null:rh);
 }
 
 function changed(which){
@@ -589,52 +869,85 @@ function changed(which){
       document.getElementById('wIn').classList.add('calc-out');
       render(cw,h,rw,rh);
     } else { render(null,null,rw,rh); }
+  } else if(which==='r'){
+    // ratio fields cleared or invalid — drop the ratio-derived state
+    render(isNaN(w)?null:w, isNaN(h)?null:h, null, null);
   } else if((which==='w'||which==='h')&&!isNaN(w)&&!isNaN(h)&&w>0&&h>0){
     const[sr,sh]=simplify(w,h);
     document.getElementById('rW').value=sr;
     document.getElementById('rH').value=sh;
     render(w,h,sr,sh);
+  } else if(which==='w'&&isNaN(w)){
+    render(null, isNaN(h)?null:h, isNaN(rw)?null:rw, isNaN(rh)?null:rh);
+  } else if(which==='h'&&isNaN(h)){
+    render(isNaN(w)?null:w, null, isNaN(rw)?null:rw, isNaN(rh)?null:rh);
   }
 }
 
 function render(w,h,rw,rh){
   const key=rw&&rh?`${rw}:${rh}`:null;
-  // ratio name tag
   const tag=document.getElementById('ratioTag');
+  const nearestEl=document.getElementById('nearestNote');
+
   if(key&&NAMES[key]){
     tag.classList.add('show');
     document.getElementById('ratioTagTxt').textContent=`${key} — ${NAMES[key]}`;
     activeKey=key; highlightPreset(key);
+    nearestEl.textContent='';
   } else if(key){
     tag.classList.add('show');
     document.getElementById('ratioTagTxt').textContent=`${key} — Custom ratio`;
     activeKey=key; highlightPreset(null);
-  } else { tag.classList.remove('show'); }
-  // chips
+    const dec=rw/rh;
+    const nearest=nearestStandard(dec);
+    if(nearest && nearest.diff>0.005 && nearest.diff<0.12){
+      nearestEl.innerHTML=`Closest standard ratio: <strong>${nearest.key}</strong> (Δ${nearest.diff.toFixed(3)})`;
+    } else {
+      nearestEl.textContent='';
+    }
+  } else {
+    tag.classList.remove('show');
+    nearestEl.textContent='';
+    activeKey=null; highlightPreset(null);
+  }
+
+  const dpi=parseFloat(document.getElementById('dpiIn').value)||300;
+  const pxW=w?convertToPx(w,unit,dpi):null;
+  const pxH=h?convertToPx(h,unit,dpi):null;
+
   if(w&&h){
     document.getElementById('cDec').textContent=(w/h).toFixed(4);
-    document.getElementById('cMp').textContent=unit==='px'?((w*h)/1e6).toFixed(2)+' MP':'—';
-    document.getElementById('cTot').textContent=unit==='px'?(w*h).toLocaleString():'—';
   } else if(rw&&rh){
     document.getElementById('cDec').textContent=(rw/rh).toFixed(4);
+  } else {
+    document.getElementById('cDec').textContent='—';
+  }
+
+  if(pxW&&pxH){
+    document.getElementById('cMp').textContent=((pxW*pxH)/1e6).toFixed(2)+' MP';
+    document.getElementById('cTot').textContent=Math.round(pxW*pxH).toLocaleString();
+  } else {
     document.getElementById('cMp').textContent='—';
     document.getElementById('cTot').textContent='—';
   }
-  // dim labels
+
   document.getElementById('wDim').textContent=w?`${Math.round(w)} ${unit}`:'';
   document.getElementById('hDim').textContent=h?`${Math.round(h)} ${unit}`:'';
-  // preview
+
   const prw=rw||(w&&h?w/h:16), prh=rh||(w&&h?1:9);
   const sc=Math.min(210/prw,170/prh);
   const pw=Math.round(prw*sc), ph=Math.round(prh*sc);
   const rect=document.getElementById('pRect');
   rect.style.width=pw+'px'; rect.style.height=ph+'px';
   document.getElementById('pLbl').textContent=rw&&rh?`${rw} : ${rh}`:'—';
-  // res table
+
   document.getElementById('resTag').textContent=key||'—';
   buildResTable(key,w,h);
-  // scale
   scaleW(); scaleH();
+  computeCrop();
+  computeLetterbox();
+  renderCompare();
+  syncURL(w,h,rw,rh);
 }
 
 function buildResTable(key,curW,curH){
@@ -645,13 +958,13 @@ function buildResTable(key,curW,curH){
   }
   const rows=RESOLUTIONS[key].map(r=>{
     const isCur=(!isNaN(curW)&&!isNaN(curH)&&Math.round(curW)===r.w&&Math.round(curH)===r.h);
-    const tags=r.t.map(t=>`<span class="tag ${TCLS[t]}">${TLBL[t]}</span>`).join('');
+    const tags=r.t.map(t=>`<span class="res-tag ${TCLS[t]}">${TLBL[t]}</span>`).join('');
     const mp=((r.w*r.h)/1e6).toFixed(1);
     return`<tr class="${isCur?'cur-res':''}" onclick="useRes(${r.w},${r.h})">
       <td><strong>${r.n}</strong></td><td>${r.w} × ${r.h}</td><td>${mp} MP</td><td>${tags}</td>
     </tr>`;
   }).join('');
-  wrap.innerHTML=`<table><thead><tr><th>Name</th><th>Resolution</th><th>Megapixels</th><th>Usage</th></tr></thead><tbody>${rows}</tbody></table>`;
+  wrap.innerHTML=`<table class="res-table"><thead><tr><th>Name</th><th>Resolution</th><th>Megapixels</th><th>Usage</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
 function useRes(w,h){
@@ -677,11 +990,34 @@ function buildPresets(){
   });
 }
 
+function buildPlatformSizes(){
+  const grid=document.getElementById('platformGrid');
+  PLATFORM_SIZES.forEach(p=>{
+    const btn=document.createElement('button');
+    btn.className='platform-btn';
+    btn.onclick=()=>applyDimensions(p.w,p.h);
+    btn.innerHTML=`<div class="platform-name">${p.name}</div><div class="platform-dim">${p.w} × ${p.h}</div>`;
+    grid.appendChild(btn);
+  });
+}
+
 function applyPreset(rw,rh,key){
   document.getElementById('rW').value=rw;
   document.getElementById('rH').value=rh;
   activeKey=key; highlightPreset(key);
   changed('r');
+}
+
+// Sets an exact width & height (used by platform sizes and file detection)
+function applyDimensions(w,h){
+  document.getElementById('wIn').value=w;
+  document.getElementById('hIn').value=h;
+  document.getElementById('wIn').classList.remove('calc-out');
+  document.getElementById('hIn').classList.remove('calc-out');
+  const [sr,sh]=simplify(w,h);
+  document.getElementById('rW').value=sr;
+  document.getElementById('rH').value=sh;
+  render(w,h,sr,sh);
 }
 
 function highlightPreset(key){
@@ -702,31 +1038,282 @@ function scaleH(){
   document.getElementById('sHR').textContent=(!isNaN(th)&&th>0&&rw>0&&rh>0)?Math.round(th*rw/rh)+' '+unit:'—';
 }
 
+// ---- CROP CALCULATOR ----
+function computeCrop(){
+  const origW=parseFloat(document.getElementById('cropW').value);
+  const origH=parseFloat(document.getElementById('cropH').value);
+  const rw=parseFloat(document.getElementById('rW').value);
+  const rh=parseFloat(document.getElementById('rH').value);
+  const resultEl=document.getElementById('cropResult');
+  const outer=document.getElementById('cropOuter');
+  const box=document.getElementById('cropBox');
+
+  if(isNaN(origW)||isNaN(origH)||origW<=0||origH<=0){
+    resultEl.textContent='Enter original dimensions above — the crop box is calculated to fit the ratio set in the Calculator card.';
+    outer.style.width='200px'; outer.style.height='150px';
+    box.style.cssText='';
+    return;
+  }
+  if(isNaN(rw)||isNaN(rh)||rw<=0||rh<=0){
+    resultEl.textContent='Set a ratio in the Calculator card above to compute a crop.';
+    return;
+  }
+
+  const targetAspect=rw/rh, sourceAspect=origW/origH;
+  let cropW,cropH,offX,offY;
+  if(sourceAspect>targetAspect){
+    cropH=origH; cropW=Math.round(origH*targetAspect);
+    offX=Math.round((origW-cropW)/2); offY=0;
+  } else {
+    cropW=origW; cropH=Math.round(origW/targetAspect);
+    offX=0; offY=Math.round((origH-cropH)/2);
+  }
+
+  resultEl.innerHTML=`Crop box: <strong>${cropW} × ${cropH}</strong> px<br>Offset from left: <strong>${offX}px</strong> · Offset from top: <strong>${offY}px</strong>`;
+
+  const sc=Math.min(220/origW,170/origH);
+  const ow=Math.round(origW*sc), oh=Math.round(origH*sc);
+  outer.style.width=ow+'px'; outer.style.height=oh+'px';
+  const bw=Math.round(cropW*sc), bh=Math.round(cropH*sc);
+  const bx=Math.round(offX*sc), by=Math.round(offY*sc);
+  box.style.width=bw+'px'; box.style.height=bh+'px';
+  box.style.left=bx+'px'; box.style.top=by+'px';
+}
+
+// ---- COMPARISON ----
+function buildCompareSelects(){
+  ['cmpA','cmpB','cmpC'].forEach((id,i)=>{
+    const sel=document.getElementById(id);
+    sel.innerHTML=COMPARE_OPTIONS.map(o=>`<option value="${o.value}">${o.label}</option>`).join('');
+    sel.value = i===0?'current':(i===1?'16:9':'1:1');
+  });
+}
+
+function renderCompare(){
+  ['A','B','C'].forEach(letter=>{
+    const sel=document.getElementById('cmp'+letter);
+    if(!sel) return;
+    const val=sel.value;
+    let rw,rh;
+    if(val==='current'){
+      rw=parseFloat(document.getElementById('rW').value);
+      rh=parseFloat(document.getElementById('rH').value);
+    } else {
+      [rw,rh]=val.split(':').map(Number);
+    }
+    const rect=document.getElementById('cmpRect'+letter);
+    const lbl=document.getElementById('cmpLbl'+letter);
+    if(isNaN(rw)||isNaN(rh)||rw<=0||rh<=0){
+      rect.style.width='60px'; rect.style.height='60px';
+      lbl.textContent='—';
+      return;
+    }
+    const sc=Math.min(120/rw,110/rh);
+    rect.style.width=Math.round(rw*sc)+'px';
+    rect.style.height=Math.round(rh*sc)+'px';
+    lbl.textContent=`${rw}:${rh}`;
+  });
+}
+
+// ---- LETTERBOX / PILLARBOX ----
+function computeLetterbox(){
+  const frameW=parseFloat(document.getElementById('lbW').value);
+  const frameH=parseFloat(document.getElementById('lbH').value);
+  const rw=parseFloat(document.getElementById('rW').value);
+  const rh=parseFloat(document.getElementById('rH').value);
+  const resultEl=document.getElementById('lbResult');
+  const frame=document.getElementById('lbFrame');
+  const content=document.getElementById('lbContent');
+  const contentLbl=document.getElementById('lbContentLbl');
+
+  if(isNaN(frameW)||isNaN(frameH)||frameW<=0||frameH<=0){
+    resultEl.textContent='Enter a frame size above — bars are calculated for the ratio set in the Calculator card.';
+    frame.style.width='220px'; frame.style.height='124px';
+    content.style.cssText='';
+    contentLbl.textContent='';
+    return;
+  }
+  if(isNaN(rw)||isNaN(rh)||rw<=0||rh<=0){
+    resultEl.textContent='Set a ratio in the Calculator card above to compute bar sizes.';
+    return;
+  }
+
+  const frameAspect=frameW/frameH, contentAspect=rw/rh;
+  let scaledW,scaledH,mode,barSize;
+
+  if(Math.abs(frameAspect-contentAspect)<0.001){
+    mode='match'; scaledW=frameW; scaledH=frameH; barSize=0;
+  } else if(contentAspect<frameAspect){
+    mode='pillarbox'; scaledH=frameH; scaledW=Math.round(frameH*contentAspect);
+    barSize=Math.round((frameW-scaledW)/2);
+  } else {
+    mode='letterbox'; scaledW=frameW; scaledH=Math.round(frameW/contentAspect);
+    barSize=Math.round((frameH-scaledH)/2);
+  }
+
+  if(mode==='match'){
+    resultEl.innerHTML=`<strong>Exact match</strong> — no bars needed at ${frameW} × ${frameH}`;
+  } else if(mode==='pillarbox'){
+    resultEl.innerHTML=`<strong>Pillarbox</strong> — bars of <strong>${barSize}px</strong> on each side · content area <strong>${scaledW} × ${scaledH}</strong>`;
+  } else {
+    resultEl.innerHTML=`<strong>Letterbox</strong> — bars of <strong>${barSize}px</strong> top and bottom · content area <strong>${scaledW} × ${scaledH}</strong>`;
+  }
+
+  const sc=Math.min(220/frameW,150/frameH);
+  const fw=Math.round(frameW*sc), fh=Math.round(frameH*sc);
+  frame.style.width=fw+'px'; frame.style.height=fh+'px';
+  const cw=Math.round(scaledW*sc), ch=Math.round(scaledH*sc);
+  content.style.width=cw+'px'; content.style.height=ch+'px';
+  contentLbl.textContent=`${rw}:${rh}`;
+}
+
+// ---- COPY TO CLIPBOARD ----
+function flashCopied(btn){
+  const original=btn.innerHTML;
+  btn.innerHTML='✓';
+  btn.style.color='var(--green)';
+  setTimeout(()=>{btn.innerHTML=original;btn.style.color='';},1200);
+}
+
+function copyRatio(){
+  const txt=document.getElementById('ratioTagTxt').textContent;
+  if(!txt||txt==='—')return;
+  navigator.clipboard && navigator.clipboard.writeText(txt).then(()=>flashCopied(document.getElementById('copyRatioBtn')));
+}
+
+// ---- SHAREABLE URL ----
+function syncURL(w,h,rw,rh){
+  const params=new URLSearchParams();
+  if(w) params.set('w',Math.round(w));
+  if(h) params.set('h',Math.round(h));
+  if(rw) params.set('rw',rw);
+  if(rh) params.set('rh',rh);
+  const qs=params.toString();
+  const newUrl=window.location.pathname+(qs?('?'+qs):'');
+  window.history.replaceState(null,'',newUrl);
+}
+
+function copyShareLink(){
+  navigator.clipboard && navigator.clipboard.writeText(window.location.href).then(()=>{
+    const btn=document.getElementById('shareBtn');
+    const original=btn.innerHTML;
+    btn.innerHTML='<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Link copied';
+    setTimeout(()=>{btn.innerHTML=original;},1500);
+  });
+}
+
+function loadFromURL(){
+  const params=new URLSearchParams(window.location.search);
+  const w=parseFloat(params.get('w'));
+  const h=parseFloat(params.get('h'));
+  const rw=parseFloat(params.get('rw'));
+  const rh=parseFloat(params.get('rh'));
+  if(!isNaN(w)) document.getElementById('wIn').value=w;
+  if(!isNaN(h)) document.getElementById('hIn').value=h;
+  if(!isNaN(rw)) document.getElementById('rW').value=rw;
+  if(!isNaN(rh)) document.getElementById('rH').value=rh;
+  return !isNaN(w)||!isNaN(h)||!isNaN(rw)||!isNaN(rh);
+}
+
+// ---- FILE DETECTION ----
+function handleFile(file){
+  if(!file) return;
+  const resultBox=document.getElementById('uploadResult');
+  const resultTxt=document.getElementById('uploadResultTxt');
+  if(file.type.startsWith('image/')){
+    const img=new Image();
+    img.onload=()=>{
+      applyDimensions(img.naturalWidth,img.naturalHeight);
+      resultTxt.textContent=`Detected ${img.naturalWidth} × ${img.naturalHeight} from "${file.name}"`;
+      resultBox.classList.add('show');
+      URL.revokeObjectURL(img.src);
+    };
+    img.onerror=()=>{ resultTxt.textContent='Could not read that image file.'; resultBox.classList.add('show'); };
+    img.src=URL.createObjectURL(file);
+  } else if(file.type.startsWith('video/')){
+    const vid=document.createElement('video');
+    vid.preload='metadata';
+    vid.onloadedmetadata=()=>{
+      applyDimensions(vid.videoWidth,vid.videoHeight);
+      resultTxt.textContent=`Detected ${vid.videoWidth} × ${vid.videoHeight} from "${file.name}"`;
+      resultBox.classList.add('show');
+      URL.revokeObjectURL(vid.src);
+    };
+    vid.onerror=()=>{ resultTxt.textContent='Could not read that video file.'; resultBox.classList.add('show'); };
+    vid.src=URL.createObjectURL(file);
+  } else {
+    resultTxt.textContent='Please choose an image or video file.';
+    resultBox.classList.add('show');
+  }
+}
+
+function initUpload(){
+  const zone=document.getElementById('uploadZone');
+  const input=document.getElementById('fileInput');
+  zone.addEventListener('click',()=>input.click());
+  zone.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); input.click(); } });
+  input.addEventListener('change',e=>{ if(e.target.files[0]) handleFile(e.target.files[0]); });
+  ['dragenter','dragover'].forEach(evt=>zone.addEventListener(evt,e=>{ e.preventDefault(); zone.classList.add('drag'); }));
+  ['dragleave','drop'].forEach(evt=>zone.addEventListener(evt,e=>{ e.preventDefault(); zone.classList.remove('drag'); }));
+  zone.addEventListener('drop',e=>{ if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
+}
+
+// ---- KEYBOARD SHORTCUTS ----
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    const active=document.activeElement;
+    const isFormField=active && (active.tagName==='INPUT'||active.tagName==='SELECT');
+    resetAll();
+    if(isFormField) active.blur();
+  }
+});
+
 function resetAll(){
-  ['wIn','hIn','rW','rH','sW','sH'].forEach(id=>{
-    document.getElementById(id).value='';
-    document.getElementById(id).classList&&document.getElementById(id).classList.remove('calc-out');
+  ['wIn','hIn','rW','rH','sW','sH','cropW','cropH','lbW','lbH'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el) return;
+    el.value='';
+    el.classList&&el.classList.remove('calc-out');
   });
   ['sWR','sHR'].forEach(id=>document.getElementById(id).textContent='—');
   ['cDec','cMp','cTot'].forEach(id=>document.getElementById(id).textContent='—');
   ['wDim','hDim'].forEach(id=>document.getElementById(id).textContent='');
   document.getElementById('ratioTag').classList.remove('show');
+  document.getElementById('nearestNote').textContent='';
   document.getElementById('resTag').textContent='—';
   document.getElementById('resWrap').innerHTML='<div class="no-res">Select a preset or enter dimensions to see matching resolutions</div>';
+  document.getElementById('uploadResult').classList.remove('show');
   const rect=document.getElementById('pRect');
   rect.style.width='192px'; rect.style.height='108px';
   document.getElementById('pLbl').textContent='16 : 9';
   activeKey=null; highlightPreset(null);
+  computeCrop();
+  computeLetterbox();
+  renderCompare();
+  syncURL(null,null,null,null);
 }
 
-function faq(el){el.classList.toggle('open');el.nextElementSibling.classList.toggle('open')}
-
 buildPresets();
-// Default seed
-document.getElementById('rW').value=16;
-document.getElementById('rH').value=9;
-document.getElementById('wIn').value=1920;
-changed('w');
+buildPlatformSizes();
+buildCompareSelects();
+initUpload();
+
+// Load from a shared URL if present, otherwise seed the default example
+if(loadFromURL()){
+  const w=parseFloat(document.getElementById('wIn').value);
+  const h=parseFloat(document.getElementById('hIn').value);
+  const rw=parseFloat(document.getElementById('rW').value);
+  const rh=parseFloat(document.getElementById('rH').value);
+  if(!isNaN(w)&&!isNaN(rw)&&!isNaN(rh)) changed('w');
+  else if(!isNaN(w)&&!isNaN(h)) changed('h');
+  else if(!isNaN(rw)&&!isNaN(rh)) changed('r');
+  else render(isNaN(w)?null:w,isNaN(h)?null:h,isNaN(rw)?null:rw,isNaN(rh)?null:rh);
+} else {
+  document.getElementById('rW').value=16;
+  document.getElementById('rH').value=9;
+  document.getElementById('wIn').value=1920;
+  changed('w');
+}
 </script>
 </body>
 </html>
