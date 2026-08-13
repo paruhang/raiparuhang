@@ -3,7 +3,7 @@
   --ink: #0a0a0a;
   --muted: #f4f4f5;
   --muted-2: #e4e4e7;
-  --accent: #ffcc00;
+  --accent: #ffcc00e4;
   --hairline: #4f8eff;
   --hairline-2: rgba(10, 10, 10, 0.06);
   --ink-60: rgba(10, 10, 10, 0.6);
@@ -453,7 +453,6 @@ p { margin: 0; }
   .form-group input:focus,
   .form-group textarea:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(79,142,255,0.15);
   }
 
   .form-submit {
@@ -622,4 +621,22 @@ p { margin: 0; }
   font-size: 12px;
   color: rgba(10,10,10,0.3);
   letter-spacing: 0.04em;
+}
+
+/* ---------- About profile ---------- */
+.about-profile {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+.about-photo {
+  width: 96px; height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--hairline);
+  flex-shrink: 0;
+}
+@media (max-width: 480px) {
+  .about-profile { flex-direction: column; align-items: flex-start; }
 }
