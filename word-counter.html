@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Word Counter — Count Words, Characters, Sentences & Reading Time | Rai Paruhang</title>
-<meta name="description" content="Free online word counter. Instantly count words, characters, sentences, paragraphs and reading time as you type. Includes keyword density, writing goal tracker, and character limits for Twitter, LinkedIn, SMS.">
+<meta name="description" content="Free online word counter. Instantly count words, characters, sentences, paragraphs and reading time as you type. Includes keyword density, writing goal tracker, focus mode, and character limits for Twitter, LinkedIn, SMS.">
 <link rel="alternate" hreflang="en" href="https://raiparuhang.com.np/word-counter">
 <link rel="alternate" hreflang="x-default" href="https://raiparuhang.com.np/word-counter">
- <!-- Modern SVG Favicon (Infinite scaling for desktop & high-res screens) -->
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<!-- For Safari pinned tabs color blending -->
-<link rel="mask-icon" href="favicon.svg" color="#4f8eff">
-<link rel="canonical" href="https://raiparuhang.com.np/word-counter"/>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="assets/css/styles.css" />
+<link rel="canonical" href="https://raiparuhang.com.np/word-counter">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-<!-- ✅ 1. SoftwareApplication SCHEMA -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Word Counter",
   "url": "https://raiparuhang.com.np/word-counter",
-  "description": "Free online word counter. Instantly count words, characters, sentences, paragraphs, and reading time as you type. Includes keyword density, readability score, writing goal tracker, and character limits for Twitter, LinkedIn, SMS, and more. Runs 100% in your browser — no uploads, no server, completely private.",
+  "description": "Free online word counter. Instantly count words, characters, sentences, paragraphs, and reading time as you type. Includes keyword density, readability score, writing goal tracker, focus mode, draft auto-recovery, and character limits for Twitter, LinkedIn, SMS, and more. Runs 100% in your browser — no uploads, no server, completely private.",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Web",
   "browserRequirements": "Requires a modern web browser with JavaScript enabled",
@@ -36,12 +36,16 @@
   "featureList": [
     "Live word count as you type",
     "Character count with and without spaces",
-    "Sentence and paragraph counter",
+    "Accurate sentence and paragraph counter",
     "Reading time, speaking time, and typing time estimates",
     "Keyword density and frequency analysis",
     "Readability score",
     "Writing goal tracker",
-    "Character limits for Twitter, LinkedIn, SMS, Instagram, Meta description, Title tag",
+    "Character limits for Twitter, LinkedIn, SMS, Instagram, Threads, Meta description, Title tag",
+    "Distraction-free focus mode",
+    "Local draft auto-recovery after accidental reload",
+    "Copy a plain-text stats report",
+    "Download text as a .txt file",
     "No text uploaded to any server",
     "100% client-side processing",
     "Free forever"
@@ -53,87 +57,54 @@
   }
 }
 </script>
- 
- 
-<!-- ✅ 2. FAQPage SCHEMA -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Is my text sent to a server when using the word counter?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Everything runs entirely in your browser using JavaScript. Your text is never sent to any server, stored, or shared with anyone. The tool works completely offline after the page loads."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How is reading time calculated?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Reading time is calculated at 200 words per minute, which is the average adult silent reading speed for web content. Speaking time uses 130 words per minute and typing time uses 40 words per minute."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the ideal word count for a blog post?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "For competitive SEO keywords, 1,500 to 3,000 words tends to rank better. For low-competition or local keywords, 600 to 1,000 words is often enough. Always match depth to user intent rather than padding for length."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does the word counter check character limits for social media?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. The tool includes character limit trackers for Twitter (280), SMS (160), Instagram (2200), LinkedIn (3000), Meta description (160), and Title tag (60)."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is keyword density and why does it matter?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Keyword density shows how frequently each word appears in your text as a percentage. It helps writers and SEO professionals understand which words dominate their content. Filtering out stopwords reveals the meaningful keywords that define your content's topic."
-      }
-    }
-  ]
-}
-</script>
 
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#06080f;--bg2:#0d1120;--bg3:#111827;--surface:#161d2e;--surface2:#1e2840;--border:rgba(99,140,255,.12);--border2:rgba(99,140,255,.22);--accent:#4f8eff;--violet:#8b5cf6;--violet2:#a78bfa;--violet-bg:rgba(139,92,246,.08);--violet-bd:rgba(139,92,246,.25);--green:#22d3a0;--green-bg:rgba(34,211,160,.1);--red:#f87171;--amber:#f59e0b;--amber-bg:rgba(245,158,11,.08);--text:#e8edf8;--text2:#8b99bb;--text3:#556080;--mono:'DM Mono',monospace;--sans:'Sora',sans-serif;--radius:14px;--radius-lg:20px}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root{
+  --surface:#161d2e;--surface2:#1e2840;--bg3:#111827;
+  --border:rgba(99,140,255,.12);--border2:rgba(99,140,255,.22);
+  --violet:#8b5cf6;--violet2:#a78bfa;--violet-bg:rgba(139,92,246,.08);--violet-bd:rgba(139,92,246,.25);
+  --green:#22d3a0;--green-bg:rgba(34,211,160,.1);
+  --red:#f87171;--red-bg:rgba(248,113,113,.1);
+  --amber:#f59e0b;--amber-bg:rgba(245,158,11,.08);
+  --text:#e8edf8;--text2:#8b99bb;--text3:#556080;
+  --mono:'JetBrains Mono',monospace;--sans:'Sora',sans-serif;
+  --radius:14px;--radius-lg:20px;
+}
 html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;min-height:100vh}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 max(24px,5vw);height:64px;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-size:17px;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:-.3px;display:flex;align-items:center;gap:10px}
-.nav-logo .dot{width:8px;height:8px;background:var(--accent);border-radius:50%;box-shadow:0 0 8px var(--accent);animation:pulse 2.4s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
-.nav-links{display:flex;gap:32px;list-style:none}
-.nav-links a{font-size:14px;color:var(--text2);text-decoration:none;transition:color .2s}
-.nav-links a:hover{color:var(--text)}
-.nav-cta{background:var(--accent);color:#fff!important;padding:8px 18px;border-radius:8px;font-weight:600!important;font-size:13px!important}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
-.hamburger span{width:22px;height:2px;background:var(--text2);border-radius:2px;display:block}
-.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(6,8,15,.97);border-bottom:1px solid var(--border);padding:24px max(24px,5vw);z-index:99;flex-direction:column;gap:20px}
-.mobile-menu.open{display:flex}
-.mobile-menu a{color:var(--text2);text-decoration:none;font-size:16px;padding:8px 0;border-bottom:1px solid var(--border)}
-.mobile-menu a:last-child{border-bottom:none}
-@media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}}
+
+/* ---- PAGE HEADER ---- */
 .page-header{padding:96px max(24px,5vw) 40px;max-width:1060px;margin:0 auto;text-align:center}
-.page-badge{display:inline-flex;align-items:center;gap:8px;background:var(--violet-bg);border:1px solid var(--violet-bd);border-radius:100px;padding:5px 14px;font-family:var(--mono);font-size:11px;color:var(--violet2);margin-bottom:20px;letter-spacing:.5px}
+.page-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--green-bg); border: 1px solid rgba(34,211,160,.25); border-radius: 100px; padding: 5px 14px; font-family: var(--mono); font-size: 11px; color: var(--green); margin-bottom: 20px; letter-spacing: .5px; }
 .page-badge::before{content:'';width:5px;height:5px;background:var(--violet);border-radius:50%;box-shadow:0 0 6px var(--violet)}
-.page-header h1{font-size:clamp(26px,5vw,50px);font-weight:700;letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px}
-.page-header h1 span{background:linear-gradient(135deg,var(--violet),var(--violet2),#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.page-header p{color:var(--text2);font-size:15px;max-width:540px;margin:0 auto;font-weight:300}
+.page-header h1{font-size:clamp(26px,5vw,50px);margin-bottom:12px}
+.page-header h1 span{background:linear-gradient(135deg,var(--accent) 0%,var(--accent) 45%,var(--violet2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-header p{color:var(--ink-60);font-size:15px;max-width:560px;margin:0 auto;font-weight:400}
+
+/* ---- TOOL WRAPPER ---- */
 .tool-wrapper{max-width:1060px;margin:0 auto;padding:0 max(24px,5vw) 80px;display:flex;flex-direction:column;gap:16px}
 .main-grid{display:grid;grid-template-columns:1fr 300px;gap:16px;align-items:start}
 @media(max-width:860px){.main-grid{grid-template-columns:1fr}}
+body.focus-mode .stats-panel{display:none}
+body.focus-mode #freqCard{display:none}
+body.focus-mode .ref-section{display:none}
+
+/* ---- TOOL CARD (renamed from .card to avoid clashing with the shared listing-page .card) ---- */
+.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.tool-card-hdr{display:flex;align-items:center;gap:6px;padding:11px 14px;border-bottom:1px solid var(--border);font-size:11px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:.4px}
+.tool-card-hdr svg{width:12px;height:12px;color:var(--violet2);flex-shrink:0}
+.tool-card-hdr .ml{margin-left:auto;cursor:pointer;font-size:10px;color:var(--violet2);background:none;border:none;font-family:var(--mono);transition:opacity .15s}
+.tool-card-hdr .ml:hover{opacity:.7}
+
+/* RESTORE BANNER */
+.restore-banner{display:none;align-items:center;gap:12px;background:var(--violet-bg);border:1px solid var(--violet-bd);border-radius:var(--radius);padding:12px 16px;font-size:12px;color:var(--text2);flex-wrap:wrap}
+.restore-banner.show{display:flex}
+.restore-banner svg{width:15px;height:15px;color:var(--violet2);flex-shrink:0}
+.restore-banner strong{color:var(--text)}
+.restore-actions{margin-left:auto;display:flex;gap:8px}
+.restore-btn{background:var(--violet);color:#fff;border:none;border-radius:7px;padding:6px 12px;font-size:11px;font-family:var(--mono);cursor:pointer}
+.restore-btn.ghost{background:var(--bg3);color:var(--text3);border:1px solid var(--border)}
+
 /* EDITOR */
 .editor-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column}
 .editor-toolbar{display:flex;align-items:center;gap:6px;padding:11px 16px;border-bottom:1px solid var(--border);flex-wrap:wrap}
@@ -142,6 +113,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.85);
 .btn-xs:hover{border-color:var(--border2);color:var(--text2);background:var(--surface2)}
 .btn-xs svg{width:11px;height:11px}
 .btn-xs.warn:hover{border-color:var(--red);color:var(--red)}
+.btn-xs.on{background:var(--violet-bg);border-color:var(--violet-bd);color:var(--violet2)}
 .spacer{flex:1}
 .char-counter{font-size:11px;font-family:var(--mono);color:var(--text3)}
 .char-counter.warn{color:var(--amber)}
@@ -150,10 +122,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.85);
 .editor-textarea::placeholder{color:var(--text3)}
 .editor-footer{padding:10px 16px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .live-badge{display:flex;align-items:center;gap:5px;font-size:10px;font-family:var(--mono);color:var(--green)}
-.live-badge::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%;animation:pulse 1.5s ease-in-out infinite}
+.live-badge::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%;animation:wcpulse 1.5s ease-in-out infinite}
+@keyframes wcpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
 .quick-stats{display:flex;gap:12px;flex-wrap:wrap}
 .qs{font-size:11px;font-family:var(--mono);color:var(--text3)}
 .qs strong{color:var(--text2)}
+
 /* STATS */
 .stats-panel{display:flex;flex-direction:column;gap:12px}
 .hero-count{background:var(--surface);border:1px solid var(--violet-bd);border-radius:var(--radius-lg);padding:24px 20px;text-align:center;position:relative;overflow:hidden}
@@ -163,21 +137,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.85);
 .hero-num.pop{animation:numPop .15s ease}
 @keyframes numPop{0%{transform:scale(1.07)}100%{transform:scale(1)}}
 .hero-sub{font-size:11px;font-family:var(--mono);color:var(--text3);margin-top:6px}
+.hero-report-btn{position:relative;margin-top:12px;display:inline-flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:11px;font-family:var(--mono);color:var(--text3);cursor:pointer;transition:all .15s}
+.hero-report-btn:hover{border-color:var(--violet-bd);color:var(--violet2)}
+.hero-report-btn svg{width:11px;height:11px}
 .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .stat-cell{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 13px;display:flex;flex-direction:column;gap:3px}
 .sc-label{font-size:10px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:.4px}
 .sc-value{font-size:18px;font-family:var(--mono);font-weight:500;color:var(--text);line-height:1.1}
 .sc-sub{font-size:10px;font-family:var(--mono);color:var(--text3)}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
-.card-hdr{display:flex;align-items:center;gap:6px;padding:11px 14px;border-bottom:1px solid var(--border);font-size:11px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:.4px}
-.card-hdr svg{width:12px;height:12px;color:var(--violet2);flex-shrink:0}
-.card-hdr .ml{margin-left:auto;cursor:pointer;font-size:10px;color:var(--violet2);background:none;border:none;transition:opacity .15s}
-.card-hdr .ml:hover{opacity:.7}
 .time-rows{padding:4px 0}
 .time-row{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-bottom:1px solid var(--border)}
 .time-row:last-child{border-bottom:none}
 .tr-lbl{font-size:12px;color:var(--text2)}
 .tr-val{font-size:13px;font-family:var(--mono);font-weight:500;color:var(--violet2)}
+
 /* GOAL */
 .goal-body{padding:14px;display:flex;flex-direction:column;gap:10px}
 .goal-input{background:var(--bg3);border:1.5px solid var(--border);border-radius:9px;padding:8px 12px;font-size:14px;font-family:var(--mono);color:var(--text);width:100%;outline:none;transition:border-color .2s;-moz-appearance:textfield}
@@ -186,6 +159,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.85);
 .progress-wrap{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
 .progress-fill{height:100%;border-radius:3px;transition:width .4s ease,background .4s}
 .progress-labels{display:flex;justify-content:space-between;font-size:10px;font-family:var(--mono);color:var(--text3)}
+
 /* LIMIT */
 .limit-presets{display:flex;flex-wrap:wrap;gap:5px;padding:12px 14px;border-bottom:1px solid var(--border)}
 .limit-btn{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:4px 9px;font-size:10px;font-family:var(--mono);color:var(--text3);cursor:pointer;transition:all .15s;white-space:nowrap}
@@ -198,6 +172,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.85);
 .lm-val.ok{color:var(--green)}
 .lm-bar-wrap{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden}
 .lm-bar{height:100%;border-radius:3px;transition:width .3s,background .3s}
+
 /* FREQUENCY */
 .freq-hdr{display:flex;align-items:center;gap:6px;padding:11px 14px;border-bottom:1px solid var(--border);font-size:11px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:.4px}
 .freq-hdr svg{width:12px;height:12px;color:var(--violet2)}
@@ -213,6 +188,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.85);
 .freq-bar-fill{height:100%;background:var(--violet);border-radius:2px;transition:width .4s ease}
 .freq-count{font-size:11px;font-family:var(--mono);color:var(--text3);min-width:22px;text-align:right}
 .freq-empty{padding:20px 16px;text-align:center;font-size:12px;font-family:var(--mono);color:var(--text3)}
+
 /* READABILITY */
 .read-body{padding:14px;display:flex;flex-direction:column;gap:10px}
 .grade-display{display:flex;align-items:center;justify-content:space-between;gap:8px}
@@ -222,70 +198,78 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,15,.85);
 .grade-desc{font-size:11px;font-family:var(--mono);color:var(--text3);margin-top:2px}
 .grade-bar-wrap{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
 .grade-bar{height:100%;border-radius:3px;transition:width .5s ease,background .5s}
+
 /* REF TABLE */
 .ref-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
 .ref-hdr{display:flex;align-items:center;gap:8px;padding:14px 20px;border-bottom:1px solid var(--border)}
-.ref-hdr svg{width:15px;height:15px;color:var(--accent)}
-.ref-hdr h3{font-size:13px;font-weight:600}
+.ref-hdr svg{width:15px;height:15px;color:var(--violet2)}
+.ref-hdr h3{font-size:13px;font-weight:600;color:var(--text)}
 .ref-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:12px;font-family:var(--mono)}
-th{color:var(--text3);font-weight:500;padding:8px 16px;text-align:left;border-bottom:1px solid var(--border);letter-spacing:.4px;text-transform:uppercase;font-size:11px;white-space:nowrap}
-td{padding:10px 16px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:middle}
-tr:last-child td{border-bottom:none}
-tr:hover td{background:var(--surface2)}
-td strong{color:var(--text)}
-.tag{display:inline-flex;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:500;white-space:nowrap}
-.t-s{background:rgba(139,92,246,.1);color:var(--violet2)}
-.t-b{background:rgba(79,142,255,.1);color:var(--accent)}
-.t-g{background:rgba(34,211,160,.1);color:var(--green)}
-/* FAQ */
-.faq-section{padding:60px max(24px,5vw) 80px;max-width:720px;margin:0 auto}
-.faq-section h2{font-size:clamp(20px,3vw,28px);font-weight:700;letter-spacing:-.7px;margin-bottom:28px}
-.faq-item{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden}
-.faq-q{padding:16px 20px;font-size:15px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;user-select:none;transition:background .2s}
-.faq-q:hover{background:var(--surface)}
-.faq-q svg{width:16px;height:16px;color:var(--text3);flex-shrink:0;transition:transform .3s}
-.faq-q.open svg{transform:rotate(180deg)}
-.faq-a{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .35s,padding .35s;font-size:14px;color:var(--text2);line-height:1.75}
-.faq-a.open{max-height:400px;padding:0 20px 16px}
+.wc-table{width:100%;border-collapse:collapse;font-size:12px;font-family:var(--mono)}
+.wc-table th{color:var(--text3);font-weight:500;padding:8px 16px;text-align:left;border-bottom:1px solid var(--border);letter-spacing:.4px;text-transform:uppercase;font-size:11px;white-space:nowrap}
+.wc-table td{padding:10px 16px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:middle}
+.wc-table tr:last-child td{border-bottom:none}
+.wc-table tr:hover td{background:var(--surface2)}
+.wc-table td strong{color:var(--text)}
+.wc-tag{display:inline-flex;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:500;white-space:nowrap}
+.wt-s{background:rgba(139,92,246,.1);color:var(--violet2)}
+.wt-b{background:rgba(79,142,255,.1);color:#4f8eff}
+.wt-g{background:rgba(34,211,160,.1);color:var(--green)}
+
 code{font-family:var(--mono);font-size:12px;background:var(--surface2);padding:1px 6px;border-radius:4px;color:var(--violet2)}
-footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
-.footer-left{font-size:12px;color:var(--text3);font-family:var(--mono)}
-.footer-left a{color:var(--text3);text-decoration:none}
-.footer-right{display:flex;gap:16px}
-.footer-right a{color:var(--text3);font-size:12px;text-decoration:none;font-family:var(--mono)}
+
+@media (max-width:640px){
+  .wc-table td,.wc-table th{padding:8px 10px}
+}
 </style>
-
-
 </head>
-
-
 <body>
-<!-- NAV -->
-<nav>
-  <a href="https://raiparuhang.com.np" class="nav-logo"><span class="dot"></span>Rai Paruhang</a>
-  <ul class="nav-links">
-    <li><a href="https://raiparuhang.com.np/#home">Home</a></li>
-    <li><a href="https://raiparuhang.com.np/#about">About</a></li>
-    <li><a href="https://raiparuhang.com.np/#contact">Contact</a></li>
-    <li><a href="https://raiparuhang.com.np/tools" class="nav-cta">All Tools</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="https://raiparuhang.com.np/#home" onclick="closeMobile()">Home</a>
-  <a href="https://raiparuhang.com.np/tools" class="active" onclick="closeMobile()">All Tools</a>
-  <a href="https://raiparuhang.com.np/#about" onclick="closeMobile()">About</a>
-  <a href="https://raiparuhang.com.np/#contact" onclick="closeMobile()">Contact</a>
-</div>
 
+<!-- NAV -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="/">
+      <span class="brand-mark">R</span>
+      <span>Raiparuhang</span>
+    </a>
+    <nav class="nav-links">
+      <a data-nav href="/">Home</a>
+      <a data-nav href="/tools">Tools</a>
+      <a data-nav href="/about">About</a>
+      <a data-nav href="/contact">Contact</a>
+    </nav>
+    <a class="nav-cta" href="/tools">Browse tools →</a>
+    <button class="nav-toggle" aria-label="Menu">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+  <div class="nav-mobile">
+    <a data-nav href="/">Home</a>
+    <a data-nav href="/tools">Tools</a>
+    <a data-nav href="/about">About</a>
+    <a data-nav href="/contact">Contact</a>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
 <div class="page-header">
-  <div class="page-badge">Live · Instant · Free</div>
+  <div class="page-badge">100% Client-Side · No Server Upload</div>
   <h1>Word <span>Counter</span></h1>
-  <p>Paste or type your text — get instant word count, characters, reading time, keyword density, and readability score as you write.</p>
+  <p>Paste or type your text — get instant word count, characters, reading time, keyword density, and readability score as you write. Your draft is recovered automatically if the tab closes by accident.</p>
 </div>
 
 <div class="tool-wrapper">
+
+  <!-- RESTORE BANNER -->
+  <div class="restore-banner" id="restoreBanner">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+    <span>We found <strong>an unsaved draft</strong> from your last visit.</span>
+    <div class="restore-actions">
+      <button class="restore-btn" onclick="restoreDraft()">Restore</button>
+      <button class="restore-btn ghost" onclick="discardDraft()">Discard</button>
+    </div>
+  </div>
+
   <div class="main-grid">
 
     <!-- LEFT COL -->
@@ -303,6 +287,14 @@ footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:fle
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
             Sample
           </button>
+          <button class="btn-xs" onclick="downloadTxt()">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download .txt
+          </button>
+          <button class="btn-xs" id="focusBtn" onclick="toggleFocus(this)">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+            Focus mode
+          </button>
           <div class="spacer"></div>
           <span class="char-counter" id="charCounter"></span>
           <button class="btn-xs warn" onclick="clearText()">
@@ -310,7 +302,7 @@ footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:fle
             Clear
           </button>
         </div>
-        <textarea class="editor-textarea" id="mainTA" placeholder="Start typing or paste your text here&#x2026;&#10;&#10;All stats update live — words, characters, sentences, reading time, keyword frequency, and readability." oninput="analyze()"></textarea>
+        <textarea class="editor-textarea" id="mainTA" aria-label="Text to analyze" placeholder="Start typing or paste your text here&#x2026;&#10;&#10;All stats update live — words, characters, sentences, reading time, keyword frequency, and readability." oninput="analyze()"></textarea>
         <div class="editor-footer">
           <div class="live-badge">Updating live</div>
           <div class="quick-stats">
@@ -323,7 +315,7 @@ footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:fle
       </div>
 
       <!-- FREQUENCY -->
-      <div class="card">
+      <div class="tool-card" id="freqCard">
         <div class="freq-hdr">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           Top Keywords
@@ -343,8 +335,12 @@ footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:fle
       <!-- HERO -->
       <div class="hero-count">
         <div class="hero-label">Words</div>
-        <div class="hero-num" id="heroNum">0</div>
+        <div class="hero-num" id="heroNum" aria-live="polite" aria-atomic="true">0</div>
         <div class="hero-sub" id="heroSub">Start typing to count</div>
+        <button class="hero-report-btn" onclick="copyReport()" id="reportBtn">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy stats report
+        </button>
       </div>
 
       <!-- GRID -->
@@ -358,8 +354,8 @@ footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:fle
       </div>
 
       <!-- TIME -->
-      <div class="card">
-        <div class="card-hdr">
+      <div class="tool-card">
+        <div class="tool-card-hdr">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           Time Estimates
         </div>
@@ -372,8 +368,8 @@ footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:fle
       </div>
 
       <!-- READABILITY -->
-      <div class="card">
-        <div class="card-hdr">
+      <div class="tool-card">
+        <div class="tool-card-hdr">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
           Readability
         </div>
@@ -387,8 +383,8 @@ footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:fle
       </div>
 
       <!-- WRITING GOAL -->
-      <div class="card">
-        <div class="card-hdr">
+      <div class="tool-card">
+        <div class="tool-card-hdr">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg>
           Writing Goal
           <button class="ml" onclick="toggleGoal()" id="goalToggle">Set goal</button>
@@ -401,14 +397,15 @@ footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:fle
       </div>
 
       <!-- CHARACTER LIMITS -->
-      <div class="card">
-        <div class="card-hdr">
+      <div class="tool-card">
+        <div class="tool-card-hdr">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           Character Limits
         </div>
         <div class="limit-presets">
           <button class="limit-btn on" onclick="setLim(0,this)">Off</button>
-          <button class="limit-btn" onclick="setLim(280,this)">Twitter (280)</button>
+          <button class="limit-btn" onclick="setLim(280,this)">Twitter/X (280)</button>
+          <button class="limit-btn" onclick="setLim(500,this)">Threads (500)</button>
           <button class="limit-btn" onclick="setLim(160,this)">SMS (160)</button>
           <button class="limit-btn" onclick="setLim(2200,this)">Instagram (2200)</button>
           <button class="limit-btn" onclick="setLim(3000,this)">LinkedIn (3000)</button>
@@ -432,70 +429,28 @@ footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:fle
       <h3>Word Count Guide by Content Type</h3>
     </div>
     <div class="ref-wrap">
-      <table>
+      <table class="wc-table">
         <thead><tr><th>Content Type</th><th>Typical Range</th><th>Reading Time</th><th>Category</th></tr></thead>
         <tbody>
-          <tr><td><strong>Tweet / X Post</strong></td><td>&#8804; 280 chars (~50 words)</td><td>&lt; 30 sec</td><td><span class="tag t-s">Social</span></td></tr>
-          <tr><td><strong>SMS Message</strong></td><td>&#8804; 160 chars</td><td>&lt; 15 sec</td><td><span class="tag t-s">Social</span></td></tr>
-          <tr><td><strong>Instagram Caption</strong></td><td>125–150 words optimal</td><td>~1 min</td><td><span class="tag t-s">Social</span></td></tr>
-          <tr><td><strong>Short Blog Post</strong></td><td>300–600 words</td><td>2–3 min</td><td><span class="tag t-b">Blog</span></td></tr>
-          <tr><td><strong>Standard Blog Post</strong></td><td>1,000–1,500 words</td><td>5–7 min</td><td><span class="tag t-b">Blog</span></td></tr>
-          <tr><td><strong>Long-form / Pillar Article</strong></td><td>2,000–4,000 words</td><td>10–20 min</td><td><span class="tag t-b">Blog</span></td></tr>
-          <tr><td><strong>Academic Essay</strong></td><td>1,500–5,000 words</td><td>8–25 min</td><td><span class="tag t-g">Academic</span></td></tr>
-          <tr><td><strong>Email Newsletter</strong></td><td>200–500 words</td><td>1–3 min</td><td><span class="tag t-b">Email</span></td></tr>
-          <tr><td><strong>Meta Description</strong></td><td>&#8804; 160 chars (~25 words)</td><td>&lt; 15 sec</td><td><span class="tag t-s">SEO</span></td></tr>
-          <tr><td><strong>Title Tag</strong></td><td>&#8804; 60 chars (~8–10 words)</td><td>&lt; 5 sec</td><td><span class="tag t-s">SEO</span></td></tr>
+          <tr><td><strong>Tweet / X Post</strong></td><td>&#8804; 280 chars (~50 words)</td><td>&lt; 30 sec</td><td><span class="wc-tag wt-s">Social</span></td></tr>
+          <tr><td><strong>SMS Message</strong></td><td>&#8804; 160 chars</td><td>&lt; 15 sec</td><td><span class="wc-tag wt-s">Social</span></td></tr>
+          <tr><td><strong>Instagram Caption</strong></td><td>125–150 words optimal</td><td>~1 min</td><td><span class="wc-tag wt-s">Social</span></td></tr>
+          <tr><td><strong>Short Blog Post</strong></td><td>300–600 words</td><td>2–3 min</td><td><span class="wc-tag wt-b">Blog</span></td></tr>
+          <tr><td><strong>Standard Blog Post</strong></td><td>1,000–1,500 words</td><td>5–7 min</td><td><span class="wc-tag wt-b">Blog</span></td></tr>
+          <tr><td><strong>Long-form / Pillar Article</strong></td><td>2,000–4,000 words</td><td>10–20 min</td><td><span class="wc-tag wt-b">Blog</span></td></tr>
+          <tr><td><strong>Academic Essay</strong></td><td>1,500–5,000 words</td><td>8–25 min</td><td><span class="wc-tag wt-g">Academic</span></td></tr>
+          <tr><td><strong>Email Newsletter</strong></td><td>200–500 words</td><td>1–3 min</td><td><span class="wc-tag wt-b">Email</span></td></tr>
+          <tr><td><strong>Meta Description</strong></td><td>&#8804; 160 chars (~25 words)</td><td>&lt; 15 sec</td><td><span class="wc-tag wt-s">SEO</span></td></tr>
+          <tr><td><strong>Title Tag</strong></td><td>&#8804; 60 chars (~8–10 words)</td><td>&lt; 5 sec</td><td><span class="wc-tag wt-s">SEO</span></td></tr>
         </tbody>
       </table>
     </div>
   </div>
+
 </div>
 
-<div class="faq-section">
-  <h2>Frequently Asked Questions</h2>
-  <div class="faq-item">
-    <div class="faq-q" onclick="faq(this)">How is reading time calculated?<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-    <div class="faq-a">Reading time uses <strong>200 words per minute</strong> — average adult silent reading speed for web content. Speaking time uses <strong>130 words per minute</strong> (natural speech). Typing time uses <strong>40 words per minute</strong> (average typist). These are population averages; your speed will vary.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="faq(this)">How does the readability score work?<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-    <div class="faq-a">Readability is estimated using average words per sentence — a reliable proxy for text complexity. Shorter sentences are easier to read. Under 10 words/sentence = Very Easy; 10–14 = Easy; 15–20 = Standard; 21–25 = Difficult; over 25 = Very Difficult. For most blogs, aim for 14–17 words per sentence.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="faq(this)">What are stopwords?<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-    <div class="faq-a">Stopwords are common grammatical filler words like <code>the</code>, <code>and</code>, <code>is</code>, <code>a</code> that appear in almost all texts. Filtering them in the keyword frequency view reveals the words that actually define your content's topic — more useful for SEO and content analysis.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="faq(this)">Is my text stored or sent to a server?<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-    <div class="faq-a">No. Everything runs entirely in your browser. No text, no data, and no analytics are ever sent to any server. The tool works completely offline after the page loads. Close the tab and it's gone.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="faq(this)">What is the ideal blog post length for SEO?<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-    <div class="faq-a">For competitive keywords, 1,500–3,000+ words tends to rank better because it covers topics more thoroughly and earns more backlinks. For low-competition or local keywords, 600–1,000 words is often enough. The key is matching depth to user intent — never pad for the sake of length alone.</div>
-  </div>
-</div>
-
-<section style="margin: 60px auto; max-width: 780px; padding: 0 20px;">
-  <h2 style="font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6b7280; margin-bottom: 16px;">
-    Also searched as
-  </h2>
-  <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">word counter no login</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">online word counter free no signup</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">character counter for twitter</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">word count checker for seo</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">word counter without uploading</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">wordcounter.net alternative</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">word counter with reading time</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">character counter no server</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">word count for blog post</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">private word counter browser only</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">word counter with keyword density</span>
-    <span style="display:inline-block; padding: 6px 14px; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 13px;">linkedin character counter free</span>
-  </div>
-</section>
 <!--related tools-->
-<section style="max-width:780px;margin:0 auto 60px;padding:0 20px;">
+<section style="max-width:780px;margin:0 auto 60px;padding:0 20px;" class="border-line">
   <h2 style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#556080;margin-bottom:16px;">Related Tools</h2>
   <div style="display:flex;flex-wrap:wrap;gap:12px;">
     <a href="https://raiparuhang.com.np/case-converter" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:#161d2e;border:1px solid rgba(99,140,255,.12);border-radius:12px;text-decoration:none;color:#e8edf8;font-size:13px;font-weight:600;flex:1;min-width:180px;">
@@ -515,33 +470,176 @@ footer{border-top:1px solid var(--border);padding:28px max(24px,5vw);display:fle
     </a>
   </div>
 </section>
-<!--footer-->
-<footer>
-  <div class="footer-left">© 2026 Rai Paruhang · <a href="https://raiparuhang.com.np/terms.html">Privacy &amp; Terms</a></div>
-  <div class="footer-right">
-    <a href="https://raiparuhang.com.np/tools">All Tools</a>
-    <a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter/X</a>
-    <a href="https://www.linkedin.com/in/paruhang-rai/" target="_blank" rel="noopener">Linkedin</a>
+
+<!--how to section-->
+<section style="max-width: 780px; margin: 3rem auto; padding: 0 1.25rem; font-family: system-ui, -apple-system, sans-serif; line-height: 1.7;" class="border-line">
+
+  <h2 style="font-size: 1.6rem; font-weight: 600; margin: 0 0 0.5rem;">How to use the word counter</h2>
+  <p style="font-size: 1rem; color: var(--ink-60); margin: 0 0 2rem;">
+    Every stat updates as you type — no button to press, nothing to upload. Here's how to get the most out of it.
+  </p>
+
+  <ol style="padding: 0; margin: 0 0 2.5rem; list-style: none; display: flex; flex-direction: column; gap: 1rem;">
+    <li style="display: flex; gap: 1rem; align-items: flex-start; background: #f8f8f6; border-radius: 10px; padding: 1rem 1.25rem;">
+      <span style="min-width: 32px; height: 32px; background: #1a1a1a; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 600;">1</span>
+      <div>
+        <p style="font-weight: 600; margin: 0 0 0.25rem;">Type, paste, or restore a draft</p>
+        <p style="margin: 0; color: #555; font-size: 0.95rem;">Start typing directly, click <em>Paste</em> to grab from your clipboard, or click <em>Sample</em> to load example text. If you had unsaved text from a previous visit, a banner at the top offers to restore it automatically.</p>
+      </div>
+    </li>
+    <li style="display: flex; gap: 1rem; align-items: flex-start; background: #f8f8f6; border-radius: 10px; padding: 1rem 1.25rem;">
+      <span style="min-width: 32px; height: 32px; background: #1a1a1a; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 600;">2</span>
+      <div>
+        <p style="font-weight: 600; margin: 0 0 0.25rem;">Read the stats panel as you write</p>
+        <p style="margin: 0; color: #555; font-size: 0.95rem;">Word count, characters, sentences, paragraphs, unique words, reading/speaking/typing time, readability, and top keywords all update live. Click <em>Copy stats report</em> to grab a plain-text summary for a client, editor, or teammate.</p>
+      </div>
+    </li>
+    <li style="display: flex; gap: 1rem; align-items: flex-start; background: #f8f8f6; border-radius: 10px; padding: 1rem 1.25rem;">
+      <span style="min-width: 32px; height: 32px; background: #1a1a1a; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 600;">3</span>
+      <div>
+        <p style="font-weight: 600; margin: 0 0 0.25rem;">Set a target, or check a platform limit</p>
+        <p style="margin: 0; color: #555; font-size: 0.95rem;">Use <em>Writing Goal</em> to track progress toward a target word count, or pick a platform under <em>Character Limits</em> — Twitter/X, Threads, SMS, Instagram, LinkedIn, meta description, or title tag — to see exactly how much room is left as you type. Use <em>Focus mode</em> to hide the side panel and write distraction-free.</p>
+      </div>
+    </li>
+  </ol>
+
+  <div style="display: flex; flex-direction: column; gap: 2rem;">
+
+    <div>
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">How is reading time calculated?</h3>
+      <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
+        Reading time uses <strong>200 words per minute</strong> — the average adult silent reading speed for web content. Speaking time uses <strong>130 words per minute</strong> (natural speech), and typing time uses <strong>40 words per minute</strong> (average typist). These are population averages; your own speed will vary.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">How does the readability score work?</h3>
+      <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
+        Readability is estimated from average words per sentence — a reliable proxy for text complexity. Shorter sentences are easier to read. Under 10 words/sentence is <strong>Very Easy</strong>; 10–14 is <strong>Easy</strong>; 15–20 is <strong>Standard</strong>; 21–25 is <strong>Difficult</strong>; over 25 is <strong>Very Difficult</strong>. For most blogs, aim for 14–17 words per sentence.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">What are stopwords?</h3>
+      <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
+        Stopwords are common grammatical filler words like <code>the</code>, <code>and</code>, <code>is</code>, <code>a</code> that appear in almost all texts. Switching the Top Keywords card to "No stopwords" reveals the words that actually define your content's topic — more useful for SEO and content analysis.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">Is my text stored or sent to a server?</h3>
+      <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
+        No text is ever sent to a server — everything runs in your browser. The only storage involved is a local, on-device draft saved in your browser (not on any server) so you don't lose work if the tab closes accidentally; you can discard it at any time from the restore banner or by clearing the text.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">What is the ideal blog post length for SEO?</h3>
+      <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
+        For competitive keywords, 1,500–3,000+ words tends to rank better because it covers topics more thoroughly and earns more backlinks. For low-competition or local keywords, 600–1,000 words is often enough. The key is matching depth to user intent — never pad for the sake of length alone.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- BUG REPORTS -->
+<section class="bug-section">
+  <div class="bug-section-head">
+    <span class="bug-section-title">Bug Reports</span>
+    <span class="bug-count"></span>
+  </div>
+  <div class="bug-list">
+    <!-- COPY THE CARD FORMAT BELOW WHEN A BUG IS REPORTED, OR REMOVE THIS PLACEHOLDER -->
+    <div class="bug-empty">No bugs reported yet — looking good.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <a class="brand" href="/">
+        <span class="brand-mark">R</span>
+        <span>Raiparuhang</span>
+      </a>
+      <p style="color:var(--ink-60); margin-top:.85rem; max-width:340px">A small archive of private, in-browser tools — built and maintained by one person.</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="/tools">All tools</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Elsewhere</h4>
+      <ul>
+        <li><a href="https://raiparuhang.com.np" target="_blank" rel="noopener">raiparuhang.com.np ↗</a></li>
+        <li><a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter/X</a></li>
+        <li><a href="https://www.linkedin.com/in/paruhang-rai/" target="_blank" rel="noopener">Linkedin</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 Raiparuhang</span>
+    <span class="mono">Built static · HTML · CSS · JS</span>
+    <span class="mono"><a href="https://raiparuhang.com.np/terms">Privacy &amp; Terms</a></span>
   </div>
 </footer>
 
-<script>
-document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
-function closeMobile(){document.getElementById('mobileMenu').classList.remove('open')}
+<!-- Bug Report Button -->
+<a class="bug-btn" href="https://raiparuhang.com.np/contact" target="_blank" rel="noopener" aria-label="Report a bug">
+  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 2l1.5 1.5M16 2l-1.5 1.5M9 9h6M9 13h6M12 17v2M6.5 7.5A5.5 5.5 0 0 1 17.5 7.5M4 10h2M18 10h2M5 17l2-2M19 17l-2-2"/>
+  </svg>
+  <span class="bug-tip">Report a bug</span>
+</a>
 
+<script src="assets/js/nav.js"></script>
+<script>
 const SW=new Set(['the','a','an','and','or','but','in','on','at','to','for','of','is','it','its','this','that','are','was','were','be','been','being','have','has','had','do','does','did','will','would','could','should','may','might','shall','can','not','no','so','as','if','then','than','when','what','where','who','which','how','i','you','he','she','we','they','me','him','her','us','them','my','your','his','our','their','with','from','by','about','into','through','after','before','up','down','out','off','over','under','again','once','here','there','all','any','both','each','few','more','most','other','some','such','own','same','just','because','while','also','very','too','much','many','only','even','well','still','now','get','got','said','like','see','know','make','come','go','take','want','give','use','look','find','think','tell','work','seem','feel','try','ask','keep','let','put']);
 
-let fm='all', charLim=0, goalOn=false, prevW=0;
+let fm='all', charLim=0, goalOn=false, prevW=0, saveTimer=null;
+const DRAFT_KEY='wc_draft_v1';
+
+// ---- SHARED TEXT HELPERS (centralised so every stat uses the same tokenisation) ----
+function getWords(text){
+  return text.trim() ? text.trim().split(/\s+/).filter(Boolean) : [];
+}
+function cleanWord(w){
+  return w.toLowerCase().replace(/[^a-z0-9]/gi,'');
+}
+function countSentences(text){
+  const t=text.trim();
+  if(!t) return 0;
+  const matches=t.match(/[^.!?…]+[.!?…]+/g)||[];
+  let count=matches.length;
+  const consumed=matches.join('').length;
+  // catches a trailing fragment with no terminal punctuation, e.g. "Hello. World" -> 2, not 1
+  if(t.length>consumed && t.slice(consumed).trim().length>0) count+=1;
+  return count||1;
+}
+function longestWord(words){
+  let longest='';
+  for(const w of words){
+    const c=cleanWord(w);
+    if(c.length>longest.length) longest=c;
+  }
+  return longest||'—';
+}
 
 function analyze(){
   const text=document.getElementById('mainTA').value;
-  const words=text.trim()?text.trim().split(/\s+/).filter(w=>w.length>0):[];
+  const words=getWords(text);
   const wc=words.length;
   const ch=text.length;
   const chN=text.replace(/\s/g,'').length;
-  const sents=text.trim()?(text.match(/[^.!?…]+[.!?…]+/g)||[text.trim()]).filter(s=>s.trim()).length:0;
+  const sents=countSentences(text);
   const paras=text.trim()?text.split(/\n\s*\n/).filter(p=>p.trim()).length:0;
-  const unique=new Set(words.map(w=>w.toLowerCase().replace(/[^a-z0-9]/gi,''))).size;
+  const unique=new Set(words.map(cleanWord).filter(Boolean)).size;
   const avgSL=sents>0?(wc/sents).toFixed(1):0;
 
   const h=document.getElementById('heroNum');
@@ -567,8 +665,7 @@ function analyze(){
   document.getElementById('tRd').textContent=wc?fmtT(wc/200):'—';
   document.getElementById('tSp').textContent=wc?fmtT(wc/130):'—';
   document.getElementById('tTy').textContent=wc?fmtT(wc/40):'—';
-  const lw=words.map(w=>w.replace(/[^a-z0-9]/gi,'')).filter(Boolean).sort((a,b)=>b.length-a.length)[0]||'—';
-  document.getElementById('tLw').textContent=lw;
+  document.getElementById('tLw').textContent=wc?longestWord(words):'—';
 
   updateReadability(parseFloat(avgSL),wc);
   buildFreq(words);
@@ -578,6 +675,8 @@ function analyze(){
   const cc=document.getElementById('charCounter');
   if(charLim>0){const rem=charLim-ch;cc.textContent=rem>=0?`${rem} left`:`${-rem} over`;cc.className='char-counter'+(rem<0?' over':rem<charLim*.15?' warn':'');}
   else{cc.textContent=ch?`${ch.toLocaleString()} chars`:'';cc.className='char-counter';}
+
+  scheduleSave(text);
 }
 
 function fmtT(m){
@@ -621,7 +720,7 @@ function setFM(mode,btn){
   fm=mode;
   document.querySelectorAll('.ftab').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
-  buildFreq(document.getElementById('mainTA').value.trim().split(/\s+/).filter(Boolean));
+  buildFreq(getWords(document.getElementById('mainTA').value));
 }
 
 function toggleGoal(){
@@ -630,7 +729,7 @@ function toggleGoal(){
   if(goalOn) document.getElementById('goalBody').style.flexDirection='column';
   document.getElementById('goalToggle').textContent=goalOn?'Hide':'Set goal';
 }
-function updateGoal(){const wc=document.getElementById('mainTA').value.trim().split(/\s+/).filter(Boolean).length;updateGoalDisplay(wc)}
+function updateGoal(){updateGoalDisplay(getWords(document.getElementById('mainTA').value).length)}
 function updateGoalDisplay(wc){
   const t=parseInt(document.getElementById('goalIn').value)||0;
   if(!t) return;
@@ -667,13 +766,131 @@ function updateLimDisplay(ch){
   le.className='lm-val'+(over?' over':' ok');
 }
 
-async function pasteText(){try{const t=await navigator.clipboard.readText();document.getElementById('mainTA').value=t;analyze()}catch(_){document.getElementById('mainTA').focus()}}
-function clearText(){document.getElementById('mainTA').value='';analyze()}
+// ---- CLIPBOARD / SAMPLE / CLEAR (with confirm guard against accidental data loss) ----
+async function pasteText(){
+  try{
+    const t=await navigator.clipboard.readText();
+    document.getElementById('mainTA').value=t;
+    analyze();
+  }catch(_){
+    const ta=document.getElementById('mainTA');
+    ta.focus();
+    flashCharCounter('Clipboard access blocked — press Ctrl/Cmd+V to paste manually');
+  }
+}
+function hasMeaningfulText(){
+  return document.getElementById('mainTA').value.trim().length>20;
+}
+function clearText(){
+  if(hasMeaningfulText() && !confirm('Clear all text? This cannot be undone.')) return;
+  document.getElementById('mainTA').value='';
+  analyze();
+  discardDraft();
+}
 function loadSample(){
+  if(hasMeaningfulText() && !confirm('Replace your current text with the sample? Your current text will be lost.')) return;
   document.getElementById('mainTA').value=`The Art of Writing Well\n\nGood writing is not about using big words or complex sentences. It is about being clear. A well-written paragraph says exactly what it means, in as few words as necessary, without losing any meaning in the process.\n\nMany writers make the mistake of padding their work — adding words that sound important but contribute nothing. This habit often comes from insecurity: the fear that short, direct writing will seem too simple or not serious enough.\n\nIn reality, the opposite is true. The best writers are ruthlessly clear. They strip away everything that does not serve the reader. They know that the reader's time is precious, and they respect it.\n\nIf you want to improve your writing, start by cutting. Cut adverbs. Cut passive voice. Cut any sentence that says what the previous sentence already said. What remains is usually much stronger.\n\nPractice is the only path forward. Write every day, read widely, and revise without mercy. Over time, the gap between what you mean to say and what you actually write will close.`;
   analyze();
 }
-function faq(el){el.classList.toggle('open');el.nextElementSibling.classList.toggle('open')}
+function flashCharCounter(msg){
+  const cc=document.getElementById('charCounter');
+  const original=cc.textContent, originalClass=cc.className;
+  cc.textContent=msg; cc.className='char-counter warn';
+  setTimeout(()=>{cc.textContent=original;cc.className=originalClass;},3000);
+}
+
+// ---- FOCUS MODE ----
+function toggleFocus(btn){
+  const active=document.body.classList.toggle('focus-mode');
+  btn.classList.toggle('on',active);
+  btn.lastChild.textContent=active?' Exit focus':' Focus mode';
+}
+
+// ---- DOWNLOAD ----
+function downloadTxt(){
+  const text=document.getElementById('mainTA').value;
+  if(!text.trim()){ flashCharCounter('Nothing to download yet'); return; }
+  const blob=new Blob([text],{type:'text/plain;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download='word-counter-text.txt';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ---- COPY STATS REPORT ----
+function buildReportText(){
+  const g=id=>document.getElementById(id).textContent;
+  return [
+    'Word Count Report',
+    '------------------',
+    `Words: ${g('heroNum')}`,
+    `Characters: ${g('sC')} (${g('sCN')} without spaces)`,
+    `Sentences: ${g('sSe')}`,
+    `Paragraphs: ${g('sPa')}`,
+    `Unique words: ${g('sU')}`,
+    `Reading time: ${g('tRd')}`,
+    `Speaking time: ${g('tSp')}`,
+    `Typing time: ${g('tTy')}`,
+    `Readability: ${g('gLbl')}`,
+    '',
+    'Generated with raiparuhang.com.np/word-counter'
+  ].join('\n');
+}
+function copyReport(){
+  if(!getWords(document.getElementById('mainTA').value).length) return;
+  const report=buildReportText();
+  const btn=document.getElementById('reportBtn');
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(report).then(()=>{
+      const original=btn.innerHTML;
+      btn.innerHTML='<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied';
+      setTimeout(()=>{btn.innerHTML=original;},1500);
+    });
+  }
+}
+
+// ---- LOCAL DRAFT AUTO-RECOVERY ----
+function scheduleSave(text){
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(()=>{
+    try{
+      if(text.trim()) localStorage.setItem(DRAFT_KEY,text);
+      else localStorage.removeItem(DRAFT_KEY);
+    }catch(e){ /* storage unavailable (private mode etc.) — fail silently */ }
+  },500);
+}
+function checkForDraft(){
+  let saved=null;
+  try{ saved=localStorage.getItem(DRAFT_KEY); }catch(e){}
+  const currentText=document.getElementById('mainTA').value;
+  if(saved && saved.trim() && saved!==currentText){
+    document.getElementById('restoreBanner').classList.add('show');
+  }
+}
+function restoreDraft(){
+  let saved=null;
+  try{ saved=localStorage.getItem(DRAFT_KEY); }catch(e){}
+  if(saved){
+    document.getElementById('mainTA').value=saved;
+    analyze();
+  }
+  document.getElementById('restoreBanner').classList.remove('show');
+}
+function discardDraft(){
+  try{ localStorage.removeItem(DRAFT_KEY); }catch(e){}
+  document.getElementById('restoreBanner').classList.remove('show');
+}
+
+// ---- WARN BEFORE LEAVING WITH UNSAVED WORK ----
+window.addEventListener('beforeunload',e=>{
+  if(hasMeaningfulText()){
+    e.preventDefault();
+    e.returnValue='';
+  }
+});
+
+checkForDraft();
 analyze();
 </script>
 </body>
