@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Free PDF Merger — Merge PDFs Online Without Uploading Them</title>
-<meta name="description" content="Combine multiple PDFs into one — instantly, for free. Your files never leave your browser: no upload, no server, no sign up. 100% private PDF merging.">
+<meta name="description" content="Combine multiple PDFs into one — instantly, for free. Reorder, rotate, and select page ranges per file. Handles password-protected PDFs gracefully. Your files never leave your browser: no upload, no server, no sign up.">
 <link rel="alternate" hreflang="en" href="https://raiparuhang.com.np/pdf-merger">
 <link rel="alternate" hreflang="x-default" href="https://raiparuhang.com.np/pdf-merger">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -16,11 +16,9 @@
 <link rel="canonical" href="https://raiparuhang.com.np/pdf-merger">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 
 <script type="application/ld+json">
 {
@@ -28,7 +26,7 @@
   "@type": "SoftwareApplication",
   "name": "PDF Merger",
   "url": "https://raiparuhang.com.np/pdf-merger",
-  "description": "Combine multiple PDF files into one clean merged document in a single click. All processing happens in your browser — no uploads, no data sharing, completely free.",
+  "description": "Combine multiple PDF files into one clean merged document. Reorder files by dragging anywhere on the card, rotate individual files, select a custom page range or odd/even pages per file, add bookmarks, and pad odd-page files automatically. Gracefully skips files that fail to load — including most password-protected PDFs — instead of aborting the whole merge. All processing happens in your browser — no uploads, no data sharing, completely free.",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Web",
   "browserRequirements": "Requires a modern web browser with JavaScript enabled",
@@ -39,7 +37,16 @@
   },
   "featureList": [
     "Merge multiple PDFs into one",
-    "Drag and drop reordering",
+    "Reorder files by dragging anywhere on the card, or with up/down buttons on mobile",
+    "Rotate individual files 90/180/270 degrees before merging",
+    "Custom page range or odd/even pages per file",
+    "Live running total of pages and file size as you build the merge",
+    "Duplicate file warning",
+    "Inline validation for page range input",
+    "Auto-generated bookmarks per source file",
+    "Automatic blank-page padding for odd-numbered files",
+    "Cancel a merge in progress",
+    "Skips unreadable or password-protected files instead of failing the whole merge",
     "No file upload required",
     "100% client-side processing",
     "Free forever"
@@ -56,13 +63,13 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --surface: #161d2e; --surface2: #1e2840;
+  --surface: #161d2e; --surface2: #1e2840; --bg3: #111827;
   --border: rgba(99,140,255,0.12); --border2: rgba(99,140,255,0.22);
   --green: #0cbb89; --green-bg: rgba(34,211,160,0.1);
   --red: #ff5b5b; --red-bg: rgba(255,91,91,0.1);
   --amber: #f5a623; --amber-bg: rgba(245,166,35,0.08);
   --text: #e8edf8; --text2: #8b99bb; --text3: #556080;
-  --mono: 'DM Mono', monospace; --sans: 'Sora', sans-serif;
+  --mono: 'JetBrains Mono', monospace; --sans: 'Sora', sans-serif;
   --radius: 14px; --radius-lg: 20px;
 }
 html { scroll-behavior: smooth; }
@@ -77,6 +84,12 @@ html { scroll-behavior: smooth; }
 /* ---- TOOL WRAPPER ---- */
 .tool-wrapper { max-width: 960px; margin: 0 auto; padding: 0 max(24px,5vw) 80px; display: flex; flex-direction: column; gap: 20px; }
 
+/* ---- LIBRARY LOAD ERROR ---- */
+.lib-error { display: none; align-items: center; gap: 10px; background: var(--red-bg); border: 1px solid rgba(255,91,91,.3); border-radius: 12px; padding: 14px 16px; font-size: 13px; color: var(--text2); }
+.lib-error.show { display: flex; }
+.lib-error svg { width: 18px; height: 18px; color: var(--red); flex-shrink: 0; }
+.lib-error strong { color: var(--text); }
+
 /* ---- SECURITY STRIP ---- */
 .security-strip { display: flex; align-items: center; gap: 8px; justify-content: center; padding: 14px; background: var(--green-bg); border: 1px solid rgba(7, 194, 141, 0.822); border-radius: 12px; font-size: 12px; font-family: var(--mono); color: var(--green); letter-spacing: .3px; flex-wrap: wrap; text-align: center; }
 .security-strip svg { width: 16px; height: 16px; flex-shrink: 0; }
@@ -84,7 +97,10 @@ html { scroll-behavior: smooth; }
 /* ---- UPLOAD ZONE ---- */
 .upload-zone { border: 2px dashed var(--border2); border-radius: var(--radius-lg); background: var(--surface); padding: 44px 24px; text-align: center; cursor: pointer; transition: all .3s; }
 .upload-zone.dragover { border-color: var(--accent); background: rgba(79,142,255,.06); transform: scale(1.005); }
-.upload-zone:hover { background: var(--surface2); border-color: var(--border2); }
+.upload-zone:hover, .upload-zone:focus-visible { background: var(--surface2); border-color: var(--border2); }
+.upload-zone:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.upload-hint-mobile { display: none; }
+@media (max-width: 600px) { .upload-hint-desktop { display: none; } .upload-hint-mobile { display: block; color: var(--text2); font-size: 14px; margin-bottom: 20px; } }
 .upload-icon { width: 56px; height: 56px; margin: 0 auto 16px; background: rgba(79,142,255,.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; }
 .upload-icon svg { width: 26px; height: 26px; color: var(--accent); }
 .upload-zone h3 { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
@@ -100,8 +116,15 @@ html { scroll-behavior: smooth; }
 .files-section.show { display: flex; }
 .list-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
 .list-header-left { display: flex; align-items: center; gap: 10px; }
+.list-summary { font-size: 12px; font-family: var(--mono); color: var(--text3); }
 .list-header h3 { font-size: 14px; font-weight: 600; color: var(--text2); }
 .list-header-right { display: flex; gap: 8px; flex-wrap: wrap; }
+.dup-warning { display: none; align-items: center; gap: 8px; padding: 10px 14px; background: var(--red-bg); border: 1px solid rgba(255,91,91,.25); border-radius: 10px; font-size: 12px; color: var(--text2); }
+.dup-warning.show { display: flex; }
+.dup-warning svg { color: var(--red); flex-shrink: 0; }
+.dup-warning span { flex: 1; }
+.dup-dismiss { background: none; border: none; color: var(--text3); cursor: pointer; padding: 2px; flex-shrink: 0; }
+.dup-dismiss:hover { color: var(--text); }
 .btn-sm { display: inline-flex; align-items: center; gap: 6px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 7px 13px; font-size: 12px; font-family: var(--mono); color: var(--text2); cursor: pointer; transition: all .2s; white-space: nowrap; }
 .btn-sm:hover { border-color: var(--border2); color: var(--text); background: var(--surface2); }
 .btn-sm.danger:hover { border-color: rgba(255,91,91,.4); color: var(--red); background: var(--red-bg); }
@@ -113,24 +136,29 @@ html { scroll-behavior: smooth; }
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 14px 16px;
   display: flex; align-items: center; gap: 12px;
-  cursor: grab; transition: all .2s; position: relative; user-select: none;
+  transition: all .2s; position: relative; cursor: grab; user-select: none;
 }
 .pdf-card:active { cursor: grabbing; }
 .pdf-card.dragging { opacity: .45; border-style: dashed; }
 .pdf-card.drag-over { border-color: var(--accent); background: rgba(79,142,255,.05); box-shadow: 0 0 0 2px rgba(79,142,255,.2); }
 .pdf-card:hover { border-color: var(--border2); }
 
-.drag-handle { display: flex; flex-direction: column; gap: 3.5px; flex-shrink: 0; opacity: .35; cursor: grab; padding: 4px 2px; }
+/* The whole card is now a drag target (mousedown delegation excludes interactive
+   controls — see JS), but inputs/buttons keep their own natural cursor via normal
+   CSS specificity/UA defaults, so this doesn't fight typing or clicking them. */
+.pdf-card input, .pdf-card button, .pdf-card select { cursor: auto; user-select: text; }
+.pdf-card button { cursor: pointer; }
+.drag-handle { display: flex; flex-direction: column; gap: 3.5px; flex-shrink: 0; opacity: .35; padding: 4px 2px; }
 .drag-handle span { width: 14px; height: 2px; background: var(--text2); border-radius: 1px; display: block; }
 
 /* thumbnail */
-.pdf-thumb-wrap { width: 44px; height: 58px; border-radius: 8px; overflow: hidden; background: var(--bg3); flex-shrink: 0; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
+.pdf-thumb-wrap { width: 44px; height: 58px; border-radius: 8px; overflow: hidden; background: var(--bg3); flex-shrink: 0; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; transition: transform .25s ease; }
 .pdf-thumb-wrap canvas { width: 44px !important; height: 58px !important; object-fit: cover; display: block; }
 .pdf-thumb-wrap .thumb-placeholder { color: var(--text3); }
 .pdf-thumb-wrap .thumb-placeholder svg { width: 20px; height: 20px; }
 
 .pdf-card-info { flex: 1; min-width: 0; }
-.pdf-card-name { font-size: 14px; font-weight: 600; white-space: nowrap; color: var(--muted); overflow: hidden; text-overflow: ellipsis; }
+.pdf-card-name { font-size: 14px; font-weight: 600; white-space: nowrap; color: var(--text); overflow: hidden; text-overflow: ellipsis; }
 .pdf-card-meta { font-size: 12px; color: var(--text3); font-family: var(--mono); margin-top: 3px; display: flex; gap: 10px; flex-wrap: wrap; }
 .meta-tag { display: inline-flex; align-items: center; gap: 4px; }
 
@@ -142,19 +170,24 @@ html { scroll-behavior: smooth; }
 }
 .page-range-input:focus { border-color: var(--accent); color: var(--text); }
 .page-range-input::placeholder { color: var(--text3); }
+.page-range-input.invalid { border-color: var(--red); background: var(--red-bg); }
+.page-range-input.invalid:focus { border-color: var(--red); }
 
 .order-badge { font-family: var(--mono); font-size: 11px; color: var(--text3); min-width: 22px; text-align: center; flex-shrink: 0; }
 
 .pdf-card-actions { display: flex; gap: 6px; flex-shrink: 0; }
 .icon-btn { width: 32px; height: 32px; border-radius: 8px; background: var(--surface2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .2s; color: var(--text2); flex-shrink: 0; }
+.icon-btn.rotate.active-rotate { background: var(--green-bg); border-color: rgba(34,211,160,.3); color: var(--green); }
 .icon-btn svg { width: 14px; height: 14px; }
 .icon-btn:hover { background: var(--bg3); color: var(--text); }
+.icon-btn:disabled { opacity: .3; cursor: not-allowed; }
+.icon-btn:disabled:hover { background: var(--surface2); color: var(--text2); }
 .icon-btn.del:hover { background: var(--red-bg); border-color: rgba(255,91,91,.3); color: var(--red); }
 .icon-btn.preview:hover { background: rgba(79,142,255,.1); border-color: rgba(79,142,255,.3); color: var(--accent); }
 
 /* ---- SETTINGS ---- */
 .settings-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
-.settings-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; color: var(--muted); border-bottom: 1px solid var(--border); cursor: pointer; user-select: none; }
+.settings-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; color: var(--text); border-bottom: 1px solid var(--border); cursor: pointer; user-select: none; }
 .settings-header-left { display: flex; align-items: center; gap: 10px; }
 .settings-header h3 { font-size: 14px; font-weight: 600; }
 .settings-header span { font-family: var(--mono); font-size: 11px; color: var(--text3); }
@@ -165,18 +198,19 @@ html { scroll-behavior: smooth; }
 .settings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%,210px),1fr)); gap: 16px; }
 .setting-group { display: flex; flex-direction: column; gap: 8px; }
 .setting-group label { font-size: 12px; color: var(--text2); font-family: var(--mono); letter-spacing: .4px; text-transform: uppercase; }
-.setting-group select, .setting-group input[type=text] { background: var(--ink); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; font-size: 14px; font-family: var(--sans); color: var(--text); width: 100%; outline: none; transition: border-color .2s, box-shadow .2s; -webkit-appearance: none; appearance: none; }
+.setting-group select, .setting-group input[type=text] { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; font-size: 14px; font-family: var(--sans); color: var(--text); width: 100%; outline: none; transition: border-color .2s, box-shadow .2s; -webkit-appearance: none; appearance: none; }
 .setting-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b99bb' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
 .setting-group select:focus, .setting-group input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(79,142,255,.15); }
 .setting-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
 .setting-row:last-child { border-bottom: none; }
-.setting-row-label { display: flex; flex-direction: column; gap: 3px; color: var(--muted-2);}
+.setting-row-label { display: flex; flex-direction: column; gap: 3px; color: var(--text2);}
 .setting-row-label span:first-child { font-size: 14px; font-weight: 500; }
 .setting-row-label span:last-child { font-size: 12px; color: var(--text3); }
-.toggle { width: 42px; height: 24px; background: var(--bg3); border-radius: 100px; border: 1px solid var(--border); cursor: pointer; position: relative; transition: all .2s; flex-shrink: 0; }
+.toggle { width: 42px; height: 24px; background: var(--bg3); border-radius: 100px; border: 1px solid var(--border); cursor: pointer; position: relative; transition: all .2s; flex-shrink: 0; padding: 0; font: inherit; }
 .toggle.active { background: var(--accent); border-color: var(--accent); }
 .toggle::after { content:''; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; background: var(--text3); border-radius: 50%; transition: all .2s; }
 .toggle.active::after { left: 19px; background: #fff; }
+.toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* ---- MERGE BUTTON ---- */
 .merge-section { display: flex; flex-direction: column; gap: 14px; }
@@ -187,6 +221,11 @@ html { scroll-behavior: smooth; }
 .btn-merge:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(79,142,255,.35); }
 .btn-merge:disabled { opacity: .4; cursor: not-allowed; transform: none; }
 .btn-merge svg { width: 20px; height: 20px; }
+.merge-btn-row { display: flex; gap: 10px; }
+.btn-cancel-merge { display: none; background: var(--bg3); color: var(--text2); border: 1px solid var(--border2); border-radius: 12px; padding: 16px 20px; font-size: 14px; font-weight: 600; font-family: var(--sans); cursor: pointer; transition: all .2s; }
+.btn-cancel-merge.show { display: block; }
+.btn-cancel-merge:hover { border-color: rgba(255,91,91,.4); color: var(--red); }
+@media (max-width: 480px) { .merge-btn-row { flex-direction: column; } }
 
 /* ---- RESULT CARD ---- */
 .result-card { background: var(--green-bg); border: 1px solid rgba(34,211,160,.25); border-radius: var(--radius-lg); padding: 24px; display: none; flex-direction: column; gap: 16px; }
@@ -221,18 +260,6 @@ html { scroll-behavior: smooth; }
 .lb-nav-btn svg { width: 15px; height: 15px; }
 .lb-counter { font-family: var(--mono); font-size: 13px; color: var(--text2); min-width: 80px; text-align: center; }
 
-/* ---- FAQ ---- */
-.faq-section { padding: 60px max(24px,5vw) 80px; max-width: 720px; margin: 0 auto; }
-.faq-section h2 { font-size: clamp(20px,3vw,28px); font-weight: 700; letter-spacing: -.7px; margin-bottom: 28px; }
-.faq-item { border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 10px; overflow: hidden; }
-.faq-q { padding: 16px 20px; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; user-select: none; transition: background .2s; }
-.faq-q:hover { background: var(--muted-2); }
-.faq-q svg { width: 16px; height: 16px; color: var(--text3); flex-shrink: 0; transition: transform .3s; }
-.faq-q.open svg { transform: rotate(180deg); }
-.faq-a { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height .3s, padding .3s; font-size: 14px; color: var(--ink-60); line-height: 1.7; }
-.faq-a.open { max-height: 200px; padding: 0 20px 16px; }
-
-
 /* ---- RESPONSIVE ---- */
 @media (max-width: 640px) {
   .settings-grid { grid-template-columns: 1fr; }
@@ -243,10 +270,14 @@ html { scroll-behavior: smooth; }
   .list-header { flex-direction: column; align-items: flex-start; }
 }
 @media (max-width: 480px) {
-  .pdf-card { gap: 8px; }
+  .pdf-card { flex-wrap: wrap; gap: 8px; row-gap: 10px; }
+  .drag-handle { display: none; } /* redundant on mobile now that ↑↓ buttons handle reordering, and frees up space */
   .pdf-thumb-wrap { width: 36px; height: 48px; }
-  .icon-btn { width: 28px; height: 28px; }
+  .icon-btn { width: 30px; height: 30px; }
   .icon-btn svg { width: 12px; height: 12px; }
+  .pdf-card-info { flex-basis: 100%; order: 3; }
+  .page-range-input { flex-basis: 100%; width: auto; order: 4; }
+  .pdf-card-actions { flex-basis: 100%; justify-content: flex-end; order: 5; }
 }
 
 </style>
@@ -289,13 +320,18 @@ html { scroll-behavior: smooth; }
 <!-- TOOL -->
 <div class="tool-wrapper">
 
+  <div class="lib-error" id="libError">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <span><strong>Couldn't load a required library.</strong> This can happen with an ad blocker, browser extension, or a flaky connection blocking cdnjs.cloudflare.com. Try disabling any content blockers for this site, check your connection, and reload the page.</span>
+  </div>
+
   <div class="security-strip">
     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
     Your PDFs never leave your device — all merging happens 100% locally in your browser
   </div>
 
   <!-- UPLOAD ZONE -->
-  <div class="upload-zone" id="uploadZone">
+  <div class="upload-zone" id="uploadZone" tabindex="0" role="button" aria-label="Upload PDF files">
     <div class="upload-icon">
       <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
         <polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/>
@@ -303,13 +339,14 @@ html { scroll-behavior: smooth; }
       </svg>
     </div>
     <h3>Drop PDFs here to merge</h3>
-    <p>Drag &amp; drop multiple PDF files, or click to browse</p>
+    <p class="upload-hint-desktop">Drag &amp; drop multiple PDF files, or tap to browse</p>
+    <p class="upload-hint-mobile">Tap to choose PDF files from your device</p>
     <div class="fmt-row"><span class="fmt-badge">PDF</span><span class="fmt-badge">Multiple Files</span></div>
-    <button class="btn-upload" onclick="document.getElementById('fileInput').click()">
+    <button class="btn-upload" type="button" onclick="event.stopPropagation(); document.getElementById('fileInput').click()">
       <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
       Choose PDFs
     </button>
-    <input type="file" id="fileInput" accept="application/pdf" multiple>
+    <input type="file" id="fileInput" accept="application/pdf,.pdf" multiple>
   </div>
 
   <!-- FILES LIST -->
@@ -317,6 +354,7 @@ html { scroll-behavior: smooth; }
     <div class="list-header">
       <div class="list-header-left">
         <h3 id="fileCount">0 files</h3>
+        <span class="list-summary" id="listSummary"></span>
       </div>
       <div class="list-header-right">
         <button class="btn-sm" onclick="document.getElementById('fileInput').click()">
@@ -337,7 +375,16 @@ html { scroll-behavior: smooth; }
     <!-- helper tip -->
     <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--amber-bg);border:1px solid rgba(245,166,35,.18);border-radius:10px;font-size:12px;color:var(--amber);font-family:var(--mono);">
       <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      Drag cards to reorder · Use page range (e.g. 1-3, 5) to include only specific pages · Click 👁 to preview
+      Drag cards to reorder (or use the ↑↓ buttons on mobile) · Use page range (e.g. 1-3, 5) to include only specific pages · Click 👁 to preview
+    </div>
+
+    <!-- duplicate-file warning -->
+    <div class="dup-warning" id="dupWarning">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span id="dupWarningTxt"></span>
+      <button class="dup-dismiss" onclick="dismissDupWarning()" aria-label="Dismiss">
+        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
     </div>
 
     <div class="pdf-list" id="pdfList"></div>
@@ -373,14 +420,14 @@ html { scroll-behavior: smooth; }
               <span>Add Bookmarks</span>
               <span>Inserts a named bookmark for each merged file</span>
             </div>
-            <div class="toggle active" id="toggleBookmarks" onclick="this.classList.toggle('active')"></div>
+            <button type="button" class="toggle active" id="toggleBookmarks" role="switch" aria-checked="true" aria-label="Add bookmarks" onclick="toggleSwitch(this)"></button>
           </div>
           <div class="setting-row">
             <div class="setting-row-label">
               <span>Odd-page padding</span>
               <span>Insert blank page after each file if it has an odd number of pages</span>
             </div>
-            <div class="toggle" id="togglePad" onclick="this.classList.toggle('active')"></div>
+            <button type="button" class="toggle" id="togglePad" role="switch" aria-checked="false" aria-label="Odd-page padding" onclick="toggleSwitch(this)"></button>
           </div>
         </div>
       </div>
@@ -391,13 +438,16 @@ html { scroll-behavior: smooth; }
   <div class="merge-section" id="mergeSection" style="display:none;">
     <div class="progress-bar-wrap" id="progressWrap"><div class="progress-bar" id="progressBar"></div></div>
     <p class="convert-status" id="convertStatus"></p>
-    <button class="btn-merge" id="mergeBtn" onclick="mergePDFs()">
-      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path d="M8 6H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-3"/>
-        <polyline points="15 3 12 6 9 3"/><line x1="12" y1="6" x2="12" y2="13"/>
-      </svg>
-      Merge PDFs
-    </button>
+    <div class="merge-btn-row">
+      <button class="btn-merge" id="mergeBtn" onclick="mergePDFs()">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="M8 6H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-3"/>
+          <polyline points="15 3 12 6 9 3"/><line x1="12" y1="6" x2="12" y2="13"/>
+        </svg>
+        Merge PDFs
+      </button>
+      <button class="btn-cancel-merge" id="cancelMergeBtn" onclick="cancelMerge()">Cancel</button>
+    </div>
   </div>
 
   <!-- RESULT -->
@@ -468,7 +518,7 @@ html { scroll-behavior: smooth; }
 </section>
 
 <!--how to section-->
-<section style="max-width: 780px; margin: 3rem auto; padding: 0 1.25rem; font-family: system-ui, -apple-system, sans-serif; color: var(--font-display); line-height: 1.7;" class="border-line">
+<section style="max-width: 780px; margin: 3rem auto; padding: 0 1.25rem; font-family: system-ui, -apple-system, sans-serif; line-height: 1.7;" class="border-line">
 
   <h2 style="font-size: 1.6rem; font-weight: 600; margin: 0 0 0.5rem;">How to merge PDF files online</h2>
   <p style="font-size: 1rem; color: var(--ink-60); margin: 0 0 2rem;">
@@ -488,8 +538,8 @@ html { scroll-behavior: smooth; }
     <li style="display: flex; gap: 1rem; align-items: flex-start; background: #f8f8f6; border-radius: 10px; padding: 1rem 1.25rem;">
       <span style="min-width: 32px; height: 32px; background: #1a1a1a; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 600;">2</span>
       <div>
-        <p style="font-weight: 600; margin: 0 0 0.25rem;">Reorder and set page ranges (optional)</p>
-        <p style="margin: 0; color: #555; font-size: 0.95rem;">Drag the file cards to set the order you want in the final PDF. For each file you can also enter a page range — for example <code style="background: #eee; padding: 1px 5px; border-radius: 4px; font-size: 0.875rem;">1-3, 5</code> — to include only specific pages instead of the whole document.</p>
+        <p style="font-weight: 600; margin: 0 0 0.25rem;">Reorder, rotate, and set page ranges (optional)</p>
+        <p style="margin: 0; color: #555; font-size: 0.95rem;">Drag anywhere on a file card to reorder it (or use the ↑↓ buttons on mobile), click the rotate icon to turn a file 90° at a time, and enter a page range — for example <code style="background: #eee; padding: 1px 5px; border-radius: 4px; font-size: 0.875rem;">1-3, 5</code> — to include only specific pages instead of the whole document. A running total of pages and file size updates as you go, and an invalid range is flagged in red before you merge.</p>
       </div>
     </li>
     <li style="display: flex; gap: 1rem; align-items: flex-start; background: #f8f8f6; border-radius: 10px; padding: 1rem 1.25rem;">
@@ -528,7 +578,7 @@ html { scroll-behavior: smooth; }
     <div>
       <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">How to combine specific pages from multiple PDFs</h3>
       <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
-        You do not have to include every page from each file. After uploading, each file card shows a <em>page range</em> input. Type a range like <code style="background: #2d2c2c8d; padding: 1px 5px; border-radius: 4px; font-size: 0.875rem;">1-3</code> to include only the first three pages, or <code style="background: #2d2c2c8d; padding: 1px 5px; border-radius: 4px; font-size: 0.875rem;">2, 4, 6</code> to pick individual pages. This is useful when you want to extract and combine specific chapters or sections from several documents without editing each file separately.
+        You do not have to include every page from each file. After uploading, each file card shows a <em>page range</em> input. Type a range like <code style="background: #eee; padding: 1px 5px; border-radius: 4px; font-size: 0.875rem;">1-3</code> to include only the first three pages, or <code style="background: #eee; padding: 1px 5px; border-radius: 4px; font-size: 0.875rem;">2, 4, 6</code> to pick individual pages. This is useful when you want to extract and combine specific chapters or sections from several documents without editing each file separately.
       </p>
     </div>
 
@@ -543,6 +593,20 @@ html { scroll-behavior: smooth; }
       <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">How to merge PDF files without uploading them</h3>
       <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
         Unlike iLovePDF, SmallPDF, or Adobe online tools, this merger does not upload your files to any server. All processing happens directly in your browser using JavaScript. Your documents never leave your device, which makes it safe for confidential files like contracts, medical records, or financial statements. You can even use it offline once the page has loaded.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">Can I rotate a file before merging?</h3>
+      <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
+        Yes. Click the rotate icon on any file card to turn it 90° at a time — click it again for 180°, 270°, and back to normal. This is useful when a scanned document came in sideways. The thumbnail and the preview both update immediately so you can confirm the orientation before merging, and the rotation is applied on top of whatever rotation the file already had, so it stacks correctly rather than resetting.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem;">What happens if one of my PDFs is password-protected?</h3>
+      <p style="margin: 0; color: var(--ink-60); font-size: 0.95rem;">
+        If a file can't be read — because it's password-protected, corrupted, or not a valid PDF — it's skipped automatically and the rest of your files still merge normally. You'll see which files were skipped and why in the result summary, rather than the whole merge failing because of a single problem file.
       </p>
     </div>
 
@@ -641,41 +705,99 @@ html { scroll-behavior: smooth; }
 
 <script src="assets/js/nav.js"></script>
 <script>
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-const { PDFDocument } = PDFLib;
+// ---- LIBRARY LOAD GUARD ----
+// If pdf.js or pdf-lib fail to load (ad blocker, blocked CDN, flaky network), don't let
+// it take the whole page down — everything below runs regardless, and upload is disabled
+// with a visible explanation instead of the page silently dying with no feedback.
+let PDFDocument = null;
+function checkLibsReady() {
+  if (typeof pdfjsLib === 'undefined' || typeof PDFLib === 'undefined') {
+    document.getElementById('libError').classList.add('show');
+    const zone = document.getElementById('uploadZone');
+    zone.setAttribute('aria-disabled', 'true');
+    zone.style.opacity = '.5';
+    zone.style.pointerEvents = 'none';
+    return false;
+  }
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  PDFDocument = PDFLib.PDFDocument;
+  libsReady = true;
+  return true;
+}
 
 // ---- STATE ----
-let files = []; // {file, name, arrayBuffer, pageCount, id}
-let dragSrcIdx = null;
+let files = []; // {file, name, arrayBuffer, pageCount, id, pdfDocRef}
 let lbPdfDoc = null;
 let lbPageIdx = 0;
+let lbFileIdx = null;
+let mergeCancelled = false;
+let libsReady = false;
 
 
 // ---- UPLOAD ----
-document.getElementById('fileInput').addEventListener('change', e => addFiles(e.target.files));
+// Validates by MIME type OR file extension — some mobile file managers and OSes
+// misreport the MIME type for PDFs, so type-only checks silently drop valid files.
+function isPdfFile(file) {
+  if (!file) return false;
+  if (file.type === 'application/pdf') return true;
+  return /\.pdf$/i.test(file.name || '');
+}
+
+document.getElementById('fileInput').addEventListener('change', e => { addFiles(e.target.files); e.target.value = ''; });
 const zone = document.getElementById('uploadZone');
+const fileInputEl = document.getElementById('fileInput');
+// Whole zone is tappable/clickable, not just the inner button — matters on mobile
+// where drag-and-drop doesn't exist. The button keeps its own stopPropagation so it
+// doesn't double-trigger the picker.
+zone.addEventListener('click', () => { if (libsReady) fileInputEl.click(); });
+zone.addEventListener('keydown', e => {
+  if ((e.key === 'Enter' || e.key === ' ') && libsReady) { e.preventDefault(); fileInputEl.click(); }
+});
 zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
 zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
 zone.addEventListener('drop', e => {
   e.preventDefault(); zone.classList.remove('dragover');
-  addFiles([...e.dataTransfer.files].filter(f => f.type === 'application/pdf'));
+  addFiles([...e.dataTransfer.files].filter(isPdfFile));
 });
 
 async function addFiles(rawFiles) {
-  const pdfs = [...rawFiles].filter(f => f.type === 'application/pdf');
+  if (!libsReady) { alert('Required libraries failed to load — please reload the page.'); return; }
+  const pdfs = [...rawFiles].filter(isPdfFile);
+  const rejected = [...rawFiles].filter(f => !isPdfFile(f));
+  if (rejected.length) alert(`${rejected.length===1?'"'+rejected[0].name+'" doesn\'t':'Some of those files don\'t'} look like a PDF and ${rejected.length===1?'was':'were'} skipped.`);
   if (!pdfs.length) return;
+
+  const duplicateNames = [];
   for (const file of pdfs) {
+    // Duplicate detection — same name AND same size is a strong signal it's the exact
+    // same file added twice (e.g. re-selecting from a multi-select dialog by accident).
+    // Still added (some people genuinely want a file merged in twice, like a repeated
+    // divider page), just flagged so it's not a silent surprise in the final PDF.
+    if (files.some(existing => existing.name === file.name && existing.file.size === file.size)) {
+      duplicateNames.push(file.name);
+    }
     const buf = await file.arrayBuffer();
     let pageCount = '?';
+    let pdfDocRef = null;
     try {
-      const pdfDoc = await pdfjsLib.getDocument({ data: buf.slice(0) }).promise;
-      pageCount = pdfDoc.numPages;
+      pdfDocRef = await pdfjsLib.getDocument({ data: buf.slice(0) }).promise;
+      pageCount = pdfDocRef.numPages;
     } catch(e) {}
-    files.push({ file, name: file.name, arrayBuffer: buf, pageCount, id: Date.now() + Math.random() });
+    files.push({ file, name: file.name, arrayBuffer: buf, pageCount, id: Date.now() + Math.random(), pdfDocRef, rotation: 0 });
   }
   renderList();
   showUI();
+
+  const dupBanner = document.getElementById('dupWarning');
+  if (duplicateNames.length) {
+    document.getElementById('dupWarningTxt').textContent =
+      `${duplicateNames.length === 1 ? `"${duplicateNames[0]}" was` : `${duplicateNames.length} files were`} already in your list and added again — check this was intentional.`;
+    dupBanner.classList.add('show');
+  } else {
+    dupBanner.classList.remove('show');
+  }
 }
+function dismissDupWarning() { document.getElementById('dupWarning').classList.remove('show'); }
 
 function showUI() {
   document.getElementById('filesSection').classList.add('show');
@@ -698,20 +820,88 @@ function sortAlpha() {
   renderList();
 }
 
+// ---- CARD REORDER (plain mouse events, not native HTML5 drag-and-drop) ----
+// Native HTML5 drag-and-drop (draggable/dragstart/dragover/drop) is notoriously
+// unreliable across browsers — the previous implementation never called
+// dataTransfer.setData(), which several browsers effectively require for a drag
+// session to resolve cleanly; without it the browser can get stuck holding a
+// "drag in progress" state with the grabbing cursor and never release it, exactly
+// matching the reported bug. This implementation uses only mousedown/mousemove/
+// mouseup, entirely under our own control, so there's no native drag session to get
+// stuck in. Wired once via event delegation on the list container (not re-attached
+// on every renderList() call) to avoid listener accumulation.
+let reorderSrcIdx = null;
+
+document.getElementById('pdfList').addEventListener('mousedown', e => {
+  const card = e.target.closest('.pdf-card');
+  if (!card) return;
+  // Any interactive control inside the card keeps its normal behavior — typing/
+  // selecting in the page-range input, clicking the move/preview/remove buttons.
+  // Everything else on the card (thumbnail, filename, padding, the handle icon)
+  // starts a drag, so you're not restricted to precisely grabbing the small handle.
+  if (e.target.closest('input, button, select, textarea, a')) return;
+  e.preventDefault(); // stop native text-selection/drag entirely — we own this gesture now
+  reorderSrcIdx = parseInt(card.dataset.idx, 10);
+  card.classList.add('dragging');
+  document.body.style.cursor = 'grabbing';
+  document.body.style.userSelect = 'none';
+  document.addEventListener('mousemove', onReorderMove);
+  document.addEventListener('mouseup', onReorderEnd);
+});
+
+function onReorderMove(e) {
+  document.querySelectorAll('.pdf-card').forEach(c => c.classList.remove('drag-over'));
+  const el = document.elementFromPoint(e.clientX, e.clientY);
+  const overCard = el && el.closest ? el.closest('.pdf-card') : null;
+  if (overCard) overCard.classList.add('drag-over');
+}
+
+function onReorderEnd(e) {
+  document.removeEventListener('mousemove', onReorderMove);
+  document.removeEventListener('mouseup', onReorderEnd);
+  document.body.style.cursor = '';
+  document.body.style.userSelect = '';
+
+  const el = document.elementFromPoint(e.clientX, e.clientY);
+  const overCard = el && el.closest ? el.closest('.pdf-card') : null;
+  document.querySelectorAll('.pdf-card').forEach(c => c.classList.remove('drag-over', 'dragging'));
+
+  if (overCard && reorderSrcIdx !== null) {
+    const targetIdx = parseInt(overCard.dataset.idx, 10);
+    if (targetIdx !== reorderSrcIdx) {
+      const moved = files.splice(reorderSrcIdx, 1)[0];
+      files.splice(targetIdx, 0, moved);
+      renderList();
+    }
+  }
+  reorderSrcIdx = null;
+}
+
 // ---- RENDER LIST ----
 function renderList() {
   const list = document.getElementById('pdfList');
   document.getElementById('fileCount').textContent = files.length + ' file' + (files.length !== 1 ? 's' : '');
+
+  // Live running total — updates on every add/remove/reorder, not just at merge time.
+  const knownPageCounts = files.filter(f => typeof f.pageCount === 'number');
+  const totalPages = knownPageCounts.reduce((sum, f) => sum + f.pageCount, 0);
+  const totalBytes = files.reduce((sum, f) => sum + (f.file.size || 0), 0);
+  const pageLabel = knownPageCounts.length === files.length
+    ? `${totalPages} page${totalPages !== 1 ? 's' : ''}`
+    : `${totalPages}+ pages`; // some files' page counts couldn't be read yet
+  document.getElementById('listSummary').textContent = files.length
+    ? `· ${pageLabel} · ~${formatBytes(totalBytes)} total`
+    : '';
+
   list.innerHTML = '';
   files.forEach((f, i) => {
     const card = document.createElement('div');
     card.className = 'pdf-card';
-    card.draggable = true;
     card.dataset.idx = i;
     card.innerHTML = `
       <div class="drag-handle"><span></span><span></span><span></span></div>
       <span class="order-badge">${i + 1}</span>
-      <div class="pdf-thumb-wrap" id="thumb-${f.id}">
+      <div class="pdf-thumb-wrap" id="thumb-${f.id}" style="transform:rotate(${f.rotation || 0}deg)">
         <div class="thumb-placeholder">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         </div>
@@ -729,8 +919,17 @@ function renderList() {
           </span>
         </div>
       </div>
-      <input class="page-range-input" id="range-${f.id}" type="text" placeholder="all pages" title="Page range, e.g. 1-3, 5">
+      <input class="page-range-input" id="range-${f.id}" type="text" placeholder="all pages" title="Page range, e.g. 1-3, 5" oninput="validateRangeInput(this, ${typeof f.pageCount === 'number' ? f.pageCount : 0})">
       <div class="pdf-card-actions">
+        <button class="icon-btn move" title="Move up" aria-label="Move up" onclick="moveFile(${i},-1)" ${i===0?'disabled':''}>
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+        </button>
+        <button class="icon-btn move" title="Move down" aria-label="Move down" onclick="moveFile(${i},1)" ${i===files.length-1?'disabled':''}>
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <button class="icon-btn rotate" title="Rotate 90°" aria-label="Rotate 90 degrees" onclick="rotateFile(${i})">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6"/><path d="M2.5 22v-6h6"/><path d="M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+        </button>
         <button class="icon-btn preview" title="Preview pages" onclick="openPreview(${i})">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
         </button>
@@ -739,28 +938,25 @@ function renderList() {
         </button>
       </div>`;
 
-    // drag events
-    card.addEventListener('dragstart', () => { dragSrcIdx = i; setTimeout(() => card.classList.add('dragging'), 0); });
-    card.addEventListener('dragend', () => { card.classList.remove('dragging'); document.querySelectorAll('.pdf-card').forEach(c => c.classList.remove('drag-over')); });
-    card.addEventListener('dragover', e => { e.preventDefault(); card.classList.add('drag-over'); });
-    card.addEventListener('dragleave', () => card.classList.remove('drag-over'));
-    card.addEventListener('drop', e => {
-      e.preventDefault(); card.classList.remove('drag-over');
-      if (dragSrcIdx !== null && dragSrcIdx !== i) {
-        const moved = files.splice(dragSrcIdx, 1)[0];
-        files.splice(i, 0, moved);
-        renderList();
-      }
-    });
     list.appendChild(card);
     card.querySelector('.pdf-card-name').textContent = f.name;
+    if (f.rotation) card.querySelector('.icon-btn.rotate').classList.add('active-rotate');
     renderThumbnail(f, i);
   });
 }
 
+// Cycles a file's rotation 0° → 90° → 180° → 270° → 0°, applied at merge time and
+// reflected immediately in the thumbnail so you can confirm it before merging.
+function rotateFile(i) {
+  files[i].rotation = ((files[i].rotation || 0) + 90) % 360;
+  renderList();
+}
+
 async function renderThumbnail(f, i) {
   try {
-    const pdfDoc = await pdfjsLib.getDocument({ data: f.arrayBuffer.slice(0) }).promise;
+    // Reuse the pdf.js document already parsed in addFiles() (for the page count)
+    // instead of parsing the same file a second time from scratch.
+    const pdfDoc = f.pdfDocRef || await pdfjsLib.getDocument({ data: f.arrayBuffer.slice(0) }).promise;
     const page = await pdfDoc.getPage(1);
     const vp = page.getViewport({ scale: 0.18 });
     const canvas = document.createElement('canvas');
@@ -774,6 +970,16 @@ async function renderThumbnail(f, i) {
 function removeFile(i) {
   files.splice(i, 1);
   if (!files.length) { clearAll(); return; }
+  renderList();
+}
+
+// Touch-friendly reorder alternative — native HTML5 drag-and-drop (used for desktop
+// mouse dragging below) doesn't fire via touch on most mobile browsers, so "Drag cards
+// to reorder" was previously silently non-functional on phones with no fallback at all.
+function moveFile(i, dir) {
+  const j = i + dir;
+  if (j < 0 || j >= files.length) return;
+  [files[i], files[j]] = [files[j], files[i]];
   renderList();
 }
 
@@ -796,23 +1002,62 @@ function parseRange(str, total) {
   return [...pages].sort((a,b) => a - b);
 }
 
+// Live feedback while typing a page range — flags tokens that don't parse to anything
+// (like "3-", "abc", or a page number beyond the file's actual page count) instead of
+// silently producing zero pages and only finding out at merge time.
+function validateRangeInput(input, total) {
+  const str = input.value.trim();
+  if (!str || !total) { input.classList.remove('invalid'); input.title = 'Page range, e.g. 1-3, 5'; return; }
+  const badTokens = [];
+  str.split(',').forEach(rawPart => {
+    const part = rawPart.trim();
+    if (!part) return;
+    if (part.includes('-')) {
+      const segs = part.split('-').map(s => s.trim());
+      const a = parseInt(segs[0]), b = parseInt(segs[1]);
+      if (segs.length !== 2 || segs[0] === '' || segs[1] === '' || isNaN(a) || isNaN(b) || a < 1 || b < 1 || a > total || b > total) {
+        badTokens.push(part);
+      }
+    } else {
+      const n = parseInt(part);
+      if (isNaN(n) || n < 1 || n > total) badTokens.push(part);
+    }
+  });
+  if (badTokens.length) {
+    input.classList.add('invalid');
+    input.title = `"${badTokens.join(', ')}" isn't valid for a ${total}-page file. Use e.g. 1-3, 5.`;
+  } else {
+    input.classList.remove('invalid');
+    input.title = 'Page range, e.g. 1-3, 5';
+  }
+}
+
 // ---- SETTINGS ----
 function toggleSettings() {
   document.getElementById('settingsBody').classList.toggle('open');
   document.getElementById('settingsChevron').classList.toggle('open');
 }
+function toggleSwitch(btn) {
+  const isOn = !btn.classList.contains('active');
+  btn.classList.toggle('active', isOn);
+  btn.setAttribute('aria-checked', String(isOn));
+}
 
 // ---- MERGE ----
 async function mergePDFs() {
-  if (files.length < 1) return;
+  if (files.length < 1 || !libsReady) return;
   const btn = document.getElementById('mergeBtn');
   btn.disabled = true;
   document.getElementById('progressWrap').style.display = 'block';
   document.getElementById('convertStatus').style.display = 'block';
+  document.getElementById('cancelMergeBtn').classList.add('show');
 
   const addBookmarks = document.getElementById('toggleBookmarks').classList.contains('active');
   const padOdd = document.getElementById('togglePad').classList.contains('active');
   const filename = (document.getElementById('outFilename').value || 'merged').replace(/\.pdf$/i, '');
+
+  mergeCancelled = false;
+  const skippedFiles = [];
 
   try {
     const merged = await PDFDocument.create();
@@ -820,44 +1065,77 @@ async function mergePDFs() {
     let totalPages = 0; let mergedCount = 0;
 
     for (let i = 0; i < files.length; i++) {
+      if (mergeCancelled) break;
       const f = files[i];
       setProgress(Math.round((i / files.length) * 90), `Merging: ${f.name} (${i+1}/${files.length})`);
       await new Promise(r => setTimeout(r, 15));
+      if (mergeCancelled) break;
 
-let srcDoc;
-try {
-  srcDoc = await PDFDocument.load(f.arrayBuffer.slice(0), {
-    ignoreEncryption: true,   // load PDFs with restrictions without throwing
-  });
-} catch (loadErr) {
-  console.warn(`Skipping "${f.name}": ${loadErr.message}`);
-  setProgress(Math.round((i / files.length) * 90), `⚠ Skipped: ${f.name}`);
-  await new Promise(r => setTimeout(r, 400));
-  continue; // skip this file, keep merging the rest
-}      
-      const srcPageCount = srcDoc.getPageCount();
-      const rangeStr = document.getElementById(`range-${f.id}`)?.value || '';
-      const pageIndices = parseRange(rangeStr, srcPageCount);
+      // BUGFIX: everything from load() through copyPages()/addPage() now lives in ONE
+      // try/catch per file. Previously only PDFDocument.load() was guarded — a
+      // password-protected PDF often "loads" without throwing (ignoreEncryption just
+      // suppresses that one check) but then fails later at getPageCount()/copyPages()
+      // when pdf-lib actually tries to read the encrypted content. That later failure
+      // was uncaught, so it aborted the WHOLE merge instead of just skipping that file
+      // — this is the exact bug reported in the bug tracker below.
+      try {
+        const srcDoc = await PDFDocument.load(f.arrayBuffer.slice(0), {
+          ignoreEncryption: true, // load PDFs with restrictions without throwing at this step
+        });
+        const srcPageCount = srcDoc.getPageCount();
+        const rangeStr = document.getElementById(`range-${f.id}`)?.value || '';
+        const pageIndices = parseRange(rangeStr, srcPageCount);
 
-    if (pageIndices.length === 0) {
-    setProgress(Math.round((i / files.length) * 90), `⚠ Skipped: ${f.name} (empty range)`);
-    await new Promise(r => setTimeout(r, 400));
-    continue;
-    }
-      if (addBookmarks) {
-        bookmarks.push({ title: f.name.replace(/\.pdf$/i, ''), pageIndex: totalPages });
-      }    
-    const copied = await merged.copyPages(srcDoc, pageIndices);
-          copied.forEach(p => merged.addPage(p));
-          mergedCount++;
-      totalPages += pageIndices.length;
+        if (pageIndices.length === 0) {
+          skippedFiles.push({ name: f.name, reason: 'empty page range' });
+          setProgress(Math.round((i / files.length) * 90), `⚠ Skipped: ${f.name} (empty range)`);
+          await new Promise(r => setTimeout(r, 300));
+          continue;
+        }
 
-      // odd-page padding
-      if (padOdd && pageIndices.length % 2 !== 0 && i < files.length - 1) {
-        const blankPage = merged.addPage();
-        blankPage.setSize(copied[0]?.getWidth() || 595, copied[0]?.getHeight() || 842);
-        totalPages++;
+        const copied = await merged.copyPages(srcDoc, pageIndices);
+        if (f.rotation) {
+          // Add to any rotation the source page already has, rather than overwriting
+          // it — a page that's already rotated 90° plus a requested 90° should end up
+          // at 180°, not reset back to 90°.
+          copied.forEach(p => {
+            const current = p.getRotation().angle || 0;
+            p.setRotation(PDFLib.degrees((current + f.rotation) % 360));
+          });
+        }
+        copied.forEach(p => merged.addPage(p));
+
+        if (addBookmarks) {
+          bookmarks.push({ title: f.name.replace(/\.pdf$/i, ''), pageIndex: totalPages });
+        }
+        mergedCount++;
+        totalPages += pageIndices.length;
+
+        // odd-page padding
+        if (padOdd && pageIndices.length % 2 !== 0 && i < files.length - 1) {
+          const blankPage = merged.addPage();
+          blankPage.setSize(copied[0]?.getWidth() || 595, copied[0]?.getHeight() || 842);
+          totalPages++;
+        }
+      } catch (fileErr) {
+        console.warn(`Skipping "${f.name}": ${fileErr.message}`);
+        skippedFiles.push({ name: f.name, reason: /encrypt|password/i.test(fileErr.message) ? 'password-protected' : 'could not be read' });
+        setProgress(Math.round((i / files.length) * 90), `⚠ Skipped: ${f.name}`);
+        await new Promise(r => setTimeout(r, 300));
+        continue; // skip this file, keep merging the rest
       }
+    }
+
+    if (mergedCount === 0) {
+      document.getElementById('progressWrap').style.display = 'none';
+      document.getElementById('convertStatus').style.display = 'none';
+      document.getElementById('cancelMergeBtn').classList.remove('show');
+      btn.disabled = false;
+      const reason = skippedFiles.length
+        ? `Every file was skipped (${skippedFiles.map(s => `${s.name}: ${s.reason}`).join('; ')}).`
+        : 'No files to merge.';
+      alert(`Nothing was merged. ${reason}`);
+      return;
     }
 
     // Add bookmarks (outlines)
@@ -905,11 +1183,14 @@ merged.catalog.set(PDFLib.PDFName.of('Outlines'), outlineRootRef);
     const dl = document.getElementById('downloadLink');
     dl.href = url;
     dl.download = filename + '.pdf';
-    document.getElementById('resultMeta').textContent =
-      `${mergedCount} file${mergedCount>1?'s':''} · ${totalPages} pages · ${formatBytes(blob.size)}`
+
+    let metaTxt = `${mergedCount} file${mergedCount!==1?'s':''} · ${totalPages} pages · ${formatBytes(blob.size)}`;
+    if (mergeCancelled) metaTxt = `Cancelled — ${metaTxt} kept from before stopping`;
+    else if (skippedFiles.length) metaTxt += ` · ${skippedFiles.length} skipped (${skippedFiles.map(s => s.reason).join(', ')})`;
+    document.getElementById('resultMeta').textContent = metaTxt;
     document.getElementById('resultCard').classList.add('show');
 
-    setProgress(100, 'Done!');
+    setProgress(100, mergeCancelled ? 'Cancelled — partial result ready' : 'Done!');
     document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
   } catch(err) {
@@ -920,7 +1201,10 @@ merged.catalog.set(PDFLib.PDFName.of('Outlines'), outlineRootRef);
   btn.innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M8 6H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-3"/><polyline points="15 3 12 6 9 3"/><line x1="12" y1="6" x2="12" y2="13"/></svg> Merge PDFs`;
   document.getElementById('progressWrap').style.display = 'none';
   document.getElementById('convertStatus').style.display = 'none';
+  document.getElementById('cancelMergeBtn').classList.remove('show');
 }
+
+function cancelMerge() { mergeCancelled = true; }
 
 function setProgress(val, msg) {
   document.getElementById('progressBar').style.width = val + '%';
@@ -930,6 +1214,7 @@ function setProgress(val, msg) {
 // ---- PREVIEW LIGHTBOX ----
 async function openPreview(idx) {
   const f = files[idx];
+  lbFileIdx = idx;
   try {
     lbPdfDoc = await pdfjsLib.getDocument({ data: f.arrayBuffer.slice(0) }).promise;
     lbPageIdx = 0;
@@ -944,8 +1229,11 @@ async function renderLbPage() {
   const page = await lbPdfDoc.getPage(lbPageIdx + 1);
   const canvas = document.getElementById('lbCanvas');
   const maxW = Math.min(window.innerWidth * 0.85, 640);
-  const scale = maxW / page.getViewport({ scale: 1 }).width;
-  const vp = page.getViewport({ scale });
+  // Preview reflects the rotation set for this file, so what you see here matches
+  // what actually ends up in the merged output.
+  const rotation = (files[lbFileIdx] && files[lbFileIdx].rotation) || 0;
+  const scale = maxW / page.getViewport({ scale: 1, rotation }).width;
+  const vp = page.getViewport({ scale, rotation });
   canvas.width = vp.width; canvas.height = vp.height;
   await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
   document.getElementById('lbCounter').textContent = `${lbPageIdx+1} / ${lbPdfDoc.numPages}`;
@@ -973,6 +1261,13 @@ function formatBytes(b) {
   if (b < 1024) return b + ' B';
   if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
   return (b/1024/1024).toFixed(2) + ' MB';
+}
+
+// ---- INIT ----
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', checkLibsReady);
+} else {
+  checkLibsReady();
 }
 </script>
 </body>
