@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BS to AD Date Converter — Bikram Sambat ⇄ Gregorian | Rai Paruhang</title>
+<meta name="description" content="Convert Bikram Sambat (Nepali) dates to Gregorian (AD) dates instantly, free and entirely in your browser. Covers BS 1970 to 2090.">
+<link rel="alternate" hreflang="en" href="https://raiparuhang.com.np/nepali-date-converter">
+<link rel="alternate" hreflang="x-default" href="https://raiparuhang.com.np/nepali-date-converter">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="assets/css/styles.css" />
+<link rel="canonical" href="https://raiparuhang.com.np/nepali-date-converter">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "BS to AD Date Converter",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Free browser-based tool to convert between Bikram Sambat (Nepali) and Gregorian (AD) dates. Runs entirely client-side, covering BS 1970-2090."
+}
+</script>
+<style>
+  :root{
+    --bg:#0f1115;
+    --panel:#171a21;
+    --panel-border:#262a35;
+    --text:#e8e9ed;
+    --text-dim:#9a9fac;
+    --accent:#dc3d5a;
+    --accent-dim:#7a2233;
+    --mono:'JetBrains Mono','Courier New',monospace;
+
+    /* Override the shared site palette so nav/footer go dark too */
+    --paper: #0f1115;
+    --ink: #e8e9ed;
+    --muted: #171a21;
+    --muted-2: #20242c;
+    --hairline: #262a35;
+    --hairline-2: rgba(232, 233, 237, 0.08);
+    --ink-60: rgba(232, 233, 237, 0.6);
+    --ink-40: rgba(232, 233, 237, 0.4);
+  }
+  .nav{ background: rgba(15, 17, 21, 0.85) !important; }
+  *{box-sizing:border-box;}
+  .wrap{
+    max-width:920px;margin:0 auto;padding:32px 20px 64px;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    line-height:1.5;
+  }
+  header.page{margin-bottom:22px;}
+  h1{font-size:1.6rem;margin:0 0 8px;letter-spacing:-0.01em;}
+  .sub{color:var(--text-dim);font-size:0.95rem;max-width:640px;}
+  .badge{
+    display:inline-block;font-size:0.72rem;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--accent);border:1px solid var(--accent-dim);background:rgba(220,61,90,.08);
+    padding:3px 8px;border-radius:4px;margin-bottom:12px;
+  }
+  .direction-switch{
+    display:inline-flex;background:var(--panel);border:1px solid var(--panel-border);
+    border-radius:8px;padding:3px;margin-bottom:20px;gap:3px;
+  }
+  .direction-switch button{
+    background:transparent;border:none;color:var(--text-dim);font-size:0.85rem;
+    padding:7px 14px;border-radius:6px;cursor:pointer;transition:all .15s;
+  }
+  .direction-switch button.active{background:var(--accent);color:#fff;}
+  .direction-switch button:not(.active):hover{color:var(--text);}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch;}
+  @media (max-width:760px){.grid{grid-template-columns:1fr;}}
+  .panel{
+    background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;
+    display:flex;flex-direction:column;overflow:hidden;
+  }
+  .panel-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:10px 14px;border-bottom:1px solid var(--panel-border);
+  }
+  .panel-head span.label{font-size:0.78rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;}
+  .panel-body{padding:20px;display:flex;flex-direction:column;gap:14px;flex:1;}
+  .select-row{display:grid;grid-template-columns:1fr 1.3fr 0.8fr;gap:8px;}
+  select, input[type=date]{
+    background:var(--bg);border:1px solid var(--panel-border);color:var(--text);
+    padding:9px 8px;border-radius:6px;font-size:0.95rem;font-family:inherit;outline:none;
+    width:100%;
+  }
+  select:focus, input[type=date]:focus{border-color:var(--accent);}
+  .big-date{
+    font-family:var(--mono);font-size:1.4rem;color:var(--text);margin-top:auto;
+    padding-top:10px;border-top:1px dashed var(--panel-border);
+  }
+  .big-date .weekday{display:block;font-size:0.78rem;color:var(--text-dim);font-family:inherit;margin-top:4px;text-transform:uppercase;letter-spacing:.05em;}
+  .devanagari-date{font-family:'Noto Sans Devanagari',sans-serif;font-size:1.25rem;color:var(--text);margin-top:6px;}
+  .tbtn{
+    background:transparent;border:1px solid var(--panel-border);color:var(--text-dim);
+    padding:5px 10px;border-radius:6px;font-size:0.78rem;cursor:pointer;transition:all .15s;
+    white-space:nowrap;
+  }
+  .tbtn:hover{color:var(--text);border-color:var(--text-dim);}
+  .tbtn.primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .tbtn.primary:hover{background:#c2334d;}
+  .actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
+  .note{color:var(--text-dim);font-size:0.82rem;margin-top:10px;min-height:1.2em;}
+  .info{margin-top:44px;border-top:1px solid var(--panel-border);padding-top:28px;}
+  .info h2{font-size:1.15rem;margin-bottom:10px;}
+  .info p{color:var(--text-dim);font-size:0.92rem;max-width:680px;}
+  .privacy-strip{display:flex;align-items:center;gap:8px;font-size:0.8rem;color:var(--text-dim);margin-top:16px;}
+  .privacy-strip svg{flex-shrink:0;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark">R</span>
+        <span>Raiparuhang</span>
+      </a>
+      <nav class="nav-links">
+        <a data-nav href="/">Home</a>
+        <a data-nav href="/tools">Tools</a>
+        <a data-nav href="/about">About</a>
+        <a data-nav href="/contact">Contact</a>
+      </nav>
+      <a class="nav-cta" href="/tools">Browse tools →</a>
+      <button class="nav-toggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <div class="nav-mobile">
+      <a data-nav href="/">Home</a>
+      <a data-nav href="/tools">Tools</a>
+      <a data-nav href="/about">About</a>
+      <a data-nav href="/contact">Contact</a>
+    </div>
+  </header>
+
+<div class="wrap">
+  <header class="page">
+    <span class="badge">100% client-side · BS 1970 – 2090</span>
+    <h1>BS ⇄ AD Date Converter</h1>
+    <p class="sub">Convert Bikram Sambat (Nepali) dates to Gregorian dates, or the other way around. Pick a date on either side and the other updates instantly. Nothing you enter ever leaves your browser.</p>
+  </header>
+
+  <div class="direction-switch" role="tablist" aria-label="Conversion direction">
+    <button type="button" id="dirB2A" class="active">BS → AD</button>
+    <button type="button" id="dirA2B">AD → BS</button>
+  </div>
+
+  <div class="grid" id="dateGrid">
+    <div class="panel" id="bsPanel">
+      <div class="panel-head"><span class="label">Bikram Sambat (BS)</span></div>
+      <div class="panel-body">
+        <div class="select-row">
+          <select id="bsYear" aria-label="BS Year"></select>
+          <select id="bsMonth" aria-label="BS Month"></select>
+          <select id="bsDay" aria-label="BS Day"></select>
+        </div>
+        <div class="big-date" id="bsBigDate">—
+          <span class="weekday" id="bsWeekday"></span>
+        </div>
+        <div class="devanagari-date" id="bsDevanagari"></div>
+      </div>
+    </div>
+    <div class="panel" id="adPanel">
+      <div class="panel-head"><span class="label">Gregorian (AD)</span></div>
+      <div class="panel-body">
+        <input type="date" id="adInput">
+        <div class="big-date" id="adBigDate">—
+          <span class="weekday" id="adWeekday"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="tbtn primary" id="todayBtn" type="button">Today</button>
+    <button class="tbtn" id="copyBtn" type="button">Copy BS Date</button>
+  </div>
+  <p class="note" id="statusNote"></p>
+
+  <div class="privacy-strip">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg>
+    Conversion runs entirely in your browser via JavaScript — no dates are uploaded or stored.
+  </div>
+
+  <div class="info">
+    <h2>About this converter</h2>
+    <p>Bikram Sambat is a solar calendar roughly 56–57 years ahead of the Gregorian calendar, but unlike Gregorian months, each Bikram Sambat month doesn't have a fixed length — it can vary slightly from year to year based on the sidereal year calculation. That means BS-to-AD conversion can't be done with simple arithmetic; it needs an actual lookup table of how many days were in each month of each year. This tool uses a verified table covering BS 1970 to 2090 (roughly AD 1913 to 2033) to do exact conversions in both directions.</p>
+  </div>
+
+  <!-- RELATED TOOLS -->
+  <section style="max-width:780px;margin:3rem auto 0;padding:0;" class="border-line">
+    <h2 style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px;">Related Tools</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;">
+      <a href="https://raiparuhang.com.np/preeti-to-unicode" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;flex:1;min-width:180px;">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#4f8eff" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+        Preeti ⇄ Unicode Converter
+        <span style="margin-left:auto;font-size:11px;color:var(--text-dim);font-family:monospace;">→</span>
+      </a>
+      <a href="https://raiparuhang.com.np/qr-code-generator" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;flex:1;min-width:180px;">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#22d3a0" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM20 14v7M14 20h7"/></svg>
+        QR Code Generator
+        <span style="margin-left:auto;font-size:11px;color:var(--text-dim);font-family:monospace;">→</span>
+      </a>
+      <a href="https://raiparuhang.com.np/word-counter" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;flex:1;min-width:180px;">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#f5a623" stroke-width="2"><path d="M4 6h16M4 12h10M4 18h16"/></svg>
+        Word Counter
+        <span style="margin-left:auto;font-size:11px;color:var(--text-dim);font-family:monospace;">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- HOW TO -->
+  <section style="max-width:780px;margin:3rem auto 0;padding:2.5rem 0 0;border-top:1px solid var(--panel-border);">
+    <h2 style="font-size:1.6rem;font-weight:600;margin:0 0 0.5rem;">How to convert BS to AD (or AD to BS)</h2>
+    <p style="font-size:1rem;color:var(--text-dim);margin:0 0 2rem;">
+      Both directions work the same way — pick one side, and the other fills in instantly. Here's the full walkthrough, plus a few common questions.
+    </p>
+
+    <!-- Main 3 steps -->
+    <ol style="padding:0;margin:0 0 2.5rem;list-style:none;display:flex;flex-direction:column;gap:1rem;">
+      <li style="display:flex;gap:1rem;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:1rem 1.25rem;">
+        <span style="min-width:32px;height:32px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:600;flex-shrink:0;">1</span>
+        <div>
+          <p style="font-weight:600;margin:0 0 0.25rem;color:var(--text);">Choose a direction</p>
+          <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">Use the <em>BS → AD</em> / <em>AD → BS</em> switch above the panels to set which side you're entering a date on. The panel you're editing always sits on the left.</p>
+        </div>
+      </li>
+      <li style="display:flex;gap:1rem;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:1rem 1.25rem;">
+        <span style="min-width:32px;height:32px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:600;flex-shrink:0;">2</span>
+        <div>
+          <p style="font-weight:600;margin:0 0 0.25rem;color:var(--text);">Enter the date</p>
+          <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">For BS, pick the year, month, and day from the dropdowns. For AD, use the native date picker. Either way, you don't need to know the other calendar's date — that's what gets calculated for you.</p>
+        </div>
+      </li>
+      <li style="display:flex;gap:1rem;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:1rem 1.25rem;">
+        <span style="min-width:32px;height:32px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:600;flex-shrink:0;">3</span>
+        <div>
+          <p style="font-weight:600;margin:0 0 0.25rem;color:var(--text);">Read the result</p>
+          <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">The other panel updates instantly with the converted date, weekday, and a Devanagari-script version of the BS date. Use <em>Copy BS Date</em> to grab the text, or <em>Today</em> to jump straight to the current date in both calendars.</p>
+        </div>
+      </li>
+    </ol>
+
+    <!-- Sub-sections -->
+    <div style="display:flex;flex-direction:column;gap:2rem;">
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">How to find today's date in Bikram Sambat</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          Click <em>Today</em> above the panels. It jumps both sides to the current date instantly — no need to look up today's AD date first and enter it manually.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">How to convert a birthdate or document date accurately</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          Set the direction to match what you already have — <em>AD → BS</em> if your birth certificate or passport shows a Gregorian date and you need the BS equivalent for a Nepali form, or <em>BS → AD</em> if it's the other way around. The weekday shown alongside the result is a useful sanity check against the original document.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">Why can't BS dates be converted with simple math?</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          Gregorian months always have the same length every year, so shifting between Gregorian dates is pure arithmetic. Bikram Sambat months don't — each month's length depends on that year's sidereal calculation and can shift by a day from one year to the next. That's why this tool relies on an actual lookup table rather than a formula, to stay accurate across the full supported range.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">What date range does this tool support?</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          BS 1970 through BS 2090, which covers roughly AD 1913 to AD 2033. Dates outside that range will show an error instead of a possibly-wrong result.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">Is my date data uploaded anywhere?</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          No. The conversion runs entirely in JavaScript in your browser — nothing you enter is sent to a server, stored, or logged.
+        </p>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="/">
+          <span class="brand-mark">R</span>
+          <span>Raiparuhang</span>
+        </a>
+        <p style="color:var(--ink-60); margin-top:.85rem; max-width:340px">A small archive of private, in-browser tools — built and maintained by one person.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/tools">All tools</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <ul>
+          <li><a href="https://raiparuhang.com.np" target="_blank" rel="noopener">raiparuhang.com.np ↗</a></li>
+          <li><a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter/X</a></li>
+          <li><a href="https://www.linkedin.com/in/paruhang-rai/" target="_blank" rel="noopener">Linkedin</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Raiparuhang</span>
+      <span class="mono">Built static · HTML · CSS · JS</span>
+      <span class="mono"><a href="https://raiparuhang.com.np/terms">Privacy & Terms</a></span>
+    </div>
+  </footer>
+
+<script src="assets/js/nav.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  var BS_CALENDAR = {"1970":[31,31,32,31,31,31,30,29,30,29,30,30],"1971":[31,31,32,31,32,30,30,29,30,29,30,30],"1972":[31,32,31,32,31,30,30,30,29,29,30,31],"1973":[30,32,31,32,31,30,30,30,29,30,29,31],"1974":[31,31,32,31,31,31,30,29,30,29,30,30],"1975":[31,31,32,32,30,31,30,29,30,29,30,30],"1976":[31,32,31,32,31,30,30,30,29,29,30,31],"1977":[30,32,31,32,31,30,30,30,29,30,29,31],"1978":[31,31,32,31,31,31,30,29,30,29,30,30],"1979":[31,31,32,32,31,30,30,29,30,29,30,30],"1980":[31,32,31,32,31,30,30,30,29,29,30,31],"1981":[31,31,31,32,31,31,29,30,30,29,30,30],"1982":[31,31,32,31,31,31,30,29,30,29,30,30],"1983":[31,31,32,32,31,30,30,29,30,29,30,30],"1984":[31,32,31,32,31,30,30,30,29,29,30,31],"1985":[31,31,31,32,31,31,29,30,30,29,30,30],"1986":[31,31,32,31,31,31,30,29,30,29,30,30],"1987":[31,32,31,32,31,30,30,29,30,29,30,30],"1988":[31,32,31,32,31,30,30,30,29,29,30,31],"1989":[31,31,31,32,31,31,30,29,30,29,30,30],"1990":[31,31,32,31,31,31,30,29,30,29,30,30],"1991":[31,32,31,32,31,30,30,29,30,29,30,30],"1992":[31,32,31,32,31,30,30,30,29,30,29,31],"1993":[31,31,31,32,31,31,30,29,30,29,30,30],"1994":[31,31,32,31,31,31,30,29,30,29,30,30],"1995":[31,32,31,32,31,30,30,30,29,29,30,30],"1996":[31,32,31,32,31,30,30,30,29,30,29,31],"1997":[31,31,32,31,31,31,30,29,30,29,30,30],"1998":[31,31,32,31,31,31,30,29,30,29,30,30],"1999":[31,32,31,32,31,30,30,30,29,29,30,31],"2000":[30,32,31,32,31,30,30,30,29,30,29,31],"2001":[31,31,32,31,31,31,30,29,30,29,30,30],"2002":[31,31,32,32,31,30,30,29,30,29,30,30],"2003":[31,32,31,32,31,30,30,30,29,29,30,31],"2004":[30,32,31,32,31,30,30,30,29,30,29,31],"2005":[31,31,32,31,31,31,30,29,30,29,30,30],"2006":[31,31,32,32,31,30,30,29,30,29,30,30],"2007":[31,32,31,32,31,30,30,30,29,29,30,31],"2008":[31,31,31,32,31,31,29,30,30,29,29,31],"2009":[31,31,32,31,31,31,30,29,30,29,30,30],"2010":[31,31,32,32,31,30,30,29,30,29,30,30],"2011":[31,32,31,32,31,30,30,30,29,29,30,31],"2012":[31,31,31,32,31,31,29,30,30,29,30,30],"2013":[31,31,32,31,31,31,30,29,30,29,30,30],"2014":[31,31,32,32,31,30,30,29,30,29,30,30],"2015":[31,32,31,32,31,30,30,30,29,29,30,31],"2016":[31,31,31,32,31,31,29,30,30,29,30,30],"2017":[31,31,32,31,31,31,30,29,30,29,30,30],"2018":[31,32,31,32,31,30,30,29,30,29,30,30],"2019":[31,32,31,32,31,30,30,30,29,29,30,31],"2020":[31,31,31,32,31,31,30,29,30,29,30,30],"2021":[31,31,32,31,31,31,30,29,30,29,30,30],"2022":[31,32,31,32,31,30,30,30,29,29,30,30],"2023":[31,32,31,32,31,30,30,30,29,30,29,31],"2024":[31,31,31,32,31,31,30,29,30,29,30,30],"2025":[31,31,32,31,31,31,30,29,30,29,30,30],"2026":[31,32,31,32,31,30,30,30,29,29,30,30],"2027":[31,32,31,32,31,30,30,30,29,30,29,31],"2028":[31,31,32,31,31,31,30,29,30,29,30,30],"2029":[31,31,32,31,32,30,30,29,30,29,30,30],"2030":[31,32,31,32,31,30,30,30,29,29,30,31],"2031":[30,32,31,32,31,30,30,30,29,30,29,31],"2032":[31,31,32,31,31,31,30,29,30,29,30,30],"2033":[31,31,32,32,31,30,30,29,30,29,30,30],"2034":[31,32,31,32,31,30,30,30,29,29,30,31],"2035":[30,32,31,32,31,31,29,30,30,29,29,31],"2036":[31,31,32,31,31,31,30,29,30,29,30,30],"2037":[31,31,32,32,31,30,30,29,30,29,30,30],"2038":[31,32,31,32,31,30,30,30,29,29,30,31],"2039":[31,31,31,32,31,31,29,30,30,29,30,30],"2040":[31,31,32,31,31,31,30,29,30,29,30,30],"2041":[31,31,32,32,31,30,30,29,30,29,30,30],"2042":[31,32,31,32,31,30,30,30,29,29,30,31],"2043":[31,31,31,32,31,31,29,30,30,29,30,30],"2044":[31,31,32,31,31,31,30,29,30,29,30,30],"2045":[31,32,31,32,31,30,30,29,30,29,30,30],"2046":[31,32,31,32,31,30,30,30,29,29,30,31],"2047":[31,31,31,32,31,31,30,29,30,29,30,30],"2048":[31,31,32,31,31,31,30,29,30,29,30,30],"2049":[31,32,31,32,31,30,30,30,29,29,30,30],"2050":[31,32,31,32,31,30,30,30,29,30,29,31],"2051":[31,31,31,32,31,31,30,29,30,29,30,30],"2052":[31,31,32,31,31,31,30,29,30,29,30,30],"2053":[31,32,31,32,31,30,30,30,29,29,30,30],"2054":[31,32,31,32,31,30,30,30,29,30,29,31],"2055":[31,31,32,31,31,31,30,29,30,29,30,30],"2056":[31,31,32,31,32,30,30,29,30,29,30,30],"2057":[31,32,31,32,31,30,30,30,29,29,30,31],"2058":[30,32,31,32,31,30,30,30,29,30,29,31],"2059":[31,31,32,31,31,31,30,29,30,29,30,30],"2060":[31,31,32,32,31,30,30,29,30,29,30,30],"2061":[31,32,31,32,31,30,30,30,29,29,30,31],"2062":[30,32,31,32,31,31,29,30,29,30,29,31],"2063":[31,31,32,31,31,31,30,29,30,29,30,30],"2064":[31,31,32,32,31,30,30,29,30,29,30,30],"2065":[31,32,31,32,31,30,30,30,29,29,30,31],"2066":[31,31,31,32,31,31,29,30,30,29,29,31],"2067":[31,31,32,31,31,31,30,29,30,29,30,30],"2068":[31,31,32,32,31,30,30,29,30,29,30,30],"2069":[31,32,31,32,31,30,30,30,29,29,30,31],"2070":[31,31,31,32,31,31,29,30,30,29,30,30],"2071":[31,31,32,31,31,31,30,29,30,29,30,30],"2072":[31,32,31,32,31,30,30,29,30,29,30,30],"2073":[31,32,31,32,31,30,30,30,29,29,30,31],"2074":[31,31,31,32,31,31,30,29,30,29,30,30],"2075":[31,31,32,31,31,31,30,29,30,29,30,30],"2076":[31,32,31,32,31,30,30,30,29,29,30,30],"2077":[31,32,31,32,31,30,30,30,29,30,29,31],"2078":[31,31,31,32,31,31,30,29,30,29,30,30],"2079":[31,31,32,31,31,31,30,29,30,29,30,30],"2080":[31,32,31,32,31,30,30,30,29,29,30,30],"2081":[31,32,31,32,31,30,30,30,29,30,29,31],"2082":[31,31,32,31,31,31,30,29,30,29,30,30],"2083":[31,31,32,31,31,31,30,29,30,29,30,30],"2084":[31,31,32,31,31,30,30,30,29,30,30,30],"2085":[31,32,31,32,30,31,30,30,29,30,30,30],"2086":[30,32,31,32,31,30,30,30,29,30,30,30],"2087":[31,31,32,31,31,31,30,30,29,30,30,30],"2088":[30,31,32,32,30,31,30,30,29,30,30,30],"2089":[30,32,31,32,31,30,30,30,29,30,30,30],"2090":[30,32,31,32,31,30,30,30,29,30,30,30]};
+  var BS_EPOCH_YEAR = 1970;
+  var BS_EPOCH_AD_MS = Date.UTC(1913, 3, 13); // 1913-04-13 = BS 1970-01-01
+  var MS_PER_DAY = 86400000;
+  var bsYears = Object.keys(BS_CALENDAR).map(Number).sort(function(a,b){return a-b;});
+  var BS_MIN_YEAR = bsYears[0];
+  var BS_MAX_YEAR = bsYears[bsYears.length - 1];
+
+  var MONTH_NAMES = ["Baisakh","Jestha","Ashar","Shrawan","Bhadra","Ashoj","Kartik","Mangsir","Poush","Magh","Falgun","Chaitra"];
+  var MONTH_NAMES_NP = ["बैशाख","जेठ","असार","साउन","भदौ","असोज","कार्तिक","मंसिर","पौष","माघ","फाल्गुन","चैत"];
+  var WEEKDAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  var NP_DIGITS = ["०","१","२","३","४","५","६","७","८","९"];
+
+  function toNpDigits(n){
+    return String(n).split("").map(function(c){ return NP_DIGITS[c] !== undefined ? NP_DIGITS[c] : c; }).join("");
+  }
+
+  function daysInBsMonth(year, month){
+    var row = BS_CALENDAR[year];
+    if (!row) throw new Error("No calendar data for BS year " + year);
+    return row[month - 1];
+  }
+
+  function bsToAd(year, month, day){
+    var totalDays = 0, y, m;
+    for (y = BS_EPOCH_YEAR; y < year; y++){
+      for (m = 1; m <= 12; m++) totalDays += daysInBsMonth(y, m);
+    }
+    for (m = 1; m < month; m++) totalDays += daysInBsMonth(year, m);
+    totalDays += day;
+    var adMs = BS_EPOCH_AD_MS + (totalDays - 1) * MS_PER_DAY;
+    var d = new Date(adMs);
+    return { year: d.getUTCFullYear(), month: d.getUTCMonth() + 1, day: d.getUTCDate(), weekday: d.getUTCDay() };
+  }
+
+  function adToBs(year, month, day){
+    var adMs = Date.UTC(year, month - 1, day);
+    var totalDays = Math.round((adMs - BS_EPOCH_AD_MS) / MS_PER_DAY) + 1;
+    if (totalDays < 1) throw new Error("Date is before the supported range (before 1913-04-13 AD)");
+    var bsYear = BS_EPOCH_YEAR;
+    while (true){
+      var yearDays = 0;
+      for (var m = 1; m <= 12; m++) yearDays += daysInBsMonth(bsYear, m);
+      if (totalDays <= yearDays) break;
+      totalDays -= yearDays;
+      bsYear++;
+      if (bsYear > BS_MAX_YEAR) throw new Error("Date is beyond the supported range (after BS " + BS_MAX_YEAR + ")");
+    }
+    var bsMonth = 1;
+    while (totalDays > daysInBsMonth(bsYear, bsMonth)){
+      totalDays -= daysInBsMonth(bsYear, bsMonth);
+      bsMonth++;
+    }
+    return { year: bsYear, month: bsMonth, day: totalDays, weekday: new Date(adMs).getUTCDay() };
+  }
+
+  // ---------- UI ----------
+  var bsYearSel = document.getElementById('bsYear');
+  var bsMonthSel = document.getElementById('bsMonth');
+  var bsDaySel = document.getElementById('bsDay');
+  var adInput = document.getElementById('adInput');
+  var bsBigDate = document.getElementById('bsBigDate');
+  var bsWeekday = document.getElementById('bsWeekday');
+  var bsDevanagari = document.getElementById('bsDevanagari');
+  var adBigDate = document.getElementById('adBigDate');
+  var adWeekday = document.getElementById('adWeekday');
+  var statusNote = document.getElementById('statusNote');
+  var bsPanel = document.getElementById('bsPanel');
+  var adPanel = document.getElementById('adPanel');
+  var dirB2A = document.getElementById('dirB2A');
+  var dirA2B = document.getElementById('dirA2B');
+
+  function setDirection(dir){
+    var b2a = dir === 'b2a';
+    dirB2A.classList.toggle('active', b2a);
+    dirA2B.classList.toggle('active', !b2a);
+    bsPanel.style.order = b2a ? '0' : '1';
+    adPanel.style.order = b2a ? '1' : '0';
+    if (b2a) { bsYearSel.focus(); } else { adInput.focus(); }
+  }
+  dirB2A.addEventListener('click', function(){ setDirection('b2a'); });
+  dirA2B.addEventListener('click', function(){ setDirection('a2b'); });
+
+  function flash(msg, ms){
+    statusNote.textContent = msg;
+    if (msg) setTimeout(function(){ if (statusNote.textContent === msg) statusNote.textContent = ""; }, ms || 3500);
+  }
+
+  for (var y = BS_MIN_YEAR; y <= BS_MAX_YEAR; y++){
+    var opt = document.createElement('option');
+    opt.value = y; opt.textContent = y;
+    bsYearSel.appendChild(opt);
+  }
+  MONTH_NAMES.forEach(function(name, i){
+    var opt = document.createElement('option');
+    opt.value = i + 1; opt.textContent = name;
+    bsMonthSel.appendChild(opt);
+  });
+
+  function populateBsDays(year, month, keepDay){
+    var max = daysInBsMonth(year, month);
+    var prevVal = keepDay || parseInt(bsDaySel.value, 10) || 1;
+    bsDaySel.innerHTML = "";
+    for (var d = 1; d <= max; d++){
+      var opt = document.createElement('option');
+      opt.value = d; opt.textContent = d;
+      bsDaySel.appendChild(opt);
+    }
+    bsDaySel.value = Math.min(prevVal, max);
+  }
+
+  function renderBsSide(bsDate){
+    bsBigDate.childNodes[0].nodeValue = MONTH_NAMES[bsDate.month - 1] + " " + bsDate.day + ", " + bsDate.year + " BS";
+    bsWeekday.textContent = WEEKDAYS[bsDate.weekday];
+    bsDevanagari.textContent = toNpDigits(bsDate.day) + " " + MONTH_NAMES_NP[bsDate.month - 1] + " " + toNpDigits(bsDate.year);
+  }
+
+  function renderAdSide(adDate){
+    var pad = function(n){ return n < 10 ? "0" + n : "" + n; };
+    adInput.value = adDate.year + "-" + pad(adDate.month) + "-" + pad(adDate.day);
+    adBigDate.childNodes[0].nodeValue = ["January","February","March","April","May","June","July","August","September","October","November","December"][adDate.month - 1] + " " + adDate.day + ", " + adDate.year;
+    adWeekday.textContent = WEEKDAYS[adDate.weekday];
+  }
+
+  var syncing = false;
+
+  function onBsChange(keepDay){
+    if (syncing) return;
+    syncing = true;
+    try {
+      var year = parseInt(bsYearSel.value, 10);
+      var month = parseInt(bsMonthSel.value, 10);
+      populateBsDays(year, month, keepDay);
+      var day = parseInt(bsDaySel.value, 10);
+      var bsDate = { year: year, month: month, day: day };
+      var ad = bsToAd(year, month, day);
+      bsDate.weekday = ad.weekday;
+      renderBsSide(bsDate);
+      renderAdSide(ad);
+      flash("");
+    } catch (e){
+      flash(e.message);
+    }
+    syncing = false;
+  }
+
+  function onAdChange(){
+    if (syncing || !adInput.value) return;
+    syncing = true;
+    try {
+      var parts = adInput.value.split("-").map(Number);
+      var bs = adToBs(parts[0], parts[1], parts[2]);
+      bsYearSel.value = bs.year;
+      bsMonthSel.value = bs.month;
+      populateBsDays(bs.year, bs.month, bs.day);
+      renderBsSide(bs);
+      renderAdSide({ year: parts[0], month: parts[1], day: parts[2], weekday: bs.weekday });
+      flash("");
+    } catch (e){
+      flash(e.message);
+    }
+    syncing = false;
+  }
+
+  bsYearSel.addEventListener('change', function(){ onBsChange(); });
+  bsMonthSel.addEventListener('change', function(){ onBsChange(); });
+  bsDaySel.addEventListener('change', function(){ onBsChange(parseInt(bsDaySel.value, 10)); });
+  adInput.addEventListener('change', onAdChange);
+
+  document.getElementById('todayBtn').addEventListener('click', function(){
+    var now = new Date();
+    adInput.value = now.getFullYear() + "-" + String(now.getMonth()+1).padStart(2,"0") + "-" + String(now.getDate()).padStart(2,"0");
+    onAdChange();
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', function(){
+    var text = bsDevanagari.previousSibling ? bsBigDate.childNodes[0].nodeValue.trim() : "";
+    navigator.clipboard.writeText(text).then(function(){ flash("Copied to clipboard.", 2000); });
+  });
+
+  // init to today
+  var now = new Date();
+  var todayIso = now.getFullYear() + "-" + String(now.getMonth()+1).padStart(2,"0") + "-" + String(now.getDate()).padStart(2,"0");
+  try {
+    var initBs = adToBs(now.getFullYear(), now.getMonth()+1, now.getDate());
+    bsYearSel.value = initBs.year;
+    bsMonthSel.value = initBs.month;
+    populateBsDays(initBs.year, initBs.month, initBs.day);
+    renderBsSide(initBs);
+    adInput.value = todayIso;
+    renderAdSide({ year: now.getFullYear(), month: now.getMonth()+1, day: now.getDate(), weekday: initBs.weekday });
+  } catch(e){
+    bsYearSel.value = BS_MIN_YEAR;
+    bsMonthSel.value = 1;
+    populateBsDays(BS_MIN_YEAR, 1);
+    onBsChange();
+  }
+})();
+</script>
+</body>
+</html>
