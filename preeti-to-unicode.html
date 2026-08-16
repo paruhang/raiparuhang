@@ -1,0 +1,640 @@
+<!--
+  SETUP NOTE: the "Preview as Devanagari" toggle needs Preeti.ttf sitting
+  next to this HTML file (same folder). Rename the file to match, or edit
+  the @font-face src below, if yours has a different filename. If the
+  font isn't found, the toggle degrades gracefully with a message instead
+  of silently showing boxes/garbage characters.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preeti ⇄ Unicode Converter — Free Nepali Font Converter | Rai Paruhang</title>
+<meta name="description" content="Convert between Preeti font and Nepali Unicode instantly, free and entirely in your browser. No uploads, no accounts.">
+<link rel="alternate" hreflang="en" href="https://raiparuhang.com.np/preeti-to-unicode">
+<link rel="alternate" hreflang="x-default" href="https://raiparuhang.com.np/preeti-to-unicode">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="assets/css/styles.css" />
+<link rel="canonical" href="https://raiparuhang.com.np/preeti-to-unicode">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  /* Preeti.ttf sits in the same folder as this HTML file — adjust the
+     filename below if yours is named differently (e.g. preeti.ttf,
+     Preeti Normal.ttf). */
+  @font-face{
+    font-family:'Preeti';
+    src:url('/fonts/Preeti.ttf') format('truetype');
+    font-display:swap;
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Preeti Unicode Converter",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Free browser-based tool to convert between Preeti font Nepali text and Unicode Devanagari, in either direction. Runs entirely client-side."
+}
+</script>
+<style>
+  :root{
+    --bg:#0f1115;
+    --panel:#171a21;
+    --panel-border:#262a35;
+    --text:#e8e9ed;
+    --text-dim:#9a9fac;
+    --accent:#dc3d5a;
+    --accent-dim:#7a2233;
+    --mono:'JetBrains Mono','Courier New',monospace;
+
+    /* Override the shared site palette so nav/footer go dark too */
+    --paper: #0f1115;
+    --ink: #e8e9ed;
+    --muted: #171a21;
+    --muted-2: #20242c;
+    --hairline: #262a35;
+    --hairline-2: rgba(232, 233, 237, 0.08);
+    --ink-60: rgba(232, 233, 237, 0.6);
+    --ink-40: rgba(232, 233, 237, 0.4);
+  }
+  .nav{ background: rgba(15, 17, 21, 0.85) !important; }
+  *{box-sizing:border-box;}
+  .wrap{
+    max-width:920px;margin:0 auto;padding:32px 20px 64px;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    line-height:1.5;
+  }
+  header.page{margin-bottom:22px;}
+  h1{font-size:1.6rem;margin:0 0 8px;letter-spacing:-0.01em;}
+  .sub{color:var(--text-dim);font-size:0.95rem;max-width:640px;}
+  .badge{
+    display:inline-block;font-size:0.72rem;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--accent);border:1px solid var(--accent-dim);background:rgba(220,61,90,.08);
+    padding:3px 8px;border-radius:4px;margin-bottom:12px;
+  }
+
+  .direction-switch{
+    display:inline-flex;background:var(--panel);border:1px solid var(--panel-border);
+    border-radius:8px;padding:3px;margin-bottom:20px;gap:3px;
+  }
+  .direction-switch button{
+    background:transparent;border:none;color:var(--text-dim);font-size:0.85rem;
+    padding:7px 14px;border-radius:6px;cursor:pointer;transition:all .15s;
+  }
+  .direction-switch button.active{background:var(--accent);color:#fff;}
+  .direction-switch button:not(.active):hover{color:var(--text);}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;position:relative;}
+  @media (max-width:760px){.grid{grid-template-columns:1fr;}}
+  .panel{
+    background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;
+    display:flex;flex-direction:column;overflow:hidden;
+  }
+  .panel.is-output{opacity:0.92;}
+  .panel-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:10px 14px;border-bottom:1px solid var(--panel-border);
+    gap:8px;
+  }
+  .panel-head span.label{font-size:0.78rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;}
+  .panel-head span.tag{font-size:0.68rem;color:var(--accent);border:1px solid var(--accent-dim);border-radius:4px;padding:1px 6px;margin-left:6px;}
+  textarea{
+    width:100%;min-height:280px;resize:vertical;border:none;background:transparent;color:var(--text);
+    padding:14px;font-size:1.05rem;font-family:var(--mono);outline:none;
+  }
+  textarea[readonly]{color:var(--text-dim);}
+  .devanagari-text{font-family:'Noto Sans Devanagari',sans-serif;font-size:1.15rem;color:var(--text);}
+  .btn{
+    background:transparent;border:1px solid var(--panel-border);color:var(--text-dim);
+    padding:5px 10px;border-radius:6px;font-size:0.78rem;cursor:pointer;transition:all .15s;
+    white-space:nowrap;
+  }
+  .btn:hover{color:var(--text);border-color:var(--text-dim);}
+  .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .btn.primary:hover{background:#c2334d;}
+  .note{color:var(--text-dim);font-size:0.82rem;margin-top:10px;}
+  .info{margin-top:44px;border-top:1px solid var(--panel-border);padding-top:28px;}
+  .info h2{font-size:1.15rem;margin-bottom:10px;}
+  .info p{color:var(--text-dim);font-size:0.92rem;max-width:680px;}
+  .privacy-strip{
+    display:flex;align-items:center;gap:8px;font-size:0.8rem;color:var(--text-dim);
+    margin-top:16px;
+  }
+  .privacy-strip svg{flex-shrink:0;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark">R</span>
+        <span>Raiparuhang</span>
+      </a>
+      <nav class="nav-links">
+        <a data-nav href="/">Home</a>
+        <a data-nav href="/tools">Tools</a>
+        <a data-nav href="/about">About</a>
+        <a data-nav href="/contact">Contact</a>
+      </nav>
+      <a class="nav-cta" href="/tools">Browse tools →</a>
+      <button class="nav-toggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <div class="nav-mobile">
+      <a data-nav href="/">Home</a>
+      <a data-nav href="/tools">Tools</a>
+      <a data-nav href="/about">About</a>
+      <a data-nav href="/contact">Contact</a>
+    </div>
+  </header>
+
+<div class="wrap">
+  <header class="page">
+    <span class="badge">100% client-side</span>
+    <h1>Preeti ⇄ Unicode Converter</h1>
+    <p class="sub">Convert Preeti font text to Nepali Unicode, or the other way around — ready for anywhere Unicode is required (government forms, WhatsApp, websites, Word) or anywhere legacy Preeti is still expected. Nothing you type ever leaves your browser.</p>
+  </header>
+
+  <div class="direction-switch" role="tablist" aria-label="Conversion direction">
+    <button type="button" id="dirP2U" class="active">Preeti → Unicode</button>
+    <button type="button" id="dirU2P">Unicode → Preeti</button>
+  </div>
+
+  <div class="grid">
+    <div class="panel" id="leftPanel">
+      <div class="panel-head">
+        <span><span class="label">Preeti text</span><span class="tag" id="leftTag">Input</span></span>
+        <div style="display:flex;gap:6px;">
+          <button class="btn primary" id="previewBtn" type="button" title="Render this box in the actual Preeti font, the way it originally looked">Show raw text</button>
+          <button class="btn" id="leftActionBtn" type="button">Paste</button>
+        </div>
+      </div>
+      <textarea id="leftBox" style="font-family:'Preeti', var(--mono);" placeholder="Type or paste Preeti font text here…" spellcheck="false"></textarea>
+    </div>
+    <div class="panel is-output" id="rightPanel">
+      <div class="panel-head">
+        <span><span class="label">Unicode (नेपाली)</span><span class="tag" id="rightTag">Output</span></span>
+        <button class="btn" id="rightActionBtn" type="button">Copy</button>
+      </div>
+      <textarea id="rightBox" class="devanagari-text" placeholder="Unicode output will appear here…" readonly spellcheck="false"></textarea>
+    </div>
+  </div>
+
+  <button class="btn" id="clearBtn" type="button" style="margin-top:14px;">Clear</button>
+  <p class="note" id="statusNote"></p>
+
+  <div class="privacy-strip">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg>
+    Conversion runs entirely in your browser via JavaScript — no text is uploaded or stored.
+  </div>
+
+  <div class="info">
+    <h2>About this converter</h2>
+    <p>Preeti is a glyph-substitution font: it maps Devanagari letter-shapes onto ordinary English keyboard keys, so text typed in Preeti is really just plain ASCII wearing a Nepali costume. That's fine as long as everyone viewing the text has the Preeti font installed — but it breaks on modern platforms (browsers, phones, government portals) that expect real Unicode Devanagari. Use "Preeti → Unicode" to fix old Preeti text for modern use, or "Unicode → Preeti" to go the other way if you need to match a legacy layout that still expects Preeti.</p>
+    <p>"Preview as Devanagari" loads the actual Preeti font and applies it to the Preeti box, so you can see the text the way it originally rendered before comparing it against the Unicode side.</p>
+  </div>
+
+  <!-- RELATED TOOLS -->
+  <section style="max-width:780px;margin:3rem auto 0;padding:0;" class="border-line">
+    <h2 style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px;">Related Tools</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;">
+      <a href="https://raiparuhang.com.np/word-counter" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;flex:1;min-width:180px;">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#4f8eff" stroke-width="2"><path d="M4 6h16M4 12h10M4 18h16"/></svg>
+        Word Counter
+        <span style="margin-left:auto;font-size:11px;color:var(--text-dim);font-family:monospace;">→</span>
+      </a>
+      <a href="https://raiparuhang.com.np/case-converter" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;flex:1;min-width:180px;">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#22d3a0" stroke-width="2"><path d="M4 20V8l4-6 4 6v12M4 14h8M14 10h6M14 15h6M14 20h4"/></svg>
+        Case Converter
+        <span style="margin-left:auto;font-size:11px;color:var(--text-dim);font-family:monospace;">→</span>
+      </a>
+      <a href="https://raiparuhang.com.np/base64-encoder" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;flex:1;min-width:180px;">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#f5a623" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        Base64 Encoder
+        <span style="margin-left:auto;font-size:11px;color:var(--text-dim);font-family:monospace;">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- HOW TO -->
+  <section style="max-width:780px;margin:3rem auto 0;padding:2.5rem 0 0;border-top:1px solid var(--panel-border);">
+    <h2 style="font-size:1.6rem;font-weight:600;margin:0 0 0.5rem;">How to convert Preeti to Unicode</h2>
+    <p style="font-size:1rem;color:var(--text-dim);margin:0 0 2rem;">
+      Converting takes a few seconds — no account, no upload, and nothing installed. Here's the full walkthrough, plus notes for specific devices and situations.
+    </p>
+
+    <!-- Main 3 steps -->
+    <ol style="padding:0;margin:0 0 2.5rem;list-style:none;display:flex;flex-direction:column;gap:1rem;">
+      <li style="display:flex;gap:1rem;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:1rem 1.25rem;">
+        <span style="min-width:32px;height:32px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:600;flex-shrink:0;">1</span>
+        <div>
+          <p style="font-weight:600;margin:0 0 0.25rem;color:var(--text);">Paste or type your text</p>
+          <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">Drop old Preeti-encoded text into the left box, or type directly if you still have a Preeti keyboard layout set up. If you're going the other way, type or paste Nepali Unicode into the right box instead.</p>
+        </div>
+      </li>
+      <li style="display:flex;gap:1rem;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:1rem 1.25rem;">
+        <span style="min-width:32px;height:32px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:600;flex-shrink:0;">2</span>
+        <div>
+          <p style="font-weight:600;margin:0 0 0.25rem;color:var(--text);">Pick a direction</p>
+          <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">Use <em>Preeti → Unicode</em> to bring old text into the modern Unicode standard, or switch to <em>Unicode → Preeti</em> if you need to match a legacy system that still expects the old font encoding. The panels swap sides automatically so the box you're editing always stays on the left.</p>
+        </div>
+      </li>
+      <li style="display:flex;gap:1rem;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:1rem 1.25rem;">
+        <span style="min-width:32px;height:32px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:600;flex-shrink:0;">3</span>
+        <div>
+          <p style="font-weight:600;margin:0 0 0.25rem;color:var(--text);">Copy the result</p>
+          <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">Click <em>Copy</em> on the output panel and the converted text is on your clipboard — ready to paste into Word, WhatsApp, Facebook, or a government portal. Nothing is saved or sent anywhere; it disappears the moment you leave the page.</p>
+        </div>
+      </li>
+    </ol>
+
+    <!-- Sub-sections -->
+    <div style="display:flex;flex-direction:column;gap:2rem;">
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">How to preview Preeti text before converting</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          Click <em>Preview as Devanagari</em> above the Preeti box to render it in the actual Preeti font — the way it looked in its original source — so you can sanity-check it against the Unicode output before you commit to the conversion. If the button reports the font is missing, that's just a local setup note for this file's owner and doesn't affect conversion accuracy.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">How to convert Preeti to Unicode on Mac, Windows, or mobile</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          This runs entirely as JavaScript in your browser, so there's nothing to install on any platform. Open this page in Safari or Chrome on Mac, Chrome or Edge on Windows, or Safari/Chrome on iPhone and Android — paste your text the same way on all of them. On mobile, use your keyboard's paste option or long-press inside the box.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">Why won't my old Nepali text display correctly?</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          If text typed in Preeti shows up as random symbols or boxes, it's because Preeti isn't a real Unicode font — it reassigns Devanagari shapes to plain English keys, so it only looks right on a device that has the Preeti font installed. Converting it to Unicode with this tool makes it render correctly everywhere, permanently, without needing that font again.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">Can I convert Unicode Nepali text back to Preeti?</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          Yes — switch to <em>Unicode → Preeti</em> using the toggle above the panels. This is useful if you need to match an older layout, publication, or piece of software that was built expecting Preeti-encoded text rather than Unicode.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">Is my Nepali text uploaded anywhere?</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          No. The entire conversion runs client-side in JavaScript — nothing you type or paste is sent to a server, stored, or logged. That makes it safe to use for anything, including personal letters, legal documents, or confidential notes.
+        </p>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="/">
+          <span class="brand-mark">R</span>
+          <span>Raiparuhang</span>
+        </a>
+        <p style="color:var(--ink-60); margin-top:.85rem; max-width:340px">A small archive of private, in-browser tools — built and maintained by one person.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/tools">All tools</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <ul>
+          <li><a href="https://raiparuhang.com.np" target="_blank" rel="noopener">raiparuhang.com.np ↗</a></li>
+          <li><a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter/X</a></li>
+          <li><a href="https://www.linkedin.com/in/paruhang-rai/" target="_blank" rel="noopener">Linkedin</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Raiparuhang</span>
+      <span class="mono">Built static · HTML · CSS · JS</span>
+      <span class="mono"><a href="https://raiparuhang.com.np/terms">Privacy & Terms</a></span>
+    </div>
+  </footer>
+
+<script src="assets/js/nav.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  // ---------- Preeti -> Unicode ----------
+  var GLYPH_MAP = {
+    "s":"क","S":"क्","v":"ख","V":"ख्","u":"ग","U":"ग्",
+    "3":"घ","£":"घ्","ª":"ङ","Í":"ङ्क","Ë":"ङ्ग","‹":"ङ्घ","°":"ङ्ढ",
+    "r":"च","R":"च्","5":"छ","e":"भ","E":"भ्",
+    "h":"ज","H":"ज्","1":"ज्ञ","¡":"ज्ञ्","~":"ञ्","`":"ञ",
+    "6":"ट","§":"ट्ट","Ý":"ट्ठ","7":"ठ","¶":"ठ्ठ",
+    "8":"ड","9":"ढ","•":"ड्ड","0":"ण्",
+    "t":"त","T":"त्","q":"त्र","Q":"त्त","y":"थ","Y":"थ्",
+    "b":"द","B":"द्य","2":"द्द","4":"द्ध","ß":"द्म","¢":"द्घ","›":"द्र",
+    "d":"म","D":"म्","g":"न","G":"न्","Ì":"न्न",
+    "k":"प","K":"प्","ˆ":"फ्","a":"ब","A":"ब्",
+    "o":"य","j":"व","J":"व्",
+    "z":"श","Z":"श्","i":"ष्","È":"ष",">":"श्र",
+    ";":"स",":":"स्","x":"ह","X":"ह्","Å":"हृ",
+    "c":"अ","O":"इ","p":"उ","C":"ऋ","P":"ए",
+    "I":"क्ष्","Ô":"क्ष","¤":"झ्","´":"झ","‰":"झ्","n":"ल","N":"ल्",
+    "f":"ा","l":"ि","L":"ी","'":"ु","\"":"ू","[":"ृ",
+    "]":"े","}":"ै","F":"ँ","M":"ः","+":"ं",
+    "\\":"्","|":"्र","«":"्र","Ø":"्य",
+    "?":"रु","¿":"रू","©":"र","®":"+",
+    "!":"१","@":"२","#":"३","$":"४","%":"५",
+    "^":"६","&":"७","*":"८","(":"९",")":"०",
+    ".":"।",",":",","/":"र","-":"(","_":")","Ö":"=","=":".",
+    "æ":"\u201c","Æ":"\u201d","‘":"ॅ","Ú":"\u2019","˜":"ऽ","÷":"/"
+  };
+
+  var REORDER_RULES = [
+    [/्ा/g, ""],
+    [/(त्र|त्त)([^उभप]+?)m/g, "$1m$2"],
+    [/त्रm/g, "क्र"],
+    [/त्तm/g, "क्त"],
+    [/([^उभप]+?)m/g, "m$1"],
+    [/उm/g, "ऊ"],
+    [/भm/g, "झ"],
+    [/पm/g, "फ"],
+    [/इ\{/g, "ई"],
+    [/ि((.्)*[^्])/g, "$1ि"],
+    [/(.[ािीुूृेैोौंःँ]*?)\{/g, "{$1"],
+    [/((.्)*)\{/g, "{$1"],
+    [/\{/g, "र्"],
+    [/([ाीुूृेैोौंःँ]+?)(्(.्)*[^्])/g, "$2$1"],
+    [/्([ाीुूृेैोौंःँ]+?)((.्)*[^्])/g, "्$2$1"],
+    [/([ंँ])([ािीुूृेैोौः]*)/g, "$2$1"],
+    [/ँँ/g, "ँ"], [/ंं/g, "ं"], [/ेे/g, "े"], [/ैै/g, "ै"], [/ुु/g, "ु"], [/ूू/g, "ू"],
+    [/^ः/g, ":"],
+    [/टृ/g, "ट्ट"],
+    [/ेा/g, "ाे"], [/ैा/g, "ाै"],
+    [/अाे/g, "ओ"], [/अाै/g, "औ"], [/अा/g, "आ"],
+    [/एे/g, "ऐ"],
+    [/ाे/g, "ो"], [/ाै/g, "ौ"]
+  ];
+
+  function preetiToUnicode(input){
+    if(!input) return "";
+    var out = "";
+    for (var i=0;i<input.length;i++){
+      var ch = input[i];
+      out += (GLYPH_MAP[ch] !== undefined) ? GLYPH_MAP[ch] : ch;
+    }
+    for (var r=0;r<REORDER_RULES.length;r++){
+      out = out.replace(REORDER_RULES[r][0], REORDER_RULES[r][1]);
+    }
+    return out;
+  }
+
+  // ---------- Unicode -> Preeti ----------
+  var U2P = {
+    "अ":"c","आ":"cf","ा":"f","इ":"O","ई":"O{","र्":"{","उ":"p","ए":"P",
+    "े":"]","ै":"}","ो":"f]","ौ":"f}","ओ":"cf]","औ":"cf}","ं":"+","ँ":"F",
+    "ि":"l","ी":"L","ु":"'","ू":"\"",
+    "क":"s","ख":"v","ग":"u","घ":"3","ङ":"ª","च":"r","छ":"5","ज":"h","झ":"´",
+    "ञ":"`","ट":"6","ठ":"7","ड":"8","ढ":"9","ण":"0f","त":"t","थ":"y","द":"b",
+    "ध":"w","न":"g","प":"k","फ":"km","ब":"a","भ":"e","म":"d","य":"o","र":"/",
+    "रू":"?","ृ":"[","ल":"n","व":"j","स":";","श":"z","ष":"if","ज्ञ":"1","ह":"x",
+    "१":"!","२":"@","३":"#","४":"$","५":"%","६":"^","७":"&","८":"*","९":"(","०":")",
+    "।":".","्":"\\","ऊ":"pm","-":" ","(":"-",")":"_"
+  };
+  var HALF_FORM_KEYS = {};
+  "wertyuxasdghjkzvn".split("").forEach(function(k){ HALF_FORM_KEYS[k] = true; });
+
+  function shiftKey(key){ return String.fromCharCode(key.charCodeAt(0) - 32); }
+
+  function u2pNormalize(text){
+    var out = "", i = 0;
+    while (i < text.length){
+      var ch = text[i], next = text[i+1], next2 = text[i+2];
+      if (ch !== "र" && U2P[ch] !== undefined &&
+          next === "्" && next2 !== undefined && next2 !== " " && next2 !== "।" && next2 !== ","){
+        if (next2 !== "र"){
+          if (HALF_FORM_KEYS[U2P[ch]]){ out += shiftKey(U2P[ch]); i += 2; continue; }
+          if (ch === "स"){ out += ":"; i += 2; continue; }
+          if (ch === "ष"){ out += "i"; i += 2; continue; }
+        }
+      }
+      if (ch === "्" && next === "र" && (i === 0 || text[i-1] !== "र")){
+        var prev = text[i-1];
+        out += (prev !== "ट" && prev !== "ठ" && prev !== "ड") ? "|" : "«";
+        i += 2; continue;
+      }
+      out += ch; i += 1;
+    }
+    return out.replace(/त\|/g, "q");
+  }
+
+  function u2pMap(ch){
+    if (U2P[ch] === undefined) throw new Error("no mapping");
+    return U2P[ch];
+  }
+
+  function unicodeToPreeti(text){
+    if(!text) return "";
+    var norm = u2pNormalize(text);
+    var out = "", i = 0;
+    while (i < norm.length){
+      var ch = norm[i];
+      if (ch === "\ufeff"){ i++; continue; }
+      var n1 = norm[i+1], n2 = norm[i+2], n3 = norm[i+3];
+      var handled = false;
+      try {
+        if (n1 === "ि"){
+          out += (ch === "q") ? ("l" + ch) : ("l" + u2pMap(ch));
+          i += 2; handled = true;
+        } else if (n2 === "ि" && "WERTYUXASDGHJK:ZVN".indexOf(ch) !== -1 && n1 !== "q"){
+          out += "l" + ch + u2pMap(n1);
+          i += 3; handled = true;
+        } else if (n2 === "ि" && n1 === "q"){
+          out += "l" + ch + n1;
+          i += 3; handled = true;
+        } else if (n1 === "्" && ch === "र"){
+          if (["ा","ो","ौ","े","ै","ी"].indexOf(n3) !== -1){
+            out += u2pMap(n2) + u2pMap(n3) + "{"; i += 4; handled = true;
+          } else if (n3 === "ि"){
+            out += u2pMap(n3) + u2pMap(n2) + "{"; i += 4; handled = true;
+          } else {
+            out += u2pMap(n2) + "{"; i += 3; handled = true;
+          }
+        } else if (n3 === "ि" && (n2 === "|" || n2 === "«") && "WERTYUXASDGHJKIi:ZVN".indexOf(ch) !== -1){
+          out += "l" + ch + u2pMap(n1) + n2; i += 4; handled = true;
+        }
+      } catch(e){ handled = false; }
+
+      if (!handled){
+        try { out += u2pMap(ch); } catch(e){ out += ch; }
+        i += 1;
+      }
+    }
+    return out
+      .replace(/Si/g, "I").replace(/H`/g, "1").replace(/b\\w/g, "4")
+      .replace(/z\|/g, ">").replace(/\/'/g, "?").replace(/\/"/g, "¿")
+      .replace(/Tt/g, "Q").replace(/b\\lj/g, "lå").replace(/b\\j/g, "å")
+      .replace(/0f\\/g, "0").replace(/`\\/g, "~");
+  }
+
+  // ---------- UI wiring ----------
+  var leftBox = document.getElementById('leftBox');
+  var rightBox = document.getElementById('rightBox');
+  var leftTag = document.getElementById('leftTag');
+  var rightTag = document.getElementById('rightTag');
+  var leftPanel = document.getElementById('leftPanel');
+  var rightPanel = document.getElementById('rightPanel');
+  var leftActionBtn = document.getElementById('leftActionBtn');
+  var rightActionBtn = document.getElementById('rightActionBtn');
+  var statusNote = document.getElementById('statusNote');
+  var previewBtn = document.getElementById('previewBtn');
+  var dirP2U = document.getElementById('dirP2U');
+  var dirU2P = document.getElementById('dirU2P');
+
+  var direction = 'p2u'; // 'p2u' = left editable (Preeti), 'u2p' = right editable (Unicode)
+  var previewOn = true;
+  var fontStatus = null;
+
+  function flash(msg, ms){
+    statusNote.textContent = msg;
+    setTimeout(function(){ statusNote.textContent = ""; }, ms || 3000);
+  }
+
+  function checkFontLoaded(){
+    if (fontStatus !== null) return Promise.resolve(fontStatus);
+    if (!('fonts' in document)) { fontStatus = false; return Promise.resolve(false); }
+    return document.fonts.load('16px Preeti').then(function(fonts){
+      fontStatus = fonts.length > 0 && document.fonts.check('16px Preeti');
+      return fontStatus;
+    }).catch(function(){ fontStatus = false; return false; });
+  }
+
+  function applyPreviewState(){
+    if (previewOn){
+      leftBox.style.fontFamily = "'Preeti', var(--mono)";
+      previewBtn.textContent = "Show raw text";
+      previewBtn.classList.add('primary');
+    } else {
+      leftBox.style.fontFamily = "var(--mono)";
+      previewBtn.textContent = "Preview as Devanagari";
+      previewBtn.classList.remove('primary');
+    }
+  }
+
+  checkFontLoaded().then(function(loaded){
+    if (!loaded){
+      previewOn = false;
+      applyPreviewState();
+      flash("Preeti font not found next to this file — showing raw text instead.", 4000);
+    }
+  });
+
+  previewBtn.addEventListener('click', function(){
+    if (!previewOn){
+      checkFontLoaded().then(function(loaded){
+        if (!loaded){
+          flash("Preeti font not found next to this file — add Preeti.ttf to enable the preview.", 4000);
+          return;
+        }
+        previewOn = true;
+        applyPreviewState();
+      });
+    } else {
+      previewOn = false;
+      applyPreviewState();
+    }
+  });
+
+  function run(){
+    if (direction === 'p2u'){
+      rightBox.value = preetiToUnicode(leftBox.value);
+    } else {
+      leftBox.value = unicodeToPreeti(rightBox.value);
+    }
+  }
+
+  function setDirection(newDir){
+    direction = newDir;
+    var p2u = direction === 'p2u';
+
+    dirP2U.classList.toggle('active', p2u);
+    dirU2P.classList.toggle('active', !p2u);
+
+    leftBox.readOnly = !p2u;
+    rightBox.readOnly = p2u;
+    leftPanel.classList.toggle('is-output', !p2u);
+    rightPanel.classList.toggle('is-output', p2u);
+    leftPanel.style.order = p2u ? '0' : '1';
+    rightPanel.style.order = p2u ? '1' : '0';
+    leftTag.textContent = p2u ? 'Input' : 'Output';
+    rightTag.textContent = p2u ? 'Output' : 'Input';
+    leftActionBtn.textContent = p2u ? 'Paste' : 'Copy';
+    rightActionBtn.textContent = p2u ? 'Copy' : 'Paste';
+
+    run();
+  }
+
+  dirP2U.addEventListener('click', function(){ setDirection('p2u'); });
+  dirU2P.addEventListener('click', function(){ setDirection('u2p'); });
+
+  leftBox.addEventListener('input', function(){ if (direction === 'p2u') run(); });
+  rightBox.addEventListener('input', function(){ if (direction === 'u2p') run(); });
+
+  document.getElementById('clearBtn').addEventListener('click', function(){
+    leftBox.value = "";
+    rightBox.value = "";
+    (direction === 'p2u' ? leftBox : rightBox).focus();
+  });
+
+  function activeEditableBox(){ return direction === 'p2u' ? leftBox : rightBox; }
+  function activeReadonlyBox(){ return direction === 'p2u' ? rightBox : leftBox; }
+
+  function handleCopy(){
+    var box = activeReadonlyBox();
+    if (!box.value) return;
+    navigator.clipboard.writeText(box.value).then(function(){
+      flash("Copied to clipboard.", 2000);
+    });
+  }
+
+  function handlePaste(){
+    navigator.clipboard.readText().then(function(text){
+      activeEditableBox().value = text;
+      run();
+    }).catch(function(){
+      flash("Couldn't read clipboard — paste manually with Ctrl/Cmd+V.");
+    });
+  }
+
+  leftActionBtn.addEventListener('click', function(){
+    if (direction === 'p2u') handlePaste(); else handleCopy();
+  });
+  rightActionBtn.addEventListener('click', function(){
+    if (direction === 'p2u') handleCopy(); else handlePaste();
+  });
+
+  applyPreviewState();
+})();
+</script>
+</body>
+</html>
