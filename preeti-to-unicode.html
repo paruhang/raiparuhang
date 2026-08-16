@@ -12,7 +12,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Preeti ⇄ Unicode Converter — Free Nepali Font Converter | Rai Paruhang</title>
 <meta name="description" content="Convert between Preeti font and Nepali Unicode instantly, free and entirely in your browser. No uploads, no accounts.">
+<link rel="alternate" hreflang="en" href="https://raiparuhang.com.np/preeti-to-unicode">
+<link rel="alternate" hreflang="x-default" href="https://raiparuhang.com.np/preeti-to-unicode">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="assets/css/styles.css" />
 <link rel="canonical" href="https://raiparuhang.com.np/preeti-to-unicode">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   /* Preeti.ttf sits in the same folder as this HTML file — adjust the
      filename below if yours is named differently (e.g. preeti.ttf,
@@ -44,16 +55,26 @@
     --accent:#dc3d5a;
     --accent-dim:#7a2233;
     --mono:'JetBrains Mono','Courier New',monospace;
+
+    /* Override the shared site palette so nav/footer go dark too */
+    --paper: #0f1115;
+    --ink: #e8e9ed;
+    --muted: #171a21;
+    --muted-2: #20242c;
+    --hairline: #262a35;
+    --hairline-2: rgba(232, 233, 237, 0.08);
+    --ink-60: rgba(232, 233, 237, 0.6);
+    --ink-40: rgba(232, 233, 237, 0.4);
   }
+  .nav{ background: rgba(15, 17, 21, 0.85) !important; }
   *{box-sizing:border-box;}
-  body{
-    margin:0;
+  .wrap{
+    max-width:920px;margin:0 auto;padding:32px 20px 64px;
     background:var(--bg);
     color:var(--text);
     font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
     line-height:1.5;
   }
-  .wrap{max-width:920px;margin:0 auto;padding:32px 20px 64px;}
   header.page{margin-bottom:22px;}
   h1{font-size:1.6rem;margin:0 0 8px;letter-spacing:-0.01em;}
   .sub{color:var(--text-dim);font-size:0.95rem;max-width:640px;}
@@ -102,7 +123,6 @@
   .btn:hover{color:var(--text);border-color:var(--text-dim);}
   .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent);}
   .btn.primary:hover{background:#c2334d;}
-  .toolbar{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
   .note{color:var(--text-dim);font-size:0.82rem;margin-top:10px;}
   .info{margin-top:44px;border-top:1px solid var(--panel-border);padding-top:28px;}
   .info h2{font-size:1.15rem;margin-bottom:10px;}
@@ -115,6 +135,33 @@
 </style>
 </head>
 <body>
+
+<!-- NAV -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark">R</span>
+        <span>Raiparuhang</span>
+      </a>
+      <nav class="nav-links">
+        <a data-nav href="/">Home</a>
+        <a data-nav href="/tools">Tools</a>
+        <a data-nav href="/about">About</a>
+        <a data-nav href="/contact">Contact</a>
+      </nav>
+      <a class="nav-cta" href="/tools">Browse tools →</a>
+      <button class="nav-toggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <div class="nav-mobile">
+      <a data-nav href="/">Home</a>
+      <a data-nav href="/tools">Tools</a>
+      <a data-nav href="/about">About</a>
+      <a data-nav href="/contact">Contact</a>
+    </div>
+  </header>
+
 <div class="wrap">
   <header class="page">
     <span class="badge">100% client-side</span>
@@ -147,10 +194,7 @@
     </div>
   </div>
 
-  <div class="toolbar">
-    <button class="btn primary" id="convertBtn" type="button">Convert</button>
-    <button class="btn" id="clearBtn" type="button">Clear</button>
-  </div>
+  <button class="btn" id="clearBtn" type="button" style="margin-top:14px;">Clear</button>
   <p class="note" id="statusNote"></p>
 
   <div class="privacy-strip">
@@ -163,8 +207,138 @@
     <p>Preeti is a glyph-substitution font: it maps Devanagari letter-shapes onto ordinary English keyboard keys, so text typed in Preeti is really just plain ASCII wearing a Nepali costume. That's fine as long as everyone viewing the text has the Preeti font installed — but it breaks on modern platforms (browsers, phones, government portals) that expect real Unicode Devanagari. Use "Preeti → Unicode" to fix old Preeti text for modern use, or "Unicode → Preeti" to go the other way if you need to match a legacy layout that still expects Preeti.</p>
     <p>"Preview as Devanagari" loads the actual Preeti font and applies it to the Preeti box, so you can see the text the way it originally rendered before comparing it against the Unicode side.</p>
   </div>
+
+  <!-- RELATED TOOLS -->
+  <section style="max-width:780px;margin:3rem auto 0;padding:0;" class="border-line">
+    <h2 style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px;">Related Tools</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;">
+      <a href="https://raiparuhang.com.np/word-counter" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;flex:1;min-width:180px;">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#4f8eff" stroke-width="2"><path d="M4 6h16M4 12h10M4 18h16"/></svg>
+        Word Counter
+        <span style="margin-left:auto;font-size:11px;color:var(--text-dim);font-family:monospace;">→</span>
+      </a>
+      <a href="https://raiparuhang.com.np/case-converter" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;flex:1;min-width:180px;">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#22d3a0" stroke-width="2"><path d="M4 20V8l4-6 4 6v12M4 14h8M14 10h6M14 15h6M14 20h4"/></svg>
+        Case Converter
+        <span style="margin-left:auto;font-size:11px;color:var(--text-dim);font-family:monospace;">→</span>
+      </a>
+      <a href="https://raiparuhang.com.np/base64-encoder" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;flex:1;min-width:180px;">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#f5a623" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        Base64 Encoder
+        <span style="margin-left:auto;font-size:11px;color:var(--text-dim);font-family:monospace;">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- HOW TO -->
+  <section style="max-width:780px;margin:3rem auto 0;padding:2.5rem 0 0;border-top:1px solid var(--panel-border);">
+    <h2 style="font-size:1.6rem;font-weight:600;margin:0 0 0.5rem;">How to convert Preeti to Unicode</h2>
+    <p style="font-size:1rem;color:var(--text-dim);margin:0 0 2rem;">
+      Converting takes a few seconds — no account, no upload, and nothing installed. Here's the full walkthrough, plus notes for specific devices and situations.
+    </p>
+
+    <!-- Main 3 steps -->
+    <ol style="padding:0;margin:0 0 2.5rem;list-style:none;display:flex;flex-direction:column;gap:1rem;">
+      <li style="display:flex;gap:1rem;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:1rem 1.25rem;">
+        <span style="min-width:32px;height:32px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:600;flex-shrink:0;">1</span>
+        <div>
+          <p style="font-weight:600;margin:0 0 0.25rem;color:var(--text);">Paste or type your text</p>
+          <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">Drop old Preeti-encoded text into the left box, or type directly if you still have a Preeti keyboard layout set up. If you're going the other way, type or paste Nepali Unicode into the right box instead.</p>
+        </div>
+      </li>
+      <li style="display:flex;gap:1rem;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:1rem 1.25rem;">
+        <span style="min-width:32px;height:32px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:600;flex-shrink:0;">2</span>
+        <div>
+          <p style="font-weight:600;margin:0 0 0.25rem;color:var(--text);">Pick a direction</p>
+          <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">Use <em>Preeti → Unicode</em> to bring old text into the modern Unicode standard, or switch to <em>Unicode → Preeti</em> if you need to match a legacy system that still expects the old font encoding. The panels swap sides automatically so the box you're editing always stays on the left.</p>
+        </div>
+      </li>
+      <li style="display:flex;gap:1rem;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:1rem 1.25rem;">
+        <span style="min-width:32px;height:32px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:600;flex-shrink:0;">3</span>
+        <div>
+          <p style="font-weight:600;margin:0 0 0.25rem;color:var(--text);">Copy the result</p>
+          <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">Click <em>Copy</em> on the output panel and the converted text is on your clipboard — ready to paste into Word, WhatsApp, Facebook, or a government portal. Nothing is saved or sent anywhere; it disappears the moment you leave the page.</p>
+        </div>
+      </li>
+    </ol>
+
+    <!-- Sub-sections -->
+    <div style="display:flex;flex-direction:column;gap:2rem;">
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">How to preview Preeti text before converting</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          Click <em>Preview as Devanagari</em> above the Preeti box to render it in the actual Preeti font — the way it looked in its original source — so you can sanity-check it against the Unicode output before you commit to the conversion. If the button reports the font is missing, that's just a local setup note for this file's owner and doesn't affect conversion accuracy.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">How to convert Preeti to Unicode on Mac, Windows, or mobile</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          This runs entirely as JavaScript in your browser, so there's nothing to install on any platform. Open this page in Safari or Chrome on Mac, Chrome or Edge on Windows, or Safari/Chrome on iPhone and Android — paste your text the same way on all of them. On mobile, use your keyboard's paste option or long-press inside the box.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">Why won't my old Nepali text display correctly?</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          If text typed in Preeti shows up as random symbols or boxes, it's because Preeti isn't a real Unicode font — it reassigns Devanagari shapes to plain English keys, so it only looks right on a device that has the Preeti font installed. Converting it to Unicode with this tool makes it render correctly everywhere, permanently, without needing that font again.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">Can I convert Unicode Nepali text back to Preeti?</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          Yes — switch to <em>Unicode → Preeti</em> using the toggle above the panels. This is useful if you need to match an older layout, publication, or piece of software that was built expecting Preeti-encoded text rather than Unicode.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">Is my Nepali text uploaded anywhere?</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          No. The entire conversion runs client-side in JavaScript — nothing you type or paste is sent to a server, stored, or logged. That makes it safe to use for anything, including personal letters, legal documents, or confidential notes.
+        </p>
+      </div>
+
+    </div>
+  </section>
 </div>
 
+<!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="/">
+          <span class="brand-mark">R</span>
+          <span>Raiparuhang</span>
+        </a>
+        <p style="color:var(--ink-60); margin-top:.85rem; max-width:340px">A small archive of private, in-browser tools — built and maintained by one person.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/tools">All tools</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <ul>
+          <li><a href="https://raiparuhang.com.np" target="_blank" rel="noopener">raiparuhang.com.np ↗</a></li>
+          <li><a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter/X</a></li>
+          <li><a href="https://www.linkedin.com/in/paruhang-rai/" target="_blank" rel="noopener">Linkedin</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Raiparuhang</span>
+      <span class="mono">Built static · HTML · CSS · JS</span>
+      <span class="mono"><a href="https://raiparuhang.com.np/terms">Privacy & Terms</a></span>
+    </div>
+  </footer>
+
+<script src="assets/js/nav.js"></script>
 <script>
 (function(){
   "use strict";
@@ -425,8 +599,6 @@
 
   leftBox.addEventListener('input', function(){ if (direction === 'p2u') run(); });
   rightBox.addEventListener('input', function(){ if (direction === 'u2p') run(); });
-
-  document.getElementById('convertBtn').addEventListener('click', run);
 
   document.getElementById('clearBtn').addEventListener('click', function(){
     leftBox.value = "";
