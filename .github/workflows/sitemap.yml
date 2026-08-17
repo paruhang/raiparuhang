@@ -1,0 +1,27 @@
+name: Generate Sitemap
+
+on:
+  push:
+    branches:
+      - main # Change to 'master' if your default branch is named master
+
+jobs:
+  sitemap_job:
+    runs-on: ubuntu-latest
+    name: Generate Sitemap
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Generate Sitemap
+        uses: cicirello/generate-sitemap@v1
+        with:
+          baseUrl: https://raiparuhang.coom.np # REPLACE WITH YOUR GITHUB PAGES URL
+
+      - name: Commit and Push Sitemap
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add sitemap.xml
+          git commit -m "Automated sitemap update" || exit 0
+          git push
