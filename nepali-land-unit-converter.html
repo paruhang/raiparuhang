@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nepali Land Unit Converter — Ropani, Aana, Bigha, Kattha, Dhur | Rai Paruhang</title>
+<meta name="description" content="Convert between Nepali land units — Ropani, Aana, Paisa, Daam, Bigha, Kattha, Dhur, square feet, square meters, acres and hectares — instantly, free, entirely in your browser.">
+<link rel="alternate" hreflang="en" href="https://raiparuhang.com.np/land-unit-converter">
+<link rel="alternate" hreflang="x-default" href="https://raiparuhang.com.np/land-unit-converter">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="assets/css/styles.css" />
+<link rel="canonical" href="https://raiparuhang.com.np/land-unit-converter">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Nepali Land Unit Converter",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Free browser-based tool to convert between Nepali land measurement units: Ropani, Aana, Paisa, Daam, Bigha, Kattha, Dhur, square feet, square meters, acres, and hectares."
+}
+</script>
+<style>
+  :root{
+    --bg:#0f1115; --panel:#171a21; --panel-border:#262a35;
+    --text:#e8e9ed; --text-dim:#9a9fac; --accent:#dc3d5a; --accent-dim:#7a2233;
+    --mono:'JetBrains Mono','Courier New',monospace;
+
+    /* Override the shared site palette so nav/footer go dark too */
+    --paper: #0f1115;
+    --ink: #e8e9ed;
+    --muted: #171a21;
+    --muted-2: #20242c;
+    --hairline: #262a35;
+    --hairline-2: rgba(232, 233, 237, 0.08);
+    --ink-60: rgba(232, 233, 237, 0.6);
+    --ink-40: rgba(232, 233, 237, 0.4);
+  }
+  .nav{ background: rgba(15, 17, 21, 0.85) !important; }
+  *{box-sizing:border-box;}
+  .wrap{
+    max-width:920px;margin:0 auto;padding:32px 20px 64px;
+    background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    line-height:1.5;
+  }
+  header.page{margin-bottom:22px;}
+  h1{font-size:1.6rem;margin:0 0 8px;letter-spacing:-0.01em;}
+  .sub{color:var(--text-dim);font-size:0.95rem;max-width:680px;}
+  .badge{display:inline-block;font-size:0.72rem;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);background:rgba(220,61,90,.08);padding:3px 8px;border-radius:4px;margin-bottom:12px;}
+
+  .group{background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;margin-bottom:16px;overflow:hidden;}
+  .group-head{padding:10px 14px;border-bottom:1px solid var(--panel-border);font-size:0.78rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;}
+  .unit-rows{padding:6px 14px;}
+  .unit-row{display:grid;grid-template-columns:1fr 130px;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--panel-border);}
+  .unit-row:last-child{border-bottom:none;}
+  .unit-row label{font-size:0.92rem;}
+  .unit-row .unit-sub{color:var(--text-dim);font-size:0.76rem;display:block;}
+  .unit-row input{
+    background:var(--bg);border:1px solid var(--panel-border);color:var(--text);
+    padding:8px 10px;border-radius:6px;font-size:1rem;font-family:var(--mono);outline:none;
+    text-align:right;width:100%;
+  }
+  .unit-row input:focus{border-color:var(--accent);}
+
+  .cols-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    grid-template-rows:auto 1fr;
+    grid-auto-flow:column;
+    gap:16px;
+    align-items:stretch;
+  }
+  .cols-grid .group{margin-bottom:0;height:100%;}
+  .cols-grid .unit-row{grid-template-columns:1fr 100px;}
+  @media (max-width:900px){
+    .cols-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr auto 1fr;}
+  }
+  @media (max-width:620px){
+    .cols-grid{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row;}
+    .col-instruction{min-height:0;}
+    .cols-grid .unit-row{grid-template-columns:1fr 130px;}
+  }
+
+  .col-instruction{
+    background:rgba(220,61,90,.06);border:1px solid var(--accent-dim);border-radius:8px;
+    padding:12px 14px;margin:0;font-size:0.85rem;color:var(--text-dim);line-height:1.5;
+    display:flex;align-items:center;
+  }
+
+  .actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
+  .tbtn{background:transparent;border:1px solid var(--panel-border);color:var(--text-dim);padding:6px 12px;border-radius:6px;font-size:0.8rem;cursor:pointer;transition:all .15s;}
+  .tbtn:hover{color:var(--text);border-color:var(--text-dim);}
+  .note{color:var(--text-dim);font-size:0.82rem;margin-top:10px;min-height:1.2em;}
+  .privacy-strip{display:flex;align-items:center;gap:8px;font-size:0.8rem;color:var(--text-dim);margin-top:16px;}
+  .privacy-strip svg{flex-shrink:0;}
+  .info{margin-top:36px;border-top:1px solid var(--panel-border);padding-top:28px;}
+  .info h2{font-size:1.15rem;margin-bottom:10px;}
+  .info p{color:var(--text-dim);font-size:0.92rem;max-width:680px;}
+  .info table{border-collapse:collapse;margin-top:12px;font-size:0.88rem;color:var(--text-dim);}
+  .info td{padding:3px 14px 3px 0;}
+  .disclaimer{font-size:0.78rem;color:var(--text-dim);margin-top:14px;border-top:1px dashed var(--panel-border);padding-top:10px;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark">R</span>
+        <span>Raiparuhang</span>
+      </a>
+      <nav class="nav-links">
+        <a data-nav href="/">Home</a>
+        <a data-nav href="/tools">Tools</a>
+        <a data-nav href="/about">About</a>
+        <a data-nav href="/contact">Contact</a>
+      </nav>
+      <a class="nav-cta" href="/tools">Browse tools →</a>
+      <button class="nav-toggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <div class="nav-mobile">
+      <a data-nav href="/">Home</a>
+      <a data-nav href="/tools">Tools</a>
+      <a data-nav href="/about">About</a>
+      <a data-nav href="/contact">Contact</a>
+    </div>
+  </header>
+
+<div class="wrap">
+  <header class="page">
+    <span class="badge">100% client-side</span>
+    <h1>Nepali Land Unit Converter</h1>
+    <p class="sub">Type a value into any field below — every other unit updates instantly, all calculated from the same total area. Covers both the hill system (Ropani–Aana–Paisa–Daam) and the Terai system (Bigha–Kattha–Dhur), plus standard metric/imperial units.</p>
+  </header>
+
+  <div class="cols-grid">
+    <p class="col-instruction">Enter land area in the Ropani–Aana–Paisa–Daam system, used in hill and Kathmandu Valley regions. Type a value in any field and the rest update automatically.</p>
+    <div class="group">
+      <div class="group-head">पहाडी क्षेत्र — रोपनी प्रणाली</div>
+      <div class="unit-rows">
+        <div class="unit-row"><label>रोपनी<span class="unit-sub">1 रोपनी = 16 आना = 5,476 वर्ग फिट</span></label><input type="number" id="u_ropani" step="any"></div>
+        <div class="unit-row"><label>आना<span class="unit-sub">1 आना = 4 पैसा = 342.25 वर्ग फिट</span></label><input type="number" id="u_aana" step="any"></div>
+        <div class="unit-row"><label>पैसा<span class="unit-sub">1 पैसा = 4 दाम = 85.5625 वर्ग फिट</span></label><input type="number" id="u_paisa" step="any"></div>
+        <div class="unit-row"><label>दाम<span class="unit-sub">1 दाम = 21.390625 वर्ग फिट</span></label><input type="number" id="u_daam" step="any"></div>
+      </div>
+    </div>
+
+    <p class="col-instruction">Enter land area in the Bigha–Kattha–Dhur system, used across the Terai region. Type a value in any field and the rest update automatically.</p>
+    <div class="group">
+      <div class="group-head">तराई क्षेत्र — बिघा प्रणाली</div>
+      <div class="unit-rows">
+        <div class="unit-row"><label>बिघा<span class="unit-sub">1 बिघा = 20 कठ्ठा = 72,900 वर्ग फिट</span></label><input type="number" id="u_bigha" step="any"></div>
+        <div class="unit-row"><label>कठ्ठा<span class="unit-sub">1 कठ्ठा = 20 धुर = 3,645 वर्ग फिट</span></label><input type="number" id="u_kattha" step="any"></div>
+        <div class="unit-row"><label>धुर<span class="unit-sub">1 धुर = 182.25 वर्ग फिट</span></label><input type="number" id="u_dhur" step="any"></div>
+      </div>
+    </div>
+
+    <p class="col-instruction">Enter area in standard metric or imperial units. Values here sync with both the Ropani and Bigha systems above.</p>
+    <div class="group">
+      <div class="group-head">Standard Units</div>
+      <div class="unit-rows">
+        <div class="unit-row"><label>Square Feet</label><input type="number" id="u_sqft" step="any"></div>
+        <div class="unit-row"><label>Square Meter</label><input type="number" id="u_sqm" step="any"></div>
+        <div class="unit-row"><label>Square Yard</label><input type="number" id="u_sqyd" step="any"></div>
+        <div class="unit-row"><label>Acre</label><input type="number" id="u_acre" step="any"></div>
+        <div class="unit-row"><label>Hectare</label><input type="number" id="u_hectare" step="any"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="tbtn" id="clearBtn" type="button">Clear all</button>
+  </div>
+  <p class="note" id="statusNote"></p>
+
+  <div class="privacy-strip">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg>
+    Conversion runs entirely in your browser via JavaScript — no data is uploaded or stored.
+  </div>
+
+  <div class="info">
+    <h2>About Nepali land units</h2>
+    <p>Nepal uses two different traditional land measurement systems depending on region. The <b>Ropani–Aana–Paisa–Daam</b> system is used in the hill and mountain regions, including the Kathmandu Valley, Pokhara, and most mid-hill districts — it evolved from terraced hill farming. The <b>Bigha–Kattha–Dhur</b> system is used across the Terai (the southern plains), shared with the wider North Indian tradition. Both are still what's printed on Lalpurja (land ownership certificates) and used in Malpot (land revenue) office records, so converting between them and standard metric units comes up constantly for property buyers, sellers, and surveyors.</p>
+    <table>
+      <tr><td>1 Ropani</td><td>= 16 Aana = 5,476 sq ft ≈ 508.72 m²</td></tr>
+      <tr><td>1 Bigha</td><td>= 20 Kattha = 72,900 sq ft ≈ 6,772.63 m²</td></tr>
+      <tr><td>1 Bigha</td><td>≈ 13.31 Ropani (approximate — the two systems don't divide evenly into each other)</td></tr>
+    </table>
+    <p class="disclaimer">These are the standard published conversion constants used across Nepal's land revenue records. For legal, financial, or official transactions, always verify against your Lalpurja, survey record, or a licensed surveyor.</p>
+  </div>
+
+  <!-- RELATED TOOLS -->
+  <section style="max-width:780px;margin:3rem auto 0;padding:0;" class="border-line">
+    <h2 style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px;">Related Tools</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;">
+      <a href="https://raiparuhang.com.np/nepali-tools" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;flex:1;min-width:180px;">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#dc3d5a" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        All Nepali Tools
+        <span style="margin-left:auto;font-size:11px;color:var(--text-dim);font-family:monospace;">→</span>
+      </a>
+      <a href="https://raiparuhang.com.np/preeti-to-unicode" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;flex:1;min-width:180px;">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#4f8eff" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+        Preeti ⇄ Unicode Converter
+        <span style="margin-left:auto;font-size:11px;color:var(--text-dim);font-family:monospace;">→</span>
+      </a>
+      <a href="https://raiparuhang.com.np/nepali-date-converter" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;flex:1;min-width:180px;">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#22d3a0" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 9h18"/></svg>
+        Nepali Date Converter
+        <span style="margin-left:auto;font-size:11px;color:var(--text-dim);font-family:monospace;">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- HOW TO -->
+  <section style="max-width:780px;margin:3rem auto 0;padding:2.5rem 0 0;border-top:1px solid var(--panel-border);">
+    <h2 style="font-size:1.6rem;font-weight:600;margin:0 0 0.5rem;">How to convert Nepali land units</h2>
+    <p style="font-size:1rem;color:var(--text-dim);margin:0 0 2rem;">
+      All three unit groups above stay in sync — enter a value anywhere and everything else recalculates instantly. Here's the full walkthrough, plus notes on which system applies where.
+    </p>
+
+    <ol style="padding:0;margin:0 0 2.5rem;list-style:none;display:flex;flex-direction:column;gap:1rem;">
+      <li style="display:flex;gap:1rem;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:1rem 1.25rem;">
+        <span style="min-width:32px;height:32px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:600;flex-shrink:0;">1</span>
+        <div>
+          <p style="font-weight:600;margin:0 0 0.25rem;color:var(--text);">Find your unit group</p>
+          <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">Use Ropani–Aana–Paisa–Daam if your land is in the hills or Kathmandu Valley, or Bigha–Kattha–Dhur if it's in the Terai. Not sure which applies? Check your Lalpurja (land ownership certificate) — it's printed there.</p>
+        </div>
+      </li>
+      <li style="display:flex;gap:1rem;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:1rem 1.25rem;">
+        <span style="min-width:32px;height:32px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:600;flex-shrink:0;">2</span>
+        <div>
+          <p style="font-weight:600;margin:0 0 0.25rem;color:var(--text);">Type your value into any field</p>
+          <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">You don't need to enter every unit — just the one you already have. If your Lalpurja says "2 Ropani 4 Aana," start by typing 2 into Ropani, note the result, then add 4 into Aana and read the combined total from the standard units on the right.</p>
+        </div>
+      </li>
+      <li style="display:flex;gap:1rem;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:1rem 1.25rem;">
+        <span style="min-width:32px;height:32px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:600;flex-shrink:0;">3</span>
+        <div>
+          <p style="font-weight:600;margin:0 0 0.25rem;color:var(--text);">Read every equivalent at once</p>
+          <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">All three groups update together, so you instantly see the same area in Ropani, Bigha, square feet, square meters, acres, and hectares — no need to look up conversion tables or do the math by hand. Use <em>Clear all</em> to reset every field and start over.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div style="display:flex;flex-direction:column;gap:2rem;">
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">How to convert Ropani to square feet or square meters</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          Type your Ropani value into the Ropani field in the hill-system group — the Square Feet and Square Meter fields under Standard Units update at the same time, since every unit is calculated from the same underlying total area.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">How to convert Bigha to Ropani</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          Enter your value in Bigha, Kattha, or Dhur, and the Ropani–Aana–Paisa–Daam fields on the left update automatically. Keep in mind the two systems don't divide evenly into each other — 1 Bigha is approximately 13.31 Ropani, so expect decimal results rather than a clean round number.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">Why does Nepal use two different land measurement systems?</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          The Ropani system developed for terraced hill farming and is used across the hills, mountains, and the Kathmandu Valley. The Bigha system came from the Terai's shared agricultural tradition with North India. Both remain legally valid and are what's printed on land ownership documents depending on where the land is located — this tool doesn't pick one as "correct," it just converts accurately between whichever systems you need.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">Is this accurate enough for legal or financial transactions?</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          This tool uses the standard published conversion constants used in Nepal's land revenue records, so the math itself is correct. That said, for anything legally or financially binding — a sale, a loan, a dispute — always cross-check against your actual Lalpurja, survey record, or a licensed surveyor rather than relying on any online calculator alone.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">Is my land data uploaded anywhere?</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          No. The conversion runs entirely in JavaScript in your browser — nothing you enter is sent to a server, stored, or logged, which matters given how sensitive property details often are.
+        </p>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="/">
+          <span class="brand-mark">R</span>
+          <span>Raiparuhang</span>
+        </a>
+        <p style="color:var(--ink-60); margin-top:.85rem; max-width:340px">A small archive of private, in-browser tools — built and maintained by one person.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/tools">All tools</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <ul>
+          <li><a href="https://raiparuhang.com.np" target="_blank" rel="noopener">raiparuhang.com.np ↗</a></li>
+          <li><a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter/X</a></li>
+          <li><a href="https://www.linkedin.com/in/paruhang-rai/" target="_blank" rel="noopener">Linkedin</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Raiparuhang</span>
+      <span class="mono">Built static · HTML · CSS · JS</span>
+      <span class="mono"><a href="https://raiparuhang.com.np/terms">Privacy & Terms</a></span>
+    </div>
+  </footer>
+
+<script src="assets/js/nav.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  var FACTORS = { // all values in square feet
+    ropani: 5476, aana: 342.25, paisa: 85.5625, daam: 21.390625,
+    bigha: 72900, kattha: 3645, dhur: 182.25,
+    sqft: 1, sqm: 10.7639104167, sqyd: 9, acre: 43560, hectare: 107639.1041671
+  };
+
+  var inputs = {};
+  Object.keys(FACTORS).forEach(function(key){
+    inputs[key] = document.getElementById('u_' + key);
+  });
+
+  var statusNote = document.getElementById('statusNote');
+
+  function fmt(n){
+    if (!isFinite(n)) return "";
+    var rounded = Math.round(n * 1e6) / 1e6;
+    return String(rounded);
+  }
+
+  var syncing = false;
+
+  function updateFrom(key){
+    if (syncing) return;
+    var raw = inputs[key].value;
+    if (raw === "" || raw === null) return;
+    var val = parseFloat(raw);
+    if (isNaN(val) || val < 0) { statusNote.textContent = "Enter a positive number."; return; }
+    statusNote.textContent = "";
+    var sqft = val * FACTORS[key];
+    syncing = true;
+    Object.keys(FACTORS).forEach(function(k){
+      if (k === key) return;
+      inputs[k].value = fmt(sqft / FACTORS[k]);
+    });
+    syncing = false;
+  }
+
+  Object.keys(FACTORS).forEach(function(key){
+    inputs[key].addEventListener('input', function(){ updateFrom(key); });
+  });
+
+  document.getElementById('clearBtn').addEventListener('click', function(){
+    Object.keys(FACTORS).forEach(function(k){ inputs[k].value = ""; });
+    statusNote.textContent = "";
+  });
+})();
+</script>
+</body>
+</html>
