@@ -16,7 +16,9 @@ jobs:
       - name: Generate Sitemap
         uses: cicirello/generate-sitemap@v1
         with:
-          baseUrl: https://raiparuhang.com.np # REPLACE WITH YOUR GITHUB PAGES URL
+          base-url-path: https://raiparuhang.com.np/
+          drop-html-extension: true
+          exclude-paths: image-compressor.html
 
       - name: Commit and Push Sitemap
         run: |
