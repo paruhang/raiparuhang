@@ -5,7 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nepal Gold & Silver Weight Converter — Tola, Aana, Lal, Gram | Rai Paruhang</title>
 <meta name="description" content="Convert gold and silver weight between Tola, Aana, Lal, Gram, Kilogram and Troy Ounce — Nepal's official jewelry measurement system. Free, instant, 100% in your browser.">
-<link rel="canonical" href="https://raiparuhang.com.np/gold-silver-converter">
+<link rel="alternate" hreflang="en" href="https://raiparuhang.com.np/nepali-gold-silver-converter">
+<link rel="alternate" hreflang="x-default" href="https://raiparuhang.com.np/nepali-gold-silver-converter">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="assets/css/styles.css" />
+<link rel="canonical" href="https://raiparuhang.com.np/nepali-gold-silver-converter">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -22,10 +33,25 @@
     --bg:#0f1115; --panel:#171a21; --panel-border:#262a35;
     --text:#e8e9ed; --text-dim:#9a9fac; --accent:#dc3d5a; --accent-dim:#7a2233;
     --mono:'JetBrains Mono','Courier New',monospace;
+
+    /* Override the shared site palette so nav/footer go dark too */
+    --paper: #0f1115;
+    --ink: #e8e9ed;
+    --muted: #171a21;
+    --muted-2: #20242c;
+    --hairline: #262a35;
+    --hairline-2: rgba(232, 233, 237, 0.08);
+    --ink-60: rgba(232, 233, 237, 0.6);
+    --ink-40: rgba(232, 233, 237, 0.4);
   }
+  .nav{ background: rgba(15, 17, 21, 0.85) !important; }
   *{box-sizing:border-box;}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.5;}
-  .wrap{max-width:920px;margin:0 auto;padding:32px 20px 64px;}
+  .wrap{
+    max-width:920px;margin:0 auto;padding:32px 20px 64px;
+    background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    line-height:1.5;
+  }
   header.page{margin-bottom:22px;}
   h1{font-size:1.6rem;margin:0 0 8px;letter-spacing:-0.01em;}
   .sub{color:var(--text-dim);font-size:0.95rem;max-width:680px;}
@@ -79,9 +105,9 @@
   .value-result{margin-top:14px;font-size:1.3rem;font-family:var(--mono);color:var(--text);}
   .value-result .curr{color:var(--text-dim);font-size:0.85rem;font-family:inherit;}
 
-  .toolbar{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
-  .btn{background:transparent;border:1px solid var(--panel-border);color:var(--text-dim);padding:6px 12px;border-radius:6px;font-size:0.8rem;cursor:pointer;transition:all .15s;}
-  .btn:hover{color:var(--text);border-color:var(--text-dim);}
+  .actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
+  .tbtn{background:transparent;border:1px solid var(--panel-border);color:var(--text-dim);padding:6px 12px;border-radius:6px;font-size:0.8rem;cursor:pointer;transition:all .15s;}
+  .tbtn:hover{color:var(--text);border-color:var(--text-dim);}
   .note{color:var(--text-dim);font-size:0.82rem;margin-top:10px;min-height:1.2em;}
   .privacy-strip{display:flex;align-items:center;gap:8px;font-size:0.8rem;color:var(--text-dim);margin-top:16px;}
   .privacy-strip svg{flex-shrink:0;}
@@ -94,6 +120,33 @@
 </style>
 </head>
 <body>
+
+<!-- NAV -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark">R</span>
+        <span>Raiparuhang</span>
+      </a>
+      <nav class="nav-links">
+        <a data-nav href="/">Home</a>
+        <a data-nav href="/tools">Tools</a>
+        <a data-nav href="/about">About</a>
+        <a data-nav href="/contact">Contact</a>
+      </nav>
+      <a class="nav-cta" href="/tools">Browse tools →</a>
+      <button class="nav-toggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <div class="nav-mobile">
+      <a data-nav href="/">Home</a>
+      <a data-nav href="/tools">Tools</a>
+      <a data-nav href="/about">About</a>
+      <a data-nav href="/contact">Contact</a>
+    </div>
+  </header>
+
 <div class="wrap">
   <header class="page">
     <span class="badge">100% client-side</span>
@@ -130,8 +183,8 @@
     </div>
   </div>
 
-  <div class="toolbar">
-    <button class="btn" id="clearBtn" type="button">Clear all</button>
+  <div class="actions">
+    <button class="tbtn" id="clearBtn" type="button">Clear all</button>
   </div>
   <p class="note" id="statusNote"></p>
 
@@ -170,8 +223,129 @@
     </table>
     <p class="disclaimer">The value estimator uses a rate you enter manually — it does not fetch live gold/silver prices. Check FENEGOSIDA or your local jeweler for today's actual rate before making a purchase decision, and note that jewelry prices also include making charges beyond the raw metal value.</p>
   </div>
+
+  <!-- RELATED TOOLS -->
+  <section style="max-width:780px;margin:3rem auto 0;padding:0;" class="border-line">
+    <h2 style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px;">Related Tools</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;">
+      <a href="https://raiparuhang.com.np/nepali-tools" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;flex:1;min-width:180px;">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#dc3d5a" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        All Nepali Tools
+        <span style="margin-left:auto;font-size:11px;color:var(--text-dim);font-family:monospace;">→</span>
+      </a>
+      <a href="https://raiparuhang.com.np/land-unit-converter" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;flex:1;min-width:180px;">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#f5a623" stroke-width="2"><path d="M3 3v18h18M7 17V9m5 8V5m5 12v-6"/></svg>
+        Nepali Land Unit Converter
+        <span style="margin-left:auto;font-size:11px;color:var(--text-dim);font-family:monospace;">→</span>
+      </a>
+      <a href="https://raiparuhang.com.np/nepali-date-converter" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;flex:1;min-width:180px;">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#22d3a0" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 9h18"/></svg>
+        Nepali Date Converter
+        <span style="margin-left:auto;font-size:11px;color:var(--text-dim);font-family:monospace;">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- HOW TO -->
+  <section style="max-width:780px;margin:3rem auto 0;padding:2.5rem 0 0;border-top:1px solid var(--panel-border);">
+    <h2 style="font-size:1.6rem;font-weight:600;margin:0 0 0.5rem;">How to convert gold and silver weight</h2>
+    <p style="font-size:1rem;color:var(--text-dim);margin:0 0 2rem;">
+      All units stay in sync — enter a value anywhere and everything else updates instantly. Here's the full walkthrough, plus how the optional value estimate works.
+    </p>
+
+    <ol style="padding:0;margin:0 0 2.5rem;list-style:none;display:flex;flex-direction:column;gap:1rem;">
+      <li style="display:flex;gap:1rem;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:1rem 1.25rem;">
+        <span style="min-width:32px;height:32px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:600;flex-shrink:0;">1</span>
+        <div>
+          <p style="font-weight:600;margin:0 0 0.25rem;color:var(--text);">Type a weight into any field</p>
+          <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">Use Tola–Aana–Lal if that's what your jeweler quoted, or Gram/Kilogram if you're working from a hallmark certificate or digital scale. You only need to enter one value — everything else fills in automatically.</p>
+        </div>
+      </li>
+      <li style="display:flex;gap:1rem;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:1rem 1.25rem;">
+        <span style="min-width:32px;height:32px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:600;flex-shrink:0;">2</span>
+        <div>
+          <p style="font-weight:600;margin:0 0 0.25rem;color:var(--text);">Read the converted weight</p>
+          <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">Every field updates from the same underlying total — Tola, Aana, Lal, Gram, Kilogram, and Troy Ounce all reflect the same weight at once, so you can compare a local quote against international bullion figures instantly.</p>
+        </div>
+      </li>
+      <li style="display:flex;gap:1rem;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:1rem 1.25rem;">
+        <span style="min-width:32px;height:32px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:600;flex-shrink:0;">3</span>
+        <div>
+          <p style="font-weight:600;margin:0 0 0.25rem;color:var(--text);">Optionally estimate a value</p>
+          <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">Once you've got a Tola weight, choose Gold or Silver and type in today's rate per Tola to see an estimated total. This is manual entry only — the tool doesn't fetch live prices, so check FENEGOSIDA or your jeweler for the current rate first.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div style="display:flex;flex-direction:column;gap:2rem;">
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">How to convert Tola to grams</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          Type your Tola value into the Tola field — the Gram, Kilogram, and Troy Ounce fields update at the same time, since 1 Tola is fixed at 11.6638 grams.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">Why does Nepal use Tola, Aana, and Lal instead of grams?</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          The Tola is the traditional base unit across Nepal, India, Pakistan, and Bangladesh, tracing back to the British Indian silver rupee coin. Nepali jewelers break it down into Aana and Lal — rather than the Masha/Ratti subdivisions more common in India — because Lal is precise enough for weighing small pieces like nose pins and earrings accurately.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">How accurate is the value estimate?</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          The estimate is only as accurate as the rate you type in — this tool doesn't pull live gold or silver prices from anywhere. It also only reflects the raw metal value; actual jewelry purchases include making charges, and prices can vary between jewelers.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">Is my data uploaded anywhere?</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          No. The conversion and value estimate both run entirely in JavaScript in your browser — nothing you enter is sent to a server, stored, or logged.
+        </p>
+      </div>
+
+    </div>
+  </section>
 </div>
 
+<!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="/">
+          <span class="brand-mark">R</span>
+          <span>Raiparuhang</span>
+        </a>
+        <p style="color:var(--ink-60); margin-top:.85rem; max-width:340px">A small archive of private, in-browser tools — built and maintained by one person.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/tools">All tools</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <ul>
+          <li><a href="https://raiparuhang.com.np" target="_blank" rel="noopener">raiparuhang.com.np ↗</a></li>
+          <li><a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter/X</a></li>
+          <li><a href="https://www.linkedin.com/in/paruhang-rai/" target="_blank" rel="noopener">Linkedin</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Raiparuhang</span>
+      <span class="mono">Built static · HTML · CSS · JS</span>
+      <span class="mono"><a href="https://raiparuhang.com.np/terms">Privacy & Terms</a></span>
+    </div>
+  </footer>
+
+<script src="assets/js/nav.js"></script>
 <script>
 (function(){
   "use strict";
