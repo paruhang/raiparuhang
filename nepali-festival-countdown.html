@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nepali Festival Countdown 2083 — Dashain, Tihar, New Year &amp; More | Rai Paruhang</title>
+<meta name="description" content="Live countdown to Dashain (Vijaya Dashami), Tihar (Bhai Tika), Nepali New Year, and every major festival in 2083 BS / 2026-27 AD. Dates sourced from Nepal's official Panchanga Nirnayak Samiti calendar.">
+<link rel="alternate" hreflang="en" href="https://raiparuhang.com.np/dashain-tihar-countdown">
+<link rel="alternate" hreflang="x-default" href="https://raiparuhang.com.np/dashain-tihar-countdown">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="assets/css/styles.css" />
+<link rel="canonical" href="https://raiparuhang.com.np/dashain-tihar-countdown">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600&family=Noto+Sans+Devanagari:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Nepali Festival Countdown",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Live countdown to Dashain, Tihar, Nepali New Year, and every major Nepali festival in 2083 BS, sourced from the official Panchanga Nirnayak Samiti calendar."
+}
+</script>
+<style>
+  :root{
+    --bg:#0f0d1a; --bg2:#161129;
+    --panel:#1c1733; --panel-border:#2e2650;
+    --text:#f0ecff; --text-dim:#a89fc9;
+    --marigold:#f5a623; --marigold-dim:#7a5518;
+    --rose:#ff5b7f; --rose-dim:#7a2c3c;
+    --teal:#3ddbb8; --teal-dim:#1c5c4d;
+    --mono:'JetBrains Mono','Courier New',monospace;
+    --deva:'Noto Sans Devanagari',sans-serif;
+
+    /* Nav/footer accent — this tool has no single --accent, so alias to marigold */
+    --accent: var(--marigold);
+    --accent-dim: var(--marigold-dim);
+
+    /* Override the shared site palette so nav/footer go dark too */
+    --paper: #0f0d1a;
+    --ink: #f0ecff;
+    --muted: #1c1733;
+    --muted-2: #161129;
+    --hairline: #2e2650;
+    --hairline-2: rgba(240, 236, 255, 0.08);
+    --ink-60: rgba(240, 236, 255, 0.6);
+    --ink-40: rgba(240, 236, 255, 0.4);
+  }
+  .nav{ background: rgba(15, 13, 26, 0.85) !important; }
+  *{box-sizing:border-box;}
+  .wrap{
+    max-width:900px;margin:0 auto;padding:36px 20px 64px;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(245,166,35,.14), transparent),
+      radial-gradient(ellipse 700px 500px at 90% 10%, rgba(255,91,127,.10), transparent),
+      var(--bg);
+    color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.5;
+  }
+
+  header.page{margin-bottom:24px;text-align:center;}
+  .badge-row{display:flex;justify-content:center;gap:8px;margin-bottom:14px;}
+  .badge{display:inline-block;font-size:0.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--marigold);border:1px solid var(--marigold-dim);background:rgba(245,166,35,.1);padding:4px 10px;border-radius:20px;}
+  h1{font-family:var(--deva);font-size:2rem;margin:0 0 10px;letter-spacing:0;background:linear-gradient(90deg,#ffd27a,#ff8fa3);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .sub{color:var(--text-dim);font-size:0.95rem;max-width:560px;margin:0 auto;}
+
+  h2.section-title{font-size:0.85rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em;margin:34px 0 14px;display:flex;align-items:center;gap:10px;}
+  h2.section-title::after{content:'';flex:1;height:1px;background:var(--panel-border);}
+
+  .countdown-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:8px;}
+  @media (max-width:760px){.countdown-grid{grid-template-columns:1fr;}}
+
+  .countdown-card{
+    position:relative;overflow:hidden;border-radius:16px;padding:22px 18px;
+    background:var(--panel);border:1px solid var(--panel-border);
+  }
+  .countdown-card::before{
+    content:'';position:absolute;inset:0;opacity:.5;pointer-events:none;
+    background:radial-gradient(circle at 100% 0%, var(--card-glow, rgba(245,166,35,.18)), transparent 60%);
+  }
+  .countdown-card.theme-dashain{ --card-glow: rgba(255,91,127,.22); border-color: var(--rose-dim); }
+  .countdown-card.theme-tihar{ --card-glow: rgba(245,166,35,.25); border-color: var(--marigold-dim); }
+  .countdown-card.theme-newyear{ --card-glow: rgba(61,219,184,.22); border-color: var(--teal-dim); }
+
+  .countdown-card .icon{font-size:1.5rem;margin-bottom:6px;display:block;}
+  .countdown-card .festival-name{font-family:var(--deva);font-size:1.2rem;font-weight:600;margin-bottom:2px;position:relative;}
+  .countdown-card .festival-sub{color:var(--text-dim);font-size:0.78rem;margin-bottom:14px;min-height:1.2em;position:relative;}
+  .countdown-timer{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px;position:relative;}
+  .countdown-timer .unit{text-align:center;}
+  .countdown-timer .num{font-family:var(--mono);font-size:1.7rem;font-weight:700;}
+  .theme-dashain .num{color:var(--rose);}
+  .theme-tihar .num{color:var(--marigold);}
+  .theme-newyear .num{color:var(--teal);}
+  .countdown-timer .lbl{font-size:0.62rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.06em;}
+  .countdown-card .date-line{font-size:0.76rem;color:var(--text-dim);border-top:1px dashed var(--panel-border);padding-top:10px;position:relative;}
+  .countdown-card.past .countdown-timer{opacity:0.3;}
+  .countdown-card.past .festival-sub{color:var(--teal);}
+
+  .muhurat-note{
+    background:rgba(245,166,35,.08);border:1px solid var(--marigold-dim);border-radius:12px;
+    padding:14px 16px;font-size:0.85rem;color:#e8cfa0;margin:18px 0 8px;line-height:1.55;
+  }
+
+  .search-title{
+    text-align:center;font-size:0.9rem;color:var(--text-dim);font-weight:600;
+    margin:34px 0 14px;letter-spacing:.02em;
+  }
+  .search-box{margin-bottom:6px;display:flex;justify-content:center;}
+  .search-box .search-inner{
+    position:relative;width:100%;max-width:480px;
+  }
+  .search-box .search-inner svg{
+    position:absolute;left:18px;top:50%;transform:translateY(-50%);
+    color:var(--text-dim);pointer-events:none;
+  }
+  .search-box input{
+    width:100%;background:var(--panel);border:1px solid var(--panel-border);color:var(--text);
+    padding:14px 20px 14px 46px;border-radius:999px;font-size:0.95rem;outline:none;font-family:inherit;
+    text-align:center;transition:box-shadow .2s,border-color .2s;
+    box-shadow:0 4px 18px rgba(0,0,0,.25);
+  }
+  .search-box input:focus{
+    border-color:var(--marigold);
+    box-shadow:0 0 0 4px rgba(245,166,35,.15),0 4px 18px rgba(0,0,0,.25);
+  }
+  .search-box input::placeholder{color:var(--text-dim);}
+  .search-box input:focus::placeholder{opacity:0;}
+  .search-box input:not(:placeholder-shown){text-align:left;}
+  .search-results{margin-bottom:6px;}
+  .search-results:empty{margin:0;}
+  .search-hint{color:var(--text-dim);font-size:0.82rem;padding:10px 2px;}
+  .search-card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:16px;max-width:700px;margin-left:auto;margin-right:auto;}
+
+  .tl{position:relative;padding-left:34px;}
+  .tl::before{content:'';position:absolute;left:12px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,var(--rose-dim),var(--marigold-dim),var(--teal-dim));}
+  .tl-item{position:relative;margin-bottom:12px;}
+  .tl-dot{
+    position:absolute;left:-34px;top:2px;width:26px;height:26px;border-radius:50%;
+    background:var(--bg2);border:2px solid var(--panel-border);
+    display:flex;align-items:center;justify-content:center;font-size:13px;z-index:1;
+  }
+  .tl-item.featured .tl-dot{border-color:var(--marigold);background:rgba(245,166,35,.15);}
+  .tl-card{
+    background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;
+    padding:12px 16px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;
+  }
+  .tl-item.featured .tl-card{border-color:var(--marigold-dim);background:rgba(245,166,35,.05);}
+  .tl-name{font-family:var(--deva);font-weight:600;font-size:1rem;}
+  .tl-sub{color:var(--text-dim);font-size:0.76rem;margin-top:2px;}
+  .tl-dates{text-align:right;white-space:nowrap;}
+  .tl-ad{font-family:var(--mono);font-size:0.82rem;color:var(--text);}
+  .tl-bs{font-size:0.72rem;color:var(--text-dim);margin-top:2px;}
+  .tl-days{display:inline-block;margin-top:4px;font-size:0.7rem;padding:2px 8px;border-radius:10px;background:var(--bg2);color:var(--text-dim);}
+  .tl-days.soon{background:rgba(245,166,35,.15);color:var(--marigold);}
+  .tl-days.today{background:rgba(61,219,184,.15);color:var(--teal);}
+  .tl-days.past{opacity:0.5;}
+  @media (max-width:600px){
+    .tl-card{grid-template-columns:1fr;}
+    .tl-dates{text-align:left;}
+  }
+
+  .note{color:var(--text-dim);font-size:0.82rem;margin-top:14px;}
+  .privacy-strip{display:flex;align-items:center;gap:8px;font-size:0.8rem;color:var(--text-dim);margin-top:18px;}
+  .privacy-strip svg{flex-shrink:0;}
+  .info{margin-top:40px;border-top:1px solid var(--panel-border);padding-top:28px;}
+  .info h2{font-size:1.05rem;margin-bottom:10px;color:var(--text);}
+  .info p{color:var(--text-dim);font-size:0.9rem;max-width:680px;}
+  .info a{color:var(--marigold);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark">R</span>
+        <span>Raiparuhang</span>
+      </a>
+      <nav class="nav-links">
+        <a data-nav href="/">Home</a>
+        <a data-nav href="/tools">Tools</a>
+        <a data-nav href="/about">About</a>
+        <a data-nav href="/contact">Contact</a>
+      </nav>
+      <a class="nav-cta" href="/tools">Browse tools →</a>
+      <button class="nav-toggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <div class="nav-mobile">
+      <a data-nav href="/">Home</a>
+      <a data-nav href="/tools">Tools</a>
+      <a data-nav href="/about">About</a>
+      <a data-nav href="/contact">Contact</a>
+    </div>
+  </header>
+
+<div class="wrap">
+  <header class="page">
+    <div class="badge-row">
+      <span class="badge">2083 BS · 2026–27 AD</span>
+    </div>
+    <h1>नेपाली चाडपर्व काउन्टडाउन</h1>
+    <p class="sub">Live countdown to Dashain, Tihar, Nepali New Year, and every major festival this year — dates sourced from Nepal's official calendar authority.</p>
+  </header>
+
+  <div class="countdown-grid">
+    <div class="countdown-card theme-dashain" id="card-dashain">
+      <span class="icon">🪔</span>
+      <div class="festival-name">विजया दशमी</div>
+      <div class="festival-sub" id="sub-dashain">The main Dashain tika day</div>
+      <div class="countdown-timer">
+        <div class="unit"><div class="num" id="d-dashain-days">--</div><div class="lbl">Days</div></div>
+        <div class="unit"><div class="num" id="d-dashain-hours">--</div><div class="lbl">Hrs</div></div>
+        <div class="unit"><div class="num" id="d-dashain-mins">--</div><div class="lbl">Min</div></div>
+        <div class="unit"><div class="num" id="d-dashain-secs">--</div><div class="lbl">Sec</div></div>
+      </div>
+      <div class="date-line">Kartik 4, 2083 BS — Wed, Oct 21, 2026</div>
+    </div>
+
+    <div class="countdown-card theme-tihar" id="card-tihar">
+      <span class="icon">🪈</span>
+      <div class="festival-name">भाइटीका</div>
+      <div class="festival-sub" id="sub-tihar">The final day of Tihar</div>
+      <div class="countdown-timer">
+        <div class="unit"><div class="num" id="d-tihar-days">--</div><div class="lbl">Days</div></div>
+        <div class="unit"><div class="num" id="d-tihar-hours">--</div><div class="lbl">Hrs</div></div>
+        <div class="unit"><div class="num" id="d-tihar-mins">--</div><div class="lbl">Min</div></div>
+        <div class="unit"><div class="num" id="d-tihar-secs">--</div><div class="lbl">Sec</div></div>
+      </div>
+      <div class="date-line">Kartik 25, 2083 BS — Wed, Nov 11, 2026</div>
+    </div>
+
+    <div class="countdown-card theme-newyear" id="card-newyear">
+      <span class="icon">🎉</span>
+      <div class="festival-name">नयाँ वर्ष २०८४</div>
+      <div class="festival-sub" id="sub-newyear">Baisakh 1, 2084 begins</div>
+      <div class="countdown-timer">
+        <div class="unit"><div class="num" id="d-newyear-days">--</div><div class="lbl">Days</div></div>
+        <div class="unit"><div class="num" id="d-newyear-hours">--</div><div class="lbl">Hrs</div></div>
+        <div class="unit"><div class="num" id="d-newyear-mins">--</div><div class="lbl">Min</div></div>
+        <div class="unit"><div class="num" id="d-newyear-secs">--</div><div class="lbl">Sec</div></div>
+      </div>
+      <div class="date-line">Baisakh 1, 2084 BS — Wed, Apr 14, 2027</div>
+    </div>
+  </div>
+
+  <div class="muhurat-note">
+    <strong>About exact tika times (sait):</strong> the precise auspicious hour for Dashain and Tihar tika is announced by Nepal's official Panchanga Nirnayak Samiti roughly 2–3 weeks before each festival — it isn't available this far in advance. Most households give tika any time on the day itself without waiting for the exact astrological minute.
+  </div>
+
+  <div class="search-title">🔍 Search a Festival</div>
+  <div class="search-box">
+    <div class="search-inner">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" id="festivalSearch" placeholder="Search — Holi, Teej, Dashain, ल्होसार...">
+    </div>
+  </div>
+  <div id="searchResults" class="search-results"></div>
+
+  <h2 class="section-title">Full Timeline — 2083 BS</h2>
+  <div class="tl" id="fullTimeline"></div>
+
+  <p class="note" id="statusNote"></p>
+
+  <div class="privacy-strip">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg>
+    This countdown runs entirely in your browser using your device's clock — nothing is uploaded or tracked.
+  </div>
+
+  <div class="info">
+    <h2>About these dates</h2>
+    <p>Nepali festivals mostly follow the lunar Bikram Sambat calendar rather than a fixed solar date, so the Gregorian (AD) date shifts every year. These dates are drawn from the official 2083 BS calendar published by Nepal's Panchanga Nirnayak Bikas Samiti (the government-mandated calendar authority) and independently cross-checked — including weekday matching — against a verified Bikram Sambat conversion engine. This page covers 2083 BS (2026–27 AD) specifically; dates will need updating once the next year's official calendar is published.</p>
+  </div>
+
+  <!-- RELATED TOOLS -->
+  <section style="max-width:780px;margin:3rem auto 0;padding:0;" class="border-line">
+    <h2 style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px;">Related Tools</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;">
+      <a href="https://raiparuhang.com.np/nepali-tools" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;flex:1;min-width:180px;">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#f5a623" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        All Nepali Tools
+        <span style="margin-left:auto;font-size:11px;color:var(--text-dim);font-family:monospace;">→</span>
+      </a>
+      <a href="https://raiparuhang.com.np/nepali-date-converter" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;flex:1;min-width:180px;">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#3ddbb8" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 9h18"/></svg>
+        Nepali Date Converter
+        <span style="margin-left:auto;font-size:11px;color:var(--text-dim);font-family:monospace;">→</span>
+      </a>
+      <a href="https://raiparuhang.com.np/bluebook-renewal-calculator" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;flex:1;min-width:180px;">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#ff5b7f" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M3 11h18M7 7V4h10v3"/></svg>
+        Bluebook Renewal Fine Calculator
+        <span style="margin-left:auto;font-size:11px;color:var(--text-dim);font-family:monospace;">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- HOW TO -->
+  <section style="max-width:780px;margin:3rem auto 0;padding:2.5rem 0 0;border-top:1px solid var(--panel-border);">
+    <h2 style="font-size:1.6rem;font-weight:600;margin:0 0 0.5rem;font-family:var(--deva);">How to use the festival countdown</h2>
+    <p style="font-size:1rem;color:var(--text-dim);margin:0 0 2rem;">
+      The three featured cards update live every second. Here's how to find a specific festival, and what the timeline below them shows.
+    </p>
+
+    <ol style="padding:0;margin:0 0 2.5rem;list-style:none;display:flex;flex-direction:column;gap:1rem;">
+      <li style="display:flex;gap:1rem;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:1rem 1.25rem;">
+        <span style="min-width:32px;height:32px;background:var(--marigold);color:#1c1400;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:600;flex-shrink:0;">1</span>
+        <div>
+          <p style="font-weight:600;margin:0 0 0.25rem;color:var(--text);">Check the three featured countdowns</p>
+          <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">Vijaya Dashami, Bhai Tika, and Nepali New Year are pinned at the top and count down live to the second. Once a date passes, its card dims and shows how many days ago it happened instead.</p>
+        </div>
+      </li>
+      <li style="display:flex;gap:1rem;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:1rem 1.25rem;">
+        <span style="min-width:32px;height:32px;background:var(--marigold);color:#1c1400;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:600;flex-shrink:0;">2</span>
+        <div>
+          <p style="font-weight:600;margin:0 0 0.25rem;color:var(--text);">Search for any other festival</p>
+          <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">Type a name in English or Nepali — Holi, Teej, ल्होसार, Chhath — and a live countdown card appears for every match, using the same second-by-second timer as the featured three.</p>
+        </div>
+      </li>
+      <li style="display:flex;gap:1rem;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:1rem 1.25rem;">
+        <span style="min-width:32px;height:32px;background:var(--marigold);color:#1c1400;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:600;flex-shrink:0;">3</span>
+        <div>
+          <p style="font-weight:600;margin:0 0 0.25rem;color:var(--text);">Scroll the full timeline for the whole year</p>
+          <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">Below the search box, every festival in 2083 BS is listed chronologically with both its BS and AD date, weekday, and a "days away" badge — useful for planning leave or travel well ahead of time.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div style="display:flex;flex-direction:column;gap:2rem;">
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">Why doesn't this show the exact tika time (sait)?</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          The precise auspicious hour for Dashain and Tihar tika is only announced by the Panchanga Nirnayak Samiti roughly 2–3 weeks before each festival, so it isn't available this far in advance. Most households give tika any time on the day itself without waiting for the exact astrological minute — this page tracks the day, not the minute.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">Why do the AD dates shift every year?</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          Nepali festivals mostly follow the lunar Bikram Sambat calendar rather than a fixed solar date, so their Gregorian equivalent moves from year to year — the same festival can land on a different AD date each time. This page is specific to 2083 BS (2026–27 AD) for that reason.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">Where do these dates come from?</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          The official 2083 BS calendar published by Nepal's Panchanga Nirnayak Bikas Samiti, independently cross-checked — including weekday agreement — against a verified BS↔AD conversion engine.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.15rem;font-weight:600;margin:0 0 0.5rem;color:var(--text);">Is my search or device data uploaded anywhere?</h3>
+        <p style="margin:0;color:var(--text-dim);font-size:0.95rem;">
+          No. The countdown runs entirely in your browser using your device's own clock — nothing you search for or view is sent to a server, stored, or logged.
+        </p>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="/">
+          <span class="brand-mark">R</span>
+          <span>Raiparuhang</span>
+        </a>
+        <p style="color:var(--ink-60); margin-top:.85rem; max-width:340px">A small archive of private, in-browser tools — built and maintained by one person.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/tools">All tools</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <ul>
+          <li><a href="https://raiparuhang.com.np" target="_blank" rel="noopener">raiparuhang.com.np ↗</a></li>
+          <li><a href="https://x.com/Paruhang005" target="_blank" rel="noopener">Twitter/X</a></li>
+          <li><a href="https://www.linkedin.com/in/paruhang-rai/" target="_blank" rel="noopener">Linkedin</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Raiparuhang</span>
+      <span class="mono">Built static · HTML · CSS · JS</span>
+      <span class="mono"><a href="https://raiparuhang.com.np/terms">Privacy & Terms</a></span>
+    </div>
+  </footer>
+
+<script src="assets/js/nav.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  // All dates verified: BS source (Nepal Panchanga Nirnayak Bikas Samiti, via
+  // multiple independent news outlets) cross-checked through a validated
+  // BS<->AD conversion engine, including weekday agreement.
+  var FESTIVALS = [
+    { name: "नयाँ वर्ष २०८३", en: "Nepali New Year 2083, Naya Barsha", sub: "Bikram Sambat New Year begins", icon: "🎉", bs: "Baisakh 1, 2083", ad: [2026,4,14] },
+    { name: "मातातीर्थ औंसी", en: "Mata Tirtha Aunsi, Mother's Day", sub: "Nepal's Mother's Day", icon: "💐", bs: "Baisakh 4, 2083", ad: [2026,4,17] },
+    { name: "बुद्ध जयन्ती", en: "Buddha Jayanti, Baisakh Purnima", sub: "Birth of Gautam Buddha", icon: "☸️", bs: "Baisakh 18, 2083", ad: [2026,5,1] },
+    { name: "गुरुपूर्णिमा", en: "Guru Purnima", sub: "Honouring teachers and gurus", icon: "🙏", bs: "Shrawan 13, 2083", ad: [2026,7,29] },
+    { name: "नागपञ्चमी", en: "Nag Panchami", sub: "Worship of serpent deities", icon: "🐍", bs: "Bhadra 1, 2083", ad: [2026,8,17] },
+    { name: "जनैपूर्णिमा / रक्षाबन्धन", en: "Janai Purnima, Raksha Bandhan, Rakhi", sub: "Sacred thread ceremony; siblings tie rakhi", icon: "🧵", bs: "Bhadra 12, 2083", ad: [2026,8,28] },
+    { name: "गाईजात्रा", en: "Gai Jatra", sub: "Cow procession honouring those who passed away", icon: "🐄", bs: "Bhadra 13, 2083", ad: [2026,8,29] },
+    { name: "श्रीकृष्ण जन्माष्टमी", en: "Krishna Janmashtami, Krishna Asthami", sub: "Birth of Lord Krishna", icon: "🪈", bs: "Bhadra 19, 2083", ad: [2026,9,4] },
+    { name: "कुशे औंसी", en: "Kuse Aunsi, Father's Day", sub: "Nepal's Father's Day", icon: "👨‍👦", bs: "Bhadra 26, 2083", ad: [2026,9,11] },
+    { name: "हरितालिका तीज", en: "Teej, Haritalika Teej", sub: "Women's festival of fasting and celebration", icon: "💃", bs: "Bhadra 29, 2083", ad: [2026,9,14] },
+    { name: "ऋषिपञ्चमी", en: "Rishi Panchami", sub: "Purification day after Teej", icon: "🕊️", bs: "Bhadra 30, 2083", ad: [2026,9,15] },
+    { name: "इन्द्रजात्रा", en: "Indra Jatra, Kumari Jatra", sub: "Kumari chariot procession, Kathmandu", icon: "🎭", bs: "Ashoj 9, 2083", ad: [2026,9,25] },
+    { name: "घटस्थापना", en: "Ghatasthapana, Dashain begins", sub: "Dashain begins, Navaratri starts", icon: "🌾", bs: "Ashoj 25, 2083", ad: [2026,10,11] },
+    { name: "फूलपाती", en: "Fulpati", sub: "Sacred flowers and plants brought home", icon: "🌺", bs: "Ashoj 31, 2083", ad: [2026,10,17] },
+    { name: "महाअष्टमी", en: "Maha Ashtami, Kalratri", sub: "Kalratri — worship at Durga temples", icon: "🙏", bs: "Kartik 1, 2083", ad: [2026,10,18] },
+    { name: "महानवमी", en: "Maha Navami", sub: "Worship of tools, vehicles, and Vishwakarma", icon: "🛠️", bs: "Kartik 3, 2083", ad: [2026,10,20] },
+    { name: "विजया दशमी", en: "Vijaya Dashami, Dashain, Tika", sub: "Tika and jamara from elders", icon: "🪔", bs: "Kartik 4, 2083", ad: [2026,10,21], featured: "dashain" },
+    { name: "कोजाग्रत पूर्णिमा", en: "Kojagrat Purnima", sub: "Dashain officially ends", icon: "🌕", bs: "Kartik 8, 2083", ad: [2026,10,25] },
+    { name: "काग तिहार", en: "Kaag Tihar, Tihar begins, Deepawali", sub: "Tihar begins — crows honoured as Yama's messengers", icon: "🐦‍⬛", bs: "Kartik 20, 2083", ad: [2026,11,6] },
+    { name: "भाइटीका", en: "Bhai Tika, Tihar", sub: "Sisters give tika to brothers", icon: "🪈", bs: "Kartik 25, 2083", ad: [2026,11,11], featured: "tihar" },
+    { name: "छठ पर्व", en: "Chhath, Chhath Parva", sub: "Sun worship, offerings at riverbanks", icon: "🌅", bs: "Kartik 29, 2083", ad: [2026,11,15] },
+    { name: "सोनाम ल्होसार", en: "Sonam Lhosar, Tamang New Year", sub: "Tamang New Year", icon: "🎊", bs: "Magh 24, 2083", ad: [2027,2,7] },
+    { name: "बसन्त पञ्चमी", en: "Basanta Panchami, Saraswati Puja", sub: "Worship of Saraswati, arrival of spring", icon: "📚", bs: "Magh 28, 2083", ad: [2027,2,11] },
+    { name: "महाशिवरात्रि", en: "Maha Shivaratri, Shivaratri", sub: "Great night of Lord Shiva", icon: "🔱", bs: "Falgun 22, 2083", ad: [2027,3,6] },
+    { name: "ग्याल्पो ल्होसार", en: "Gyalpo Lhosar, Sherpa New Year, Tibetan New Year", sub: "Sherpa / Tibetan New Year", icon: "🎊", bs: "Falgun 25, 2083", ad: [2027,3,9] },
+    { name: "होली (पहाडी क्षेत्र)", en: "Holi, Fagu Purnima", sub: "Festival of colours — hills & Kathmandu Valley", icon: "🎨", bs: "Chaitra 7, 2083", ad: [2027,3,21] },
+    { name: "होली (तराई)", en: "Holi Terai", sub: "Festival of colours — Terai region", icon: "🎨", bs: "Chaitra 8, 2083", ad: [2027,3,22] },
+    { name: "नयाँ वर्ष २०८४", en: "Nepali New Year 2084, Naya Barsha", sub: "Baisakh 1 — Bikram Sambat New Year begins", icon: "🎉", bs: "Baisakh 1, 2084", ad: [2027,4,14], featured: "newyear" }
+  ];
+
+  function pad(n){ return String(n).padStart(2, '0'); }
+  var WEEKDAYS = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+  function toDate(ad){ return new Date(ad[0], ad[1]-1, ad[2], 0, 0, 0); }
+
+  function updateFeaturedCard(prefix, targetDate, subEl, cardEl, futureText, todayText, pastText){
+    var now = new Date();
+    var diff = targetDate.getTime() - now.getTime();
+
+    if (diff <= 0){
+      var elapsedDays = Math.floor(-diff / 86400000);
+      cardEl.classList.add('past');
+      subEl.textContent = elapsedDays === 0 ? todayText : pastText.replace('{d}', elapsedDays);
+      ['days','hours','mins','secs'].forEach(function(u){ document.getElementById('d-' + prefix + '-' + u).textContent = '00'; });
+      return;
+    }
+
+    cardEl.classList.remove('past');
+    subEl.textContent = futureText;
+    var totalSeconds = Math.floor(diff / 1000);
+    document.getElementById('d-' + prefix + '-days').textContent = Math.floor(totalSeconds / 86400);
+    document.getElementById('d-' + prefix + '-hours').textContent = pad(Math.floor((totalSeconds % 86400) / 3600));
+    document.getElementById('d-' + prefix + '-mins').textContent = pad(Math.floor((totalSeconds % 3600) / 60));
+    document.getElementById('d-' + prefix + '-secs').textContent = pad(totalSeconds % 60);
+  }
+
+  var searchInput = document.getElementById('festivalSearch');
+  var searchResultsEl = document.getElementById('searchResults');
+  var currentMatches = [];
+
+  function normalizeMatch(query, festival){
+    var q = query.trim().toLowerCase();
+    if (!q) return false;
+    if (festival.name.indexOf(query.trim()) !== -1) return true;
+    if (festival.en.toLowerCase().indexOf(q) !== -1) return true;
+    return false;
+  }
+
+  function renderSearchResults(){
+    var query = searchInput.value;
+    if (!query.trim()){
+      searchResultsEl.innerHTML = '';
+      currentMatches = [];
+      return;
+    }
+    currentMatches = FESTIVALS.filter(function(f){ return normalizeMatch(query, f); });
+    if (currentMatches.length === 0){
+      searchResultsEl.innerHTML = '<div class="search-hint">No festival matched "' + query + '". Try Holi, Teej, Dashain, Lhosar, Tihar...</div>';
+      return;
+    }
+    var html = '<div class="search-card-grid">';
+    currentMatches.forEach(function(f, i){
+      html += '<div class="countdown-card theme-tihar" id="search-card-' + i + '">' +
+        '<span class="icon">' + f.icon + '</span>' +
+        '<div class="festival-name">' + f.name + '</div>' +
+        '<div class="festival-sub" id="search-sub-' + i + '">' + f.sub + '</div>' +
+        '<div class="countdown-timer">' +
+          '<div class="unit"><div class="num" id="d-search' + i + '-days">--</div><div class="lbl">Days</div></div>' +
+          '<div class="unit"><div class="num" id="d-search' + i + '-hours">--</div><div class="lbl">Hrs</div></div>' +
+          '<div class="unit"><div class="num" id="d-search' + i + '-mins">--</div><div class="lbl">Min</div></div>' +
+          '<div class="unit"><div class="num" id="d-search' + i + '-secs">--</div><div class="lbl">Sec</div></div>' +
+        '</div>' +
+        '<div class="date-line">' + f.bs + ' BS</div>' +
+      '</div>';
+    });
+    html += '</div>';
+    searchResultsEl.innerHTML = html;
+    tickSearchResults();
+  }
+
+  function tickSearchResults(){
+    currentMatches.forEach(function(f, i){
+      var cardEl = document.getElementById('search-card-' + i);
+      var subEl = document.getElementById('search-sub-' + i);
+      if (!cardEl) return;
+      updateFeaturedCard('search' + i, toDate(f.ad), subEl, cardEl, f.sub, "It's today!", f.name + ' was {d} day(s) ago');
+    });
+  }
+
+  searchInput.addEventListener('input', renderSearchResults);
+
+  function renderTimeline(){
+    var container = document.getElementById('fullTimeline');
+    var now = new Date();
+    now.setHours(0,0,0,0);
+
+    var rows = '';
+    FESTIVALS.forEach(function(f){
+      var d = toDate(f.ad);
+      var dayDiff = Math.round((d.getTime() - now.getTime()) / 86400000);
+      var daysLabel, daysClass;
+      if (dayDiff === 0){ daysLabel = 'Today'; daysClass = 'today'; }
+      else if (dayDiff < 0){ daysLabel = Math.abs(dayDiff) + 'd ago'; daysClass = 'past'; }
+      else if (dayDiff <= 14){ daysLabel = 'in ' + dayDiff + 'd'; daysClass = 'soon'; }
+      else { daysLabel = 'in ' + dayDiff + 'd'; daysClass = ''; }
+
+      var adStr = MONTHS[f.ad[1]-1] + ' ' + f.ad[2] + ', ' + f.ad[0] + ' (' + WEEKDAYS[d.getDay()] + ')';
+      var itemClass = 'tl-item' + (f.featured ? ' featured' : '');
+      rows += '<div class="' + itemClass + '">' +
+        '<div class="tl-dot">' + f.icon + '</div>' +
+        '<div class="tl-card">' +
+          '<div><div class="tl-name">' + f.name + '</div><div class="tl-sub">' + f.sub + '</div></div>' +
+          '<div class="tl-dates"><div class="tl-ad">' + adStr + '</div><div class="tl-bs">' + f.bs + ' BS</div><span class="tl-days ' + daysClass + '">' + daysLabel + '</span></div>' +
+        '</div></div>';
+    });
+    container.innerHTML = rows;
+  }
+
+  function tick(){
+    updateFeaturedCard('dashain', toDate([2026,10,21]), document.getElementById('sub-dashain'), document.getElementById('card-dashain'),
+      'The main Dashain tika day', "It's today!", 'Vijaya Dashami was {d} day(s) ago');
+    updateFeaturedCard('tihar', toDate([2026,11,11]), document.getElementById('sub-tihar'), document.getElementById('card-tihar'),
+      'The final day of Tihar', "It's today!", 'Bhai Tika was {d} day(s) ago');
+    updateFeaturedCard('newyear', toDate([2027,4,14]), document.getElementById('sub-newyear'), document.getElementById('card-newyear'),
+      'Baisakh 1, 2084 begins', "It's today!", 'Naya Barsha was {d} day(s) ago');
+    tickSearchResults();
+  }
+
+  renderTimeline();
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>
